@@ -1,0 +1,86 @@
+.toggle {
+  user-select: none
+
+  circle {
+    transition: all 0.3s
+    fill: rgba(0, 0, 0, 0)
+    stroke: #ddd
+    stroke-width: 10px
+  }
+
+  path {
+    transition: all 0.3s
+    stroke-width: 8px
+  }
+}
+
+.detectToggle {
+  position: absolute
+  top: 0
+  right: 0
+  height: 100%
+  width: 56px
+  box-sizing: content-box
+  padding: 0 20px
+
+  path {
+    transition: all 0.3s
+    stroke-dasharray: 100
+    stroke: #ddd
+  }
+
+  .h {
+    transform-origin: 1%
+  }
+
+  .v {
+    -webkit-transform-origin: 1% 70%
+    transform-origin: 1% 70%
+  }
+}
+
+.option-checkbox {
+  opacity: 0
+  -webkit-appearance: none
+  -moz-appearance: none
+  position: absolute
+
+  &:checked {
+    + label .detectToggle {
+
+      .v {
+        -webkit-transform: rotate(50deg)
+        transform: rotate(50deg)
+      }
+
+      .h {
+        -webkit-transform: rotate(55deg)
+        transform: rotate(55deg)
+        stroke-dashoffset: 50
+      }
+    }
+  }
+}
+
+.option-label:focus .toggle,
+.option-label:hover .toggle {
+  circle, path {
+    stroke: #444
+    cursor: pointer
+  }
+}
+
+.option-checkbox:checked {
+
+  ~ .option-label .detectToggle {
+
+    circle {
+      fill: $ModernizrPink
+      stroke: $ModernizrPink
+    }
+
+    path {
+      stroke: $White
+    }
+  }
+}

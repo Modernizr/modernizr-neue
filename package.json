@@ -1,0 +1,74 @@
+{
+  "name": "modernizr-neue",
+  "version": "1.0.0",
+  "description": "the new version of modernizr.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/modernizr/modernizr-neue"
+  },
+  "authors": [
+    {
+      "name": "Faruk Ates"
+    },
+    {
+      "name": "Paul Irish"
+    },
+    {
+      "name": "Alex Sexton"
+    },
+    {
+      "name": "Ryan Seddon"
+    },
+    {
+      "name": "Alexander Farkas"
+    },
+    {
+      "name": "Patrick Kettner"
+    },
+    {
+      "name": "Stu Cox"
+    },
+    {
+      "name": "Richard Herrera"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/modernizr/modernizr-neue/issues"
+  },
+  "homepage": "https://github.com/modernizr/modernizr-neue",
+  "dependencies": {
+    "browserify": "^9.0.3",
+    "fontfaceobserver": "^1.4.2",
+    "fuse.js": "^1.2.2",
+    "handlebars": "^3.0.0",
+    "hapi": "^8.4.0",
+    "react": "^0.13.0",
+    "zeroclipboard": "^2.2.0"
+  },
+  "devDependencies": {
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-compile-handlebars": "^0.4.4",
+    "gulp-concat": "^2.5.2",
+    "gulp-copy": "0.0.2",
+    "gulp-htmlmin": "^1.1.1",
+    "gulp-load-plugins": "^0.8.1",
+    "gulp-minify-css": "^1.0.0",
+    "gulp-nodemon": "^1.0.5",
+    "gulp-rename": "^1.2.0",
+    "gulp-sourcemaps": "^1.5.1",
+    "gulp-stylus": "^2.0.1",
+    "gulp-symlink": "^2.1.0",
+    "gulp-uglify": "^1.1.0",
+    "gulp-zopfli": "^0.1.1",
+    "lodash-cli": "^3.5.0",
+    "run-sequence": "^1.0.2",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

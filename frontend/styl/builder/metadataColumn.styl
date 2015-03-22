@@ -1,0 +1,46 @@
+.metadataColumn {
+  color: $Black;
+  position: fixed
+  top: 150px
+  right: 0
+  bottom: 30px
+  display: none
+  overflow: scroll
+  padding: 0 0 0 32px
+  width: 30%
+  pointer-events: none
+
+  .box {
+    pointer-events: all
+  }
+}
+
+.expanded .metadataColumn,
+.option-label:focus ~ .metadataColumn,
+.option-checkbox:focus ~ .metadataColumn {
+  display: block
+}
+
+.metadata-detailsLink {
+  display: block
+}
+
+@media (max-width: $XLargeScreen) {
+  .metadataColumn {
+    position: static
+    width: 100%
+    padding: 0
+  }
+
+  .name,
+  .hasAuthors .heading {
+    display: none
+  }
+
+  .hasAuthors {
+    display: block
+    background: $White
+    border-top: $lightBorder
+    padding: 12px 24px
+  }
+}

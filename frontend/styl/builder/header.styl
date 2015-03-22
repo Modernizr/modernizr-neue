@@ -1,0 +1,91 @@
+.builder {
+  .header {
+    position: fixed
+    top: 0
+    z-index: 1
+  }
+  .header-items {
+    height: $HeaderButtonHeight
+  }
+}
+
+.header-search {
+  position: fixed
+  top: $HeaderHeight
+  right: 0
+  left: 360px
+  z-index: 2
+  display: flex
+  height: 0
+  transition-duration: 0.5s
+  transition-property: top, height
+}
+
+.header-search {
+  top: $HeaderButtonHeight
+  height: $HeaderButtonHeight
+}
+
+.header-search-input {
+  padding: 0 1em
+  height: 100%
+  border: 0
+  border-right: 10px solid #272727
+  font-style: italic
+  flex: 3
+}
+
+.header-search-input,
+.classPrefix:focus {
+  outline: none
+  background: #272727
+  color: $White
+}
+
+.header-search-build {
+  min-width: 100px
+  height: 100%
+  border: 0
+  border-top: $lightBorder
+  background: $ModernizrPink
+  color: $White
+  text-transform: uppercase
+  font-weight: 400
+  font-size: 1.8em
+  flex: 1
+  cursor: pointer
+  user-select: none
+  &:focus {
+    outline: none
+    background: $White
+    color: $ModernizrPink
+  }
+}
+
+@media (max-width: $largeScreen) {
+  .builder .header {
+    position: absolute
+  }
+  .header-search {
+    position: absolute
+    left: 155px
+  }
+}
+
+@media (max-width: $mediumScreen) {
+  .header-search {
+    top: $HeaderHeight
+    left: 0
+  }
+}
+
+@media (max-width: $smallScreen) {
+  .header-search-build {
+    padding: 0
+  }
+
+  .header-search {
+    top: 80px
+    z-index: -1
+  }
+}

@@ -1,0 +1,146 @@
+.header {
+  display: flex
+  width: 100%
+  height: $HeaderHeight
+}
+
+.header-logo {
+  display: flex
+  min-width: 360px
+  background: $White
+  justify-content: center
+  align-items: center
+}
+
+.header a {
+  display: flex
+  height: 100%
+  color: #444
+  text-decoration: none
+  text-transform: uppercase
+  font-size: 16px
+  justify-content: center
+  align-items: center
+}
+
+
+.header-items {
+  z-index: 3
+  display: flex
+  width: 100%
+  height: $HeaderHeight
+  transition: height 0.5s
+  align-items: center
+}
+
+.header-item {
+  height: 100%
+  background: $White
+  text-align: center
+  border-left: $lightBorder
+  flex: 1
+
+  a:focus,
+  a:hover {
+    outline: none
+    background: $BackgroundGrey
+    }
+}
+
+#header-items-toggle,
+.header-items-toggle {
+  display: none
+  outline: none
+}
+
+.header-logo {
+  a {
+    display: flex
+    width: 100%
+    height: $HeaderHeight
+    &:focus {
+      outline: none
+      background-color: $ModernizrPink
+      .logo {
+        background-position: center right
+      }
+    }
+  }
+
+  .logo {
+    display: block
+    margin: 0 30px
+    width: 100%
+    height: 45px
+    background: url('/img/logo.svg') center left no-repeat
+    background-size: cover
+    font-size: 0
+  }
+}
+
+@media (max-width: $largeScreen) {
+
+  .header-logo {
+    flex: 0
+    min-width: 155px
+    a:focus .logo {
+      background-position: right 40% center
+    }
+  }
+}
+
+@media (max-width: $mediumScreen) {
+  .header-items {
+    flex-wrap: wrap
+  }
+
+  .header-item {
+    min-width: 50%
+    background: $White
+    border-bottom: $lightBorder
+  }
+}
+
+@media (max-width: $smallScreen) {
+  .header {
+    height: $SmallHeaderHeight
+    flex-wrap: wrap
+  }
+
+  .header-logo {
+    flex: 1
+
+    a {
+      height: $SmallHeaderHeight
+      width: 100%
+    }
+
+    .logo {
+      width: 105px
+    }
+  }
+
+  .header-items-toggle {
+    -webkit-user-select: none
+    user-select: none
+    display: block
+    min-width: 100px
+    border: none
+    border-left: $lightBorder
+    background: url(/img/menu.svg) center no-repeat $White
+    color: transparent
+  }
+
+  #header-items-toggle:checked + .header-items {
+    display: block
+  }
+
+  .header-items {
+    display: none
+    height: auto
+  }
+
+  .header-item {
+    height: $HeaderButtonHeight
+  }
+}

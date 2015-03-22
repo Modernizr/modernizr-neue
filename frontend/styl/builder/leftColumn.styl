@@ -1,0 +1,116 @@
+.leftColumn {
+  position: fixed
+  top: $HeaderHeight + $StandardPadding
+  bottom: $StandardPadding
+  margin-right: $StandardPadding
+  width: 330px
+  overflow: scroll
+
+  .toggle {
+    width: 1.2em
+    top: 0
+    right: 0
+  }
+
+  .option {
+    display: block
+    line-height: 24px
+  }
+
+  .heading-small {
+    padding-bottom: 6px
+    margin-bottom: 0
+  }
+}
+
+.leftColumn-total {
+  display: inline-block
+  color: #aaa8a9
+}
+
+.leftColumn-selected {
+  float: right
+}
+
+.leftColumn-results {
+  text-align: right
+  height: 20px
+}
+
+.leftColumn-toggle {
+  border: none
+  background: none
+  cursor: pointer
+
+  &:hover,
+  &:focus {
+  color: $ModernizrPink
+  outline: none
+  }
+}
+
+.leftColumn-options {
+  padding: 0 24px 12px
+  background: $White
+}
+
+.classPrefix {
+  border: $lightBorder
+  line-height: 1.3em
+}
+
+.classNameAdded {
+  background: $ModernizrPink
+  color: $White
+}
+
+@media (max-width: $largeScreen) {
+  .leftColumn {
+    position: absolute
+    top: $HeaderHeight
+    width: 100%
+    z-index: 2
+    bottom: auto
+    border-top: $lightBorder
+
+    .heading-small {
+      background: $ModernizrPink
+      color: $White
+      text-align: center
+      line-height: $HeaderButtonHeight
+      text-transform: uppercase
+      padding: 0
+      cursor: pointer
+      -webkit-user-select: none
+      user-select: none
+    }
+  }
+
+  .leftColumn-options {
+    padding: 12px 24px
+    display: none
+
+    .option {
+      line-height: 40px
+      font-size: 20px
+    }
+  }
+
+
+  .heading-small.active + .leftColumn-options {
+    display: block
+  }
+}
+
+@media (max-width: $mediumScreen) {
+  .leftColumn {
+    top: $HeaderHeight + $HeaderButtonHeight
+  }
+}
+
+@media (max-width: $smallScreen) {
+  .leftColumn {
+    top: 140px
+    z-index: -1
+  }
+}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" class="builder">
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+
+    <link  rel="stylesheet" href="/css/main.css" />
+    <link  rel="stylesheet" href="/css/builder.css" />
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
+  </head>
+
+  <body>
+    {{> partials/header}}
+    <main role="main" id="main">{{{builderContent}}}</main>
+    <script>
+      window._metadata={{{metadata}}};
+      window._options={{{options}}};
+      window._modernizrConfig = {
+        metadataUrl: '/js/modernizr-metadata.json',
+        packageUrl: '/lib/modernizr/package.json',
+        baseUrl: '/lib/modernizr/src',
+        paths: {
+          text: '/lib/requirejs-plugins/lib/text',
+          lib: '/lib/modernizr/lib',
+          json: '/lib/requirejs-plugins/src/json',
+          lodash: '/lib/lodash/lodash',
+          test: '/lib/modernizr/feature-detects'
+        }
+      }
+    </script>
+    {{#each scripts}}
+      <script src="{{this}}"></script>
+    {{/each}}
+  </body>
+</html>

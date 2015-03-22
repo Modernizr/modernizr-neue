@@ -1,0 +1,96 @@
+.detects {
+  margin: $HeaderHeight + $StandardPadding 30% $StandardPadding 360px
+}
+
+.option {
+  position: relative
+  width: 100%
+  outline: 0
+  border: 0
+  background: none
+  color: #999
+  vertical-align: middle
+  text-align: left
+}
+
+.detect {
+  background: darken($White, 3%)
+  display: inline-block
+
+  .option-label,
+  &.none {
+    display: block
+    position: relative
+    height: $DetectHeight
+    font-size: 28px
+    line-height: $DetectHeight
+    overflow: hidden
+    padding-right: $DetectHeight
+    padding-left: 24px
+    width: 100%
+    text-overflow: ellipsis
+    white-space: nowrap
+    cursor: pointer
+  }
+
+  &.none:hover {
+    cursor: not-allowed
+  }
+}
+
+.detectRow {
+  border-top: $lightBorder
+
+  &:first-child {
+    border-top: none
+  }
+}
+
+.option-label {
+  cursor: pointer
+  width: 100%
+  display: inline-block
+}
+
+.detect.none
+.expanded .detect {
+  background: $White
+}
+
+.option-checkbox:focus + .option-label,
+.expanded .detect,
+.detect:hover {
+  background: $White;
+  color: #444
+}
+
+@media (max-width: $XLargeScreen) {
+  .detects {
+    margin-right: 0
+  }
+}
+
+@media (max-width: $largeScreen) {
+  .detects {
+    margin: (($HeaderButtonHeight * 3) + $StatsHeight) 0 0
+  }
+}
+
+@media (max-width: $mediumScreen) {
+  .detects {
+    margin: (($HeaderButtonHeight * 4) + $StatsHeight) 0 0
+  }
+}
+
+@media (max-width: 550px) {
+  .detect {
+    font-size: 20px
+  }
+}
+
+@media (max-width: $smallScreen) {
+  .detects {
+    margin: ($SmallHeaderHeight + $StatsHeight + ($HeaderButtonHeight * 2)) 0 0
+  }
+}
+

@@ -1,0 +1,66 @@
+.downloadOverlay {
+  position: fixed
+  top: $HeaderHeight
+  right: 0
+  bottom: 0
+  left: 0
+  z-index: 1
+  display: flex
+  background: $OverlayColor
+  background: rgba($OverlayColor, 0.8)
+  color: $Black
+  align-items: center
+  justify-content: center
+}
+
+.downloadOverlay-container {
+  padding: 30px
+  max-width: 600px
+  max-height: 65%
+  width: 95%
+  background: $White
+}
+
+.downloadOverlay-option {
+  display: flex
+  justify-content: space-between
+
+  textarea {
+    min-height: 250px
+    width: 100%
+    outline: none
+    font-family: monospace
+  }
+
+  .link {
+    display: inline-block
+    padding: 2px 6px
+    border: none
+    background: none
+    color: $ModernizrPink
+    cursor: pointer
+  }
+
+  .clipboard {
+    width: 140px
+  }
+
+  .zeroclipboard-is-hover,
+  .link:hover,
+  .link:focus {
+    outline: none
+    color: $Black
+  }
+}
+
+
+@media (max-width: $mediumScreen) {
+  .downloadOverlay {
+    top: 0
+    z-index: 3
+  }
+
+  .downloadOverlay-option > span {
+    display: block
+  }
+}
