@@ -137,7 +137,18 @@ gulp.task('uglify-loose', function() {
 
 gulp.task('develop', function () {
   var tasks = ['styles', 'modernizr', 'lodash', 'browserify'];
-  plugins.nodemon({ script: 'server/index.js', ext: 'html js styl hbs'})
+  plugins.nodemon({
+    script: 'server/index.js',
+    ext: 'html js styl hbs',
+    ignore: [
+      'dist',
+      'node_modules',
+      'frontend/lib',
+      'frontend/css',
+      'frontend/js/*.custom.js',
+      'frontend/js/modernizr-metadata.js'
+    ]
+  })
     .on('start', tasks)
     .on('change', tasks)
     .on('restart', function () {
