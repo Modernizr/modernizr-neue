@@ -1,6 +1,6 @@
 'use strict';
 var React = require('react/dist/react.min');
-var Option = require('./Option');
+var Option = React.createFactory(require('./Option'));
 
 var DOM = React.DOM, li = DOM.li;
 var Detect = React.createClass({
@@ -23,7 +23,7 @@ var Detect = React.createClass({
           onKeyDown: this.keyDown,
           onClick: this.click
         },
-        React.createElement(Option, {
+        Option({
           toggle: props.toggle,
           ref: 'option',
           className: 'option detect',

@@ -1,53 +1,23 @@
 'use strict';
 var React = require('react/dist/react.min');
-var DetectList = require('./DetectList');
-var LeftColumn = require('./LeftColumn');
-var SearchHeader = require('./SearchHeader');
-var DownloadOverlay = require('./DownloadOverlay');
+var DetectList = React.createFactory(require('./DetectList'));
+var LeftColumn = React.createFactory(require('./LeftColumn'));
+var SearchHeader = React.createFactory(require('./SearchHeader'));
+var DownloadOverlay = React.createFactory(require('./DownloadOverlay'));
 var inBrowser = typeof window !== 'undefined';
 
 var DOM = React.DOM, form = DOM.form;
 
 var DownloadUI = React.createClass({
   getInitialState: function() {
-    return {};
+    return {
+      currentSearch: this.props.currentSearch
+    };
   },
 
   componentDidMount: function() {
-    if (location.hash.length || location.search.length) {
-      var self = this;
-      var str = location.hash || location.search;
-      var baseUrl = [location.protocol, '//', location.host, location.pathname].join('');
-      var query = str.replace('#', '?');
-      var queries = _.chain(query.replace(/^\?/, '').split('&'))
-        .map(function(query) {
-          return query.split('-');
-        })
-        .flatten()
-        .value();
-
-      if (queries.length) {
-        queries.map(function(query) {
-          var searchResult = query.match(/q=(.*)/);
-          if (searchResult) {
-            self.setState({currentSearch: searchResult[1]});
-          } else {
-            var matches = function(obj) {
-              var prop = obj.property;
-              if (_.isArray(prop)) {
-                prop = prop.join('_');
-              }
-              if (query === prop.toLowerCase()) {
-                obj.selected = true;
-                return true;
-              }
-            };
-
-            return _.some(self.props.options, matches) || _.some(self.props.detects, matches);
-          }
-        });
-        window.history.replaceState({}, '', baseUrl + query);
-      }
+    if (this.props.currentSearch) {
+      this.refs.searchHeader.change();
     }
   },
 
@@ -59,8 +29,8 @@ var DownloadUI = React.createClass({
     var detects = search && search.length ? _.intersection(allDetects, state.filtered) : allDetects;
 
     return (
-      form({onClick: this.onClick, method: 'POST', action: state.action, onSubmit: this.resetAction},
-           React.createElement(SearchHeader, {
+      form({method: 'POST', action: state.action, onSubmit: this.resetAction},
+           SearchHeader({
              ref: 'searchHeader',
              onChange: this.onSearch,
              detects: allDetects,
@@ -71,14 +41,14 @@ var DownloadUI = React.createClass({
              focusFirst: this.focusFirst,
            }),
 
-           (state.overlayOpen && React.createElement(DownloadOverlay, {
+           (state.overlayOpen && DownloadOverlay({
              toggle: this.toggleOverlay,
              buildContent: state.build,
              config: state.buildConfig,
              updateAction: this.updateAction
            })),
 
-           React.createElement(LeftColumn, {
+           LeftColumn({
              detects: detects,
              allDetects: allDetects,
              toggle: this.toggleAll,
@@ -87,7 +57,7 @@ var DownloadUI = React.createClass({
              updatePrefix: this.updatePrefix
            }),
 
-           React.createElement(DetectList, {
+           DetectList({
              ref: 'detectList',
              detects: detects,
              select: this.select
@@ -97,7 +67,10 @@ var DownloadUI = React.createClass({
   },
 
   focusFirst: function() {
-    debugger;
+    var topDetect = this.refs.detectList.refs[0];
+    if (topDetect) {
+      topDetect.refs.option.refs.input.getDOMNode().focus();
+    }
   },
 
   updatePrefix: function(prefix) {

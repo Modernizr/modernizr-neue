@@ -1,9 +1,9 @@
 'use strict';
 var React = require('react/dist/react.min');
-var MetadataDocs = require('./MetadataDocs');
-var MetadataList = require('./MetadataList');
-var MetadataNotes = require('./MetadataNotes');
-var MetadataPolyfills = require('./MetadataPolyfills');
+var MetadataDocs = React.createFactory(require('./MetadataDocs'));
+var MetadataList = React.createFactory(require('./MetadataList'));
+var MetadataNotes = React.createFactory(require('./MetadataNotes'));
+var MetadataPolyfills = React.createFactory(require('./MetadataPolyfills'));
 var util = require('./util');
 
 var listify = util.listify;
@@ -29,11 +29,11 @@ var Metadata = React.createClass({
           (!_.isEmpty(authors) && div({className: 'subheading'}, 'By: ' + listify(authors)))
         ),
         (async && div({className: 'box metadata-async'}, 'This is an async detect')),
-        (docs && React.createElement(MetadataDocs, {docs: docs})),
-        (!_.isEmpty(polyfills) && React.createElement(MetadataPolyfills, {polyfills: polyfills})),
-        (!_.isEmpty(warnings) && React.createElement(MetadataList, {warnings: warnings})),
-        (!_.isEmpty(knownBugs) && React.createElement(MetadataList, {knownBugs: knownBugs})),
-        (!_.isEmpty(notes) && React.createElement(MetadataNotes, {notes: notes}))
+        (docs && MetadataDocs({docs: docs})),
+        (!_.isEmpty(polyfills) && MetadataPolyfills({polyfills: polyfills})),
+        (!_.isEmpty(warnings) && MetadataList({warnings: warnings})),
+        (!_.isEmpty(knownBugs) && MetadataList({knownBugs: knownBugs})),
+        (!_.isEmpty(notes) && MetadataNotes({notes: notes}))
       )
     );
   }

@@ -1,7 +1,7 @@
 'use strict';
 var React = require('react/dist/react.min');
-var SVGToggle = require('./SVGToggle');
-var Metadata = require('./Metadata');
+var SVGToggle = React.createFactory(require('./SVGToggle'));
+var Metadata = React.createFactory(require('./Metadata'));
 var DOM = React.DOM, span = DOM.span, input = DOM.input, label = DOM.label;
 
 var Option = React.createClass({
@@ -25,9 +25,9 @@ var Option = React.createClass({
           checked: data.selected
         }),
         label({ref: 'label', title: name, className: 'option-label', htmlFor: prop}, name,
-          React.createElement(SVGToggle, {ref: 'SVGToggle', className: 'detectToggle'})
+          SVGToggle({ref: 'SVGToggle', className: 'detectToggle'})
         ),
-        (props.metaData && React.createElement(Metadata, {ref: 'metadata', data: data}))
+        (props.metaData && Metadata({ref: 'metadata', data: data}))
       )
     );
   },

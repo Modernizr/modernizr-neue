@@ -1,7 +1,7 @@
 'use strict';
 var React = require('react/dist/react.min');
-var Detect = require('./Detect');
-var DOM = React.DOM, ul = DOM.ul;
+var Detect = React.createFactory(require('./Detect'));
+var DOM = React.DOM, ul = DOM.ul, li = DOM.li;
 var DetectList = React.createClass({
 
   getInitialState: function() {
@@ -36,7 +36,7 @@ var DetectList = React.createClass({
     var self = this;
 
     detects = _.map(detects, function(detect, i) {
-      return React.createElement(Detect, {
+      return Detect({
         expanded: self.state.expanded,
         toggle: self.toggleDetect,
         ref: i,
@@ -48,7 +48,7 @@ var DetectList = React.createClass({
       }, detect.name);
     });
 
-    detects = detects.length ? detects : React.createElement('li', {className: 'detect option none'}, ':[ no such luck...');
+    detects = detects.length ? detects : li({className: 'detect option none'}, ':[ no such luck...');
 
     return ul({className: 'detects'}, detects);
   }

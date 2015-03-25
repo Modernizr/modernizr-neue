@@ -1,7 +1,7 @@
 'use strict';
-var Option = require('./Option');
-var util = require('./util');
 var React = require('react/dist/react.min');
+var Option = React.createFactory(require('./Option'));
+var util = require('./util');
 
 var pluralize = util.pluralize;
 var DOM = React.DOM, div = DOM.div, button = DOM.button, label = DOM.label, input = DOM.input;
@@ -31,7 +31,7 @@ var LeftColumn = React.createClass({
       detects.length + pluralize(' result', detects);
 
     options = _.map(options, function(option) {
-      return React.createElement(Option, {
+      return Option({
         className: 'option',
         data: option,
         select: select,

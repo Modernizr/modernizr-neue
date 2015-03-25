@@ -37,10 +37,6 @@ var SearchHeader = React.createClass({
     this.props.onChange(this.state.fuse.search(val), val);
   },
 
-  componentDidUpdate: function() {
-    this.change();
-  },
-
   preventSubmit: function(e) {
     if (e.which === 13) {
       e.preventDefault();

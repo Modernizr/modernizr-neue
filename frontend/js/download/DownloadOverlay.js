@@ -1,7 +1,7 @@
 /*globals Modernizr*/
 'use strict';
 var React = require('react/dist/react.min');
-var DownloadOverlayOption = require('./DownloadOverlayOption');
+var DownloadOverlayOption = React.createFactory(require('./DownloadOverlayOption'));
 var gruntify = require('./util').gruntify;
 var DOM = React.DOM, div = DOM.div, ul = DOM.ul;
 
@@ -23,7 +23,7 @@ var DownloadOverlay = React.createClass({
     return div({className: 'downloadOverlay', onClick: this.toggleOverlay},
       div({ref: 'container', className: 'downloadOverlay-container'},
         ul({className: 'downloadOverlay-options'},
-          React.createElement(DownloadOverlayOption, {
+          DownloadOverlayOption({
             title: 'Build',
             expanded: state.expanded,
             content: props.buildContent,
@@ -33,7 +33,7 @@ var DownloadOverlay = React.createClass({
             filename: 'modernizr-custom',
             updateAction: props.updateAction
           }),
-          React.createElement(DownloadOverlayOption, {
+          DownloadOverlayOption({
             title: 'Command Line Config',
             expanded: state.expanded,
             content: JSON.stringify(config, 0, 2),
@@ -44,7 +44,7 @@ var DownloadOverlay = React.createClass({
             path: '/download/config',
             updateAction: props.updateAction
           }),
-          React.createElement(DownloadOverlayOption, {
+          DownloadOverlayOption({
             title: 'Grunt Config',
             expanded: state.expanded,
             content: gruntify(config),

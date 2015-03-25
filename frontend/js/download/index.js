@@ -1,6 +1,7 @@
 'use strict';
-var DownloadUI = require('./DownloadUI');
 var React = require('react/dist/react.min');
+var DownloadUI = React.createFactory(require('./DownloadUI'));
+var currentSearch;
 require('fontfaceobserver');
 
 new window.FontFaceObserver('Source Sans Pro', {})
@@ -9,7 +10,41 @@ new window.FontFaceObserver('Source Sans Pro', {})
     document.documentElement.className += ' font-loaded';
   });
 
-React.render(React.createElement(DownloadUI, {detects: window._metadata, options: window._options}), document.getElementById('main'));
+if (location.hash.length || location.search.length) {
+  var str = location.hash || location.search;
+  var baseUrl = [location.protocol, '//', location.host, location.pathname].join('');
+  var query = str.replace('#', '?');
+  var queries = _.chain(query.replace(/^\?/, '').split('&'))
+  .map(function(query) {
+    return query.split('-');
+  })
+  .flatten()
+  .value();
+
+  if (queries.length) {
+    queries.map(function(query) {
+      var searchResult = query.match(/q=(.*)/);
+      if (searchResult) {
+        currentSearch = searchResult[1];
+      } else {
+        var matches = function(obj) {
+          var prop = obj.property;
+          if (_.isArray(prop)) {
+            prop = prop.join('_');
+          }
+          if (query === prop.toLowerCase()) {
+            obj.selected = true;
+            return true;
+          }
+        };
+
+        return _.some(window._options, matches) || _.some(window._metadata, matches);
+      }
+    });
+
+    window.history.replaceState({}, '', baseUrl + query);
+  }
+}
 
 if ('Worker' in window) {
   var worker = new Worker('/js/download/worker.js');
@@ -38,3 +73,9 @@ if ('Worker' in window) {
     window.builder = _builder;
   });
 }
+
+React.render(DownloadUI({
+  detects: window._metadata,
+  options: window._options,
+  currentSearch: currentSearch
+}), document.getElementById('main'));

@@ -1,7 +1,8 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
-var DownloadUI = require('./DownloadUI');
 var React = require('react/dist/react.min');
+var DownloadUI = React.createFactory(require('./DownloadUI'));
+var currentSearch;
 require('fontfaceobserver');
 
 new window.FontFaceObserver('Source Sans Pro', {})
@@ -10,7 +11,41 @@ new window.FontFaceObserver('Source Sans Pro', {})
     document.documentElement.className += ' font-loaded';
   });
 
-React.render(React.createElement(DownloadUI, {detects: window._metadata, options: window._options}), document.getElementById('main'));
+if (location.hash.length || location.search.length) {
+  var str = location.hash || location.search;
+  var baseUrl = [location.protocol, '//', location.host, location.pathname].join('');
+  var query = str.replace('#', '?');
+  var queries = _.chain(query.replace(/^\?/, '').split('&'))
+  .map(function(query) {
+    return query.split('-');
+  })
+  .flatten()
+  .value();
+
+  if (queries.length) {
+    queries.map(function(query) {
+      var searchResult = query.match(/q=(.*)/);
+      if (searchResult) {
+        currentSearch = searchResult[1];
+      } else {
+        var matches = function(obj) {
+          var prop = obj.property;
+          if (_.isArray(prop)) {
+            prop = prop.join('_');
+          }
+          if (query === prop.toLowerCase()) {
+            obj.selected = true;
+            return true;
+          }
+        };
+
+        return _.some(window._options, matches) || _.some(window._metadata, matches);
+      }
+    });
+
+    window.history.replaceState({}, '', baseUrl + query);
+  }
+}
 
 if ('Worker' in window) {
   var worker = new Worker('/js/download/worker.js');
@@ -40,10 +75,16 @@ if ('Worker' in window) {
   });
 }
 
+React.render(DownloadUI({
+  detects: window._metadata,
+  options: window._options,
+  currentSearch: currentSearch
+}), document.getElementById('main'));
+
 },{"./DownloadUI":6,"fontfaceobserver":17,"react/dist/react.min":19}],2:[function(require,module,exports){
 'use strict';
 var React = require('react/dist/react.min');
-var Option = require('./Option');
+var Option = React.createFactory(require('./Option'));
 
 var DOM = React.DOM, li = DOM.li;
 var Detect = React.createClass({
@@ -66,7 +107,7 @@ var Detect = React.createClass({
           onKeyDown: this.keyDown,
           onClick: this.click
         },
-        React.createElement(Option, {
+        Option({
           toggle: props.toggle,
           ref: 'option',
           className: 'option detect',
@@ -144,8 +185,8 @@ module.exports = Detect;
 },{"./Option":13,"react/dist/react.min":19}],3:[function(require,module,exports){
 'use strict';
 var React = require('react/dist/react.min');
-var Detect = require('./Detect');
-var DOM = React.DOM, ul = DOM.ul;
+var Detect = React.createFactory(require('./Detect'));
+var DOM = React.DOM, ul = DOM.ul, li = DOM.li;
 var DetectList = React.createClass({
 
   getInitialState: function() {
@@ -180,7 +221,7 @@ var DetectList = React.createClass({
     var self = this;
 
     detects = _.map(detects, function(detect, i) {
-      return React.createElement(Detect, {
+      return Detect({
         expanded: self.state.expanded,
         toggle: self.toggleDetect,
         ref: i,
@@ -192,7 +233,7 @@ var DetectList = React.createClass({
       }, detect.name);
     });
 
-    detects = detects.length ? detects : React.createElement('li', {className: 'detect option none'}, ':[ no such luck...');
+    detects = detects.length ? detects : li({className: 'detect option none'}, ':[ no such luck...');
 
     return ul({className: 'detects'}, detects);
   }
@@ -204,7 +245,7 @@ module.exports = DetectList;
 /*globals Modernizr*/
 'use strict';
 var React = require('react/dist/react.min');
-var DownloadOverlayOption = require('./DownloadOverlayOption');
+var DownloadOverlayOption = React.createFactory(require('./DownloadOverlayOption'));
 var gruntify = require('./util').gruntify;
 var DOM = React.DOM, div = DOM.div, ul = DOM.ul;
 
@@ -226,7 +267,7 @@ var DownloadOverlay = React.createClass({
     return div({className: 'downloadOverlay', onClick: this.toggleOverlay},
       div({ref: 'container', className: 'downloadOverlay-container'},
         ul({className: 'downloadOverlay-options'},
-          React.createElement(DownloadOverlayOption, {
+          DownloadOverlayOption({
             title: 'Build',
             expanded: state.expanded,
             content: props.buildContent,
@@ -236,7 +277,7 @@ var DownloadOverlay = React.createClass({
             filename: 'modernizr-custom',
             updateAction: props.updateAction
           }),
-          React.createElement(DownloadOverlayOption, {
+          DownloadOverlayOption({
             title: 'Command Line Config',
             expanded: state.expanded,
             content: JSON.stringify(config, 0, 2),
@@ -247,7 +288,7 @@ var DownloadOverlay = React.createClass({
             path: '/download/config',
             updateAction: props.updateAction
           }),
-          React.createElement(DownloadOverlayOption, {
+          DownloadOverlayOption({
             title: 'Grunt Config',
             expanded: state.expanded,
             content: gruntify(config),
@@ -374,54 +415,24 @@ module.exports = DownloadOverlayOption;
 },{"react/dist/react.min":19}],6:[function(require,module,exports){
 'use strict';
 var React = require('react/dist/react.min');
-var DetectList = require('./DetectList');
-var LeftColumn = require('./LeftColumn');
-var SearchHeader = require('./SearchHeader');
-var DownloadOverlay = require('./DownloadOverlay');
+var DetectList = React.createFactory(require('./DetectList'));
+var LeftColumn = React.createFactory(require('./LeftColumn'));
+var SearchHeader = React.createFactory(require('./SearchHeader'));
+var DownloadOverlay = React.createFactory(require('./DownloadOverlay'));
 var inBrowser = typeof window !== 'undefined';
 
 var DOM = React.DOM, form = DOM.form;
 
 var DownloadUI = React.createClass({
   getInitialState: function() {
-    return {};
+    return {
+      currentSearch: this.props.currentSearch
+    };
   },
 
   componentDidMount: function() {
-    if (location.hash.length || location.search.length) {
-      var self = this;
-      var str = location.hash || location.search;
-      var baseUrl = [location.protocol, '//', location.host, location.pathname].join('');
-      var query = str.replace('#', '?');
-      var queries = _.chain(query.replace(/^\?/, '').split('&'))
-        .map(function(query) {
-          return query.split('-');
-        })
-        .flatten()
-        .value();
-
-      if (queries.length) {
-        queries.map(function(query) {
-          var searchResult = query.match(/q=(.*)/);
-          if (searchResult) {
-            self.setState({currentSearch: searchResult[1]});
-          } else {
-            var matches = function(obj) {
-              var prop = obj.property;
-              if (_.isArray(prop)) {
-                prop = prop.join('_');
-              }
-              if (query === prop.toLowerCase()) {
-                obj.selected = true;
-                return true;
-              }
-            };
-
-            return _.some(self.props.options, matches) || _.some(self.props.detects, matches);
-          }
-        });
-        window.history.replaceState({}, '', baseUrl + query);
-      }
+    if (this.props.currentSearch) {
+      this.refs.searchHeader.change();
     }
   },
 
@@ -433,8 +444,8 @@ var DownloadUI = React.createClass({
     var detects = search && search.length ? _.intersection(allDetects, state.filtered) : allDetects;
 
     return (
-      form({onClick: this.onClick, method: 'POST', action: state.action, onSubmit: this.resetAction},
-           React.createElement(SearchHeader, {
+      form({method: 'POST', action: state.action, onSubmit: this.resetAction},
+           SearchHeader({
              ref: 'searchHeader',
              onChange: this.onSearch,
              detects: allDetects,
@@ -445,14 +456,14 @@ var DownloadUI = React.createClass({
              focusFirst: this.focusFirst,
            }),
 
-           (state.overlayOpen && React.createElement(DownloadOverlay, {
+           (state.overlayOpen && DownloadOverlay({
              toggle: this.toggleOverlay,
              buildContent: state.build,
              config: state.buildConfig,
              updateAction: this.updateAction
            })),
 
-           React.createElement(LeftColumn, {
+           LeftColumn({
              detects: detects,
              allDetects: allDetects,
              toggle: this.toggleAll,
@@ -461,7 +472,7 @@ var DownloadUI = React.createClass({
              updatePrefix: this.updatePrefix
            }),
 
-           React.createElement(DetectList, {
+           DetectList({
              ref: 'detectList',
              detects: detects,
              select: this.select
@@ -471,7 +482,10 @@ var DownloadUI = React.createClass({
   },
 
   focusFirst: function() {
-    debugger;
+    var topDetect = this.refs.detectList.refs[0];
+    if (topDetect) {
+      topDetect.refs.option.refs.input.getDOMNode().focus();
+    }
   },
 
   updatePrefix: function(prefix) {
@@ -608,9 +622,9 @@ module.exports = DownloadUI;
 
 },{"./DetectList":3,"./DownloadOverlay":4,"./LeftColumn":7,"./SearchHeader":15,"react/dist/react.min":19}],7:[function(require,module,exports){
 'use strict';
-var Option = require('./Option');
-var util = require('./util');
 var React = require('react/dist/react.min');
+var Option = React.createFactory(require('./Option'));
+var util = require('./util');
 
 var pluralize = util.pluralize;
 var DOM = React.DOM, div = DOM.div, button = DOM.button, label = DOM.label, input = DOM.input;
@@ -640,7 +654,7 @@ var LeftColumn = React.createClass({
       detects.length + pluralize(' result', detects);
 
     options = _.map(options, function(option) {
-      return React.createElement(Option, {
+      return Option({
         className: 'option',
         data: option,
         select: select,
@@ -689,10 +703,10 @@ module.exports = LeftColumn;
 },{"./Option":13,"./util":16,"react/dist/react.min":19}],8:[function(require,module,exports){
 'use strict';
 var React = require('react/dist/react.min');
-var MetadataDocs = require('./MetadataDocs');
-var MetadataList = require('./MetadataList');
-var MetadataNotes = require('./MetadataNotes');
-var MetadataPolyfills = require('./MetadataPolyfills');
+var MetadataDocs = React.createFactory(require('./MetadataDocs'));
+var MetadataList = React.createFactory(require('./MetadataList'));
+var MetadataNotes = React.createFactory(require('./MetadataNotes'));
+var MetadataPolyfills = React.createFactory(require('./MetadataPolyfills'));
 var util = require('./util');
 
 var listify = util.listify;
@@ -718,11 +732,11 @@ var Metadata = React.createClass({
           (!_.isEmpty(authors) && div({className: 'subheading'}, 'By: ' + listify(authors)))
         ),
         (async && div({className: 'box metadata-async'}, 'This is an async detect')),
-        (docs && React.createElement(MetadataDocs, {docs: docs})),
-        (!_.isEmpty(polyfills) && React.createElement(MetadataPolyfills, {polyfills: polyfills})),
-        (!_.isEmpty(warnings) && React.createElement(MetadataList, {warnings: warnings})),
-        (!_.isEmpty(knownBugs) && React.createElement(MetadataList, {knownBugs: knownBugs})),
-        (!_.isEmpty(notes) && React.createElement(MetadataNotes, {notes: notes}))
+        (docs && MetadataDocs({docs: docs})),
+        (!_.isEmpty(polyfills) && MetadataPolyfills({polyfills: polyfills})),
+        (!_.isEmpty(warnings) && MetadataList({warnings: warnings})),
+        (!_.isEmpty(knownBugs) && MetadataList({knownBugs: knownBugs})),
+        (!_.isEmpty(notes) && MetadataNotes({notes: notes}))
       )
     );
   }
@@ -841,8 +855,8 @@ module.exports = MetadataPolyfills;
 },{"./util":16,"react/dist/react.min":19}],13:[function(require,module,exports){
 'use strict';
 var React = require('react/dist/react.min');
-var SVGToggle = require('./SVGToggle');
-var Metadata = require('./Metadata');
+var SVGToggle = React.createFactory(require('./SVGToggle'));
+var Metadata = React.createFactory(require('./Metadata'));
 var DOM = React.DOM, span = DOM.span, input = DOM.input, label = DOM.label;
 
 var Option = React.createClass({
@@ -866,9 +880,9 @@ var Option = React.createClass({
           checked: data.selected
         }),
         label({ref: 'label', title: name, className: 'option-label', htmlFor: prop}, name,
-          React.createElement(SVGToggle, {ref: 'SVGToggle', className: 'detectToggle'})
+          SVGToggle({ref: 'SVGToggle', className: 'detectToggle'})
         ),
-        (props.metaData && React.createElement(Metadata, {ref: 'metadata', data: data}))
+        (props.metaData && Metadata({ref: 'metadata', data: data}))
       )
     );
   },
@@ -951,10 +965,6 @@ var SearchHeader = React.createClass({
   change: function() {
     var val = this.refs.search.getDOMNode().value;
     this.props.onChange(this.state.fuse.search(val), val);
-  },
-
-  componentDidUpdate: function() {
-    this.change();
   },
 
   preventSubmit: function(e) {
