@@ -3,9 +3,10 @@
 var React = require('react/dist/react.min');
 var DownloadUI = React.createFactory(require('./DownloadUI'));
 var currentSearch;
+var shouldBuild;
 require('fontfaceobserver');
 
-new window.FontFaceObserver('Source Sans Pro', {})
+new window.FontFaceObserver('Open Sans', {})
   .check()
   .then(function() {
     document.documentElement.className += ' font-loaded';
@@ -23,10 +24,11 @@ if (location.hash.length || location.search.length) {
   .value();
 
   if (queries.length) {
+    shouldBuild = true;
     queries.map(function(query) {
       var searchResult = query.match(/q=(.*)/);
       if (searchResult) {
-        currentSearch = searchResult[1];
+        currentSearch = unescape(searchResult[1]);
       } else {
         var matches = function(obj) {
           var prop = obj.property;
@@ -48,20 +50,27 @@ if (location.hash.length || location.search.length) {
 }
 
 if ('Worker' in window) {
-  var worker = new Worker('/js/download/worker.js');
+  var buildWorker = new Worker('/js/download/buildWorker.js');
+  var gzipWorker = new Worker('/js/download/gzipWorker.js');
 
-  worker.postMessage(JSON.stringify({
+  buildWorker.postMessage(JSON.stringify({
     requireConfig: window._modernizrConfig
   }));
 
-  window.builder = function(config, cb) {
-    worker.onmessage = function(e) {
+  window.gziper = function(config, cb) {
+    gzipWorker.postMessage(config);
+    gzipWorker.onmessage = function(e) {
       cb(e.data);
     };
-    worker.postMessage(JSON.stringify({build: config}));
   };
 
-  } else {
+  window.builder = function(config, cb) {
+    buildWorker.onmessage = function(e) {
+      cb(e.data);
+    };
+    buildWorker.postMessage(JSON.stringify({build: config}));
+  };
+} else {
 
   window.builder = function() {
     var args = arguments;
@@ -75,10 +84,24 @@ if ('Worker' in window) {
   });
 }
 
+if (false && 'serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/serviceworker.js')
+  .catch(function(error) {
+    console.error(error);
+  });
+}
+
+  ZeroClipboard.config({
+    swfPath: '/lib/zeroclipboard/dist/ZeroClipboard.swf',
+    forceHandCursor: true,
+    flashLoadTimeout: 5000
+  });
+
 React.render(DownloadUI({
   detects: window._metadata,
   options: window._options,
-  currentSearch: currentSearch
+  currentSearch: currentSearch,
+  shouldBuild: shouldBuild
 }), document.getElementById('main'));
 
 },{"./DownloadUI":6,"fontfaceobserver":17,"react/dist/react.min":19}],2:[function(require,module,exports){
@@ -116,7 +139,8 @@ var Detect = React.createClass({
           name: 'feature-detects',
           focusParent: this.focus,
           blurParent: this.blur,
-          metaData: {data: data}
+          metaData: {data: data},
+          ignoreLabelClick: true
         })
       )
     );
@@ -324,34 +348,38 @@ var DownloadOverlayOption = React.createClass({
 
   getInitialState: function() {
     return {
-      supportsDownload: Modernizr.blobconstructor && Modernizr.adownload
+      supportsDownload: Modernizr.blobconstructor && Modernizr.adownload,
+      hasFlash: this.props.hasFlash
     };
   },
 
   setupClipboard: function() {
+    var self = this;
+    var state = this.state;
     var props = this.props;
-    if (props.hasFlash) {
-      var self = this;
-      var zeroClipboard = new ZeroClipboard(this.refs[this.props.title].getDOMNode());
+    if (state.hasFlash) {
+      var zeroClipboard = new ZeroClipboard(this.refs[props.title].getDOMNode());
+      ZeroClipboard.on('error', function() {
+        Modernizr.flash = false;
+        self.setState({hasFlash: false});
+        ZeroClipboard.destroy();
+      });
+
       var content = props.content;
 
       zeroClipboard.on('copy', function(e) {
         var clipboard = e.clipboardData;
 
         self.setState({copied: true});
-        setTimeout(function() {self.setState({copied: false});}, 1500);
+        setTimeout(function() {
+          self.setState({copied: false});
+        }, 1500);
         clipboard.setData('text/plain', content);
       });
     }
   },
 
   componentDidMount: function() {
-    if (this.props.hasFlash) {
-      ZeroClipboard.config({
-        swfPath: '/lib/zeroclipboard/dist/ZeroClipboard.swf',
-        forceHandCursor: true
-      });
-    }
     this.setupClipboard();
   },
 
@@ -367,7 +395,7 @@ var DownloadOverlayOption = React.createClass({
 
     if (disabled) {
       copyLabel = 'Building';
-    } else if (props.hasFlash && state.copied) {
+    } else if (state.hasFlash && state.copied) {
       copyLabel = 'Copied';
     } else {
       copyLabel = 'Copy to Clipboard';
@@ -402,9 +430,8 @@ var DownloadOverlayOption = React.createClass({
   },
 
   clickClipboard: function() {
-    var props = this.props;
-    if (!props.hasFlash) {
-      props.toggleTextarea(this);
+    if (!this.state.hasFlash) {
+      this.props.toggleTextarea(this);
     }
   }
 });
@@ -431,8 +458,13 @@ var DownloadUI = React.createClass({
   },
 
   componentDidMount: function() {
-    if (this.props.currentSearch) {
+    var props = this.props;
+    if (props.currentSearch) {
       this.refs.searchHeader.change();
+    }
+
+    if (props.shouldBuild) {
+      this.build();
     }
   },
 
@@ -445,39 +477,41 @@ var DownloadUI = React.createClass({
 
     return (
       form({method: 'POST', action: state.action, onSubmit: this.resetAction},
-           SearchHeader({
-             ref: 'searchHeader',
-             onChange: this.onSearch,
-             detects: allDetects,
-             toggleOverlay: this.toggleOverlay,
-             onHover: this.build,
-             build: this.build,
-             defaultValue: state.currentSearch,
-             focusFirst: this.focusFirst,
-           }),
+        SearchHeader({
+          ref: 'searchHeader',
+          onChange: this.onSearch,
+          detects: allDetects,
+          toggleOverlay: this.toggleOverlay,
+          onHover: this.build,
+          build: this.build,
+          defaultValue: state.currentSearch,
+          focusFirst: this.focusFirst,
+        }),
 
-           (state.overlayOpen && DownloadOverlay({
-             toggle: this.toggleOverlay,
-             buildContent: state.build,
-             config: state.buildConfig,
-             updateAction: this.updateAction
-           })),
+        (state.overlayOpen && DownloadOverlay({
+          toggle: this.toggleOverlay,
+          buildContent: state.build,
+          config: state.buildConfig,
+          updateAction: this.updateAction
+        })),
 
-           LeftColumn({
-             detects: detects,
-             allDetects: allDetects,
-             toggle: this.toggleAll,
-             options: props.options,
-             updateURL: this.updateURL,
-             updatePrefix: this.updatePrefix
-           }),
+        LeftColumn({
+          detects: detects,
+          allDetects: allDetects,
+          toggle: this.toggleAll,
+          options: props.options,
+          updateURL: this.updateURL,
+          updatePrefix: this.updatePrefix,
+          filesize: state.filesize,
+          build: this.build
+        }),
 
-           DetectList({
-             ref: 'detectList',
-             detects: detects,
-             select: this.select
-           })
-          )
+        DetectList({
+          ref: 'detectList',
+          detects: detects,
+          select: this.select
+        })
+       )
     );
   },
 
@@ -504,7 +538,6 @@ var DownloadUI = React.createClass({
   resetAction: function() {
     this.setState({action: null});
   },
-
 
   toggleOverlay: function(overlayOpen) {
     this.setState({overlayOpen: overlayOpen});
@@ -557,8 +590,14 @@ var DownloadUI = React.createClass({
   },
 
   select: function(data) {
+    var state = {};
     data.selected = !data.selected;
-    this.setState();
+    if (this.state.filesize) {
+      state = {
+        filesize: {}
+      };
+    }
+    this.setState(state);
   },
 
   onSearch: function(results, search) {
@@ -578,6 +617,16 @@ var DownloadUI = React.createClass({
     });
 
     this.setState({toggled: toggeledState});
+  },
+
+  updateFilesize: function(config) {
+    var self = this;
+
+    if ('gziper' in window) {
+      window.gziper(config, function(filesize) {
+        self.setState({filesize: filesize});
+      });
+    }
   },
 
   build: function(immediate) {
@@ -605,6 +654,7 @@ var DownloadUI = React.createClass({
 
       if ((immediate || !allEmpty) && !_.isEqual(config, state.buildConfig)) {
         window.builder(config, function(output) {
+          self.updateFilesize(JSON.stringify({build: output, config: config}));
           self.setState({build: output});
         });
         self.setState({buildConfig: config});
@@ -643,15 +693,19 @@ var LeftColumn = React.createClass({
     var options = props.options;
     var select = this.select;
 
-    var total = detects.length + ' available';
     var totalSelected = allDetects.filter(function(detect) {return detect.selected;}).length;
     var selected = totalSelected + ' selected';
-    var toggled = detects.length === totalSelected;
+    var toggled = detects.length === totalSelected
     var toggle = (toggled ? 'REMOVE' : 'ADD') + ' ALL';
     var className = (toggled ? 'toggled ' : '') + 'leftColumn column';
     var inputClass = 'classPrefix' + (state.classNameAdded ? ' classNameAdded' : '');
     var results = detects.length === allDetects.length ? ' ' :
       detects.length + pluralize(' result', detects);
+    var filesize;
+
+    if (props.filesize) {
+      filesize = div({className: 'filesizes'}, props.filesize.original, ' / ', props.filesize.compressed + ' gzipped');
+    };
 
     options = _.map(options, function(option) {
       return Option({
@@ -665,11 +719,12 @@ var LeftColumn = React.createClass({
 
     return (
       div({className: className, onClick: this.props.onClick},
-        div({className: 'box leftColum-stats'},
-          div({className: 'leftColumn-total'}, total),
-          div({className: 'leftColumn-selected'}, selected),
-          div({className: 'leftColumn-results'}, results),
-          button({type: 'button', className: 'leftColumn-toggle', onClick: this.props.toggle}, toggle)
+        div({className: 'box'},
+          div({className: 'leftColum-stats'},
+            div({className: 'leftColumn-selected'}, selected, results),
+            filesize,
+            button({type: 'button', className: 'leftColumn-toggle', onClick: this.props.toggle}, toggle)
+          )
         ),
         div({className: 'box heading-small' + (state.optionsToggled ? ' active' : ''), onClick: this.toggleOptions}, 'Options'),
         div({className: 'leftColumn-options'},
@@ -679,6 +734,11 @@ var LeftColumn = React.createClass({
         )
       )
     );
+  },
+
+  componentDidUpdate: function() {
+    this.props.updateURL();
+    this.props.build();
   },
 
   toggleOptions: function() {
@@ -734,8 +794,8 @@ var Metadata = React.createClass({
         (async && div({className: 'box metadata-async'}, 'This is an async detect')),
         (docs && MetadataDocs({docs: docs})),
         (!_.isEmpty(polyfills) && MetadataPolyfills({polyfills: polyfills})),
-        (!_.isEmpty(warnings) && MetadataList({warnings: warnings})),
-        (!_.isEmpty(knownBugs) && MetadataList({knownBugs: knownBugs})),
+        (!_.isEmpty(warnings) && MetadataList({str: 'warning', items: warnings})),
+        (!_.isEmpty(knownBugs) && MetadataList({str: 'known bug', items: knownBugs})),
         (!_.isEmpty(notes) && MetadataNotes({notes: notes}))
       )
     );
@@ -895,7 +955,7 @@ var Option = React.createClass({
     var triggeredByKeyboard = (e.clientX === e.clientY && e.clientX === 0);
     var clickedToggle = (toggle === target || toggle.contains(target));
 
-    if (!triggeredByKeyboard && target === label) {
+    if (!triggeredByKeyboard && props.ignoreLabelCLick && target === label) {
       props.focusParent && props.focusParent();
       e.preventDefault();
     } else if (triggeredByKeyboard || clickedToggle) {

@@ -2,16 +2,18 @@
 <html lang="en" class="builder">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home</title>
 
     <link  rel="stylesheet" href="/css/main.css" />
     <link  rel="stylesheet" href="/css/builder.css" />
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
     {{> partials/header}}
     <main role="main" id="main">{{{builderContent}}}</main>
+    {{> partials/footer}}
     <script>
       window._metadata={{{metadata}}};
       window._options={{{options}}};
@@ -23,7 +25,7 @@
           text: '/lib/requirejs-plugins/lib/text',
           lib: '/lib/modernizr/lib',
           json: '/lib/requirejs-plugins/src/json',
-          lodash: '/lib/lodash/lodash',
+          lodash: '/js/lodash.custom.js',
           test: '/lib/modernizr/feature-detects'
         }
       }

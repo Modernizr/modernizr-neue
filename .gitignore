@@ -3,4 +3,5 @@ node_modules
 frontend/lib
 frontend/css
 frontend/js/*.custom.js
+frontend/js/prod*
 frontend/js/modernizr-metadata.js

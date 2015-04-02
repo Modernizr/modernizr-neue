@@ -1,8 +1,10 @@
 'use strict';
+var fs = require('fs');
 var del = require('del');
 var gulp = require('gulp');
 var modernizr = require('modernizr');
 var browserify = require('browserify');
+var feed = require('./server/util/rss');
 var runSequence = require('run-sequence');
 var exec = require('child_process').exec;
 var source = require('vinyl-source-stream');
@@ -21,15 +23,23 @@ gulp.task('browserify', function() {
 });
 
 gulp.task('handlebars', function() {
+  var authors = require('./server/util/footer');
+  var blogPost = require('./server/util/blogPost');
+  var posts = fs.readdirSync('./posts').reverse().map(blogPost);
+  var post = posts.shift();
+  post.posts = posts;
+
   var templateData = {
     metadata: JSON.stringify(modernizr.metadata()),
     options: JSON.stringify(modernizr.options()),
-    builderContent: require('./server/builderBuild.js'),
+    builderContent: require('./server/buildSteps/download.js'),
     scripts: [
       '/js/prod.js',
       '/lib/r.js/dist/r.js',
       '/lib/modernizr/lib/build.js',
-    ]
+    ],
+    post: post,
+    authors: authors
   };
 
   return gulp.src([
@@ -37,7 +47,10 @@ gulp.task('handlebars', function() {
     'frontend/templates/index.hbs'
   ])
     .pipe(plugins.handlebars(templateData, {
-      batch: ['frontend/templates']
+      batch: ['frontend/templates'],
+      helpers: {
+        formatDate: require('./frontend/templates/helpers/formatDate')
+      }
     }))
     .pipe(plugins.htmlmin({
       collapseWhitespace: true,
@@ -53,6 +66,10 @@ gulp.task('handlebars', function() {
       path.extname = '.html';
     }))
   .pipe(gulp.dest('dist'));
+});
+
+gulp.task('rss', function(cb) {
+  fs.writeFile('dist/feed', feed, cb);
 });
 
 gulp.task('styles', function() {
@@ -124,8 +141,12 @@ gulp.task('uglify-combined', function() {
 
 gulp.task('uglify-loose', function() {
   return gulp.src([
-    'frontend/js/download/worker.js',
+    'frontend/js/download/buildWorker.js',
+    'frontend/js/download/gzipWorker.js',
+    'frontend/lib/pako/dist/pako_deflate.js',
+    'frontend/lib/pretty-bytes/pretty-bytes.js',
     'frontend/lib/r.js/dist/r.js',
+    'frontend/lib/serviceworker-cache-polyfill.js/dist/serviceworker-cache-polyfill.js',
     'frontend/js/lodash.custom.js',
     'frontend/lib/requirejs-plugins/**/*.js'
   ], {base: './frontend'})
@@ -135,8 +156,21 @@ gulp.task('uglify-loose', function() {
   .pipe(gulp.dest('dist'));
 });
 
+gulp.task('uglify-sw', function() {
+  // uglify service worker seperatly, becuase it has to be served
+  // from the root of the domain, so its `base` is different
+  return gulp.src('frontend/js/download/serviceworker.js', {base: 'frontend/js/download/'})
+    .pipe(plugins.sourcemaps.init())
+      .pipe(plugins.uglify())
+    .pipe(plugins.sourcemaps.write('.'))
+  .pipe(gulp.dest('dist'));
+});
+
+gulp.task('uglify', ['uglify-combined', 'uglify-loose', 'uglify-sw']);
+
 gulp.task('develop', function () {
-  var tasks = ['styles', 'modernizr', 'lodash', 'browserify'];
+  var tasks = ['modernizr', 'lodash', 'browserify', 'styles'];
+
   plugins.nodemon({
     script: 'server/index.js',
     ext: 'html js styl hbs',
@@ -146,7 +180,8 @@ gulp.task('develop', function () {
       'frontend/lib',
       'frontend/css',
       'frontend/js/*.custom.js',
-      'frontend/js/modernizr-metadata.js'
+      'frontend/js/modernizr-metadata.js',
+      'frontend/js/download/downloader.js'
     ]
   })
     .on('start', tasks)
@@ -197,9 +232,10 @@ gulp.task('deploy', function(cb) {
   runSequence(
     'clean',
     'styles',
-    ['handlebars', 'lodash', 'modernizr'],
-    ['uglify-combined', 'uglify-loose'],
+    ['browserify', 'handlebars', 'lodash', 'modernizr'],
+    'uglify',
     'copy',
+    'rss',
     'compress',
   cb);
 });

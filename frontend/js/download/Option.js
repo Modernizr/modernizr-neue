@@ -40,7 +40,7 @@ var Option = React.createClass({
     var triggeredByKeyboard = (e.clientX === e.clientY && e.clientX === 0);
     var clickedToggle = (toggle === target || toggle.contains(target));
 
-    if (!triggeredByKeyboard && target === label) {
+    if (!triggeredByKeyboard && props.ignoreLabelCLick && target === label) {
       props.focusParent && props.focusParent();
       e.preventDefault();
     } else if (triggeredByKeyboard || clickedToggle) {

@@ -19,18 +19,23 @@
   max-height: 65%
   width: 95%
   background: $White
-}
-
-.downloadOverlay-option {
-  display: flex
-  justify-content: space-between
+  overflow: scroll
 
   textarea {
     min-height: 250px
     width: 100%
     outline: none
     font-family: monospace
+    &::selection {
+      color: $White
+      background: $ModernizrPink
+    }
   }
+}
+
+.downloadOverlay-option {
+  display: flex
+  justify-content: space-between
 
   .link {
     display: inline-block

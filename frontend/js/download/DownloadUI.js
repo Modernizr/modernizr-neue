@@ -16,8 +16,13 @@ var DownloadUI = React.createClass({
   },
 
   componentDidMount: function() {
-    if (this.props.currentSearch) {
+    var props = this.props;
+    if (props.currentSearch) {
       this.refs.searchHeader.change();
+    }
+
+    if (props.shouldBuild) {
+      this.build();
     }
   },
 
@@ -30,39 +35,41 @@ var DownloadUI = React.createClass({
 
     return (
       form({method: 'POST', action: state.action, onSubmit: this.resetAction},
-           SearchHeader({
-             ref: 'searchHeader',
-             onChange: this.onSearch,
-             detects: allDetects,
-             toggleOverlay: this.toggleOverlay,
-             onHover: this.build,
-             build: this.build,
-             defaultValue: state.currentSearch,
-             focusFirst: this.focusFirst,
-           }),
+        SearchHeader({
+          ref: 'searchHeader',
+          onChange: this.onSearch,
+          detects: allDetects,
+          toggleOverlay: this.toggleOverlay,
+          onHover: this.build,
+          build: this.build,
+          defaultValue: state.currentSearch,
+          focusFirst: this.focusFirst,
+        }),
 
-           (state.overlayOpen && DownloadOverlay({
-             toggle: this.toggleOverlay,
-             buildContent: state.build,
-             config: state.buildConfig,
-             updateAction: this.updateAction
-           })),
+        (state.overlayOpen && DownloadOverlay({
+          toggle: this.toggleOverlay,
+          buildContent: state.build,
+          config: state.buildConfig,
+          updateAction: this.updateAction
+        })),
 
-           LeftColumn({
-             detects: detects,
-             allDetects: allDetects,
-             toggle: this.toggleAll,
-             options: props.options,
-             updateURL: this.updateURL,
-             updatePrefix: this.updatePrefix
-           }),
+        LeftColumn({
+          detects: detects,
+          allDetects: allDetects,
+          toggle: this.toggleAll,
+          options: props.options,
+          updateURL: this.updateURL,
+          updatePrefix: this.updatePrefix,
+          filesize: state.filesize,
+          build: this.build
+        }),
 
-           DetectList({
-             ref: 'detectList',
-             detects: detects,
-             select: this.select
-           })
-          )
+        DetectList({
+          ref: 'detectList',
+          detects: detects,
+          select: this.select
+        })
+       )
     );
   },
 
@@ -89,7 +96,6 @@ var DownloadUI = React.createClass({
   resetAction: function() {
     this.setState({action: null});
   },
-
 
   toggleOverlay: function(overlayOpen) {
     this.setState({overlayOpen: overlayOpen});
@@ -142,8 +148,14 @@ var DownloadUI = React.createClass({
   },
 
   select: function(data) {
+    var state = {};
     data.selected = !data.selected;
-    this.setState();
+    if (this.state.filesize) {
+      state = {
+        filesize: {}
+      };
+    }
+    this.setState(state);
   },
 
   onSearch: function(results, search) {
@@ -163,6 +175,16 @@ var DownloadUI = React.createClass({
     });
 
     this.setState({toggled: toggeledState});
+  },
+
+  updateFilesize: function(config) {
+    var self = this;
+
+    if ('gziper' in window) {
+      window.gziper(config, function(filesize) {
+        self.setState({filesize: filesize});
+      });
+    }
   },
 
   build: function(immediate) {
@@ -190,6 +212,7 @@ var DownloadUI = React.createClass({
 
       if ((immediate || !allEmpty) && !_.isEqual(config, state.buildConfig)) {
         window.builder(config, function(output) {
+          self.updateFilesize(JSON.stringify({build: output, config: config}));
           self.setState({build: output});
         });
         self.setState({buildConfig: config});

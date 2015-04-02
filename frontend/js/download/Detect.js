@@ -32,7 +32,8 @@ var Detect = React.createClass({
           name: 'feature-detects',
           focusParent: this.focus,
           blurParent: this.blur,
-          metaData: {data: data}
+          metaData: {data: data},
+          ignoreLabelClick: true
         })
       )
     );

@@ -23,24 +23,21 @@
   }
 }
 
-.leftColumn-total {
-  display: inline-block
-  color: #aaa8a9
-}
-
 .leftColumn-selected {
-  float: right
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
-.leftColumn-results {
-  text-align: right
-  height: 20px
+.leftColum-stats {
+  font-size: 16px;
 }
 
 .leftColumn-toggle {
   border: none
   background: none
   cursor: pointer
+  padding: 0
 
   &:hover,
   &:focus {
@@ -62,6 +59,11 @@
 .classNameAdded {
   background: $ModernizrPink
   color: $White
+}
+
+.filesizes {
+  color: #999
+  font-size: 12px
 }
 
 @media (max-width: $largeScreen) {
@@ -110,7 +112,7 @@
 
 @media (max-width: $smallScreen) {
   .leftColumn {
-    top: 140px
+    top: $SmallHeaderHeight + $HeaderButtonHeight
     z-index: -1
   }
 }

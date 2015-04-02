@@ -1,0 +1,14 @@
+<article class='blogpost'>
+  <header>
+    <h1>{{{title}}}</h1>
+    <span class="author light" rel="author">Posted by {{{author}}}, on <a href="{{url}}">{{formatDate date}}</a></span>
+  </header>
+  {{{__content}}}
+  <div class="blogpost-links">
+    {{~#if prevPost}}<a class="blogpost-link blogpost-link-prev" href="{{prevPost.url}}">{{prevPost.title}}</a>{{/if~}}
+    {{~#if nextPost}}<a class="blogpost-link blogpost-link-next" href="{{nextPost.url}}">{{nextPost.title}}</a>{{/if~}}
+  </div>
+</article>
+{{#if posts}}
+  {{> partials/allPosts}}
+{{/if}}

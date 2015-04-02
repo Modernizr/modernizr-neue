@@ -1,0 +1,14 @@
+<footer class="footer">
+  <h1>Team</h1>
+  <ul class="teamMembers">
+    {{~#each team}}
+      <li class="teamMember clearfix">
+        <a href="{{domain}}">
+          <img src="{{avatar}}"/>
+          {{name}}
+        </a>
+        <a href="https://twitter.com/{{twitter}}">@{{twitter}}</a>
+      </li>
+    {{/each~}}
+  </ul>
+</footer>

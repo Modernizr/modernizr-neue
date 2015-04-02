@@ -2,9 +2,10 @@
 var React = require('react/dist/react.min');
 var DownloadUI = React.createFactory(require('./DownloadUI'));
 var currentSearch;
+var shouldBuild;
 require('fontfaceobserver');
 
-new window.FontFaceObserver('Source Sans Pro', {})
+new window.FontFaceObserver('Open Sans', {})
   .check()
   .then(function() {
     document.documentElement.className += ' font-loaded';
@@ -22,10 +23,11 @@ if (location.hash.length || location.search.length) {
   .value();
 
   if (queries.length) {
+    shouldBuild = true;
     queries.map(function(query) {
       var searchResult = query.match(/q=(.*)/);
       if (searchResult) {
-        currentSearch = searchResult[1];
+        currentSearch = unescape(searchResult[1]);
       } else {
         var matches = function(obj) {
           var prop = obj.property;
@@ -47,20 +49,27 @@ if (location.hash.length || location.search.length) {
 }
 
 if ('Worker' in window) {
-  var worker = new Worker('/js/download/worker.js');
+  var buildWorker = new Worker('/js/download/buildWorker.js');
+  var gzipWorker = new Worker('/js/download/gzipWorker.js');
 
-  worker.postMessage(JSON.stringify({
+  buildWorker.postMessage(JSON.stringify({
     requireConfig: window._modernizrConfig
   }));
 
-  window.builder = function(config, cb) {
-    worker.onmessage = function(e) {
+  window.gziper = function(config, cb) {
+    gzipWorker.postMessage(config);
+    gzipWorker.onmessage = function(e) {
       cb(e.data);
     };
-    worker.postMessage(JSON.stringify({build: config}));
   };
 
-  } else {
+  window.builder = function(config, cb) {
+    buildWorker.onmessage = function(e) {
+      cb(e.data);
+    };
+    buildWorker.postMessage(JSON.stringify({build: config}));
+  };
+} else {
 
   window.builder = function() {
     var args = arguments;
@@ -74,8 +83,22 @@ if ('Worker' in window) {
   });
 }
 
+if (false && 'serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/serviceworker.js')
+  .catch(function(error) {
+    console.error(error);
+  });
+}
+
+  ZeroClipboard.config({
+    swfPath: '/lib/zeroclipboard/dist/ZeroClipboard.swf',
+    forceHandCursor: true,
+    flashLoadTimeout: 5000
+  });
+
 React.render(DownloadUI({
   detects: window._metadata,
   options: window._options,
-  currentSearch: currentSearch
+  currentSearch: currentSearch,
+  shouldBuild: shouldBuild
 }), document.getElementById('main'));

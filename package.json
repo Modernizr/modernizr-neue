@@ -12,28 +12,46 @@
   },
   "authors": [
     {
-      "name": "Faruk Ates"
+      "name": "Faruk Ates",
+      "email": "fates@edyt.com",
+      "domain": "http://farukat.es/",
+      "twitter": "KuraFire"
     },
     {
-      "name": "Paul Irish"
+      "name": "Paul Irish",
+      "email": "paul.irish@gmail.com",
+      "domain": "http://www.paulirish.com",
+      "twitter": "paul_irish"
     },
     {
-      "name": "Alex Sexton"
+      "name": "Alex Sexton",
+      "email": "alexsexton@gmail.com",
+      "domain": "https://alexsexton.com/",
+      "twitter": "SlexAxton"
     },
     {
-      "name": "Ryan Seddon"
+      "name": "Ryan Seddon",
+      "email": "seddon.ryan@gmail.com",
+      "domain": "http://www.thecssninja.com/",
+      "twitter": "ryanseddon"
     },
     {
-      "name": "Alexander Farkas"
+      "name": "Patrick Kettner",
+      "email": "patrickkettner@gmail.com",
+      "domain": "https://github.com/patrickkettner",
+      "twitter": "patrickkettner"
     },
     {
-      "name": "Patrick Kettner"
+      "name": "Stu Cox",
+      "email": "stu@stucox.co.uk",
+      "domain": "http://www.stucox.com/",
+      "twitter": "stucoxmedia"
     },
     {
-      "name": "Stu Cox"
-    },
-    {
-      "name": "Richard Herrera"
+      "name": "Richard Herrera",
+      "email": "rich@doctyper.com",
+      "domain": "http://doctyper.com/",
+      "twitter": "doctyper"
     }
   ],
   "license": "MIT",
@@ -45,9 +63,14 @@
     "browserify": "^9.0.3",
     "fontfaceobserver": "^1.4.2",
     "fuse.js": "^1.2.2",
+    "gravatar": "^1.1.0",
     "handlebars": "^3.0.0",
+    "handlebars-intl": "^1.1.1",
     "hapi": "^8.4.0",
+    "intl": "^0.1.4",
+    "pretty-bytes": "^1.0.3",
     "react": "^0.13.0",
+    "rss": "^1.1.1",
     "zeroclipboard": "^2.2.0"
   },
   "devDependencies": {
@@ -68,7 +91,9 @@
     "gulp-uglify": "^1.1.0",
     "gulp-zopfli": "^0.1.1",
     "lodash-cli": "^3.5.0",
+    "marked": "^0.3.3",
     "run-sequence": "^1.0.2",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "yaml-front-matter": "^3.2.3"
   }
 }

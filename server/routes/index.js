@@ -1,6 +1,7 @@
 'use strict';
 var Modernizr = require('modernizr');
-var frontendUtils = require('../frontend/js/download/util');
+var Path = require('path');
+var frontendUtils = require(Path.join('..', '..', 'frontend', 'js', 'download', 'util'));
 
 var generateConfig = function(config) {
   delete config.q;

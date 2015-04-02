@@ -1,18 +1,20 @@
 .home {
-  color: #444
+  color: $DarkGrey
 
   h1 {
     font-size: 6em
-    width: 75%
     margin-bottom: 0
+    line-height: 1.16em
+  }
+
+  h2, h3, h4, h5, h6 {
+    color: $Grey
+    font-weight: 100
+    margin: 1em 0 0.5em
   }
 
   h3 {
     font-size: 2em
-    width: 75%
-    color: #aaa8a9
-    font-weight: 100
-    margin: 0.5em 0 1em
   }
 
   .fake-btn {
@@ -25,3 +27,8 @@
   }
 }
 
+@media (max-width: $mediumScreen) {
+  .home h1 {
+    font-size: 3em
+  }
+}

@@ -7,34 +7,38 @@ var DownloadOverlayOption = React.createClass({
 
   getInitialState: function() {
     return {
-      supportsDownload: Modernizr.blobconstructor && Modernizr.adownload
+      supportsDownload: Modernizr.blobconstructor && Modernizr.adownload,
+      hasFlash: this.props.hasFlash
     };
   },
 
   setupClipboard: function() {
+    var self = this;
+    var state = this.state;
     var props = this.props;
-    if (props.hasFlash) {
-      var self = this;
-      var zeroClipboard = new ZeroClipboard(this.refs[this.props.title].getDOMNode());
+    if (state.hasFlash) {
+      var zeroClipboard = new ZeroClipboard(this.refs[props.title].getDOMNode());
+      ZeroClipboard.on('error', function() {
+        Modernizr.flash = false;
+        self.setState({hasFlash: false});
+        ZeroClipboard.destroy();
+      });
+
       var content = props.content;
 
       zeroClipboard.on('copy', function(e) {
         var clipboard = e.clipboardData;
 
         self.setState({copied: true});
-        setTimeout(function() {self.setState({copied: false});}, 1500);
+        setTimeout(function() {
+          self.setState({copied: false});
+        }, 1500);
         clipboard.setData('text/plain', content);
       });
     }
   },
 
   componentDidMount: function() {
-    if (this.props.hasFlash) {
-      ZeroClipboard.config({
-        swfPath: '/lib/zeroclipboard/dist/ZeroClipboard.swf',
-        forceHandCursor: true
-      });
-    }
     this.setupClipboard();
   },
 
@@ -50,7 +54,7 @@ var DownloadOverlayOption = React.createClass({
 
     if (disabled) {
       copyLabel = 'Building';
-    } else if (props.hasFlash && state.copied) {
+    } else if (state.hasFlash && state.copied) {
       copyLabel = 'Copied';
     } else {
       copyLabel = 'Copy to Clipboard';
@@ -85,9 +89,8 @@ var DownloadOverlayOption = React.createClass({
   },
 
   clickClipboard: function() {
-    var props = this.props;
-    if (!props.hasFlash) {
-      props.toggleTextarea(this);
+    if (!this.state.hasFlash) {
+      this.props.toggleTextarea(this);
     }
   }
 });

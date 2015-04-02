@@ -5,7 +5,7 @@ html {
   color: $Black
 
   &.font-loaded {
-    font-family: 'Source Sans Pro', sans-serif
+    font-family: 'Open Sans', sans-serif
   }
 }
 
@@ -15,6 +15,14 @@ html {
 
 body {
   background: $BackgroundGrey
+  display: flex
+  flex-direction: column
+}
+
+main {
+  margin: 0 40px
+  flex: 1
+  min-height: "calc(100vh - %s)" % $HeaderHeight
 }
 
 a,
@@ -34,6 +42,8 @@ ul {
   list-style: none
 }
 
-main {
-  margin: 0 40px;
+@media (max-width: $mediumScreen) {
+  main {
+    margin: 0 10px
+  }
 }

@@ -31,8 +31,8 @@ var Metadata = React.createClass({
         (async && div({className: 'box metadata-async'}, 'This is an async detect')),
         (docs && MetadataDocs({docs: docs})),
         (!_.isEmpty(polyfills) && MetadataPolyfills({polyfills: polyfills})),
-        (!_.isEmpty(warnings) && MetadataList({warnings: warnings})),
-        (!_.isEmpty(knownBugs) && MetadataList({knownBugs: knownBugs})),
+        (!_.isEmpty(warnings) && MetadataList({str: 'warning', items: warnings})),
+        (!_.isEmpty(knownBugs) && MetadataList({str: 'known bug', items: knownBugs})),
         (!_.isEmpty(notes) && MetadataNotes({notes: notes}))
       )
     );

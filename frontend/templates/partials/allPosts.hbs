@@ -1,0 +1,12 @@
+<div class="previousPosts">
+  <h3>Previous Posts</h3>
+
+  <ul>
+    {{#each posts}}
+    <li>
+      <a href="{{this.url}}">{{this.title}}</a>
+      <span>{{formatDate this.date}}</span>
+    </li>
+    {{/each}}
+  </ul>
+</div>

@@ -2,30 +2,14 @@
   "name": "modernizr-neue",
   "version": "1.0.0",
   "authors": [
-    {
-      "name": "Faruk Ates"
-    },
-    {
-      "name": "Paul Irish"
-    },
-    {
-      "name": "Alex Sexton"
-    },
-    {
-      "name": "Ryan Seddon"
-    },
-    {
-      "name": "Alexander Farkas"
-    },
-    {
-      "name": "Patrick Kettner"
-    },
-    {
-      "name": "Stu Cox"
-    },
-    {
-      "name": "Richard Herrera"
-    }
+    { "name": "Faruk Ates" },
+    { "name": "Paul Irish" },
+    { "name": "Alex Sexton" },
+    { "name": "Ryan Seddon" },
+    { "name": "Alexander Farkas" },
+    { "name": "Patrick Kettner" },
+    { "name": "Stu Cox" },
+    { "name": "Richard Herrera" }
   ],
   "description": "the new version of modernizr.com",
   "license": "MIT",
@@ -41,7 +25,10 @@
     "requirejs-plugins": "~1.0.3",
     "r.js": "~2.1.16",
     "normalize.css": "~3.0.2",
-    "zeroclipboard": "~2.2.0"
+    "zeroclipboard": "~2.2.0",
+    "pako": "~0.2.6",
+    "pretty-bytes": "~1.0.4",
+    "serviceworker-cache-polyfill.js": "coonsta/cache-polyfill"
   },
   "private": true
 }
