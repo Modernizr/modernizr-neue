@@ -11,7 +11,7 @@ after_success:
 
   # Update the content from the `gh-pages` branch
   curl -sSL "https://raw.githubusercontent.com/h5bp-bot/scripts/0.6.1/update_site_branch.sh" |
-    bash -s -- --commands "npm run build" \
+    bash -s -- --commands "npm run travis" \
                --commit-message "Hey server, this content is for you! [skip ci]" \
                --directory "dist" \
                --distribution-branch "gh-pages" \

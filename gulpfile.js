@@ -268,13 +268,12 @@ gulp.task('compress', function() {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('gh-pages', function(cb) {
+gulp.task('gh-pages', ['deploy'], function(cb) {
   return del([
-    '*',
     'dist/**/*.gz',
     'dist/**/*.map',
     '!dist'
-  ], cb);
+  ], fs.writeFile('dist/CNAME','new.modernizr.com', cb));
 });
 
 gulp.task('deploy', function(cb) {
