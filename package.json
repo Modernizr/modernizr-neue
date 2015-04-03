@@ -68,6 +68,7 @@
     "handlebars-intl": "^1.1.1",
     "hapi": "^8.4.0",
     "intl": "^0.1.4",
+    "modernizr": "modernizr/modernizr#master",
     "pretty-bytes": "^1.0.3",
     "react": "^0.13.0",
     "rss": "^1.1.1",
@@ -92,6 +93,7 @@
     "gulp-zopfli": "^0.1.1",
     "lodash-cli": "^3.5.0",
     "marked": "^0.3.3",
+    "merge-stream": "^0.1.7",
     "run-sequence": "^1.0.2",
     "vinyl-source-stream": "^1.1.0",
     "yaml-front-matter": "^3.2.3"

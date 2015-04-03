@@ -2,12 +2,15 @@
 var fs = require('fs');
 var del = require('del');
 var gulp = require('gulp');
+var merge = require('merge-stream');
 var modernizr = require('modernizr');
 var browserify = require('browserify');
 var feed = require('./server/util/rss');
 var runSequence = require('run-sequence');
 var exec = require('child_process').exec;
 var source = require('vinyl-source-stream');
+var blogPost = require('./server/util/blogPost');
+
 var plugins = require('gulp-load-plugins')({
   rename: {
     'gulp-minify-css': 'minify_css',
@@ -24,7 +27,6 @@ gulp.task('browserify', function() {
 
 gulp.task('handlebars', function() {
   var authors = require('./server/util/footer');
-  var blogPost = require('./server/util/blogPost');
   var posts = fs.readdirSync('./posts').reverse().map(blogPost);
   var post = posts.shift();
   post.posts = posts;
@@ -68,6 +70,43 @@ gulp.task('handlebars', function() {
   .pipe(gulp.dest('dist'));
 });
 
+gulp.task('blog', function() {
+  var tasks = fs
+    .readdirSync('./posts')
+    .reverse()
+    .map(blogPost)
+    .map(function(post, index, posts) {
+      post.prevPost = posts[index - 1];
+      post.nextPost = posts[index + 1];
+
+      return post;
+    })
+    .map(function(post) {
+
+      return gulp.src('frontend/templates/pages/news.hbs')
+        .pipe(plugins.handlebars({post: post}, {
+          batch: ['frontend/templates'],
+          helpers: {
+            formatDate: require('./frontend/templates/helpers/formatDate')
+          }
+        }))
+        .pipe(plugins.htmlmin({
+          collapseWhitespace: true,
+          removeAttributeQuotes: true,
+          minifyJS: true,
+          minifyCSS: true
+        }))
+        .pipe(plugins.rename(function(path) {
+          path.dirname += '/' + post.filename.replace('.html', '');
+          path.basename = 'index';
+          path.extname = '.html';
+        }))
+      .pipe(gulp.dest('dist'));
+    });
+
+    return merge(tasks);
+});
+
 gulp.task('rss', function(cb) {
   fs.writeFile('dist/feed', feed, cb);
 });
@@ -107,6 +146,7 @@ gulp.task('lodash', function(cb) {
     'chain',
     'contains',
     'defer',
+    'filter',
     'find',
     'flatten',
     'forEach',
@@ -211,11 +251,11 @@ gulp.task('copy-img', function() {
 
 gulp.task('copy-scripts', function() {
   return gulp.src([
-      'frontend/js/prod.js*',
-      'frontend/lib/modernizr/**/*',
-      'frontend/js/modernizr-metadata.json',
-      '!frontend/lib/modernizr/node_modules/**/*',
-      'frontend/lib/zeroclipboard/dist/ZeroClipboard.swf'
+    'frontend/js/prod.js*',
+    'frontend/lib/modernizr/**/*',
+    'frontend/js/modernizr-metadata.json',
+    '!frontend/lib/modernizr/node_modules/**/*',
+    'frontend/lib/zeroclipboard/dist/ZeroClipboard.swf'
   ])
     .pipe(plugins.copy('dist', {prefix: 1}));
 });
@@ -228,6 +268,15 @@ gulp.task('compress', function() {
   .pipe(gulp.dest('dist'));
 });
 
+gulp.task('gh-pages', function(cb) {
+  return del([
+    '*',
+    'dist/**/*.gz',
+    'dist/**/*.map',
+    '!dist'
+  ], cb);
+});
+
 gulp.task('deploy', function(cb) {
   runSequence(
     'clean',
@@ -235,7 +284,7 @@ gulp.task('deploy', function(cb) {
     ['browserify', 'handlebars', 'lodash', 'modernizr'],
     'uglify',
     'copy',
-    'rss',
+    ['blog', 'rss'],
     'compress',
   cb);
 });

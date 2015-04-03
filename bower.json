@@ -28,7 +28,8 @@
     "zeroclipboard": "~2.2.0",
     "pako": "~0.2.6",
     "pretty-bytes": "~1.0.4",
-    "serviceworker-cache-polyfill.js": "coonsta/cache-polyfill"
+    "serviceworker-cache-polyfill.js": "coonsta/cache-polyfill",
+    "modernizr": "modernizr/modernizr#master"
   },
   "private": true
 }

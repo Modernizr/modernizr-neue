@@ -1,0 +1,50 @@
+sudo: false
+language: node_js
+node_js:
+- '0.10'
+before_script:
+  - npm install -g bower
+  - bower install
+after_success:
+  # Temporary workaround for:
+  # https://github.com/travis-ci/travis-ci/issues/929
+
+  - python travis_after_all.py
+  - export $(cat .to_export_back) &> /dev/null
+  - |
+      # If all the tests pass in all the runtimes, make Travis
+      # automatically download and execute the following script
+
+      if [ "$BUILD_LEADER" == "YES" ]; then
+        if [ "$BUILD_AGGREGATE_STATUS" == "others_succeeded" ]; then \
+
+          # Clean up helper files
+          rm -rf travis_after_all.py .to_export_back && \
+
+          # The `update_site_branch.sh` script will run the build,
+          # and if that generates changes, it will commit them to the
+          # `master` branch:
+          #
+          #   * ensuring that the content from the `gh-pages/` directory
+          #     is always in sync with the rest of the content
+          #
+          #   * removing the need to execute the build step locally
+          #     everytime a change is made (especially in the case
+          #     of trivial changes such as typos)
+          #
+          # Note: The `update_site_branch.sh` script will only run
+          # if the commit was made to the `master` branch.
+
+          curl -sSL "https://raw.githubusercontent.com/h5bp-bot/scripts/0.6.1/update_site_branch.sh" |
+              bash -s -- --commands "gulp deploy" \
+                         --commit-message "Hey server, this content is for you! [skip ci]" \
+                         --directory "dist" \
+                         --distribution-branch "gh-pages" \
+                         --source-branch "master";
+        fi
+      fi
+script:
+- curl -sSLo travis_after_all.py https://raw.github.com/dmakhno/travis_after_all/master/travis_after_all.py
+env:
+  global:
+    secure: NSzI3l2kgVwketiAw+z/i17JjK0RB8TOVLUzKpF4rSYvlMF2HauwrcZG/JxEJ7Mu9Br8lYHRnRd7ObcalB3T5Ut6KWJKjA60YJUgGQhTRY4bGfhENSl87jUrkSWbFIs0Q+Rp8JLgr1Dhc2Pcqum5A3A7Ubk68WxmQuv514e/BII=

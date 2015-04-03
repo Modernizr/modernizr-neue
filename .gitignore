@@ -1,7 +1,9 @@
 dist
+*.map
 node_modules
+downloader.js
 frontend/lib
 frontend/css
+frontend/js/prod.js*
 frontend/js/*.custom.js
-frontend/js/prod*
-frontend/js/modernizr-metadata.js
+modernizr-metadata.json
