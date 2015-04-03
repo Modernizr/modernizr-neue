@@ -4,7 +4,8 @@
   "description": "the new version of modernizr.com",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo 0",
+    "build": "gulp deploy"
   },
   "repository": {
     "type": "git",
