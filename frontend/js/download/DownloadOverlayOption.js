@@ -57,7 +57,7 @@ var DownloadOverlayOption = React.createClass({
     } else if (state.hasFlash && state.copied) {
       copyLabel = 'Copied';
     } else {
-      copyLabel = 'Copy to Clipboard';
+      copyLabel = 'Copy';
     }
     return li(null,
       span({className: 'box downloadOverlay-option'},

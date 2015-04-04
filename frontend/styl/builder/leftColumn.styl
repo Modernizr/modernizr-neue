@@ -1,4 +1,6 @@
 .leftColumn {
+  @extend $hiddenScrollbar
+
   position: fixed
   top: $HeaderHeight + $StandardPadding
   bottom: $StandardPadding
@@ -24,13 +26,13 @@
 }
 
 .leftColumn-selected {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  display: flex
+  justify-content: space-between
+  align-items: flex-end
 }
 
-.leftColum-stats {
-  font-size: 16px;
+.leftColumn-stats {
+  font-size: 16px
 }
 
 .leftColumn-toggle {
@@ -98,6 +100,12 @@
     }
   }
 
+  .leftColumn-stats {
+    min-height: $HeaderButtonHeight
+    display: flex
+    flex-direction: column
+    justify-content: center
+  }
 
   .heading-small.active + .leftColumn-options {
     display: block

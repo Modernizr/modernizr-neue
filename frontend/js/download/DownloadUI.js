@@ -210,7 +210,7 @@ var DownloadUI = React.createClass({
       var allEmpty = !detects.length && !options.length;
       var config = {minify: true, 'classPrefix': classPrefix, 'options': options, 'feature-detects': detects};
 
-      if ((immediate || !allEmpty) && !_.isEqual(config, state.buildConfig)) {
+      if (!_.isEqual(config, state.buildConfig)) {
         window.builder(config, function(output) {
           self.updateFilesize(JSON.stringify({build: output, config: config}));
           self.setState({build: output});

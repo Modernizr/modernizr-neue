@@ -1,12 +1,30 @@
 'use strict';
 importScripts('/lib/pako/dist/pako_deflate.js', '/lib/pretty-bytes/pretty-bytes.js');
+
+var hashCode = function(str) {
+  var hash = 0;
+  if (str.length === 0) {
+    return hash;
+  }
+  for (var i = 0; i < str.length; i++) {
+    var char = str.charCodeAt(i);
+    hash = ((hash<<5)-hash)+char;
+    hash = hash & hash;
+  }
+
+  return hash;
+};
+
 var hash = {};
 
 onmessage = function(msg, cb) {
+  var hashedConfig = hashCode(msg.data);
   var data = JSON.parse(msg.data);
   var build = data.build;
-  var hashedConfig = btoa(data.config);
   var response = hash[hashedConfig];
+
+    console.log(build);
+    console.log(build.length);
 
   if (!response) {
     response = {

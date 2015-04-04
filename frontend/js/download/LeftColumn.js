@@ -22,17 +22,23 @@ var LeftColumn = React.createClass({
 
     var totalSelected = allDetects.filter(function(detect) {return detect.selected;}).length;
     var selected = totalSelected + ' selected';
-    var toggled = detects.length === totalSelected
+    var toggled = detects.length === totalSelected;
     var toggle = (toggled ? 'REMOVE' : 'ADD') + ' ALL';
     var className = (toggled ? 'toggled ' : '') + 'leftColumn column';
     var inputClass = 'classPrefix' + (state.classNameAdded ? ' classNameAdded' : '');
     var results = detects.length === allDetects.length ? ' ' :
       detects.length + pluralize(' result', detects);
     var filesize;
+    var text;
 
     if (props.filesize) {
-      filesize = div({className: 'filesizes'}, props.filesize.original, ' / ', props.filesize.compressed + ' gzipped');
-    };
+      if (props.filesize.original) {
+        text = props.filesize.original + ' / ' + props.filesize.compressed + ' gzipped';
+      } else {
+        text = 'calculating...';
+      }
+        filesize = div({className: 'filesizes'}, text);
+    }
 
     options = _.map(options, function(option) {
       return Option({
@@ -47,10 +53,10 @@ var LeftColumn = React.createClass({
     return (
       div({className: className, onClick: this.props.onClick},
         div({className: 'box'},
-          div({className: 'leftColum-stats'},
+          div({className: 'leftColumn-stats'},
             div({className: 'leftColumn-selected'}, selected, results),
             filesize,
-            button({type: 'button', className: 'leftColumn-toggle', onClick: this.props.toggle}, toggle)
+            div(null, button({type: 'button', className: 'leftColumn-toggle', onClick: this.props.toggle}, toggle))
           )
         ),
         div({className: 'box heading-small' + (state.optionsToggled ? ' active' : ''), onClick: this.toggleOptions}, 'Options'),

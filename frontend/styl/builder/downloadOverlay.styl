@@ -14,6 +14,8 @@
 }
 
 .downloadOverlay-container {
+  @extend $hiddenScrollbar
+
   padding: 30px
   max-width: 600px
   max-height: 65%
@@ -47,7 +49,7 @@
   }
 
   .clipboard {
-    width: 140px
+    width: 70px
   }
 
   .zeroclipboard-is-hover,
@@ -58,13 +60,15 @@
   }
 }
 
-
-@media (max-width: $mediumScreen) {
+@media (max-width: $largeScreen) {
   .downloadOverlay {
     top: 0
     z-index: 3
   }
 
+}
+
+@media (max-width: $mediumScreen) {
   .downloadOverlay-option > span {
     display: block
   }
