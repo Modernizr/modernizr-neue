@@ -4,7 +4,7 @@
   <ul>
     {{#each posts}}
     <li>
-      <a href="{{this.url}}">{{this.title}}</a>
+      <a href="{{this.url}}">{{{this.title}}}</a>
       <span>{{formatDate this.date}}</span>
     </li>
     {{/each}}

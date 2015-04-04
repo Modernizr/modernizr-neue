@@ -1,27 +1,52 @@
 .footer {
-  color: $BackgroundGrey
-  min-height: $HeaderHeight * 2
-  min-height: 50vh
+  position: relative
+  display: flex
+  padding: 1em 40px
+  min-height: $FooterHeight
   background: $ModernizrPink
-  padding: 150px 40px 100px
-  text-align: center
+  color: $BackgroundGrey
+  font-size: 28px
+  justify-content: space-between
+  align-items: flex-end
 
-  a {
-    display: block
+  .teamMembers, .teamMember {
+    display: inline
+  }
+
+  .teamMember {
+    padding-right: 0.3em;
+  }
+
+  a, .fakelink {
     color: $BackgroundGrey
+    &:focus,
+    &:hover,
+    &:active {
+      text-decoration: underline
+      outline: none
+    }
+  }
+
+  .fakelink {
+    text-decoration: none
+  }
+
+  .hiddentext {
+    width: 38px
+    height: 38px
+    background-image: url(/img/github.svg)
+    background-position: center
+    background-size: contain
+    background-repeat: no-repeat
   }
 }
 
-.teamMember {
-  display: inline-block
-  width: 250px
-  vertical-align: top
-  text-align: left
-  margin: 1em 0
+@media (max-width: $largeScreen) {
+  .footer {
+    flex-direction: column
 
-  img {
-    float: left
-    width: 72px
-    margin-right: 1em
+    .hiddentext {
+      margin: 1em auto 0
+    }
   }
 }

@@ -10,6 +10,7 @@ var runSequence = require('run-sequence');
 var exec = require('child_process').exec;
 var source = require('vinyl-source-stream');
 var blogPost = require('./server/util/blogPost');
+var authors = require('./server/util/footer');
 
 var plugins = require('gulp-load-plugins')({
   rename: {
@@ -26,7 +27,6 @@ gulp.task('browserify', function() {
 });
 
 gulp.task('handlebars', function() {
-  var authors = require('./server/util/footer');
   var posts = fs.readdirSync('./posts').reverse().map(blogPost);
   var post = posts.shift();
   post.posts = posts;
@@ -41,7 +41,7 @@ gulp.task('handlebars', function() {
       '/lib/modernizr/lib/build.js',
     ],
     post: post,
-    authors: authors
+    team: authors
   };
 
   return gulp.src([
@@ -84,7 +84,7 @@ gulp.task('blog', function() {
     .map(function(post) {
 
       return gulp.src('frontend/templates/pages/news.hbs')
-        .pipe(plugins.handlebars({post: post}, {
+        .pipe(plugins.handlebars({post: post, team: authors}, {
           batch: ['frontend/templates'],
           helpers: {
             formatDate: require('./frontend/templates/helpers/formatDate')
