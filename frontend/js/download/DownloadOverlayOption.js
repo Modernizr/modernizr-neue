@@ -1,6 +1,6 @@
 /*globals ZeroClipboard, Modernizr*/
 'use strict';
-var React = require('react/dist/react.min');
+var React = require('react');
 var DOM = React.DOM, textarea = DOM.textarea, a = DOM.a, li = DOM.li, label = DOM.label, button = DOM.button, span=DOM.span;
 
 var DownloadOverlayOption = React.createClass({
@@ -54,7 +54,7 @@ var DownloadOverlayOption = React.createClass({
     var busy = false;
 
     if (disabled) {
-      copyLabel = 'Building';
+      copyLabel = 'Copy to Clipboard';
       busy = true;
     } else if (state.hasFlash && state.copied) {
       copyLabel = 'Copied';
@@ -65,9 +65,9 @@ var DownloadOverlayOption = React.createClass({
       span({className: 'box downloadOverlay-option'},
         label({htmlFor: id}, title),
         span(null, '(',
-          download({className: 'link', onMouseDown: this.clickDownload, href: state.href, download: state.download}, 'Download'), '|',
+          download({className: 'fakelink', onMouseDown: this.clickDownload, href: state.href, download: state.download}, 'Download'), '|',
           button({
-            className: 'clipboard link', ref: props.title, type: 'button', onClick: this.clickClipboard, 'aria-busy': busy, autoFocus: true}, copyLabel), ')'
+            className: 'clipboard fakelink', ref: props.title, type: 'button', onClick: this.clickClipboard, 'aria-busy': busy, autoFocus: true}, copyLabel), ')'
         )
       ),
       expanded && textarea({id: id, ref: 'textarea', autoFocus: true, spellCheck: false, value: props.content, defaultValue: 'building...'})

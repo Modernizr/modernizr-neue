@@ -23,9 +23,6 @@ onmessage = function(msg, cb) {
   var build = data.build;
   var response = hash[hashedConfig];
 
-    console.log(build);
-    console.log(build.length);
-
   if (!response) {
     response = {
       original: prettyBytes(build.length),

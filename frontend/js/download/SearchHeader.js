@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react/dist/react.min');
+var React = require('react');
 var Fuse = require('fuse.js');
 var DOM = React.DOM, div = DOM.div, input = DOM.input, label = DOM.label, button = DOM.button;
 var fuseOptions = {

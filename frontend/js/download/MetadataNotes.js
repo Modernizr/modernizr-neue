@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react/dist/react.min');
+var React = require('react');
 var DOM = React.DOM, div = DOM.div, a = DOM.a;
 var MetadataNotes = React.createClass({
   render: function() {

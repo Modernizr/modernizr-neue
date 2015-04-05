@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react/dist/react.min');
+var React = require('react');
 var Option = React.createFactory(require('./Option'));
 
 var DOM = React.DOM, li = DOM.li;

@@ -2,6 +2,7 @@
 var fs = require('fs');
 var del = require('del');
 var gulp = require('gulp');
+var aliasify = require('aliasify');
 var merge = require('merge-stream');
 var modernizr = require('modernizr');
 var browserify = require('browserify');
@@ -20,7 +21,14 @@ var plugins = require('gulp-load-plugins')({
 });
 
 gulp.task('browserify', function() {
+  var reactVersion = process.env.NODE_ENV === 'prod' ? 'react/dist/react.min' : 'react';
+
   return browserify('./frontend/js/download/index.js')
+    .transform(aliasify, {
+      aliases: {
+        react: reactVersion
+      }
+    })
     .bundle()
     .pipe(source('downloader.js'))
   .pipe(gulp.dest('frontend/js/download/'));
@@ -277,6 +285,8 @@ gulp.task('gh-pages', ['deploy'], function(cb) {
 });
 
 gulp.task('deploy', function(cb) {
+  var env = process.env.NODE_ENV;
+  process.env.NODE_ENV = 'prod';
   runSequence(
     'clean',
     'styles',
@@ -285,5 +295,8 @@ gulp.task('deploy', function(cb) {
     'copy',
     ['blog', 'rss'],
     'compress',
-  cb);
+  function() {
+    process.env.NODE_ENV = env;
+    cb();
+  });
 });

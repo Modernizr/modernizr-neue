@@ -1,9 +1,9 @@
 /*globals Modernizr*/
 'use strict';
-var React = require('react/dist/react.min');
+var React = require('react');
 var DownloadOverlayOption = React.createFactory(require('./DownloadOverlayOption'));
 var gruntify = require('./util').gruntify;
-var DOM = React.DOM, div = DOM.div, ul = DOM.ul;
+var DOM = React.DOM, div = DOM.div, form = DOM.form, button = DOM.button, input = DOM.input, ul = DOM.ul, li = DOM.li;
 
 var DownloadOverlay = React.createClass({
   getInitialState: function() {
@@ -15,10 +15,11 @@ var DownloadOverlay = React.createClass({
   },
 
   render: function() {
-  var props = this.props;
-  var state = this.state;
-  var config = props.config;
-  var hasFlash = Modernizr.flash && !Modernizr.flash.blocked;
+    var props = this.props;
+    var state = this.state;
+    var config = props.config;
+    var hasFlash = Modernizr.flash && !Modernizr.flash.blocked;
+    var codepen = this.buildCodePen();
 
     return div({className: 'downloadOverlay', onClick: this.toggleOverlay},
       div({ref: 'container', className: 'downloadOverlay-container'},
@@ -54,7 +55,20 @@ var DownloadOverlay = React.createClass({
             filename: 'grunt config',
             path: '/download/gruntconfig',
             updateAction: props.updateAction
-          })
+          }),
+          li(null,
+            form({
+              action: 'http://codepen.io/pen/define',
+              method: 'POST'
+            },
+              input({
+                type: 'hidden',
+                name: 'data',
+                value: codepen
+              }),
+              button({className: 'fakelink'}, 'Open on codepen.io')
+            )
+          )
         )
       )
     );
@@ -65,6 +79,32 @@ var DownloadOverlay = React.createClass({
     if (!container.contains(e.target)) {
       this.props.toggle(false);
     }
+  },
+
+  buildCodePen: function() {
+    var data = {
+      title: 'modernizr.custom.js',
+      description: 'This is generated via modernizr.com/download',
+      html: '<h1>Modernizr build auto generated</h1><p><a href="' + location.href + '">Build hash</a></p>',
+      css: 'ul{-webkit-column-count: 3;-moz-column-count: 3;column-count: 3;}li{color:green}',
+      js: this.props.buildContent
+    };
+
+    var features = location.search.slice(1).split('&')[0].split('-');
+    var _ul = document.createElement('ul');
+
+    features = _.forEach(features, function(feature) {
+      data.css += '.no-' + feature + ' li.'+ feature + '{ color: red; }';
+
+      var _li = document.createElement('li');
+      _li.className = _li.innerHTML = feature;
+
+      _ul.appendChild(_li);
+    });
+
+    data.html = _ul.outerHTML;
+
+    return JSON.stringify(data);
   }
 });
 

@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react/dist/react.min');
+var React = require('react');
 var DownloadUI = React.createFactory(require('./DownloadUI'));
 var currentSearch;
 var shouldBuild;

@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react/dist/react.min');
+var React = require('react');
 var DOM = React.DOM, svg = DOM.svg, circle = DOM.circle, path = DOM.path;
 
 var SVGToggle = React.createClass({

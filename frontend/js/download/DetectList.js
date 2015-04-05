@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react/dist/react.min');
+var React = require('react');
 var Detect = React.createFactory(require('./Detect'));
 var DOM = React.DOM, ul = DOM.ul, li = DOM.li;
 var DetectList = React.createClass({

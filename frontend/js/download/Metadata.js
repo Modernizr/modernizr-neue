@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react/dist/react.min');
+var React = require('react');
 var MetadataDocs = React.createFactory(require('./MetadataDocs'));
 var MetadataList = React.createFactory(require('./MetadataList'));
 var MetadataNotes = React.createFactory(require('./MetadataNotes'));

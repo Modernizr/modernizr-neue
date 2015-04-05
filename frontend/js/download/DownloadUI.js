@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react/dist/react.min');
+var React = require('react');
 var DetectList = React.createFactory(require('./DetectList'));
 var LeftColumn = React.createFactory(require('./LeftColumn'));
 var SearchHeader = React.createFactory(require('./SearchHeader'));

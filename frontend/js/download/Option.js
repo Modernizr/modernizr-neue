@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react/dist/react.min');
+var React = require('react');
 var SVGToggle = React.createFactory(require('./SVGToggle'));
 var Metadata = React.createFactory(require('./Metadata'));
 var DOM = React.DOM, span = DOM.span, input = DOM.input, label = DOM.label;

@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react/dist/react.min');
+var React = require('react');
 var util = require('./util');
 var listify = util.listify;
 var DOM = React.DOM, div = DOM.div, ul = DOM.ul, li = DOM.li, a = DOM.a;
