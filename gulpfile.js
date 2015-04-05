@@ -76,8 +76,8 @@ gulp.task('blog', function() {
     .reverse()
     .map(blogPost)
     .map(function(post, index, posts) {
-      post.prevPost = posts[index - 1];
-      post.nextPost = posts[index + 1];
+      post.prevPost = posts[index + 1];
+      post.nextPost = posts[index - 1];
 
       return post;
     })

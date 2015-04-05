@@ -2,10 +2,10 @@
   <div class="header-logo"><a title="modernizr.com" href="/"><i class="logo">Modernizr</i></a></div>
   <label for="header-items-toggle" class="header-items-toggle">MENU</label>
   <input id="header-items-toggle" class="option-checkbox" type="checkbox"/>
-  <ul class="header-items">
-    {{> partials/header-item href="/download" text="Download"}}
-    {{> partials/header-item href="/" text="Documentation"}}
-    {{> partials/header-item href="/news" text="News"}}
-    {{> partials/header-item href="/" text="Resources"}}
-  </ul>
+  <nav role="navigation" class="header-items">
+    <a class="header-item" href="/download">Download</a>
+    <a class="header-item" href="/">Documentaion</a>
+    <a class="header-item" href="/news">News</a>
+    <a class="header-item" href="/">Resources</a>
+  </nav>
 </header>

@@ -135,7 +135,7 @@ var DownloadUI = React.createClass({
 
     var buildQuery = sortedProps.concat(sortedOpts).join('-') +
         ( (setClasses && classPrefix) ?
-          '-cssclassprefix:' + classPrefix : '' );
+          '-cssclassprefix:' + escape(classPrefix) : '' );
 
     buildQuery = buildQuery ? '?' + buildQuery : '';
 

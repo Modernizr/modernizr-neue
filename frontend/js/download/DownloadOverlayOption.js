@@ -51,9 +51,11 @@ var DownloadOverlayOption = React.createClass({
     var disabled = !props.content;
     var download = state.supportsDownload ? a : button;
     var copyLabel;
+    var busy = false;
 
     if (disabled) {
       copyLabel = 'Building';
+      busy = true;
     } else if (state.hasFlash && state.copied) {
       copyLabel = 'Copied';
     } else {
@@ -64,7 +66,8 @@ var DownloadOverlayOption = React.createClass({
         label({htmlFor: id}, title),
         span(null, '(',
           download({className: 'link', onMouseDown: this.clickDownload, href: state.href, download: state.download}, 'Download'), '|',
-          button({className: 'clipboard link', ref: props.title, type: 'button', onClick: this.clickClipboard}, copyLabel), ')'
+          button({
+            className: 'clipboard link', ref: props.title, type: 'button', onClick: this.clickClipboard, 'aria-busy': busy, autoFocus: true}, copyLabel), ')'
         )
       ),
       expanded && textarea({id: id, ref: 'textarea', autoFocus: true, spellCheck: false, value: props.content, defaultValue: 'building...'})

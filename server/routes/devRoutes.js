@@ -79,10 +79,9 @@ module.exports = [
           post.posts = posts.slice(0, -1).reverse().map(blogPost);
         }
 
-        post.team = team;
-
         reply.view('pages/news', {
-          post: post
+          post: post,
+          team: team
         });
       });
     }

@@ -30,14 +30,17 @@ var LeftColumn = React.createClass({
       detects.length + pluralize(' result', detects);
     var filesize;
     var text;
+    var busy;
 
     if (props.filesize) {
       if (props.filesize.original) {
         text = props.filesize.original + ' / ' + props.filesize.compressed + ' gzipped';
+        busy = false;
       } else {
         text = 'calculating...';
+        busy = true;
       }
-        filesize = div({className: 'filesizes'}, text);
+        filesize = div({className: 'filesizes', 'aria-busy': busy}, text);
     }
 
     options = _.map(options, function(option) {

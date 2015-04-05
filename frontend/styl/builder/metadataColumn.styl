@@ -1,5 +1,7 @@
 .metadataColumn {
-  color: $Black;
+  @extend $hiddenScrollbar
+
+  color: $Black
   position: fixed
   top: 150px
   right: 0
@@ -8,7 +10,6 @@
   overflow: scroll
   padding: 0 0 0 32px
   width: 30%
-
 }
 
 .expanded .metadataColumn,

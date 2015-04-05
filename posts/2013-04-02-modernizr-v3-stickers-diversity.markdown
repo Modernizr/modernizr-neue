@@ -16,7 +16,7 @@ You can help make v.3 become a reality by [closing issues](https://github.com/Mo
 
 ### Stickers!
 
-<a href="http://devswag.com/products/modernizr-stickers-4"><img src="http://modernizr.com/i/posts/modernizr-sticker.jpg" height="240"><img src="http://modernizr.com/i/posts/modernizr-sticker-laptop.jpg" height="240"></a>
+<a href="http://devswag.com/products/modernizr-stickers-4"><img alt="an example of the modernizr logo on a sticker" src="http://modernizr.com/i/posts/modernizr-sticker.jpg" height="240"><img alt="the top of a macbook pro, with the modernizr sticker in the upper left" src="http://modernizr.com/i/posts/modernizr-sticker-laptop.jpg" height="240"></a>
 
 While we work on version 3, you can show your support with some [fancy new Modernizr stickers](http://devswag.com/products/modernizr-stickers-4), courtesy of the fine folks at DevSwag. Put these stickers on your laptop, fixie bike, and anything else you’d like to “modernize” (ahem).
 

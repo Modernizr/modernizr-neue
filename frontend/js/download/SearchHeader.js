@@ -27,7 +27,12 @@ var SearchHeader = React.createClass({
           onKeyDown: this.preventSubmit,
           value: this.props.defaultValue
         }),
-        button({type: 'submit', className: 'header-search-build', onClick: this.click, onMouseOver: this.props.onHover}, 'Build')
+        button({type: 'submit',
+          className: 'header-search-build',
+          onClick: this.click,
+          onMouseOver: this.props.onHover,
+          'aria-haspopup': true
+        }, 'Build')
       )
     );
   },
