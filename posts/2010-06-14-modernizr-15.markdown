@@ -13,13 +13,13 @@ Rather than an incremental upgrade, we've opted to shift into a higher gear and 
  * <a href="http://www.w3.org/TR/IndexedDB/">IndexedDB</a>
  * <a target="_blank" href="http://dev.w3.org/html5/websockets/">Web Sockets</a>
  * <a target="_blank" href="http://dev.w3.org/html5/spec/history.html#event-hashchange">hashchange event</a>
- * <a target="_blank" href="http://www.w3.org/TR/html5/history.html">History and Session Management</a>
+ * <a target="_blank" href="http://www.w3.org/TR/2010/WD-html5-20100304/history.html">History and Session Management</a>
  * <a target="_blank" href="http://dev.w3.org/html5/spec/dnd.html#dnd">HTML5 Drag and Drop</a>
- * <a target="_blank" href="http://www.w3.org/TR/html5/comms.html#posting-messages">Cross-document Messaging</a>
+ * <a target="_blank" href="http://www.w3.org/TR/2010/WD-html5-20100304/comms.html#posting-messages">Cross-document Messaging</a>
 
  Additionally, IE can now print HTML5 elements (courtesy of <a target="_blank" href="http://twitter.com/jon_neal">@jon_neal</a>'s print protector), IE9 should be fully supported (<a target="_blank" href="http://twitter.com/?status=@Modernizr%20I%20found%20an%20IE9%20inconsistency">let us know if you discover inconsistencies</a>), and we also support more browsers: older Safari versions, Nokia and Blackberry mobile browsers, and Konqueror via the -khtml- prefix. Detection of Opera's CSS3 support for transitions and transforms was fixed, as well.
 
- A few big things have kept us busy preparing a good release. Flash detection (Flash Blockers included) became a hot topic and we really wanted to include it, but at the time no reliable or complete mechanism was available. We wanted to include (and still recommend) Mark Pilgrim's excellent <a target="_blank" href="http://code.google.com/p/flashblockdetector/">Flash Block Detector</a> but decided that it was too large a codebase to include in the default release of Modernizr&mdash;especially given the <a target="_blank" href="http://www.modernizr.com/news/updates-on-modernizr-front">modular Modernizr 2 plans</a> on the horizon&mdash;and so Flash detection is out for now.
+ A few big things have kept us busy preparing a good release. Flash detection (Flash Blockers included) became a hot topic and we really wanted to include it, but at the time no reliable or complete mechanism was available. We wanted to include (and still recommend) Mark Pilgrim's excellent <a target="_blank" href="https://github.com/patrickkettner/flashblockdetector">Flash Block Detector</a> but decided that it was too large a codebase to include in the default release of Modernizr&mdash;especially given the <a target="_blank" href="http://www.modernizr.com/news/updates-on-modernizr-front">modular Modernizr 2 plans</a> on the horizon&mdash;and so Flash detection is out for now.
 
  Then came the discovery that Google Chrome implemented <a target="_blank" href="http://www.quirksmode.org/mobile/tableTouch.html">Touch events</a> even on the desktop (why, Google, why?) paired with the regrettable fact that Palm's WebOS browser _doesn't support common Touch events at all_. For a browser that only exists on touch-based devices, this was too critical an issue for us to ignore. So Touch testing went out again, too.
 

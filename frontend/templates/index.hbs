@@ -6,16 +6,59 @@
     <title>Home</title>
 
     <link  rel="stylesheet" href="/css/main.css" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for Modernizr.com" href="/feed" />
   </head>
 
   <body>
     {{> partials/header}}
     <main role="main" id="main" class="home">
-      <h1>Respond to your user’s browser features.</h1>
-      <h3>Modernizr tells you what HTML, CSS and JavaScript features the user’s browser has to offer.</h3>
-      <a class="fake-btn" href="/download">Add your detects</a>
+      <h1 class="home-heading">Respond to your user’s browser features.</h1>
+      <h3 class="home-subheading">Modernizr tells you what HTML, CSS and JavaScript features the user’s browser has to offer.</h3>
+      <a class="fakebtn" href="/download">Add your detects</a>
+      <div class="home-info">
+
+        <div class="home-blurbs">
+          <div class="home-blurb">
+            <h3>What is Modernizr?</h3>
+            <p>It’s a collection of superfast tests – or “detects” as we like to call them – which run as your web page loads, then you can use the results to tailor the experience to the user.</p>
+          </div>
+          <div class="home-blurb">
+            <h3>Why do I need it?</h3>
+            <p>All web developers come up against differences between browsers and devices. That’s largely due to different feature sets: the latest versions of the popular browsers can do some awesome things which older browsers can’t – but we still have to support the older ones.</p>
+            <p>Modernizr makes it easy to deliver tiered experiences: make use of the latest and greatest features in browsers which support them, without leaving less fortunate users high and dry.</p>
+          </div>
+        </div>
+
+        <div class="home-boxes">
+          <div class="home-box column">
+            <h3 class="box">Getting Started</h3>
+            <ul class="box">
+              <li><a href="/docs/#whatis">Modernizr explained</a></li>
+              <li><a href="/docs/#whatis-fd">What is feature detection?</a></li>
+              <li><a href="/docs/#detect-js">Using Modernizr with JavaScript</a></li>
+              <li><a href="/docs/#detect-csss">Using Modernizr with CSS</a></li>
+            </ul>
+          </div>
+          <div class="home-box column">
+            <h3 class="box">Latest News</h3>
+            <ul class="box">
+              {{#each latestPosts}}
+                <li><a href="{{url}}">{{{title}}}</a></li>
+              {{/each}}
+            </ul>
+          </div>
+          <div class="home-box column">
+            <h3 class="box">Talk to us</h3>
+            <ul class="box">
+              <li><a href="https://twitter.com/modernizr">Twitter</a></li>
+              <li><a href="https://stackoverflow.com/questions/tagged/modernizr">StackOverflow</a></li>
+              <li><a href="https://github.com/modernizr/modernizr/issues">GitHub</a></li>
+              <li><a href="https://paulirish.wufoo.com/forms/p1hsxsru1ohiv0u/">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </main>
     {{> partials/footer}}
   </body>

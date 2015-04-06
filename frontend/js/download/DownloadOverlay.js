@@ -66,7 +66,7 @@ var DownloadOverlay = React.createClass({
                 name: 'data',
                 value: codepen
               }),
-              button({className: 'fakelink'}, 'Open on codepen.io')
+              button({className: 'fakelink'}, 'Open build on codepen.io')
             )
           )
         )

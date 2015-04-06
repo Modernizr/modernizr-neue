@@ -36,6 +36,7 @@ gulp.task('browserify', function() {
 
 gulp.task('handlebars', function() {
   var posts = fs.readdirSync('./posts').reverse().map(blogPost);
+  var latestPosts = posts.slice(0, 4);
   var post = posts.shift();
   post.posts = posts;
 
@@ -49,7 +50,8 @@ gulp.task('handlebars', function() {
       '/lib/modernizr/lib/build.js',
     ],
     post: post,
-    team: authors
+    team: authors,
+    latestPosts: latestPosts
   };
 
   return gulp.src([

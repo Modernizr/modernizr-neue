@@ -10,7 +10,6 @@
   }
 
   h2, h3, h4, h5, h6 {
-    color: $Grey
     font-weight: 100
     margin: 1em 0 0.5em
   }
@@ -19,18 +18,135 @@
     font-size: 2em
   }
 
-  .fake-btn {
-    display: inline-block
-    padding: 0.8em 1em
-    color: $White
-    background: $ModernizrPink
+  .fakebtn {
     font-size: 28px
-    text-decoration: none
+    margin: 2em 0
+    &:focus {
+      color: $ModernizrPink
+      background: $White
+    }
+  }
+}
+
+.home-heading {
+  max-width: 15em
+}
+
+.home-subheading {
+  color: $Grey
+  max-width: 25em
+}
+
+.home-info {
+  display: flex
+  justify-content: space-between
+}
+
+.home-blurbs {
+  font-size: 1.4em
+  width: 40%
+}
+
+.home-blurb {
+  max-width: 30em
+
+  p {
+    line-height: 1.5
+  }
+
+  h3 {
+    margin-top: 0
+  }
+}
+
+.home-boxes {
+  flex: 1
+  display: flex
+  flex-wrap: wrap
+  max-width: 55%
+  justify-content: space-between
+}
+
+.home-box {
+  width: calc(50% - 1em)
+  margin-bottom: 2em
+
+  .box {
+    padding: 20px
+  }
+
+  h3 {
+    margin: 0
+  }
+
+  li {
+    padding-bottom: 1em
+    overflow: hidden
+    text-overflow: ellipsis
+  }
+
+  a {
+    color: $DarkGrey
+    white-space: nowrap
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $ModernizrPink
+      text-decoration: none
+    }
   }
 }
 
 @media (max-width: $mediumScreen) {
   .home h1 {
     font-size: 3em
+  }
+}
+
+@media (max-width: $XLargeScreen) {
+  .home-blurbs,
+  .home-boxes {
+    flex: 1
+    max-width: none
+  }
+
+  .home-box {
+    width: 80%;
+    margin: 0 auto 2em;
+    max-width: none
+  }
+}
+
+@media (max-width: $largeScreen) {
+  .home-info {
+    flex-direction: column
+  }
+
+  .home-blurbs {
+    width: 100%
+  }
+}
+
+@media (max-width: $mediumScreen) {
+  .home-box {
+    font-size: 0.8em
+    max-width: calc(50% - 1em)
+    margin: 0 0 2em
+
+    a {
+      font-size: 1.2em
+    }
+
+    .box {
+      padding: 20px
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .home-box {
+    max-width: none
+    width: 100%
   }
 }

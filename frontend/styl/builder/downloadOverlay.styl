@@ -51,10 +51,6 @@
     text-decoration: none
   }
 
-  .clipboard {
-    width: 70px
-  }
-
   .zeroclipboard-is-hover,
   .fakelink:hover,
   .fakelink:focus {
@@ -72,7 +68,29 @@
 }
 
 @media (max-width: $mediumScreen) {
+  .downloadOverlay-option {
+    display: block
+    margin-bottom: 1em
+
+    label {
+      font-size: 1.2em
+    }
+  }
+
   .downloadOverlay-option > span {
     display: block
+    direction: rtl
+
+    a.fakelink {
+      padding-left: 0
+    }
+  }
+}
+
+@media (max-width: $smallScreen) {
+  .downloadOverlay-container {
+    padding: 20px;
+    width: 100%
+    font-size: 0.8em
   }
 }

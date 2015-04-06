@@ -43,14 +43,6 @@
   overflow: hidden
 }
 
-.clearfix:after {
-   content: "."
-   visibility: hidden
-   display: block
-   height: 0
-   clear: both
-}
-
 .light {
   color: $Grey
 }
@@ -65,5 +57,16 @@
   &:hover,
   &:focus {
     outline: none
+  }
+}
+
+.fakebtn {
+  display: inline-block
+  padding: 0.8em 1em
+  color: $White
+  background: $ModernizrPink
+  text-decoration: none
+  &:focus {
+    text-decoration: none
   }
 }

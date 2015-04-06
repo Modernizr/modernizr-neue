@@ -8,11 +8,11 @@ While Modernizr was meant from day one to eventually become unnecessary, that da
 
 ### Version 3
 
-Modernizr v.3 is not a mere version bump with some new additions; it is [a complete architectural rewrite](http://alexsexton.com/talks/modernizr-3-workflow/) of the entire library *and* all of the 150+ community feature tests. The team and some of our great contributors have worked tirelessly to convert all of the tests to [facilitate a new loading structure based on AMD](http://alexsexton.com/talks/modernizr-3-workflow/#/23/1), and are currently embedding the tests with important meta-data such as known issues, sample usage and more. 
+Modernizr v.3 is not a mere version bump with some new additions; it is [a complete architectural rewrite](https://alexsexton.com/talks/modernizr-3-workflow/) of the entire library *and* all of the 150+ community feature tests. The team and some of our great contributors have worked tirelessly to convert all of the tests to [facilitate a new loading structure based on AMD](https://alexsexton.com/talks/modernizr-3-workflow/#/23/1), and are currently embedding the tests with important meta-data such as known issues, sample usage and more. 
 
 There is a new site in the making as well, with a new documentation page [taking your feedback into account](http://www.surveymonkey.com/s/BYKMMS7) (feel free to fill out that survey if you haven’t yet), and a new download page that makes it much easier and faster to create the custom build that you need.
 
-You can help make v.3 become a reality by [closing issues](https://github.com/Modernizr/Modernizr/issues?state=open), or by updating [open Pull Requests](https://github.com/Modernizr/Modernizr/pulls) to the new v.3-compatible format for tests ([see this example for what that looks like](https://github.com/Modernizr/Modernizr/blob/master/feature-detects/a/download.js)).
+You can help make v.3 become a reality by [closing issues](https://github.com/Modernizr/Modernizr/issues?q=is%3Aopen), or by updating [open Pull Requests](https://github.com/Modernizr/Modernizr/pulls) to the new v.3-compatible format for tests ([see this example for what that looks like](https://github.com/Modernizr/Modernizr/blob/master/feature-detects/a/download.js)).
 
 ### Stickers!
 
@@ -20,7 +20,7 @@ You can help make v.3 become a reality by [closing issues](https://github.com/Mo
 
 While we work on version 3, you can show your support with some [fancy new Modernizr stickers](http://devswag.com/products/modernizr-stickers-4), courtesy of the fine folks at DevSwag. Put these stickers on your laptop, fixie bike, and anything else you’d like to “modernize” (ahem).
 
-The stickers are just $6 for a pack of four, and all of the proceeds that go to Modernizr will be donated to the [Ada Initiative](http://adainitiative.org/). All of us here at Modernizr care deeply about having a healthy and diverse community of developers, and the Ada Initiative does great work that we support.
+The stickers are just $6 for a pack of four, and all of the proceeds that go to Modernizr will be donated to the [Ada Initiative](https://adainitiative.org/). All of us here at Modernizr care deeply about having a healthy and diverse community of developers, and the Ada Initiative does great work that we support.
 
 ### Diversity in tech & open source
 

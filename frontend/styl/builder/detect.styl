@@ -22,11 +22,11 @@
     display: block
     position: relative
     height: $DetectHeight
-    font-size: 28px
+    font-size: 1.4em
     line-height: $DetectHeight
     overflow: hidden
     padding-right: $DetectHeight
-    padding-left: 24px
+    padding-left: 1.2em
     width: 100%
     text-overflow: ellipsis
     white-space: nowrap
@@ -89,8 +89,16 @@
 }
 
 @media (max-width: $smallScreen) {
+  .detect {
+    font-size: 14px
+  }
+
   .detects {
     margin: ($SmallHeaderHeight + $StatsHeight + ($HeaderButtonHeight * 2)) 0 0
   }
-}
 
+  .detect .option-label, .detect.none {
+    height: $DetectHeight - 20
+    line-height: $DetectHeight - 20
+  }
+}

@@ -53,21 +53,19 @@ var DownloadOverlayOption = React.createClass({
     var copyLabel;
     var busy = false;
 
-    if (disabled) {
-      copyLabel = 'Copy to Clipboard';
-      busy = true;
-    } else if (state.hasFlash && state.copied) {
+  if (!disabled && state.hasFlash && state.copied) {
       copyLabel = 'Copied';
     } else {
-      copyLabel = 'Copy';
+      copyLabel = 'Copy to Clipboard';
+      busy = true;
     }
     return li(null,
       span({className: 'box downloadOverlay-option'},
         label({htmlFor: id}, title),
-        span(null, '(',
-          download({className: 'fakelink', onMouseDown: this.clickDownload, href: state.href, download: state.download}, 'Download'), '|',
-          button({
-            className: 'clipboard fakelink', ref: props.title, type: 'button', onClick: this.clickClipboard, 'aria-busy': busy, autoFocus: true}, copyLabel), ')'
+        span(null,
+           button({className: 'clipboard fakelink', ref: props.title, type: 'button', onClick: this.clickClipboard, 'aria-busy': busy, autoFocus: true}, copyLabel),
+          '|',
+          download({className: 'fakelink', onMouseDown: this.clickDownload, href: state.href, download: state.download}, 'Download')
         )
       ),
       expanded && textarea({id: id, ref: 'textarea', autoFocus: true, spellCheck: false, value: props.content, defaultValue: 'building...'})

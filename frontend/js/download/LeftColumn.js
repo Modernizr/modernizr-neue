@@ -55,12 +55,10 @@ var LeftColumn = React.createClass({
 
     return (
       div({className: className, onClick: this.props.onClick},
-        div({className: 'box'},
-          div({className: 'leftColumn-stats'},
-            div({className: 'leftColumn-selected'}, selected, results),
-            filesize,
-            div(null, button({type: 'button', className: 'leftColumn-toggle', onClick: this.props.toggle}, toggle))
-          )
+        div({className: 'box leftColumn-stats'},
+          div({className: 'leftColumn-selected'}, selected, results),
+          filesize,
+          div(null, button({type: 'button', className: 'leftColumn-toggle', onClick: this.props.toggle}, toggle))
         ),
         div({className: 'box heading-small' + (state.optionsToggled ? ' active' : ''), onClick: this.toggleOptions}, 'Options'),
         div({className: 'leftColumn-options'},

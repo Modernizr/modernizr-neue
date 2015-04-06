@@ -31,7 +31,16 @@ module.exports = [
     method: 'GET',
     path: '/',
     handler: function(request, reply) {
-      reply.view('index', {team: team});
+
+      FS.readdir(Path.join(baseDir, 'posts'), function(e, posts) {
+
+        if (e) {
+          return reply().code(500);
+        }
+
+        posts = posts.reverse().slice(0, 4).map(blogPost);
+        reply.view('index', {team: team, latestPosts: posts});
+      });
     }
   }, {
     method: 'GET',

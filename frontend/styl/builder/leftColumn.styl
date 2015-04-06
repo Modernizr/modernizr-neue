@@ -101,7 +101,7 @@
   }
 
   .leftColumn-stats {
-    min-height: $HeaderButtonHeight
+    min-height: $StatsHeight
     display: flex
     flex-direction: column
     justify-content: center
@@ -121,6 +121,11 @@
 @media (max-width: $smallScreen) {
   .leftColumn {
     top: $SmallHeaderHeight + $HeaderButtonHeight
-    z-index: -1
+    z-index: initial
+  }
+
+  .leftColumn-options {
+    position: relative
+    z-index: 1
   }
 }

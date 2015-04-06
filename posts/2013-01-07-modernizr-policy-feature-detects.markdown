@@ -12,7 +12,7 @@ Modernizr aims for accuracy in tests based on their associated ECMAScript, HTML 
 
 ### Found a false positive?
 
-When you encounter a false positive, [add it to the Modernizr Issues tracker](https://github.com/Modernizr/Modernizr/issues/new). We will give it [the “False result” label](https://github.com/Modernizr/Modernizr/issues?labels=false+result&page=1&state=open). Also please clearly describe which browser(s) it is a false positive in, and whether the implementation is buggy, broken or incomplete.
+When you encounter a false positive, [add it to the Modernizr Issues tracker](https://github.com/Modernizr/Modernizr/issues). We will give it [the “False result” label](https://github.com/Modernizr/Modernizr/labels/false%20result). Also please clearly describe which browser(s) it is a false positive in, and whether the implementation is buggy, broken or incomplete.
 
 Wherever possible, we will attempt to work around the issue (for example: forcing a reflow, adding the element to the DOM, etc), though as a last result we will add a UA sniff. We'd appreciate your help with a pull request, as well!
 

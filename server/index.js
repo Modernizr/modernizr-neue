@@ -12,7 +12,7 @@ var routes = require('./routes').concat(
 var server = new Hapi.Server({
   connections: {
     router: {
-      stripTrailingSlash: false
+      stripTrailingSlash: true
     }
   }
 });
