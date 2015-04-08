@@ -49,8 +49,8 @@ if (location.hash.length || location.search.length) {
 }
 
 if ('Worker' in window) {
-  var buildWorker = new Worker('/js/download/buildWorker.js');
-  var gzipWorker = new Worker('/js/download/gzipWorker.js');
+  var buildWorker = new Worker('/js/download/workers/build.js');
+  var gzipWorker = new Worker('/js/download/workers/gzip.js');
 
   buildWorker.postMessage(JSON.stringify({
     requireConfig: window._modernizrConfig

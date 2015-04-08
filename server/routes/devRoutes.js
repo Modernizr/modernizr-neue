@@ -155,7 +155,7 @@ module.exports = [
     path: '/serviceworker.js',
     handler: function(request, reply) {
 
-      reply.file(Path.join(frontendDir, 'js', 'download', 'serviceworker.js'));
+      reply.file(Path.join(frontendDir, 'js', 'download', 'workers', 'serviceworker.js'));
     }
   }
 ];

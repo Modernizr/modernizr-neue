@@ -207,7 +207,6 @@ var DownloadUI = React.createClass({
           return option.property;
         });
 
-      var allEmpty = !detects.length && !options.length;
       var config = {minify: true, 'classPrefix': classPrefix, 'options': options, 'feature-detects': detects};
 
       if (!_.isEqual(config, state.buildConfig)) {

@@ -191,8 +191,8 @@ gulp.task('uglify-combined', function() {
 
 gulp.task('uglify-loose', function() {
   return gulp.src([
-    'frontend/js/download/buildWorker.js',
-    'frontend/js/download/gzipWorker.js',
+    'frontend/js/download/workers/build.js',
+    'frontend/js/download/workers/gzip.js',
     'frontend/lib/pako/dist/pako_deflate.js',
     'frontend/lib/pretty-bytes/pretty-bytes.js',
     'frontend/lib/r.js/dist/r.js',
@@ -209,7 +209,7 @@ gulp.task('uglify-loose', function() {
 gulp.task('uglify-sw', function() {
   // uglify service worker seperatly, becuase it has to be served
   // from the root of the domain, so its `base` is different
-  return gulp.src('frontend/js/download/serviceworker.js', {base: 'frontend/js/download/'})
+  return gulp.src('frontend/js/download/workers/serviceworker.js', {base: 'frontend/js/download/'})
     .pipe(plugins.sourcemaps.init())
       .pipe(plugins.uglify())
     .pipe(plugins.sourcemaps.write('.'))

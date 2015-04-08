@@ -8,8 +8,7 @@ var DetectList = React.createClass({
     return {};
   },
 
-  onKeyDown: function(e, currentDetect) {
-    var currentRef = currentDetect.props._ref;
+  onKeyDown: function(e, currentIndex) {
     var charCode = e.which;
     //              up arrow || J
     var UP = charCode === 38 || charCode === 75;
@@ -18,32 +17,46 @@ var DetectList = React.createClass({
 
     if (UP || DOWN) {
       var offset = UP ? -1 : 1;
-      var nextRef = Math.max(0, Math.min(currentRef + offset, this.props.detects.length));
-      if (nextRef !== currentRef) {
+
+      var nextRef = Math.max(0, Math.min(currentIndex + offset, this.props.detects.length));
+      if (nextRef !== currentIndex) {
         this.refs[nextRef].refs.option.refs.input.getDOMNode().focus();
       }
       e.preventDefault();
     }
   },
 
-  toggleDetect: function(elem) {
-    this.setState({expanded: elem});
+  focus: function(property, ensureVisible, index) {
+    this.setState({focused: property});
+  },
+
+  blur: function(property) {
+    this.setState({focused: undefined});
   },
 
   render: function() {
     var detects = this.props.detects;
     var select = this.props.select;
+    var state = this.state;
     var self = this;
 
     detects = _.map(detects, function(detect, i) {
+      var property = detect.property;
+      var expanded;
+
+      if (property === state.focused) {
+        expanded = true;
+      }
+
       return Detect({
-        expanded: self.state.expanded,
-        toggle: self.toggleDetect,
         ref: i,
-        _ref: i,
-        key: detect.property,
+        index: i,
+        expanded: expanded,
+        key: property,
         data: detect,
         select: select,
+        focus: self.focus,
+        blur: self.blur,
         keyDown: self.onKeyDown
       }, detect.name);
     });

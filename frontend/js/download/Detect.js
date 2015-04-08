@@ -8,11 +8,14 @@ var Detect = React.createClass({
     return {};
   },
 
+  shouldComponentUpdate: function(nextProps) {
+    return this.props.expanded !== nextProps.expanded;
+  },
+
   render: function() {
     var props = this.props;
     var data = props.data;
-    var select = props.select;
-    var className = 'detectRow' + (props.expanded === this ? ' expanded' : '');
+    var className = 'detectRow' + (props.expanded ? ' expanded' : '');
 
     return (
       li({
@@ -27,7 +30,7 @@ var Detect = React.createClass({
           toggle: props.toggle,
           ref: 'option',
           className: 'option detect',
-          select: select,
+          select: props.select,
           data: data,
           name: 'feature-detects',
           focusParent: this.focus,
@@ -39,12 +42,36 @@ var Detect = React.createClass({
     );
   },
 
+  componentDidUpdate: function() {
+    if (this.props.expanded) {
+      var HEADER_HEIGHT = 120;
+
+      var windowHeight = window.innerHeight;
+      var windowTop = window.pageYOffset;
+      var windowBottom = windowTop + windowHeight;
+
+      var node = this.getDOMNode();
+      var nodeTop = node.offsetTop;
+      var nodeBottom = nodeTop + node.offsetHeight;
+      var offset;
+
+      if (nodeTop < windowTop + HEADER_HEIGHT) {
+        offset = nodeTop - HEADER_HEIGHT - 10;
+      } else if (nodeBottom > windowBottom) {
+        offset = nodeBottom - windowHeight + 10;
+      }
+
+      window.scrollTo(0, offset);
+    }
+  },
+
   keyDown: function(e) {
-    this.props.keyDown(e, this);
+    this.props.keyDown(e, this.props.index);
   },
 
   focus: function() {
-    this.props.toggle(this);
+    var props = this.props;
+    props.focus(props.data.property);
   },
 
   mouseDown: function(e) {
@@ -54,46 +81,15 @@ var Detect = React.createClass({
     }
   },
 
-  click: function(e) {
-    var triggeredByKeyboard = (e.clientX === e.clientY && e.clientX === 0);
-    if (triggeredByKeyboard) {
-      this.props.select(this.props.data);
-    } else if (this.state.clickFocused) {
+  blur: function(e) {
+    if (this.state.clickFocused) {
       this.setState({clickFocused: false});
       this.refs.option.refs.input.getDOMNode().focus();
-      e.stopPropagation();
+      return e.preventDefault();
     }
-  },
 
-  blur: function(e) {
-    if (!e) {
-      return;
-    }
-    var self = this;
-    var detectElem = this.getDOMNode();
-    var blurredElem = e.target;
-    var clickFocused =  this.state.clickFocused;
-    var focusedElem;
-
-
-    // blur is a bucket of pain, because there is no cross browser way to get the
-    // newly focused target that is the result of a blur. Firefox does not support
-    // focusin/out, so we can't use that. It also does not properly update
-    // `explicitOriginalTarget` for delegated blur events. Nor does it support
-    // the `relatedTarget (along with IE11). Chrome does not update
-    // `document.activeElement` until after the `focus` event, so we `defer` until
-    // then, and there we have it.
-    _.defer(function() {
-      focusedElem = document.activeElement;
-      if (blurredElem.type !== 'checkbox' && focusedElem === document.body) {
-        // if we are focused on the info pane, and cause a blur by clicking,
-        // refocus the detect in the list
-        return self.refs.option.refs.input.getDOMNode().focus();
-      }
-      if (!detectElem.contains(focusedElem) && !clickFocused) {
-        self.props.toggle();
-      }
-    });
+    var props = this.props;
+    props.blur(props.data.property);
   }
 });
 

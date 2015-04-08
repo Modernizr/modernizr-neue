@@ -13,16 +13,20 @@ var LeftColumn = React.createClass({
   },
 
   render: function() {
-    var state = this.state || {};
+    var state = this.state;
     var props = this.props;
     var allDetects = props.allDetects;
     var detects = props.detects;
     var options = props.options;
     var select = this.select;
 
-    var totalSelected = allDetects.filter(function(detect) {return detect.selected;}).length;
+    var totalSelected = allDetects.filter(function(detect) {
+      return detect.selected;
+    }).length;
+
     var selected = totalSelected + ' selected';
     var toggled = detects.length === totalSelected;
+
     var toggle = (toggled ? 'REMOVE' : 'ADD') + ' ALL';
     var className = (toggled ? 'toggled ' : '') + 'leftColumn column';
     var inputClass = 'classPrefix' + (state.classNameAdded ? ' classNameAdded' : '');
@@ -40,7 +44,15 @@ var LeftColumn = React.createClass({
         text = 'calculating...';
         busy = true;
       }
-        filesize = div({className: 'filesizes', 'aria-busy': busy}, text);
+        filesize = div({className: 'filesizes'},
+          text,
+          div({
+            className: 'screenreader',
+            'role' :'status',
+            'aria-busy': busy,
+            'aria-live': 'polite'
+          }, 'Current build size is ' + text)
+        );
     }
 
     options = _.map(options, function(option) {
@@ -56,7 +68,7 @@ var LeftColumn = React.createClass({
     return (
       div({className: className, onClick: this.props.onClick},
         div({className: 'box leftColumn-stats'},
-          div({className: 'leftColumn-selected'}, selected, results),
+          div({className: 'leftColumn-selected', 'aria-live': 'polite', role: 'status'}, selected, results),
           filesize,
           div(null, button({type: 'button', className: 'leftColumn-toggle', onClick: this.props.toggle}, toggle))
         ),
