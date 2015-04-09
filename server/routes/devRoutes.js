@@ -11,6 +11,13 @@ var frontendDir = Path.join(baseDir, 'frontend');
 var rssFeed = require(Path.join('..', 'util', 'rss'));
 var team = require(Path.join('..', 'util', 'footer'));
 
+modernizrOptions = modernizrOptions.concat({
+  name: 'minify',
+  property: 'minify',
+  group: 'minify',
+  selected: true
+});
+
 var downloaderConfig = {
   metadata: JSON.stringify(modernizrMetadata),
   options: JSON.stringify(modernizrOptions),

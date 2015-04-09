@@ -4,7 +4,6 @@ var DetectList = React.createFactory(require('./DetectList'));
 var LeftColumn = React.createFactory(require('./LeftColumn'));
 var SearchHeader = React.createFactory(require('./SearchHeader'));
 var DownloadOverlay = React.createFactory(require('./DownloadOverlay'));
-var inBrowser = typeof window !== 'undefined';
 
 var DOM = React.DOM, form = DOM.form;
 
@@ -109,26 +108,34 @@ var DownloadUI = React.createClass({
     var searchState = currentSearch.length ? 'q=' + currentSearch : '';
     var baseUrl = [location.protocol, '//', location.host, location.pathname].join('');
 
+    var minify = this.props.options.some(function(opt) {
+        return opt.property === 'minify' && opt.selected;
+      });
+
     // Config uses amdPaths, but build hash uses property names
     var props = this.props.detects.filter(function(detect) {
-      return detect.selected;
-    }).map(function(detect) {
-      var property = detect && detect.property;
-      property = _.isArray(property) ?
-        property.join('_').replace('-', '_') :
-        property.replace('-', '_');
-      return property;
-    });
+        return detect.selected;
+      }).map(function(detect) {
+        var property = detect && detect.property;
+        property = _.isArray(property) ?
+          property.join('_').replace('-', '_') :
+          property.replace('-', '_');
+        return property;
+      });
 
     var opts = this.props.options.filter(function(opt) {
-      return opt.selected;
-    }).map(function(opt) {
-      var prop = opt.property;
-      if (prop.indexOf('html5') === 0) {
-        prop = prop.replace('html5','');
-      }
-      return prop.toLowerCase();
-    });
+        return opt.selected && opt.property !== 'minify';
+      }).map(function(opt) {
+        var prop = opt.property;
+        if (prop.indexOf('html5') === 0) {
+          prop = prop.replace('html5','');
+        }
+        return prop.toLowerCase();
+      });
+
+    if (!minify) {
+      opts.push('dontmin');
+    }
 
     var sortedProps = props.sort();
     var sortedOpts = opts.sort();
@@ -143,7 +150,7 @@ var DownloadUI = React.createClass({
       buildQuery = buildQuery ? buildQuery + '&' + searchState : '?' + searchState;
     }
 
-    inBrowser && window.history.replaceState({}, '', baseUrl + buildQuery);
+    window.history.replaceState({}, '', baseUrl + buildQuery);
     return buildQuery;
   },
 
@@ -192,6 +199,7 @@ var DownloadUI = React.createClass({
     var props = this.props;
     var state = this.state;
     var build = function() {
+      var minify = false;
       var classPrefix = state.classPrefix;
       var detects = _.chain(props.detects)
         .filter(function(detect) {
@@ -202,14 +210,19 @@ var DownloadUI = React.createClass({
 
       var options = _.chain(props.options)
         .filter(function(option) {
+          if (option.name === 'minify' && option.selected) {
+            minify = true;
+            return;
+          }
           return option.selected;
         }).map(function(option) {
           return option.property;
-        });
+        }).value();
 
-      var config = {minify: true, 'classPrefix': classPrefix, 'options': options, 'feature-detects': detects};
+      var allEmpty = !detects.length && !options.length;
+      var config = {minify: minify, 'classPrefix': classPrefix, 'options': options, 'feature-detects': detects};
 
-      if (!_.isEqual(config, state.buildConfig)) {
+      if ((!allEmpty || state.buildConfig || immediate) && !_.isEqual(config, state.buildConfig)) {
         window.builder(config, function(output) {
           self.updateFilesize(JSON.stringify({build: output, config: config}));
           self.setState({build: output});

@@ -13,7 +13,7 @@ var generateConfig = function(config) {
 
 var buildFromQuery = function(request, reply) {
   var config = generateConfig(request.payload || request.url.search.replace('^?', ''));
-  config.minify = true;
+  console.log(config);
   var ext = config.minify ? '.min.js' : '.js';
 
   Modernizr.build(config, function(build) {

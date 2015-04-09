@@ -61,7 +61,8 @@ var LeftColumn = React.createClass({
         data: option,
         select: select,
         key: option.property,
-        name: 'options'
+        name: option.group || 'options',
+        selected: option.selected
       });
     });
 
@@ -93,7 +94,7 @@ var LeftColumn = React.createClass({
 
   select: function(data) {
     data.selected = !data.selected;
-    this.setState();
+    this.setState({});
   },
 
   classNameAdded: function(e) {

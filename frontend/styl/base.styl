@@ -22,6 +22,20 @@ body {
 main {
   margin: 0 40px
   min-height: "calc(100vh - %s)" % $HeaderHeight
+  position: relative
+  transition-property: top, opacity
+  transition-duration: $TransitionDuration
+  opacity: 1
+  top: 0
+}
+
+.transition main {
+  top: $TransitionHeight
+  opacity: 0
+}
+
+img {
+  vertical-align: top
 }
 
 a,

@@ -6,6 +6,10 @@ var DOM = React.DOM, span = DOM.span, input = DOM.input, label = DOM.label;
 
 var Option = React.createClass({
 
+  shouldComponentUpdate: function(nextProps) {
+    return this.props.selected !== nextProps.selected;
+  },
+
   render: function() {
     var props = this.props;
     var data = props.data;
@@ -14,7 +18,7 @@ var Option = React.createClass({
     var name = data.name;
 
     return (
-      span({className: props.className, onClick: this.click},
+      span({className: props.className},
         input({
           ref: 'input',
           type: 'checkbox',
@@ -22,7 +26,9 @@ var Option = React.createClass({
           id: prop,
           className: 'option-checkbox',
           value: value,
-          checked: data.selected
+          checked: data.selected,
+          onChange: this.change,
+          onKeyDown: this.keyDown
         }),
         label({ref: 'label', title: name, className: 'option-label', htmlFor: prop}, name,
           SVGToggle({ref: 'SVGToggle', className: 'detectToggle'})
@@ -32,22 +38,16 @@ var Option = React.createClass({
     );
   },
 
-  click: function(e) {
-    var target = e.target;
-    var props = this.props;
-    var toggle = this.refs.SVGToggle.getDOMNode();
-    var label = this.refs.label.getDOMNode();
-    var triggeredByKeyboard = (e.clientX === e.clientY && e.clientX === 0);
-    var clickedToggle = (toggle === target || toggle.contains(target));
-
-    if (!triggeredByKeyboard && props.ignoreLabelCLick && target === label) {
-      props.focusParent && props.focusParent();
+  keyDown: function(e) {
+    if (e.which === 13) {
+      this.change();
       e.preventDefault();
-    } else if (triggeredByKeyboard || clickedToggle) {
-      props.select(props.data);
-      e.stopPropagation();
     }
+  },
 
+  change: function() {
+    var props = this.props;
+    props.select(props.data);
   }
 });
 

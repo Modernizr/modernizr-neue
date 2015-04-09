@@ -24,6 +24,7 @@ if (location.hash.length || location.search.length) {
 
   if (queries.length) {
     shouldBuild = true;
+
     queries.map(function(query) {
       var searchResult = query.match(/q=(.*)/);
       if (searchResult) {
@@ -34,14 +35,22 @@ if (location.hash.length || location.search.length) {
           if (_.isArray(prop)) {
             prop = prop.join('_');
           }
+
           if (query === prop.toLowerCase()) {
             obj.selected = true;
             return true;
           }
+
+          if (query === 'dontmin' && prop === 'minify') {
+            obj.selected = false;
+            return true;
+          }
         };
 
-        return _.some(window._options, matches) || _.some(window._metadata, matches);
+        return _.some(window._options, matches) || _.some(window._modernizrMetadata, matches);
       }
+
+      return query;
     });
 
     window.history.replaceState({}, '', baseUrl + query);
@@ -90,14 +99,14 @@ if (false && 'serviceWorker' in navigator) {
   });
 }
 
-  ZeroClipboard.config({
-    swfPath: '/lib/zeroclipboard/dist/ZeroClipboard.swf',
-    forceHandCursor: true,
-    flashLoadTimeout: 5000
-  });
+ZeroClipboard.config({
+  swfPath: '/lib/zeroclipboard/dist/ZeroClipboard.swf',
+  forceHandCursor: true,
+  flashLoadTimeout: 5000
+});
 
 React.render(DownloadUI({
-  detects: window._metadata,
+  detects: window._modernizrMetadata,
   options: window._options,
   currentSearch: currentSearch,
   shouldBuild: shouldBuild

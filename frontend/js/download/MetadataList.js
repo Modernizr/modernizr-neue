@@ -6,11 +6,14 @@ var DOM = React.DOM, div = DOM.div, ul = DOM.ul, li = DOM.li;
 
 var MetadataList = React.createClass({
   render: function() {
-    var items = this.props.items || [];
-    var str = this.props.str;
+    var props = this.props;
+    var items = props.items || [];
+    var str = props.str;
 
-    items = _.map(items, function(item) {
-      return li(null, item);
+    items = _.map(items, function(item, index) {
+      return li({
+        key: props.keyBase + index
+      }, item);
     });
 
     return (

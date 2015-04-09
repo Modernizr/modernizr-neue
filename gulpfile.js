@@ -42,7 +42,12 @@ gulp.task('handlebars', function() {
 
   var templateData = {
     metadata: JSON.stringify(modernizr.metadata()),
-    options: JSON.stringify(modernizr.options()),
+    options: JSON.stringify(modernizr.options().concat({
+      name: 'minify',
+      property: 'minify',
+      group: 'minify',
+      selected: true
+    })),
     builderContent: require('./server/buildSteps/download.js'),
     scripts: [
       '/js/prod.js',

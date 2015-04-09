@@ -32,7 +32,8 @@ var DownloadOverlay = React.createClass({
             hasFlash: hasFlash,
             type: 'text/javascript',
             filename: 'modernizr-custom',
-            updateAction: props.updateAction
+            updateAction: props.updateAction,
+            key: 'build'
           }),
           DownloadOverlayOption({
             title: 'Command Line Config',
@@ -43,7 +44,8 @@ var DownloadOverlay = React.createClass({
             type: 'application/json',
             filename: 'modernizr-config',
             path: '/download/config',
-            updateAction: props.updateAction
+            updateAction: props.updateAction,
+            key: 'config'
           }),
           DownloadOverlayOption({
             title: 'Grunt Config',
@@ -54,9 +56,12 @@ var DownloadOverlay = React.createClass({
             type: 'application/json',
             filename: 'grunt config',
             path: '/download/gruntconfig',
-            updateAction: props.updateAction
+            updateAction: props.updateAction,
+            key: 'grunt'
           }),
-          li(null,
+          li({
+            key: 'codepen'
+          },
             form({
               action: 'http://codepen.io/pen/define',
               method: 'POST'
