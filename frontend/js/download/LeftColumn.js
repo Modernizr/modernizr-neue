@@ -18,7 +18,7 @@ var LeftColumn = React.createClass({
     var allDetects = props.allDetects;
     var detects = props.detects;
     var options = props.options;
-    var select = this.select;
+    var select = props.select;
 
     var totalSelected = allDetects.filter(function(detect) {
       return detect.selected;
@@ -90,11 +90,6 @@ var LeftColumn = React.createClass({
 
   toggleOptions: function() {
     this.setState({optionsToggled: !this.state.optionsToggled});
-  },
-
-  select: function(data) {
-    data.selected = !data.selected;
-    this.setState({});
   },
 
   classNameAdded: function(e) {

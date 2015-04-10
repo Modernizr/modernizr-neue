@@ -60,7 +60,8 @@ var DownloadUI = React.createClass({
           updateURL: this.updateURL,
           updatePrefix: this.updatePrefix,
           filesize: state.filesize,
-          build: this.build
+          build: this.build,
+          select: this.select
         }),
 
         DetectList({
