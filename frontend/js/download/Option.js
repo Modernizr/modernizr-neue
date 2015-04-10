@@ -30,7 +30,13 @@ var Option = React.createClass({
           onChange: this.change,
           onKeyDown: this.keyDown
         }),
-        label({ref: 'label', title: name, className: 'option-label', htmlFor: prop}, name,
+        label({
+          ref: 'label',
+          title: name,
+          className: 'option-label',
+          htmlFor: prop,
+          onClick: this.click
+        }, name,
           SVGToggle({ref: 'SVGToggle', className: 'detectToggle'})
         ),
         (props.metaData && Metadata({ref: 'metadata', data: data}))
@@ -42,6 +48,19 @@ var Option = React.createClass({
     if (e.which === 13) {
       this.change();
       e.preventDefault();
+    }
+  },
+
+  click: function(e) {
+    var props = this.props;
+    var toggle = this.refs.SVGToggle.getDOMNode();
+
+    if (props.ignoreLabelClick && !toggle.contains(e.target)) {
+      e.preventDefault();
+    }
+
+    if (props.focusParent) {
+      props.focusParent(props.name);
     }
   },
 

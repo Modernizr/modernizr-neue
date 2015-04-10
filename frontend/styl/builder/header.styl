@@ -10,9 +10,30 @@
   }
 }
 
-.transition.builder {
+.transition {
   .header-items {
     height: $HeaderHeight
+  }
+}
+
+.no-js {
+  .header-item {
+    height: $HeaderHeight
+    &:last-child {
+      height: $HeaderButtonHeight
+    }
+  }
+
+  .header-search {
+    pointer-events: none
+  }
+
+  .header-search-input {
+    visibility: hidden
+  }
+
+  .header-search-build {
+    pointer-events: all
   }
 }
 
@@ -71,6 +92,7 @@
   .builder .header {
     position: absolute
   }
+
   .header-search {
     position: absolute
     left: 155px
@@ -81,6 +103,15 @@
   .header-search {
     top: $HeaderHeight
     left: 0
+  }
+
+  .no-js {
+    .header-item {
+      height: $HeaderButtonHeight
+    }
+    .header-search-input {
+      display: none
+    }
   }
 }
 
