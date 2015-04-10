@@ -50,6 +50,7 @@ gulp.task('handlebars', function() {
     })),
     builderContent: require('./server/buildSteps/download.js'),
     scripts: [
+      '/js/lodash.custom.js',
       '/js/prod.js',
       '/lib/r.js/dist/r.js',
       '/lib/modernizr/lib/build.js',
@@ -183,7 +184,7 @@ gulp.task('lodash', function(cb) {
 
 gulp.task('uglify-combined', function() {
   return gulp.src([
-    'frontend/js/*.custom.js',
+    'frontend/js/modernizr.custom.js',
     'frontend/lib/zeroclipboard/dist/ZeroClipboard.js',
     'frontend/js/download/downloader.js'
   ])

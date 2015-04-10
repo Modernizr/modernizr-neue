@@ -12,7 +12,6 @@ onmessage = function(msg) {
   var run = JSON.parse(msg.data);
 
   if (run.build) {
-    console.log(run.build);
 
     builder(run.build, function(build) {
       postMessage(build);
