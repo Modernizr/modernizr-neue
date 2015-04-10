@@ -92,7 +92,7 @@ if ('Worker' in window) {
   });
 }
 
-if (false && 'serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/serviceworker.js')
   .catch(function(error) {
     console.error(error);
