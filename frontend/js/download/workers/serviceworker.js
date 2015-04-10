@@ -1,7 +1,7 @@
 'use strict';
 importScripts('/lib/serviceworker-cache-polyfill.js/dist/serviceworker-cache-polyfill.js');
 
-var CACHE_VERSION = 1;
+var CACHE_VERSION = '__CACHE_VERSION__';
 var CURRENT_CACHES = {
   prefetch: 'prefetch-cache-v' + CACHE_VERSION
 };

@@ -46,6 +46,8 @@ var Option = React.createClass({
 
   keyDown: function(e) {
     if (e.which === 13) {
+      var input = this.refs.input.getDOMNode();
+      input.checked = !input.checked;
       this.change();
       e.preventDefault();
     }

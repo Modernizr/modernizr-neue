@@ -3,7 +3,7 @@
 var Hapi = require('hapi');
 var Path = require('path');
 var basePath = Path.join(__dirname, '..');
-var envRoutes = process.env.NODE_ENV === 'production' ? 'proudRoutes' : 'devRoutes';
+var envRoutes = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
 
 var routes = require('./routes').concat(
   require(Path.join(__dirname, 'routes', envRoutes))

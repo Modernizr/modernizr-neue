@@ -2,14 +2,14 @@
 var FS = require('fs');
 var Path = require('path');
 var Modernizr = require('modernizr');
-var modernizrMetadata = Modernizr.metadata();
 var modernizrOptions = Modernizr.options();
-var builderContent = require(Path.join('..', 'buildSteps', 'download'));
+var modernizrMetadata = Modernizr.metadata();
 var baseDir = Path.join(__dirname, '..', '..');
-var blogPost = require(Path.join('..', 'util', 'blogPost'));
 var frontendDir = Path.join(baseDir, 'frontend');
 var rssFeed = require(Path.join('..', 'util', 'rss'));
 var team = require(Path.join('..', 'util', 'footer'));
+var blogPost = require(Path.join('..', 'util', 'blogPost'));
+var builderContent = require(Path.join('..', 'buildSteps', 'download'));
 
 modernizrOptions = modernizrOptions.concat({
   name: 'minify',
@@ -162,7 +162,11 @@ module.exports = [
     path: '/serviceworker.js',
     handler: function(request, reply) {
 
-      reply.file(Path.join(frontendDir, 'js', 'download', 'workers', 'serviceworker.js'));
+      var worker = FS.readFileSync(Path.join(frontendDir, 'js', 'download', 'workers', 'serviceworker.js'));
+      var version = process.env.cache_time;
+
+      worker = worker.toString().replace(/__CACHE_VERSION__/, version);
+      reply(worker).type('application/javascript');
     }
   }
 ];

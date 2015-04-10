@@ -20,6 +20,9 @@ var plugins = require('gulp-load-plugins')({
   }
 });
 
+process.env.cache_time = Date.now();
+console.log(process.env.cache_time);
+
 gulp.task('browserify', function() {
   var reactVersion = process.env.NODE_ENV === 'prod' ? 'react/dist/react.min' : 'react';
 
@@ -215,8 +218,9 @@ gulp.task('uglify-loose', function() {
 gulp.task('uglify-sw', function() {
   // uglify service worker seperatly, becuase it has to be served
   // from the root of the domain, so its `base` is different
-  return gulp.src('frontend/js/download/workers/serviceworker.js', {base: 'frontend/js/download/'})
+  return gulp.src('frontend/js/download/workers/serviceworker.js', {base: 'frontend/js/download/workers/'})
     .pipe(plugins.sourcemaps.init())
+      .pipe(plugins.replace('__CACHE_VERSION__', process.env.cache_time))
       .pipe(plugins.uglify())
     .pipe(plugins.sourcemaps.write('.'))
   .pipe(gulp.dest('dist'));
@@ -225,6 +229,7 @@ gulp.task('uglify-sw', function() {
 gulp.task('uglify', ['uglify-combined', 'uglify-loose', 'uglify-sw']);
 
 gulp.task('develop', function () {
+
   var tasks = ['modernizr', 'lodash', 'browserify', 'styles'];
 
   plugins.nodemon({
@@ -243,6 +248,7 @@ gulp.task('develop', function () {
     .on('start', tasks)
     .on('change', tasks)
     .on('restart', function () {
+      process.env.cache_time = Date.now();
       console.log('restarted!');
     });
 });

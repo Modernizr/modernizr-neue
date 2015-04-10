@@ -2,7 +2,7 @@
   <div class="footer-links">
     <div>
       Made with love by
-      {{~#each team}} <a class="teamMember" href="https://twitter.com/{{twitter}}">{{name}}</a>
+      {{~#each team}} <a class="teamMember" href="{{url}}">{{name}}</a>
       {{~#unless last}}{{~#if secondToLast}}, and{{else}},{{/if~}}{{else}}.{{/unless~}}{{/each~}}
     </div>
     <div>

@@ -15,45 +15,31 @@
   "authors": [
     {
       "name": "Faruk Ates",
-      "email": "fates@edyt.com",
-      "domain": "http://farukat.es/",
-      "twitter": "KuraFire"
+      "url": "https://twitter.com/KuraFire"
     },
     {
       "name": "Paul Irish",
-      "email": "paul.irish@gmail.com",
-      "domain": "http://www.paulirish.com",
-      "twitter": "paul_irish"
+      "url": "https://twitter.com/paul_irish"
     },
     {
       "name": "Alex Sexton",
-      "email": "alexsexton@gmail.com",
-      "domain": "https://alexsexton.com/",
-      "twitter": "SlexAxton"
+      "url": "https://twitter.com/SlexAxton"
     },
     {
       "name": "Ryan Seddon",
-      "email": "seddon.ryan@gmail.com",
-      "domain": "http://www.thecssninja.com/",
-      "twitter": "ryanseddon"
+      "url": "https://twitter.com/ryanseddon"
     },
     {
       "name": "Patrick Kettner",
-      "email": "patrickkettner@gmail.com",
-      "domain": "https://github.com/patrickkettner",
-      "twitter": "patrickkettner"
+      "url": "https://twitter.com/patrickkettner"
     },
     {
       "name": "Stu Cox",
-      "email": "stu@stucox.co.uk",
-      "domain": "http://www.stucox.com/",
-      "twitter": "stucoxmedia"
+      "url": "https://twitter.com/stucoxmedia"
     },
     {
       "name": "Richard Herrera",
-      "email": "rich@doctyper.com",
-      "domain": "http://doctyper.com/",
-      "twitter": "doctyper"
+      "url": "https://twitter.com/doctyper"
     }
   ],
   "license": "MIT",
@@ -88,6 +74,7 @@
     "gulp-minify-css": "^1.0.0",
     "gulp-nodemon": "^1.0.5",
     "gulp-rename": "^1.2.0",
+    "gulp-replace": "^0.5.3",
     "gulp-sourcemaps": "^1.5.1",
     "gulp-stylus": "^2.0.1",
     "gulp-symlink": "^2.1.0",
