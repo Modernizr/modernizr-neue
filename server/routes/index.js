@@ -1,31 +1,16 @@
 'use strict';
-var Modernizr = require('modernizr');
-var Path = require('path');
-var frontendUtils = require(Path.join('..', '..', 'frontend', 'js', 'download', 'util'));
-
-var generateConfig = function(config) {
-  delete config.q;
-  config.minify = config.minify === 'minify';
-  config.options = [].concat(config.options || []);
-  config['feature-detects'] = [].concat(config['feature-detects'] || []);
-  return config;
-};
-
-var buildFromQuery = function(request, reply) {
-  var config = generateConfig(request.payload || request.url.search.replace('^?', ''));
-  console.log(config);
-  var ext = config.minify ? '.min.js' : '.js';
-
-  Modernizr.build(config, function(build) {
-    reply(build).header('Content-disposition', 'attachment; filename=modernizr-custom' + ext);
-  });
-};
+var generateConfig = require('../util/configFromPost');
+var frontendUtils = require('../../frontend/js/download/util');
 
 
 module.exports = [{
+    method: 'GET',
+    path: '/download',
+    handler: require('../util/determineDownload')
+  }, {
     method: 'POST',
     path: '/download',
-    handler: buildFromQuery
+    handler: require('../util/buildFromPostedQuery')
   }, {
     method: 'POST',
     path: '/download/config',

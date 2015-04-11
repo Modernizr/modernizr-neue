@@ -16,11 +16,11 @@ if (location.hash.length || location.search.length) {
   var baseUrl = [location.protocol, '//', location.host, location.pathname].join('');
   var query = str.replace('#', '?');
   var queries = _.chain(query.replace(/^\?/, '').split('&'))
-  .map(function(query) {
-    return query.split('-');
-  })
-  .flatten()
-  .value();
+    .map(function(query) {
+      return query.split('-');
+    })
+    .flatten()
+    .value();
 
   if (queries.length) {
     shouldBuild = true;

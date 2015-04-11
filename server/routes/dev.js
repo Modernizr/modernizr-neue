@@ -1,37 +1,11 @@
 'use strict';
 var FS = require('fs');
 var Path = require('path');
-var Modernizr = require('modernizr');
-var modernizrOptions = Modernizr.options();
-var modernizrMetadata = Modernizr.metadata();
+var rssFeed = require('../util/rss');
+var team = require('../util/footer');
 var baseDir = Path.join(__dirname, '..', '..');
 var frontendDir = Path.join(baseDir, 'frontend');
-var rssFeed = require(Path.join('..', 'util', 'rss'));
-var team = require(Path.join('..', 'util', 'footer'));
-var blogPost = require(Path.join('..', 'util', 'blogPost'));
-var builderContent = require(Path.join('..', 'buildSteps', 'download'));
-
-modernizrOptions = modernizrOptions.concat({
-  name: 'minify',
-  property: 'minify',
-  group: 'minify',
-  selected: true
-});
-
-var downloaderConfig = {
-  metadata: JSON.stringify(modernizrMetadata),
-  options: JSON.stringify(modernizrOptions),
-  builderContent: builderContent,
-  scripts: [
-    '/js/lodash.custom.js',
-    '/js/modernizr.custom.js',
-    '/lib/zeroclipboard/dist/ZeroClipboard.js',
-    '/lib/r.js/dist/r.js',
-    '/lib/modernizr/lib/build.js',
-    '/js/download/downloader.js',
-  ],
-  team: team
-};
+var blogPost = require('../util/blogPost');
 
 module.exports = [
   {
@@ -48,13 +22,6 @@ module.exports = [
         posts = posts.reverse().slice(0, 4).map(blogPost);
         reply.view('index', {team: team, latestPosts: posts});
       });
-    }
-  }, {
-    method: 'GET',
-    path: '/download',
-    handler: function(request, reply) {
-
-      reply.view('pages/download', downloaderConfig);
     }
   }, {
     method: 'GET',

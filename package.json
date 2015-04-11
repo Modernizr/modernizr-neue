@@ -48,7 +48,9 @@
   },
   "homepage": "https://github.com/modernizr/modernizr-neue",
   "dependencies": {
+    "archiver": "^0.14.3",
     "browserify": "^9.0.3",
+    "etag": "^1.5.1",
     "fontfaceobserver": "^1.4.2",
     "fuse.js": "^1.2.2",
     "handlebars": "^3.0.0",

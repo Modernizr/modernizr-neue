@@ -11,19 +11,4 @@ module.exports = [{
     }
   },
   lookupCompressed: true
-}, {
-  method: 'GET',
-  path: '/i/js/modernizr/{param*}',
-  handler: {
-    directory: {
-      path: Path.join(__dirname, '..', 'frontend', 'lib', 'modernizr')
-    }
-  },
-}, {
-  method: 'GET',
-  path: '/i/js/modernizr/metadata.json',
-  handler: function(request, reply) {
-    reply(metadata);
-  }
-}
-];
+}];
