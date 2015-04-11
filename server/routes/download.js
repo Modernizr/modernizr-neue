@@ -12,9 +12,9 @@ var Path = require('path');
 var ETag = require('etag');
 var Archiver = require('archiver');
 var Modernizr = require('modernizr');
-var bowerJSON = require('./bowerJSON')();
 var modernizrMetadata = Modernizr.metadata();
-var modernizrOptions = require('./modernizrOptions');
+var bowerJSON = require('../util/bowerJSON')();
+var modernizrOptions = require('../util/modernizrOptions');
 var _ = require(Path.join(__dirname, '..', '..', 'frontend', 'js', 'lodash.custom'));
 
 // the `builderContent` step is super heavy, as a result, do not load it if we
@@ -34,7 +34,7 @@ if (process.env.NODE_ENV !== 'production') {
       '/lib/modernizr/lib/build.js',
       '/js/download/downloader.js',
     ],
-    team: require('./footer')
+    team: require('../util/footer')
   };
 }
 

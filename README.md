@@ -1,5 +1,7 @@
 # (the future) modernizr.com
 
+for now, it lives at [new.modernizr.com](http://new.modernizr.com)
+
 ### setup
 ```
 npm install -g gulp

@@ -8,11 +8,11 @@ var frontendUtils = require('../../frontend/js/download/util');
 module.exports = [{
     method: 'GET',
     path: '/download',
-    handler: require('../util/determineDownload')
+    handler: require('./download')
   }, {
     method: 'POST',
     path: '/download',
-    handler: require('../util/buildFromPostedQuery')
+    handler: require('./POST_download')
   }, {
     method: 'POST',
     path: '/download/config',
