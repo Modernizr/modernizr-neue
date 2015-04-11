@@ -26,7 +26,7 @@ server.views({
   helpersPath: Path.join(basePath, 'frontend', 'templates', 'helpers')
 });
 
-server.connection({ port: 3000 });
+server.connection({ port: process.env.NODE_PORT || 3000 });
 
 server.route(routes);
 
