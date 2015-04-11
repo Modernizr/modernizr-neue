@@ -20,17 +20,18 @@ var DetectList = React.createClass({
 
       var nextRef = Math.max(0, Math.min(currentIndex + offset, this.props.detects.length));
       if (nextRef !== currentIndex) {
+        this.refs[currentIndex].refs.option.refs.input.getDOMNode().blur();
         this.refs[nextRef].refs.option.refs.input.getDOMNode().focus();
       }
       e.preventDefault();
     }
   },
 
-  focus: function(property, ensureVisible, index) {
+  focus: function(property) {
     this.setState({focused: property});
   },
 
-  blur: function(property) {
+  blur: function() {
     this.setState({focused: undefined});
   },
 
