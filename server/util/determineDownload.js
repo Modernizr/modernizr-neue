@@ -51,9 +51,19 @@ var config = function(query) {
 
   queries.forEach(function(query) {
     var searchResult = query.match(/q=(.*)/);
+    var cssclassprefix = query.match('cssclassprefix:(.*)');
 
     if (searchResult) {
       return;
+    }
+
+    if (cssclassprefix) {
+      config.classPrefix = cssclassprefix[1];
+      return;
+    }
+
+    if (query.match('shiv$')) {
+      query = 'html5' + query;
     }
 
     var matches = function(obj) {
@@ -63,13 +73,11 @@ var config = function(query) {
         prop = prop.join('_');
       }
 
-      if (query === prop.toLowerCase()) {
-        return true;
+      if (query === 'dontmin' && prop === 'minify') {
+        config.minify = false;
       }
 
-      if (query === 'dontmin' && prop === 'minify') {
-        return true;
-      }
+      return query === prop.toLowerCase();
     };
 
     if (_.some(modernizrOptions, matches)) {
@@ -98,7 +106,7 @@ var handler = function (request, reply) {
 
       reply(module)
         .header('Content-disposition', 'attachment; filename=Modernizr.custom.tar')
-        .etag(etag(bowerJSON.version + buildConfig));
+        .etag(etag(bowerJSON.version + JSON.stringify(buildConfig)));
     });
 
   } else if (process.env.NODE_ENV !== 'production') {
