@@ -1,20 +1,21 @@
 /*jshint camelcase: false */
 'use strict';
 
+var posts;
 var FS = require('fs');
 var RSS = require('rss');
 var Path = require('path');
-var processPost = require('./blogPost');
-
 var postsDir = Path.join(__dirname, '..', '..', 'posts');
-var posts = FS.readdirSync(postsDir);
+var processPost = require(Path.join(__dirname, '..', 'util', 'blogPost'));
 
-posts = posts
+posts = FS.readdirSync(postsDir)
   .map(processPost)
   .map(function(post) {
     post.description = post.__content;
     post.url = 'https://modernizr.com/news/' + post.url;
 
+    // since the entire object gets pusted into the feed, we strip out the
+    // stuff we don't want, or at least don't want duplicated
     delete post.layout;
     delete post.filename;
     delete post.__content;
@@ -29,7 +30,8 @@ var feed = new RSS({
   site_url: 'https://modernizr.com',
   image_url: 'https://modernizr.com/img/logo.png',
   language: 'en-US',
-  pubDate: posts[posts.length - 1].date,
+  pubDate: posts.slice(-1).date,
+  // ttl = Number of minutes feed can be cached
   ttl: 24 * 60
 });
 

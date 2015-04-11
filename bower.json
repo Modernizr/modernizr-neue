@@ -18,8 +18,9 @@
     "**/.*",
     "node_modules",
     "bower_components",
+    "tests",
     "test",
-    "tests"
+    "dist"
   ],
   "dependencies": {
     "requirejs-plugins": "~1.0.3",

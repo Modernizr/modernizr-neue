@@ -6,24 +6,29 @@ var aliasify = require('aliasify');
 var merge = require('merge-stream');
 var modernizr = require('modernizr');
 var browserify = require('browserify');
-var feed = require('./server/util/rss');
-var runSequence = require('run-sequence');
 var exec = require('child_process').exec;
+var runSequence = require('run-sequence');
 var source = require('vinyl-source-stream');
-var blogPost = require('./server/util/blogPost');
 var authors = require('./server/util/footer');
+var feed = require('./server/buildSteps/rss');
+var blogPost = require('./server/util/blogPost');
+var modernizrOptions = require('./server/util/modernizrOptions');
 
 var plugins = require('gulp-load-plugins')({
   rename: {
-    'gulp-minify-css': 'minify_css',
+    'gulp-minify-css': 'minifyCSS',
     'gulp-compile-handlebars': 'handlebars'
   }
 });
 
+// set a global var representing when the site was built.
+// right now, this is only used in serviceworkers.js to prevent stale caches
 process.env.cache_time = Date.now();
-console.log(process.env.cache_time);
 
+// browserify is used to build the react portions of the app, currently only `/download`
 gulp.task('browserify', function() {
+  // the react lib has wonderful debugging messages, but it comes at the cost of a much
+  // larger lib. So use the `.min` mode when building the production site to save those byte$
   var reactVersion = process.env.NODE_ENV === 'prod' ? 'react/dist/react.min' : 'react';
 
   return browserify('./frontend/js/download/index.js')
@@ -37,20 +42,23 @@ gulp.task('browserify', function() {
   .pipe(gulp.dest('frontend/js/download/'));
 });
 
+// `handlebars` is used for pretty much everything except for `/downlaod`, however
+// this task is only for building the static, production version. When running in
+// `develop`, all of the handlebars compilation is handeled by Hapi, most of those
+// configurations are found in `server/routes/dev`. Functionally, it should result
+// in the same output.
 gulp.task('handlebars', function() {
   var posts = fs.readdirSync('./posts').reverse().map(blogPost);
+  // `latestPosts` is used for the blog posts slugs on the homepage
   var latestPosts = posts.slice(0, 4);
+
+  // `post` is used for the default blog post, on `/news`
   var post = posts.shift();
   post.posts = posts;
 
   var templateData = {
     metadata: JSON.stringify(modernizr.metadata()),
-    options: JSON.stringify(modernizr.options().concat({
-      name: 'minify',
-      property: 'minify',
-      group: 'minify',
-      selected: true
-    })),
+    options: JSON.stringify(modernizrOptions),
     builderContent: require('./server/buildSteps/download.js'),
     scripts: [
       '/js/lodash.custom.js',
@@ -58,9 +66,9 @@ gulp.task('handlebars', function() {
       '/lib/r.js/dist/r.js',
       '/lib/modernizr/lib/build.js',
     ],
-    post: post,
+    latestPosts: latestPosts,
     team: authors,
-    latestPosts: latestPosts
+    post: post
   };
 
   return gulp.src([
@@ -80,6 +88,8 @@ gulp.task('handlebars', function() {
       minifyCSS: true
     }))
     .pipe(plugins.rename(function(path) {
+      // since this is for the static site, we want `/news/post` rather than
+      // `/news/post.html`.
       if (path.basename !== 'index') {
         path.dirname += '/' + path.basename;
         path.basename = 'index';
@@ -89,12 +99,15 @@ gulp.task('handlebars', function() {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('blog', function() {
+// `news` builds out everything under
+gulp.task('news', function() {
   var tasks = fs
     .readdirSync('./posts')
+    // reverse, so its orderes from newest to oldest
     .reverse()
     .map(blogPost)
     .map(function(post, index, posts) {
+      // used for the links at the bottom of each blog post
       post.prevPost = posts[index + 1];
       post.nextPost = posts[index - 1];
 
@@ -102,7 +115,11 @@ gulp.task('blog', function() {
     })
     .map(function(post) {
 
+      // the meat of the actual task. Since we only have one source file for gulp
+      // to use, we iterate over each markdown blog post file, run each one through
+      // its own anonymous task, then merge them all at the end
       return gulp.src('frontend/templates/pages/news.hbs')
+        // team is used for the footer
         .pipe(plugins.handlebars({post: post, team: authors}, {
           batch: ['frontend/templates'],
           helpers: {
@@ -131,6 +148,8 @@ gulp.task('rss', function(cb) {
 });
 
 gulp.task('styles', function() {
+  // process the two styl files separately since the `builder` sheet is quite a
+  // bit larger, and not needed on a majority of the site.
   return gulp.src([
     'frontend/styl/main.styl',
     'frontend/styl/builder/builder.styl'
@@ -138,11 +157,12 @@ gulp.task('styles', function() {
     .pipe(plugins.sourcemaps.init())
       .pipe(plugins.stylus())
       .pipe(plugins.autoprefixer())
-      .pipe(plugins.minify_css())
+      .pipe(plugins.minifyCSS())
     .pipe(plugins.sourcemaps.write('.', {sourceMappingURLPrefix: '/css/'}))
   .pipe(gulp.dest('frontend/css'));
 });
 
+// `modernizr` builds a custom version of modernizr needed for the site
 gulp.task('modernizr', function(cb) {
   var detects = [
     'adownload',
@@ -151,15 +171,13 @@ gulp.task('modernizr', function(cb) {
   ].join();
 
   var output = 'frontend/js/modernizr.custom.js';
-  var metadata = 'frontend/js/modernizr-metadata.json';
 
   return exec('./node_modules/.bin/modernizr -f ' + detects + ' -d ' + output,
-    exec('./node_modules/.bin/modernizr -u -m ' + metadata,
-      cb
-    )
+    cb
   );
 });
 
+// lodash builds our custom version of lodash. try and keep it tight.
 gulp.task('lodash', function(cb) {
   var includes = [
     'chain',
@@ -185,6 +203,7 @@ gulp.task('lodash', function(cb) {
   return exec('./node_modules/.bin/lodash include=' + includes + ' -d -o ' + output, cb);
 });
 
+// `uglify-combined` outputs one giant glob of javascript used on `/download`
 gulp.task('uglify-combined', function() {
   return gulp.src([
     'frontend/js/modernizr.custom.js',
@@ -198,6 +217,9 @@ gulp.task('uglify-combined', function() {
   .pipe(gulp.dest('frontend/js'));
 });
 
+// `uglify-loose` uglifies each one of the files listed in `src` individually, as they
+// are requested by the pages and workers one at a time (rather than one large file).
+// HTTP2 is coming soon, anyway yall
 gulp.task('uglify-loose', function() {
   return gulp.src([
     'frontend/js/download/workers/build.js',
@@ -215,9 +237,11 @@ gulp.task('uglify-loose', function() {
   .pipe(gulp.dest('dist'));
 });
 
+
 gulp.task('uglify-sw', function() {
-  // uglify service worker seperatly, becuase it has to be served
-  // from the root of the domain, so its `base` is different
+  // uglify service worker seperatly, becuase it has to be served by itself
+  // from the root of the domain, so its `base` is different from all the
+  // scripts in `uglify-loose`
   return gulp.src('frontend/js/download/workers/serviceworker.js', {base: 'frontend/js/download/workers/'})
     .pipe(plugins.sourcemaps.init())
       .pipe(plugins.replace('__CACHE_VERSION__', process.env.cache_time))
@@ -228,6 +252,86 @@ gulp.task('uglify-sw', function() {
 
 gulp.task('uglify', ['uglify-combined', 'uglify-loose', 'uglify-sw']);
 
+gulp.task('clean', function(cb) {
+  return del([
+    'dist',
+    'frontend/js/prod.js',
+    'frontend/js/*.custom.js'
+  ], cb);
+});
+
+// grab all of the compiled stylus files and put them into the production dir
+gulp.task('copy-styles', function() {
+  return gulp.src('frontend/css/*')
+    .pipe(plugins.copy('dist', {prefix: 1}));
+});
+
+// same thing for the images
+gulp.task('copy-img', function() {
+  return gulp.src('frontend/img/*')
+    .pipe(plugins.copy('dist', {prefix: 1}));
+});
+
+// and for all of the scripts that were not uglified (the uglify tasks already 
+// output files in the `dist` dir), as well as their sourcemaps
+gulp.task('copy-scripts', function() {
+  return gulp.src([
+    'frontend/js/prod.js*',
+    'frontend/lib/modernizr/**/*',
+    '!frontend/lib/modernizr/node_modules/**/*',
+    'frontend/lib/zeroclipboard/dist/ZeroClipboard.swf'
+  ])
+  .pipe(plugins.copy('dist', {prefix: 1}));
+});
+
+gulp.task('copy', ['copy-styles', 'copy-img', 'copy-scripts']);
+
+// smoosh everything down with zopfli (http://en.wikipedia.org/wiki/Zopfli)
+// Hapi has built in support for serving precompressed files (when configured),
+// so we get a ~8% filesize reduction
+gulp.task('compress', function() {
+  return gulp.src('dist/**/*')
+    .pipe(plugins.zopfli())
+  .pipe(gulp.dest('dist'));
+});
+
+// in case the hapi server falls over, or if we just want to test what changes
+// look like, the gh-pages task is used by travis.ci to automatically upload
+// a compiled version of the `master` branch to the `gh-pages` branch. In order
+// to prevent a whole lotta bloat in the git repo, we remove all of the sourcemaps
+// and zopfli compressed files. The CNAME file is used by github to allow for a
+// custom domain (http://git.io/vvvgp)
+gulp.task('gh-pages', ['deploy'], function(cb) {
+  return del([
+    'dist/**/*.gz',
+    'dist/**/*.map',
+    '!dist'
+  ], fs.writeFile('dist/CNAME','new.modernizr.com', cb));
+});
+
+// `deploy` builds the static version of the site. Assuming a javascript supported
+// client, everything _should_ work 100% when built. Note that there are a few
+// progressive enhancements in `/server/routes/index` to allow for scriptless
+// clients, and the bower download support
+gulp.task('deploy', function(cb) {
+  var env = process.env.NODE_ENV;
+  process.env.NODE_ENV = 'prod';
+  runSequence(
+    'clean',
+    'styles',
+    ['browserify', 'handlebars', 'lodash', 'modernizr'],
+    'uglify',
+    'copy',
+    ['news', 'rss'],
+    'compress',
+  function() {
+    process.env.NODE_ENV = env;
+    cb();
+  });
+});
+
+// develop is your live server. Its not very pretty, and rebuilds everything on
+// every change, but it gets the job done
 gulp.task('develop', function () {
 
   var tasks = ['modernizr', 'lodash', 'browserify', 'styles'];
@@ -248,69 +352,8 @@ gulp.task('develop', function () {
     .on('start', tasks)
     .on('change', tasks)
     .on('restart', function () {
+      // reset the cache version var for the serviceworker
       process.env.cache_time = Date.now();
       console.log('restarted!');
     });
-});
-
-gulp.task('clean', function(cb) {
-  return del([
-    'dist',
-    'frontend/js/prod.js',
-    'frontend/js/*.custom.js'
-  ], cb);
-});
-
-gulp.task('copy-styles', function() {
-  return gulp.src('frontend/css/*')
-    .pipe(plugins.copy('dist', {prefix: 1}));
-});
-
-gulp.task('copy-img', function() {
-  return gulp.src('frontend/img/*')
-    .pipe(plugins.copy('dist', {prefix: 1}));
-});
-
-gulp.task('copy-scripts', function() {
-  return gulp.src([
-    'frontend/js/prod.js*',
-    'frontend/lib/modernizr/**/*',
-    'frontend/js/modernizr-metadata.json',
-    '!frontend/lib/modernizr/node_modules/**/*',
-    'frontend/lib/zeroclipboard/dist/ZeroClipboard.swf'
-  ])
-    .pipe(plugins.copy('dist', {prefix: 1}));
-});
-
-gulp.task('copy', ['copy-styles', 'copy-img', 'copy-scripts']);
-
-gulp.task('compress', function() {
-  return gulp.src('dist/**/*')
-    .pipe(plugins.zopfli())
-  .pipe(gulp.dest('dist'));
-});
-
-gulp.task('gh-pages', ['deploy'], function(cb) {
-  return del([
-    'dist/**/*.gz',
-    'dist/**/*.map',
-    '!dist'
-  ], fs.writeFile('dist/CNAME','new.modernizr.com', cb));
-});
-
-gulp.task('deploy', function(cb) {
-  var env = process.env.NODE_ENV;
-  process.env.NODE_ENV = 'prod';
-  runSequence(
-    'clean',
-    'styles',
-    ['browserify', 'handlebars', 'lodash', 'modernizr'],
-    'uglify',
-    'copy',
-    ['blog', 'rss'],
-    'compress',
-  function() {
-    process.env.NODE_ENV = env;
-    cb();
-  });
 });

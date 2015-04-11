@@ -1,14 +1,11 @@
 <!doctype html>
 <html lang="en" class="builder no-js">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
-    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
-    <link  rel="stylesheet" href="/css/main.css" />
+    {{!-- we style the download page different is javascript isn't running. in
+    order to prevent a flash of those styles, change the class right away --}}
+    <script>(function(D){D.className=D.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+    {{> partials/head 'Modernizr Download Builder'}}
     <link  rel="stylesheet" href="/css/builder.css" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
-    <link rel="alternate" type="application/rss+xml" title="RSS Feed for Modernizr.com" href="/feed" />
   </head>
 
   <body>
@@ -16,8 +13,13 @@
     <main role="main" id="main">{{{builderContent}}}</main>
     {{> partials/footer}}
     <script>
+     {{!-- inject all of the detect metadata onto the page, rather than force
+      the client to download it after the initial render --}}
       window._modernizrMetadata={{{metadata}}};
+     {{! same thing for the options }}
       window._options={{{options}}};
+
+     {{! provide the correct paths for the modernizr builder}}
       window._modernizrConfig = {
         metadataUrl: '/js/modernizr-metadata.json',
         packageUrl: '/lib/modernizr/package.json',
@@ -32,6 +34,9 @@
       }
     </script>
     {{#each scripts}}
+    {{!-- in prod, we want combined scripts, in dev we want each one loosly for
+    easier debugging. To reuse the template in both situations, inject the scripts
+    as a handlebars var--}}
       <script src="{{this}}"></script>
     {{/each}}
   </body>

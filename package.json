@@ -54,13 +54,12 @@
     "fontfaceobserver": "^1.4.2",
     "fuse.js": "^1.2.2",
     "handlebars": "^3.0.0",
-    "handlebars-intl": "^1.1.1",
     "hapi": "^8.4.0",
-    "intl": "^0.1.4",
+    "lodash": "^3.6.0",
     "modernizr": "modernizr/modernizr#master",
-    "pretty-bytes": "^1.0.3",
     "react": "^0.13.0",
     "rss": "^1.1.1",
+    "yaml-front-matter": "^3.2.3",
     "zeroclipboard": "^2.2.0"
   },
   "devDependencies": {
@@ -79,15 +78,13 @@
     "gulp-replace": "^0.5.3",
     "gulp-sourcemaps": "^1.5.1",
     "gulp-stylus": "^2.0.1",
-    "gulp-symlink": "^2.1.0",
     "gulp-uglify": "^1.1.0",
     "gulp-zopfli": "^1.0.0",
     "lodash-cli": "^3.5.0",
     "marked": "^0.3.3",
     "merge-stream": "^0.1.7",
     "run-sequence": "^1.0.2",
-    "vinyl-source-stream": "^1.1.0",
-    "yaml-front-matter": "^3.2.3"
+    "vinyl-source-stream": "^1.1.0"
   },
   "private": true
 }
