@@ -8,8 +8,8 @@ module.exports = [{
   path: '/{param*}',
   handler: {
     directory: {
-      path: Path.join(__dirname, '..', 'dist')
+      path: Path.join(__dirname, '..', '..', 'dist'),
+      lookupCompressed: true
     }
-  },
-  lookupCompressed: true
+  }
 }];

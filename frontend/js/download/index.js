@@ -62,7 +62,8 @@ if ('Worker' in window) {
   var gzipWorker = new Worker('/js/download/workers/gzip.js');
 
   buildWorker.postMessage(JSON.stringify({
-    requireConfig: window._modernizrConfig
+    requireConfig: window._modernizrConfig,
+    metadata: window._modernizrMetadata
   }));
 
   window.gziper = function(config, cb) {

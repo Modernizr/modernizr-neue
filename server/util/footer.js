@@ -1,5 +1,4 @@
 'use strict';
-var _ = require('lodash');
 var Path = require('path');
 var pkg = require(Path.join(__dirname, '..', '..', 'package.json'));
 
@@ -8,11 +7,11 @@ var pkg = require(Path.join(__dirname, '..', '..', 'package.json'));
 var authors = pkg.authors.map(
   function(author, index, authors) {
 
-    return _.extend(author, {
-      name: author.name.split(' ').shift(),
-      last: (index === authors.length - 1),
-      secondToLast: (index === authors.length - 2)
-    });
+    author.name = author.name.split(' ').shift();
+    author.last = (index === authors.length - 1);
+    author.secondToLast = (index === authors.length - 2);
+
+    return author;
   });
 
 module.exports = authors;

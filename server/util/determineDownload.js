@@ -1,15 +1,21 @@
 'use strict';
 
-// We have three possible outcomes when someone requests `/download`, this module
-// determines the right one depending the circumstances
+// We have three possible outcomes when someone requests `/download`,
 
-var _ = require('lodash');
-var etag = require('etag');
-var archiver = require('archiver');
+// 1. serve the compilled, static html file if in production
+// 2. serve a compiled handlebars template on each request, in development
+// 3. reply with a tar ball of a compiled version of Modernizr, if requested via bower
+
+// this module determines the right one depending the circumstances
+
+var Path = require('path');
+var ETag = require('etag');
+var Archiver = require('archiver');
 var Modernizr = require('modernizr');
 var bowerJSON = require('./bowerJSON')();
 var modernizrMetadata = Modernizr.metadata();
 var modernizrOptions = require('./modernizrOptions');
+var _ = require(Path.join(__dirname, '..', '..', 'frontend', 'js', 'lodash.custom'));
 
 // the `builderContent` step is super heavy, as a result, do not load it if we
 // are in a production enviroment
@@ -115,7 +121,7 @@ var handler = function (request, reply) {
     // bower complains a bunch if we don't include proper metadata with the response.
     // in order to do so, we create a virtual tar file, and but the build and bower.json
     // file in it
-    var archive = archiver('tar');
+    var archive = Archiver('tar');
     var buildConfig = config(request.url.search);
 
     Modernizr.build(buildConfig, function(build) {
@@ -131,7 +137,7 @@ var handler = function (request, reply) {
         // bower will cache files downloaded via URLResolver (which is what it is
         // using here) via its ETag. This won't prevent us from building a new
         // version on each response, but it will prevent wasted bandwidth
-        .etag(etag(bowerJSON.version + JSON.stringify(buildConfig)));
+        .etag(ETag(bowerJSON.version + JSON.stringify(buildConfig)));
     });
 
   } else if (process.env.NODE_ENV !== 'production') {
@@ -140,7 +146,7 @@ var handler = function (request, reply) {
     reply.view('pages/download', downloaderConfig);
   } else {
     // if all else fails, we are in prod/static mode, so serve the static index
-    reply.file('../../dist/download/index.html');
+    reply.file(Path.join(__dirname, '..', '..', 'dist', 'download', 'index.html'));
   }
 };
 

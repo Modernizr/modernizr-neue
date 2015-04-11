@@ -55,7 +55,6 @@
     "fuse.js": "^1.2.2",
     "handlebars": "^3.0.0",
     "hapi": "^8.4.0",
-    "lodash": "^3.6.0",
     "modernizr": "modernizr/modernizr#master",
     "react": "^0.13.0",
     "rss": "^1.1.1",

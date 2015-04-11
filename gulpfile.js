@@ -183,6 +183,7 @@ gulp.task('lodash', function(cb) {
     'chain',
     'contains',
     'defer',
+    'extend',
     'filter',
     'find',
     'flatten',
@@ -345,7 +346,6 @@ gulp.task('develop', function () {
       'frontend/lib',
       'frontend/css',
       'frontend/js/*.custom.js',
-      'frontend/js/modernizr-metadata.js',
       'frontend/js/download/downloader.js'
     ]
   })

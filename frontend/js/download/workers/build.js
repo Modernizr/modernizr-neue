@@ -18,6 +18,8 @@ onmessage = function(msg) {
     });
   } else if (run.requireConfig) {
     self._modernizrConfig = run.requireConfig;
+    self._modernizrMetadata = run.metadata;
+
     importScripts('/lib/modernizr/lib/build.js');
 
     require(['build'], function(build) {
