@@ -98,6 +98,12 @@ module.exports = [
     }
   }, {
     method: 'GET',
+    path: '/favicon.ico',
+    handler: function(request, reply) {
+      reply.file(Path.join(frontendDir, 'img', 'favicon.ico'));
+    }
+  }, {
+    method: 'GET',
     path: '/serviceworker.js',
     handler: function(request, reply) {
 

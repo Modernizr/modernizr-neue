@@ -269,8 +269,18 @@ gulp.task('copy-styles', function() {
 
 // same thing for the images
 gulp.task('copy-img', function() {
-  return gulp.src('frontend/img/*')
+  var img = gulp.src([
+      'frontend/img/*',
+      '!frontend/img/favicon.ico'
+    ])
     .pipe(plugins.copy('dist', {prefix: 1}));
+
+  var favicon = gulp.src([
+      'frontend/img/favicon.ico'
+    ])
+    .pipe(plugins.copy('dist', {prefix: 2}));
+
+  return merge([img, favicon]);
 });
 
 // and for all of the scripts that were not uglified (the uglify tasks already 

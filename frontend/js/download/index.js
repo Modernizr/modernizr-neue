@@ -93,7 +93,9 @@ if ('Worker' in window) {
   });
 }
 
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator &&
+    (location.protocol === 'https:' || location.hostname === 'localhost')
+   ) {
   navigator.serviceWorker.register('/serviceworker.js')
   .catch(function(error) {
     console.error(error);
