@@ -4,8 +4,10 @@
   "description": "the new version of modernizr.com",
   "main": "index.js",
   "scripts": {
-    "test": "echo 0",
     "build": "gulp deploy",
+    "deploy": "gulp deploy",
+    "develop": "gulp develop",
+    "test": "echo 0",
     "travis": "gulp gh-pages"
   },
   "repository": {
