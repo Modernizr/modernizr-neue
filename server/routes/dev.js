@@ -1,7 +1,9 @@
 'use strict';
 var FS = require('fs');
 var Path = require('path');
+var docs = require('../util/docs');
 var team = require('../util/footer');
+var modernizr = require('modernizr');
 var blogPost = require('../util/blogPost');
 var baseDir = Path.join(__dirname, '..', '..');
 var frontendDir = Path.join(baseDir, 'frontend');
@@ -81,6 +83,16 @@ module.exports = [
           post: post,
           team: team
         });
+      });
+    }
+  }, {
+    method: 'GET',
+    path: '/docs',
+    handler: function(request, reply) {
+      reply.view('pages/docs', {
+        docs: docs(),
+        features: modernizr.metadata(),
+        team: team
       });
     }
   }, {

@@ -1,0 +1,46 @@
+@require "../../node_modules/highlight.js/styles/github.css"
+
+.docs {
+  max-width: 90%
+  width: 960px
+  margin: 2.5em auto
+  padding: 0 2.5em
+  background: $White
+  line-height: 1.3em
+
+  table {
+    border: 1px solid $Grey
+  }
+
+  td, th {
+    @extend .docs table
+    padding: 0.5em
+  }
+
+  tr:nth-child(even) {
+    background: $BackgroundGrey
+  }
+
+  h3 {
+    font-size: 1.17em
+  }
+}
+
+abbr, .functionArg {
+  cursor: help
+}
+
+.functionRef {
+  padding: 0.5em
+}
+
+
+code {
+  background: darken($White, 3%)
+}
+
+
+pre code {
+  display: block
+  padding: 1em
+}

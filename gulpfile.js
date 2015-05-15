@@ -51,13 +51,15 @@ gulp.task('handlebars', function() {
   var posts = fs.readdirSync('./posts').reverse().map(blogPost);
   // `latestPosts` is used for the blog posts slugs on the homepage
   var latestPosts = posts.slice(0, 4);
+  var metadata = modernizr.metadata();
+  var docs = require('./server/util/docs');
 
   // `post` is used for the default blog post, on `/news`
   var post = posts.shift();
   post.posts = posts;
 
   var templateData = {
-    metadata: JSON.stringify(modernizr.metadata()),
+    metadata: JSON.stringify(metadata),
     options: JSON.stringify(modernizrOptions),
     builderContent: require('./server/buildSteps/download.js'),
     scripts: [
@@ -68,6 +70,8 @@ gulp.task('handlebars', function() {
     ],
     latestPosts: latestPosts,
     team: authors,
+    docs: docs(),
+    features: metadata,
     post: post
   };
 
@@ -193,10 +197,13 @@ gulp.task('lodash', function(cb) {
     'isEmpty',
     'isEqual',
     'map',
+    'merge',
     'pluck',
     'reduce',
     'some',
-    'without'
+    'where',
+    'without',
+    'zipObject'
   ].join();
 
   var output = 'frontend/js/lodash.custom.js';
@@ -330,7 +337,8 @@ gulp.task('deploy', function(cb) {
   runSequence(
     'clean',
     'styles',
-    ['browserify', 'handlebars', 'lodash', 'modernizr'],
+    ['lodash', 'modernizr'],
+    ['browserify', 'handlebars'],
     'uglify',
     'copy',
     ['news', 'rss'],
@@ -349,7 +357,7 @@ gulp.task('develop', function () {
 
   plugins.nodemon({
     script: 'server/index.js',
-    ext: 'html js styl hbs',
+    ext: 'html js styl hbs md',
     ignore: [
       'dist',
       'node_modules',

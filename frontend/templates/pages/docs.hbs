@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{> partials/head 'Modernizr Documentation'}}
+  </head>
+
+  <body>
+    {{> partials/header}}
+    <main role="main" id="main" class="docs home">
+      {{{docs}}}
+      <h2>Features detected by Modernizr</h2>
+      <table>
+        <thead>
+            <tr>
+                <th>Detect</th>
+                <th>CSS class/JS property</th>
+            </tr>
+        </thead>
+        <tbody>
+          {{#each features}}
+            <tr>
+              <td>{{name}}</td>
+              <td><b>{{property}}</b></td>
+            </tr>
+            {{#if doc}}
+              <tr>
+                <td colspan=2>{{{doc}}}</td>
+              </tr>
+            {{/if}}
+          {{/each}}
+        </tbody>
+      </table>
+    </main>
+    {{> partials/footer}}
+  </body>
+</html>

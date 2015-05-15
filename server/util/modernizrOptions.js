@@ -5,11 +5,13 @@ var Modernizr = require('modernizr');
 // Rather than make this change every time we need to use the options, we have this
 // neat lil convenience wrapper around it
 
-var options = Modernizr.options().concat({
-      name: 'minify',
-      property: 'minify',
-      group: 'minify',
-      selected: true
-    });
+var options = Modernizr.options().sort(function(a, b) {
+    return a.name > b.name ? 1 : -1;
+  }).concat({
+    name: 'minify',
+    property: 'minify',
+    group: 'minify',
+    selected: true
+  });
 
 module.exports = options;
