@@ -3,9 +3,9 @@
   <label for="header-items-toggle" class="header-items-toggle">MENU</label>
   <input id="header-items-toggle" class="option-checkbox" type="checkbox"/>
   <nav role="navigation" class="header-items">
-    <a class="header-item" href="/download">Download</a>
-    <a class="header-item" href="/docs">Documentation</a>
-    <a class="header-item" href="/news">News</a>
-    <a class="header-item" href="/">Resources</a>
+    <a class="header-item {{ternary activeClass 'download' 'active' ''}}" href="/download">Download</a>
+    <a class="header-item {{ternary activeClass 'docs' 'active' ''}}" href="/docs">Documentation</a>
+    <a class="header-item {{ternary activeClass 'news' 'active' ''}}" href="/news">News</a>
+    <a class="header-item {{ternary activeClass 'resources' 'active' ''}}" href="/">Resources</a>
   </nav>
 </header>

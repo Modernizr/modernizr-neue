@@ -12,9 +12,9 @@ new window.FontFaceObserver('Open Sans', {})
   });
 
 if (location.hash.length || location.search.length) {
-  var str = location.hash || location.search;
+  var str     = location.hash || location.search;
   var baseUrl = [location.protocol, '//', location.host, location.pathname].join('');
-  var query = str.replace('#', '?');
+  var query   = str.replace('#', '?');
   var queries = _.chain(query.replace(/^\?/, '').split('&'))
     .map(function(query) {
       return query.split('-');

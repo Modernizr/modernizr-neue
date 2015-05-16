@@ -1,17 +1,16 @@
 'use strict';
-var fs = require('fs');
-var del = require('del');
-var gulp = require('gulp');
-var aliasify = require('aliasify');
-var merge = require('merge-stream');
-var modernizr = require('modernizr');
-var browserify = require('browserify');
-var exec = require('child_process').exec;
-var runSequence = require('run-sequence');
-var source = require('vinyl-source-stream');
-var authors = require('./server/util/footer');
-var feed = require('./server/buildSteps/rss');
-var blogPost = require('./server/util/blogPost');
+var fs               = require('fs');
+var del              = require('del');
+var gulp             = require('gulp');
+var merge            = require('merge-stream');
+var modernizr        = require('modernizr');
+var browserify       = require('browserify');
+var exec             = require('child_process').exec;
+var runSequence      = require('run-sequence');
+var source           = require('vinyl-source-stream');
+var authors          = require('./server/util/footer');
+var feed             = require('./server/buildSteps/rss');
+var blogPost         = require('./server/util/blogPost');
 var modernizrOptions = require('./server/util/modernizrOptions');
 
 var plugins = require('gulp-load-plugins')({
@@ -27,16 +26,7 @@ process.env.cache_time = Date.now();
 
 // browserify is used to build the react portions of the app, currently only `/download`
 gulp.task('browserify', function() {
-  // the react lib has wonderful debugging messages, but it comes at the cost of a much
-  // larger lib. So use the `.min` mode when building the production site to save those byte$
-  var reactVersion = process.env.NODE_ENV === 'prod' ? 'react/dist/react.min' : 'react';
-
   return browserify('./frontend/js/download/index.js')
-    .transform(aliasify, {
-      aliases: {
-        react: reactVersion
-      }
-    })
     .bundle()
     .pipe(source('downloader.js'))
   .pipe(gulp.dest('frontend/js/download/'));
@@ -82,7 +72,8 @@ gulp.task('handlebars', function() {
     .pipe(plugins.handlebars(templateData, {
       batch: ['frontend/templates'],
       helpers: {
-        formatDate: require('./frontend/templates/helpers/formatDate')
+        formatDate: require('./frontend/templates/helpers/formatDate'),
+        ternary: require('./frontend/templates/helpers/ternary')
       }
     }))
     .pipe(plugins.htmlmin({
@@ -127,7 +118,8 @@ gulp.task('news', function() {
         .pipe(plugins.handlebars({post: post, team: authors}, {
           batch: ['frontend/templates'],
           helpers: {
-            formatDate: require('./frontend/templates/helpers/formatDate')
+            formatDate: require('./frontend/templates/helpers/formatDate'),
+            ternary: require('./frontend/templates/helpers/ternary')
           }
         }))
         .pipe(plugins.htmlmin({
@@ -290,7 +282,7 @@ gulp.task('copy-img', function() {
   return merge([img, favicon]);
 });
 
-// and for all of the scripts that were not uglified (the uglify tasks already 
+// and for all of the scripts that were not uglified (the uglify tasks already
 // output files in the `dist` dir), as well as their sourcemaps
 gulp.task('copy-scripts', function() {
   return gulp.src([
@@ -333,7 +325,7 @@ gulp.task('gh-pages', ['deploy'], function(cb) {
 // clients, and the bower download support
 gulp.task('deploy', function(cb) {
   var env = process.env.NODE_ENV;
-  process.env.NODE_ENV = 'prod';
+  process.env.NODE_ENV = 'production';
   runSequence(
     'clean',
     'styles',

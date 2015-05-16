@@ -1,10 +1,13 @@
 'use strict';
-var React = require('react');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var util = require('./util');
 var pluralize = util.pluralize;
 var DOM = React.DOM, div = DOM.div, ul = DOM.ul, li = DOM.li;
 
 var MetadataList = React.createClass({
+  mixins: [PureRenderMixin],
+
   render: function() {
     var props = this.props;
     var items = props.items || [];

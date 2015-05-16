@@ -1,8 +1,11 @@
 'use strict';
-var React = require('react');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var DOM = React.DOM, svg = DOM.svg, circle = DOM.circle, path = DOM.path;
 
 var SVGToggle = React.createClass({
+  mixins: [PureRenderMixin],
+
   render: function() {
     var className = this.props.className + ' toggle';
 
