@@ -66,6 +66,7 @@
     "zeroclipboard": "^2.2.0"
   },
   "devDependencies": {
+    "aliasify": "^1.7.2",
     "del": "^1.1.1",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
