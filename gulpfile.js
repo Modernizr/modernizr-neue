@@ -29,7 +29,7 @@ process.env.cache_time = Date.now();
 gulp.task('browserify', function() {
   // the react lib has wonderful debugging messages, but it comes at the cost of a much
   // larger lib. So use the `.min` mode when building the production site to save those byte$
-  var reactVersion = process.env.NODE_ENV === 'production' ? 'react/dist/react-with-addons.min' : 'react-with-addons';
+  var reactVersion = process.env.NODE_ENV === 'production' ? 'react/dist/react-with-addons.min' : 'react/addons';
 
   return browserify('./frontend/js/download/index.js')
     .transform(aliasify, {
