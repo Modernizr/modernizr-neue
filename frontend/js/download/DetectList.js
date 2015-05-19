@@ -1,8 +1,10 @@
 'use strict';
-var React = require('react');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var Detect = React.createFactory(require('./Detect'));
 var DOM = React.DOM, ul = DOM.ul, li = DOM.li;
 var DetectList = React.createClass({
+  mixins: [PureRenderMixin],
 
   getInitialState: function() {
     return {};

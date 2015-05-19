@@ -1,10 +1,13 @@
 'use strict';
-var React = require('react');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var util = require('./util');
 var listify = util.listify;
 var DOM = React.DOM, div = DOM.div, ul = DOM.ul, li = DOM.li, a = DOM.a;
 
 var MetadataPolyfills = React.createClass({
+  mixins: [PureRenderMixin],
+
   render: function() {
     var polyfills = this.props.polyfills || [];
 

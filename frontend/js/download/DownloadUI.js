@@ -1,8 +1,8 @@
 'use strict';
-var React = require('react');
-var DetectList = React.createFactory(require('./DetectList'));
-var LeftColumn = React.createFactory(require('./LeftColumn'));
-var SearchHeader = React.createFactory(require('./SearchHeader'));
+var React = require('react/addons');
+var DetectList      = React.createFactory(require('./DetectList'));
+var LeftColumn      = React.createFactory(require('./LeftColumn'));
+var SearchHeader    = React.createFactory(require('./SearchHeader'));
 var DownloadOverlay = React.createFactory(require('./DownloadOverlay'));
 
 var DOM = React.DOM, form = DOM.form;
@@ -31,6 +31,14 @@ var DownloadUI = React.createClass({
     var search = state.currentSearch;
     var allDetects = props.detects;
     var detects = search && search.length ? _.intersection(allDetects, state.filtered) : allDetects;
+    var overlay = state.overlayOpen ?
+                  DownloadOverlay({
+                    toggle: this.toggleOverlay,
+                    buildContent: state.build,
+                    config: state.buildConfig,
+                    updateAction: this.updateAction
+                  }) :
+                  null;
 
     return (
       form({method: 'POST', action: state.action, onSubmit: this.resetAction},
@@ -45,12 +53,7 @@ var DownloadUI = React.createClass({
           focusFirst: this.focusFirst,
         }),
 
-        (state.overlayOpen && DownloadOverlay({
-          toggle: this.toggleOverlay,
-          buildContent: state.build,
-          config: state.buildConfig,
-          updateAction: this.updateAction
-        })),
+        overlay,
 
         LeftColumn({
           detects: detects,

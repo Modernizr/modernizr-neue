@@ -1,14 +1,12 @@
 'use strict';
-var React = require('react');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var SVGToggle = React.createFactory(require('./SVGToggle'));
 var Metadata = React.createFactory(require('./Metadata'));
 var DOM = React.DOM, span = DOM.span, input = DOM.input, label = DOM.label;
 
 var Option = React.createClass({
-
-  shouldComponentUpdate: function(nextProps) {
-    return this.props.selected !== nextProps.selected;
-  },
+  mixins: [PureRenderMixin],
 
   render: function() {
     var props = this.props;

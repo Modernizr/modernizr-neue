@@ -1,15 +1,14 @@
 'use strict';
-var React = require('react');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var Option = React.createFactory(require('./Option'));
 
 var DOM = React.DOM, li = DOM.li;
 var Detect = React.createClass({
+  mixins: [PureRenderMixin],
+
   getInitialState: function() {
     return {};
-  },
-
-  shouldComponentUpdate: function(nextProps) {
-    return this.props.expanded !== nextProps.expanded;
   },
 
   render: function() {

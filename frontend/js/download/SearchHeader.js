@@ -1,5 +1,6 @@
 'use strict';
-var React = require('react');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var Fuse = require('fuse.js');
 var DOM = React.DOM, div = DOM.div, input = DOM.input, label = DOM.label, button = DOM.button;
 var fuseOptions = {
@@ -7,10 +8,13 @@ var fuseOptions = {
   threshold: 0.3,
   keys: ['name','property', 'caniuse', 'cssclass', 'tags', 'aliases', 'builderAliases']
 };
+var fuse;
 
 var SearchHeader = React.createClass({
-  getInitialState: function() {
-    return {fuse: new Fuse(this.props.detects, fuseOptions)};
+  mixins: [PureRenderMixin],
+
+  componentDidMount: function() {
+    fuse = new Fuse(this.props.detects, fuseOptions);
   },
 
   render: function() {
@@ -39,7 +43,7 @@ var SearchHeader = React.createClass({
 
   change: function() {
     var val = this.refs.search.getDOMNode().value;
-    this.props.onChange(this.state.fuse.search(val), val);
+    this.props.onChange(fuse.search(val), val);
   },
 
   preventSubmit: function(e) {

@@ -1,7 +1,10 @@
 'use strict';
-var React = require('react');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var DOM = React.DOM, div = DOM.div, a = DOM.a;
 var MetadataNotes = React.createClass({
+  mixins: [PureRenderMixin],
+
   render: function() {
     var notes = this.props.notes || [];
     var caniuse = this.props.caniuse;

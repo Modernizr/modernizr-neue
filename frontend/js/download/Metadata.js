@@ -1,5 +1,6 @@
 'use strict';
-var React = require('react');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var MetadataDocs = React.createFactory(require('./MetadataDocs'));
 var MetadataList = React.createFactory(require('./MetadataList'));
 var MetadataNotes = React.createFactory(require('./MetadataNotes'));
@@ -10,6 +11,8 @@ var listify = util.listify;
 var DOM = React.DOM, div = DOM.div, span = DOM.span;
 
 var Metadata = React.createClass({
+  mixins: [PureRenderMixin],
+
   render: function() {
     var data = this.props.data;
     var async = data.async;

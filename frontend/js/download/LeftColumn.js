@@ -1,5 +1,6 @@
 'use strict';
-var React = require('react');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var Option = React.createFactory(require('./Option'));
 var util = require('./util');
 
@@ -7,6 +8,7 @@ var pluralize = util.pluralize;
 var DOM = React.DOM, div = DOM.div, button = DOM.button, label = DOM.label, input = DOM.input;
 
 var LeftColumn = React.createClass({
+  mixins: [PureRenderMixin],
 
   getInitialState: function() {
     return {};
