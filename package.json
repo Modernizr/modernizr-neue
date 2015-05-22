@@ -63,7 +63,8 @@
     "react": "^0.13.0",
     "rss": "^1.1.1",
     "yaml-front-matter": "^3.2.3",
-    "zeroclipboard": "^2.2.0"
+    "zeroclipboard": "^2.2.0",
+    "classnames": "~2.1.1"
   },
   "devDependencies": {
     "aliasify": "^1.7.2",

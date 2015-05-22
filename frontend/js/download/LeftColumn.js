@@ -3,6 +3,7 @@ var React = require('react/addons');
 var PureRenderMixin = React.addons.PureRenderMixin;
 var Option = React.createFactory(require('./Option'));
 var util = require('./util');
+var cx = require('classnames');
 
 var pluralize = util.pluralize;
 var DOM = React.DOM, div = DOM.div, button = DOM.button, label = DOM.label, input = DOM.input;
@@ -30,8 +31,17 @@ var LeftColumn = React.createClass({
     var toggled = detects.length === totalSelected;
 
     var toggle = (toggled ? 'REMOVE' : 'ADD') + ' ALL';
-    var className = (toggled ? 'toggled ' : '') + 'leftColumn column';
-    var inputClass = 'classPrefix' + (state.classNameAdded ? ' classNameAdded' : '');
+    var className = cx({
+      'leftColumn column': true,
+      'toggled': toggled
+    });
+    var inputClass = cx({
+      'classPrefix': true,
+      'classNameAdded': state.classNameAdded
+    });
+    var inputContainerClass = cx({
+      'hidden': !this.state.showClassPrefixInput
+    });
     var results = detects.length === allDetects.length ? ' ' :
       detects.length + pluralize(' result', detects);
     var filesize;
@@ -58,15 +68,21 @@ var LeftColumn = React.createClass({
     }
 
     options = _.map(options, function(option) {
+      var optionClasses = cx({
+        'option': true,
+        'option-separator': option.group === 'minify'
+      });
+
       return Option({
-        className: 'option',
+        className: optionClasses,
         data: option,
         select: select,
         key: option.property,
         name: option.group || 'options',
-        selected: option.selected
+        selected: option.selected,
+        toggleClassPrefix: this.toggleClassPrefix
       });
-    });
+    }, this);
 
     return (
       div({className: className, onClick: this.props.onClick},
@@ -78,8 +94,10 @@ var LeftColumn = React.createClass({
         div({className: 'box heading-small' + (state.optionsToggled ? ' active' : ''), onClick: this.toggleOptions}, 'Options'),
         div({className: 'leftColumn-options'},
           options,
-          label({className: 'hidden', htmlFor: 'classPrefix'}, 'className prefix'),
-          input({className: inputClass, name: 'classPrefix', id: 'classPrefix', placeholder:'className prefix', onKeyUp: this.classNameAdded})
+          div({className: inputContainerClass},
+            label({htmlFor: 'classPrefix'}, 'className prefix'),
+            input({className: inputClass, name: 'classPrefix', id: 'classPrefix', placeholder:'className prefix', onKeyUp: this.classNameAdded})
+          )
         )
       )
     );
@@ -92,6 +110,12 @@ var LeftColumn = React.createClass({
 
   toggleOptions: function() {
     this.setState({optionsToggled: !this.state.optionsToggled});
+  },
+
+  toggleClassPrefix: function(checked) {
+    this.setState({
+      showClassPrefixInput: checked
+    });
   },
 
   classNameAdded: function(e) {

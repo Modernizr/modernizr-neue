@@ -42,6 +42,10 @@ var Option = React.createClass({
     );
   },
 
+  componentDidMount: function() {
+    this.triggerClassPrefixCallback(this.props.data);
+  },
+
   keyDown: function(e) {
     if (e.which === 13) {
       var input = this.refs.input.getDOMNode();
@@ -64,9 +68,17 @@ var Option = React.createClass({
     }
   },
 
+  triggerClassPrefixCallback: function(data) {
+    if(data.property === 'setClasses') {
+      this.props.toggleClassPrefix(data.selected);
+    }
+  },
+
   change: function() {
     var props = this.props;
     props.select(props.data);
+
+    this.triggerClassPrefixCallback(this.props.data);
   }
 });
 
