@@ -29,7 +29,9 @@ if (location.hash.length || location.search.length) {
             prop = prop.join('_');
           }
 
-          if (query === prop.toLowerCase()) {
+          if (query === prop.toLowerCase()
+             || query === 'shiv' && prop === 'html5shiv'
+             || query === 'printshiv' && prop === 'html5printshiv') {
             obj.selected = true;
             return true;
           }
