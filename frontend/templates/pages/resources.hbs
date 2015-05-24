@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {{> partials/head 'Modernizr Resources'}}
+  </head>
+
+  <body>
+    {{> partials/header activeClass="resources"}}
+    <main role="main" id="main" class="resources home">
+      <h1 class="home-heading">Resources</h1>
+      <h3 class="home-subheading">This section is still brand-new and a little empty. We’re working on adding things, but if you know of a great resource for this page.</h3>
+      <a class="fakebtn" href="https://twitter.com/?status=@Modernizr%20here%E2%80%99s%20a%20great%20resource:%20">Let us know!</a>
+      <div class="home-info">
+        <div class="home-blurbs">
+          <div class="home-blurb">
+            <h3>Tutorials</h3>
+            <ul>
+               <li><a rel="external" href="http://hacks.mozilla.org/2012/07/the-web-developer-toolbox-modernizr/">Mozilla Web Developer Toolbox: Modernizr</a><br>— <cite>Jeremie Patonnier</cite></li>
+               <li><a rel="external" href="http://www.alistapart.com/articles/taking-advantage-of-html5-and-css3-with-modernizr/">Taking Advantage of HTML5 and CSS3 with Modernizr</a><br>— <cite>Faruk Ateş</cite></li>
+               <li><a rel="external" href="http://webdesignernotebook.com/css/how-to-use-modernizr/">How to use Modernizr</a><br>— <cite>Inayaili de León</cite></li>
+               <li><a rel="external" href="https://learnable.com/courses/modernizr-front-end-development-done-right-2561">Modernizr: front-end development done right</a><br>— <cite>Ryan Seddon</cite></li>
+               <li><a rel="external" href="http://www.andismith.com/blog/2012/02/modernizr-prefixed/">Using Modernizr Prefixed</a><br>— <cite>Andi Smith</cite></li>
+            </ul>
+          </div>
+
+          <div class="home-blurb">
+            <h3>Third-party resources</h3>
+            <ul>
+              <li><a rel="external" href="http://www.browserscope.org/user/tests/table/agt1YS1wcm9maWxlcnINCxIEVGVzdBib2KQGDA">Browserscope results</a> — Modernizr’s feature detection across a large range of browsers</li>
+            </ul>
+          </div>
+
+          <div class="home-blurb">
+            <h3>Helpful tools</h3>
+            <ul>
+               <li><a rel="external" href="https://github.com/scottjehl/Respond">Respond.js</a> — Fast media queries for older browsers</li>
+            </ul>
+          </div>
+
+          <div class="home-blurb">
+            <h3>Browser Support &amp; Compatibility tables</h3>
+            <ul>
+               <li><a rel="external" href="http://haz.io/">haz.io</a> — see what features your current browser supports</li>
+               <li><a rel="external" href="http://caniuse.com/">When can I use…</a> —&nbsp;CSS3, HTML5 and related across past, current and future browser versions</li>
+               <li><a rel="external" href="http://mobilehtml5.org/">Mobile HTML5</a> — HTML5 compatiblity on mobile devices</li>
+            </ul>
+          </div>
+        </div>
+
+        {{> partials/boxes latestPosts=latestPosts resources=true}}
+      </div>
+    </main>
+    {{> partials/footer}}
+  </body>
+</html>

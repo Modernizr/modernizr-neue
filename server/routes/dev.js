@@ -8,6 +8,25 @@ var blogPost = require('../util/blogPost');
 var baseDir = Path.join(__dirname, '..', '..');
 var frontendDir = Path.join(baseDir, 'frontend');
 
+function latestPosts(view, req, reply) {
+  FS.readdir(Path.join(baseDir, 'posts'), function(e, posts) {
+
+    if (e) {
+      return reply().code(500);
+    }
+
+    // we only need the latest 4 posts, so slice it up good
+    posts = posts.reverse().slice(0, 4).map(blogPost);
+
+    // hapi's `view` helper compiles a handlebars template (it supports a number
+    // of templating engines). Its configured in `server/index.js`
+    reply.view(view, {
+      team: team,
+      latestPosts: posts
+    });
+  });
+}
+
 // export an array of Hapi routes for development only
 // http://hapijs.com/api#route-options
 module.exports = [
@@ -16,22 +35,7 @@ module.exports = [
     path: '/',
     handler: function(request, reply) {
       // for the homepage, we need to grab the latest posts for news box
-      FS.readdir(Path.join(baseDir, 'posts'), function(e, posts) {
-
-        if (e) {
-          return reply().code(500);
-        }
-
-        // we only need the latest 4 posts, so slice it up good
-        posts = posts.reverse().slice(0, 4).map(blogPost);
-
-        // hapi's `view` helper compiles a handlebars template (it supports a number
-        // of templating engines). Its configured in `server/index.js`
-        reply.view('index', {
-          team: team,
-          latestPosts: posts
-        });
-      });
+      latestPosts('index', request, reply);
     }
   }, {
     method: 'GET',
@@ -49,7 +53,7 @@ module.exports = [
         }
 
         // if the `post` parameter was given, that means that a specific post was
-        // requests (e.g. `/news/wu-tang-clan-still-not-to-be-messed-with`, rather 
+        // requests (e.g. `/news/wu-tang-clan-still-not-to-be-messed-with`, rather
         // than just `/news`)
         if (post) {
           post = post.replace(/\/$/, '');
@@ -129,6 +133,12 @@ module.exports = [
 
       worker = worker.toString().replace(/__CACHE_VERSION__/, version);
       reply(worker).type('application/javascript');
+    }
+  }, {
+    method: 'GET',
+    path: '/resources',
+    handler: function(request, reply) {
+      latestPosts('pages/resources', request, reply);
     }
   }, {
     method: 'GET',

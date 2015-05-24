@@ -24,34 +24,7 @@
           </div>
         </div>
 
-        <div class="home-boxes">
-          <div class="home-box column">
-            <h3 class="box">Getting Started</h3>
-            <ul class="box">
-              <li><a href="/docs/#what-is-modernizr">Modernizr explained</a></li>
-              <li><a href="/docs/#what-is-feature-detection">What is feature detection?</a></li>
-              <li><a href="/docs/#using-modernizr-with-javascript">Using Modernizr with JavaScript</a></li>
-              <li><a href="/docs/#using-modernizr-with-css">Using Modernizr with CSS</a></li>
-            </ul>
-          </div>
-          <div class="home-box column">
-            <h3 class="box">Latest News</h3>
-            <ul class="box">
-              {{#each latestPosts}}
-                <li><a href="{{url}}">{{{title}}}</a></li>
-              {{/each}}
-            </ul>
-          </div>
-          <div class="home-box column">
-            <h3 class="box">Talk to us</h3>
-            <ul class="box">
-              <li><a href="https://twitter.com/modernizr">Twitter</a></li>
-              <li><a href="https://stackoverflow.com/questions/tagged/modernizr">StackOverflow</a></li>
-              <li><a href="https://github.com/modernizr/modernizr/issues">GitHub</a></li>
-              <li><a href="https://paulirish.wufoo.com/forms/p1hsxsru1ohiv0u/">Contact</a></li>
-            </ul>
-          </div>
-        </div>
+        {{> partials/boxes latestPosts=latestPosts}}
       </div>
     </main>
     {{> partials/footer}}
