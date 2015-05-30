@@ -32,7 +32,7 @@ if (location.hash.length || location.search.length) {
           if (query === prop.toLowerCase()
              || query === 'shiv' && prop === 'html5shiv'
              || query === 'printshiv' && prop === 'html5printshiv'
-             || query === 'all') {
+             || query === 'do_not_use_in_production') {
             obj.selected = true;
             return true;
           }
@@ -43,7 +43,7 @@ if (location.hash.length || location.search.length) {
           }
         };
 
-        if(queries.length === 1 && query === 'all') {
+        if(queries.length === 1 && query === 'do_not_use_in_production') {
           _.chain(_.union(window._options, window._modernizrMetadata))
             .filter(function(option) {
               if(_.isArray(option.property)) {
