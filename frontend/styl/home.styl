@@ -31,7 +31,7 @@
 }
 
 .home-heading {
-  max-width: 15em
+  max-width: 12em
 }
 
 .home-subheading {
@@ -45,8 +45,11 @@
 }
 
 .home-blurbs {
-  font-size: 1.4em
+  font-size: 1.3em
   width: 40%
+  @media (max-width: $mediumScreen) {
+    font-size: 1.2em
+  }
 }
 
 .home-blurb {
@@ -55,6 +58,11 @@
 
   p {
     line-height: 1.5
+    color: #666
+    font-weight: 300
+    @media (max-width: $mediumScreen) {
+      line-height: 1.7
+    }
   }
 
   h3 {
@@ -104,7 +112,22 @@
 
 @media (max-width: 1200px) {
   .home h1 {
-    font-size: 3em
+    font-size: 4em
+  }
+}
+
+@media (max-width: $smallScreen) {
+  .home {
+    margin-top: 40px
+  }
+}
+
+@media (max-width: $mediumScreen) {
+  .home h1 {
+    font-size: 2.4em
+  }
+  .home h3 {
+    font-size: 1.6em
   }
 }
 

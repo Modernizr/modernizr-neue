@@ -20,6 +20,7 @@
   text-decoration: none
   text-transform: uppercase
   font-size: 16px
+  letter-spacing: 0.05em
   justify-content: center
   align-items: center
 }
@@ -44,7 +45,7 @@
   &:hover,
   &.active {
     outline: none
-    background: $BackgroundGrey
+    background: #f7f7f7
     }
 }
 
@@ -61,23 +62,25 @@
     height: $HeaderHeight
     &:focus {
       outline: none
-      background-color: $ModernizrPink
-      .logo {
-        background-position: center right
-      }
+      opacity: 0.8
     }
   }
 
   .logo {
     display: block
-    margin: 0 60px
     width: 100%
-    height: 45px
+    max-width: 200px
+    height: 37px
     background: url('/img/logo.svg') center left no-repeat
     background-size: contain
     font-size: 0
-    @media (max-width: $largeScreen) {
-      margin: 0 30px
+    @media (min-width: $largeScreen) {
+      position: relative
+      top: -6px
+    }
+    @media (max-width: $largeScreen - 1px) and (min-width: $smallScreen) {
+      background-size: auto 100%
+      width: 76px
     }
   }
 }

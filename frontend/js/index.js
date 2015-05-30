@@ -1,7 +1,7 @@
 'use strict';
 require('fontfaceobserver');
 
-new window.FontFaceObserver('Open Sans', {})
+new window.FontFaceObserver('Source Sans Pro', {})
   .check()
   .then(function() {
     document.documentElement.className += ' font-loaded';
