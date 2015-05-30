@@ -306,7 +306,8 @@ gulp.task('copy-scripts', function() {
     'frontend/js/prod.js*',
     'frontend/lib/modernizr/**/*',
     '!frontend/lib/modernizr/node_modules/**/*',
-    'frontend/lib/zeroclipboard/dist/ZeroClipboard.swf'
+    'frontend/lib/zeroclipboard/dist/ZeroClipboard.swf',
+    'frontend/js/build.js'
   ])
   .pipe(plugins.copy('dist', {prefix: 1}));
 });

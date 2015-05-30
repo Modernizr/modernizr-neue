@@ -12,6 +12,7 @@
     {{> partials/header activeClass="download"}}
     <main role="main" id="main">{{{builderContent}}}</main>
     {{> partials/footer}}
+    <script src="/js/build.js"></script>
     <script>
      {{!-- inject all of the detect metadata onto the page, rather than force
       the client to download it after the initial render --}}
@@ -39,6 +40,5 @@
     as a handlebars var--}}
       <script src="{{this}}"></script>
     {{/each}}
-    <script src="js/build.js"></script>
   </body>
 </html>
