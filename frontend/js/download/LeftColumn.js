@@ -39,9 +39,7 @@ var LeftColumn = React.createClass({
       'classPrefix': true,
       'classNameAdded': state.classNameAdded
     });
-    var inputContainerClass = cx({
-      'hidden': !this.state.showClassPrefixInput
-    });
+
     var results = detects.length === allDetects.length ? ' ' :
       detects.length + pluralize(' result', detects);
     var filesize;
@@ -70,7 +68,7 @@ var LeftColumn = React.createClass({
     options = _.map(options, function(option) {
       var optionClasses = cx({
         'option': true,
-        'option-separator': option.group === 'minify'
+        'option-separator': option.group === 'minify' || option.property === 'html5printshiv' || option.property === 'setClasses'
       });
 
       return Option({
@@ -94,9 +92,13 @@ var LeftColumn = React.createClass({
         div({className: 'box heading-small' + (state.optionsToggled ? ' active' : ''), onClick: this.toggleOptions}, 'Options'),
         div({className: 'leftColumn-options'},
           options,
-          div({className: inputContainerClass},
-            label({htmlFor: 'classPrefix'}, 'className prefix'),
-            input({className: inputClass, name: 'classPrefix', id: 'classPrefix', placeholder:'className prefix', onKeyUp: this.classNameAdded})
+          div({className: cx({
+            option: true,
+            'extra-option': true,
+            hidden: !this.state.showClassPrefixInput
+          })},
+            label({htmlFor: 'classPrefix'}, '… with prefix'),
+            input({className: inputClass, name: 'classPrefix', id: 'classPrefix', placeholder:'e.g. mod_', onKeyUp: this.classNameAdded})
           )
         )
       )
