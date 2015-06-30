@@ -42,6 +42,13 @@ gulp.task('browserify', function() {
   .pipe(gulp.dest('frontend/js/download/'));
 });
 
+gulp.task('global_browserify', function() {
+  return browserify('./frontend/js/index.js')
+  .bundle()
+  .pipe(source('build.js'))
+  .pipe(gulp.dest('./frontend/js/'));
+});
+
 // `handlebars` is used for pretty much everything except for `/downlaod`, however
 // this task is only for building the static, production version. When running in
 // `develop`, all of the handlebars compilation is handeled by Hapi, most of those
@@ -299,7 +306,8 @@ gulp.task('copy-scripts', function() {
     'frontend/js/prod.js*',
     'frontend/lib/modernizr/**/*',
     '!frontend/lib/modernizr/node_modules/**/*',
-    'frontend/lib/zeroclipboard/dist/ZeroClipboard.swf'
+    'frontend/lib/zeroclipboard/dist/ZeroClipboard.swf',
+    'frontend/js/build.js'
   ])
   .pipe(plugins.copy('dist', {prefix: 1}));
 });
@@ -355,7 +363,7 @@ gulp.task('deploy', function(cb) {
 // every change, but it gets the job done
 gulp.task('develop', function () {
 
-  var tasks = ['modernizr', 'lodash', 'browserify', 'styles'];
+  var tasks = ['modernizr', 'lodash', 'browserify', 'global_browserify', 'styles'];
 
   plugins.nodemon({
     script: 'server/index.js',

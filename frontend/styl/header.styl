@@ -7,7 +7,7 @@
 
 .header-logo {
   display: flex
-  min-width: 360px
+  min-width: 290px
   background: $White
   justify-content: center
   align-items: center
@@ -20,8 +20,15 @@
   text-decoration: none
   text-transform: uppercase
   font-size: 16px
+  letter-spacing: 0.05em
+  font-weight: 600
   justify-content: center
   align-items: center
+}
+
+.header-logo a {
+  justify-content: flex-start
+  padding-left: 40px
 }
 
 
@@ -44,8 +51,8 @@
   &:hover,
   &.active {
     outline: none
-    background: $BackgroundGrey
-    }
+    background: $NavHover
+  }
 }
 
 #header-items-toggle,
@@ -61,21 +68,26 @@
     height: $HeaderHeight
     &:focus {
       outline: none
-      background-color: $ModernizrPink
-      .logo {
-        background-position: center right
-      }
+      opacity: 0.8
     }
   }
 
   .logo {
     display: block
-    margin: 0 30px
     width: 100%
-    height: 45px
+    max-width: 200px
+    height: 37px
     background: url('/img/logo.svg') center left no-repeat
-    background-size: cover
+    background-size: contain
     font-size: 0
+    @media (min-width: $largeScreen) {
+      position: relative
+      top: -6px
+    }
+    @media (max-width: $largeScreen - 1px) and (min-width: $smallScreen) {
+      background-size: auto 100%
+      width: 76px
+    }
   }
 }
 
@@ -84,9 +96,6 @@
   .header-logo {
     flex: 0
     min-width: 155px
-    a:focus .logo {
-      background-position: right 40% center
-    }
   }
 }
 

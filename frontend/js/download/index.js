@@ -3,13 +3,6 @@ var React = require('react/addons');
 var DownloadUI = React.createFactory(require('./DownloadUI'));
 var currentSearch;
 var shouldBuild;
-require('fontfaceobserver');
-
-new window.FontFaceObserver('Open Sans', {})
-  .check()
-  .then(function() {
-    document.documentElement.className += ' font-loaded';
-  });
 
 if (location.hash.length || location.search.length) {
   var str     = location.hash || location.search;
