@@ -18,7 +18,19 @@
 
   .option {
     display: block
+    overflow: hidden
     line-height: 24px
+  }
+
+  .option-separator {
+    border-top: 1px solid #ececec
+    padding-top: 1em
+    margin-top: 1em
+  }
+
+  .extra-option {
+    font-size: 12px
+    margin-top: 5px
   }
 
   .heading-small {
@@ -64,6 +76,15 @@
 .classPrefix {
   border: $lightBorder
   line-height: 1.3em
+  float: right
+  padding: 2px 5px
+  font-size: 12px
+  width: 100px
+  margin-right: 20px
+  &:focus {
+    border-color: $DarkGrey
+    outline: 0
+  }
 }
 
 .classNameAdded {
@@ -105,6 +126,11 @@
     .option {
       line-height: 40px
       font-size: 20px
+    }
+
+    .extra-option {
+      font-size: 12px
+      line-height: 1.2
     }
   }
 

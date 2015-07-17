@@ -2,6 +2,7 @@
 var React = require('react/addons');
 var PureRenderMixin = React.addons.PureRenderMixin;
 var Option = React.createFactory(require('./Option'));
+var cx = require('classnames');
 
 var DOM = React.DOM, li = DOM.li;
 var Detect = React.createClass({
@@ -14,7 +15,10 @@ var Detect = React.createClass({
   render: function() {
     var props = this.props;
     var data = props.data;
-    var className = 'detectRow' + (props.expanded ? ' expanded' : '');
+    var className = cx({
+      'detectRow': true,
+      'expanded': props.expanded
+    });
 
     return (
       li({

@@ -6,12 +6,16 @@ var Modernizr = require('modernizr');
 // neat lil convenience wrapper around it
 
 var options = Modernizr.options().sort(function(a, b) {
-    return a.name > b.name ? 1 : -1;
-  }).concat({
-    name: 'minify',
-    property: 'minify',
-    group: 'minify',
-    selected: true
-  });
+      return a.name > b.name ? 1 : -1;
+    }).concat({
+      name: 'minify',
+      property: 'minify',
+      group: 'minify',
+      selected: true
+    },{
+      name: 'Add CSS classes',
+      property: 'setClasses',
+      selected: true
+    });
 
 module.exports = options;
