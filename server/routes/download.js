@@ -38,6 +38,14 @@ if (process.env.NODE_ENV !== 'production') {
   };
 }
 
+var propToAMD = function(prop) {
+  if (_.contains(prop, '_')) {
+    prop = prop.split('_');
+  }
+
+  return _.where(modernizrMetadata, {'property': prop})[0].amdPath;
+};
+
 // takes a build hash/querystring that is updated automatically on `/download`, and
 // included by default inside of every custom build of modernizr, and converts it
 // into a valid Modernizr config
@@ -101,7 +109,7 @@ var config = function(query) {
     if (_.some(modernizrOptions, matches)) {
       config.options.push(query);
     } else if (_.some(modernizrMetadata, matches)) {
-      config['feature-detects'].push(query);
+      config['feature-detects'].push(propToAMD(query));
     }
   });
 
@@ -122,7 +130,8 @@ var handler = function (request, reply) {
     // in order to do so, we create a virtual tar file, and but the build and bower.json
     // file in it
     var archive = Archiver('tar');
-    var buildConfig = config(request.url.search);
+    var query = request.url.search.replace(/\.tar(.gz)?$/, '');
+    var buildConfig = config(query);
 
     Modernizr.build(buildConfig, function(build) {
       var module = archive
