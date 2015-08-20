@@ -1,12 +1,14 @@
 'use strict';
 var React = require('react/addons');
-var PureRenderMixin = React.addons.PureRenderMixin;
 var Option = React.createFactory(require('./Option'));
 var cx = require('classnames');
 
 var DOM = React.DOM, li = DOM.li;
 var Detect = React.createClass({
-  mixins: [PureRenderMixin],
+
+  shouldComponentUpdate: function(newProps) {
+    return this.props.expanded !== newProps.expanded;
+  },
 
   getInitialState: function() {
     return {};
@@ -64,7 +66,9 @@ var Detect = React.createClass({
         offset = nodeBottom - windowHeight + 10;
       }
 
-      window.scrollTo(0, offset);
+      if (offset) {
+        window.scrollTo(0, offset);
+      }
     }
   },
 
@@ -79,7 +83,7 @@ var Detect = React.createClass({
 
   mouseDown: function(e) {
     var metadataPane = this.refs.option.refs.metadata.getDOMNode();
-     if (metadataPane.contains(e.target) && !this.state.clickFocused) {
+    if (metadataPane.contains(e.target) && !this.state.clickFocused) {
       this.setState({clickFocused: true});
     }
   },

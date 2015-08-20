@@ -1,12 +1,14 @@
 'use strict';
 var React = require('react/addons');
-var PureRenderMixin = React.addons.PureRenderMixin;
 var SVGToggle = React.createFactory(require('./SVGToggle'));
 var Metadata = React.createFactory(require('./Metadata'));
 var DOM = React.DOM, span = DOM.span, input = DOM.input, label = DOM.label;
 
 var Option = React.createClass({
-  mixins: [PureRenderMixin],
+
+  shouldComponentUpdate: function(newProps) {
+    return this.props.selected !== newProps.selected;
+  },
 
   render: function() {
     var props = this.props;
@@ -24,7 +26,7 @@ var Option = React.createClass({
           id: prop,
           className: 'option-checkbox',
           value: value,
-          checked: data.selected,
+          checked: data.checked,
           onChange: this.change,
           onKeyDown: this.keyDown
         }),
@@ -35,7 +37,10 @@ var Option = React.createClass({
           htmlFor: prop,
           onClick: this.click
         }, name,
-          SVGToggle({ref: 'SVGToggle', className: 'detectToggle'})
+          SVGToggle({
+            ref: 'SVGToggle',
+            className: 'detectToggle'
+          })
         ),
         (props.metaData && Metadata({ref: 'metadata', data: data}))
       )
@@ -70,7 +75,7 @@ var Option = React.createClass({
 
   triggerClassPrefixCallback: function(data) {
     if(data.property === 'setClasses') {
-      this.props.toggleClassPrefix(data.selected);
+      this.props.toggleClassPrefix(data.checked);
     }
   },
 

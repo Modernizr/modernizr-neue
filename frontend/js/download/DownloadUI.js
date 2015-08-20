@@ -113,12 +113,12 @@ var DownloadUI = React.createClass({
     var baseUrl = [location.protocol, '//', location.host, location.pathname].join('');
 
     var minify = this.props.options.some(function(opt) {
-        return opt.property === 'minify' && opt.selected;
+        return opt.property === 'minify' && opt.checked;
       });
 
     // Config uses amdPaths, but build hash uses property names
     var props = this.props.detects.filter(function(detect) {
-        return detect.selected;
+        return detect.checked;
       }).map(function(detect) {
         var property = detect && detect.property;
         property = _.isArray(property) ?
@@ -128,7 +128,7 @@ var DownloadUI = React.createClass({
       });
 
     var opts = this.props.options.filter(function(opt) {
-        return opt.selected && opt.property !== 'minify';
+        return opt.checked && opt.property !== 'minify';
       }).map(function(opt) {
         var prop = opt.property;
         if (prop.indexOf('html5') === 0) {
@@ -160,7 +160,7 @@ var DownloadUI = React.createClass({
 
   select: function(data) {
     var state = {};
-    data.selected = !data.selected;
+    data.checked = !data.checked;
     if (this.state.filesize) {
       state = {
         filesize: {}
@@ -181,7 +181,7 @@ var DownloadUI = React.createClass({
     var detects = filtered && filtered.length ? filtered : this.props.detects;
 
     _.forEach(detects, function(detect) {
-      detect.selected = !toggeledState;
+      detect.checked = !toggeledState;
       self.select(detect);
     });
 
@@ -207,18 +207,18 @@ var DownloadUI = React.createClass({
       var classPrefix = state.classPrefix;
       var detects = _.chain(props.detects)
         .filter(function(detect) {
-          return detect.selected;
+          return detect.checked;
         }).map(function(detect) {
           return detect.amdPath;
         }).value();
 
       var options = _.chain(props.options)
         .filter(function(option) {
-          if (option.name === 'minify' && option.selected) {
+          if (option.name === 'minify' && option.checked) {
             minify = true;
             return;
           }
-          return option.selected;
+          return option.checked;
         }).map(function(option) {
           return option.property;
         }).value();
