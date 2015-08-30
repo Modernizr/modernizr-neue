@@ -33,12 +33,12 @@ if (location.hash.length || location.search.length) {
              || query === 'shiv' && prop === 'html5shiv'
              || query === 'printshiv' && prop === 'html5printshiv'
              || query === 'do_not_use_in_production') {
-            obj.selected = true;
+            obj.checked = true;
             return true;
           }
 
           if (query === 'dontmin' && prop === 'minify') {
-            obj.selected = false;
+            obj.checked = false;
             return true;
           }
         };

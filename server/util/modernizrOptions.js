@@ -11,11 +11,11 @@ var options = Modernizr.options().sort(function(a, b) {
       name: 'minify',
       property: 'minify',
       group: 'minify',
-      selected: true
+      checked: true
     },{
       name: 'Add CSS classes',
       property: 'setClasses',
-      selected: true
+      checked: true
     });
 
 module.exports = options;

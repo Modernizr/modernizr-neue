@@ -23,12 +23,12 @@ var LeftColumn = React.createClass({
     var options = props.options;
     var select = props.select;
 
-    var totalSelected = allDetects.filter(function(detect) {
-      return detect.selected;
+    var totalChecked = allDetects.filter(function(detect) {
+      return detect.checked;
     }).length;
 
-    var selected = totalSelected + ' selected';
-    var toggled = detects.length === totalSelected;
+    var checked = totalChecked + ' checked';
+    var toggled = detects.length === totalChecked;
 
     var toggle = (toggled ? 'REMOVE' : 'ADD') + ' ALL';
     var className = cx({
@@ -77,7 +77,7 @@ var LeftColumn = React.createClass({
         select: select,
         key: option.property,
         name: option.group || 'options',
-        selected: option.selected,
+        checked: option.checked,
         toggleClassPrefix: this.toggleClassPrefix
       });
     }, this);
@@ -85,7 +85,7 @@ var LeftColumn = React.createClass({
     return (
       div({className: className, onClick: this.props.onClick},
         div({className: 'box leftColumn-stats'},
-          div({className: 'leftColumn-selected', 'aria-live': 'polite', role: 'status'}, selected, results),
+          div({className: 'leftColumn-checked', 'aria-live': 'polite', role: 'status'}, checked, results),
           filesize,
           div(null, button({type: 'button', className: 'leftColumn-toggle', onClick: this.props.toggle}, toggle))
         ),

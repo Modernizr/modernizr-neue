@@ -1,5 +1,5 @@
 'use strict';
-importScripts('/lib/serviceworker-cache-polyfill.js/dist/serviceworker-cache-polyfill.js');
+importScripts('/lib/serviceworker-cache-polyfill.js/index.js');
 
 var CACHE_VERSION = '__CACHE_VERSION__';
 var CURRENT_CACHES = {
