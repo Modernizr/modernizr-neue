@@ -58,7 +58,6 @@ var DownloadUI = React.createClass({
         LeftColumn({
           detects: detects,
           allDetects: allDetects,
-          toggle: this.toggleAll,
           options: props.options,
           updateURL: this.updateURL,
           updatePrefix: this.updatePrefix,
@@ -171,21 +170,6 @@ var DownloadUI = React.createClass({
 
   onSearch: function(results, search) {
     this.setState({filtered: results, currentSearch: search});
-  },
-
-  toggleAll: function() {
-    var self = this;
-    var state = this.state || {};
-    var filtered = state.filtered;
-    var toggeledState = !state.toggled;
-    var detects = filtered && filtered.length ? filtered : this.props.detects;
-
-    _.forEach(detects, function(detect) {
-      detect.checked = !toggeledState;
-      self.select(detect);
-    });
-
-    this.setState({toggled: toggeledState});
   },
 
   updateFilesize: function(config) {

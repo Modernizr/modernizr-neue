@@ -10,14 +10,14 @@ var DetectList = React.createClass({
     return {};
   },
 
-  onKeyDown: function(e, currentIndex) {
+  keyDown: function(e, currentIndex) {
     var charCode = e.which;
     //              up arrow || J
     var UP = charCode === 38 || charCode === 75;
     //              down arrow || K
     var DOWN = charCode === 40 || charCode === 74;
 
-    if (UP || DOWN) {
+    if ((UP || DOWN) && !e.meta) {
       var offset = UP ? -1 : 1;
 
       var nextRef = Math.max(0, Math.min(currentIndex + offset, this.props.detects.length));
@@ -33,8 +33,10 @@ var DetectList = React.createClass({
     this.setState({focused: property});
   },
 
-  blur: function() {
-    this.setState({focused: undefined});
+  blur: function(property) {
+    if (this.state.focused === property) {
+      this.setState({focused: undefined});
+    }
   },
 
   render: function() {
@@ -60,7 +62,7 @@ var DetectList = React.createClass({
         select: select,
         focus: self.focus,
         blur: self.blur,
-        keyDown: self.onKeyDown
+        keyDown: self.keyDown
       }, detect.name);
     });
 

@@ -28,12 +28,9 @@ var LeftColumn = React.createClass({
     }).length;
 
     var checked = totalChecked + ' checked';
-    var toggled = detects.length === totalChecked;
 
-    var toggle = (toggled ? 'REMOVE' : 'ADD') + ' ALL';
     var className = cx({
-      'leftColumn column': true,
-      'toggled': toggled
+      'leftColumn column': true
     });
     var inputClass = cx({
       'classPrefix': true,
@@ -86,8 +83,7 @@ var LeftColumn = React.createClass({
       div({className: className, onClick: this.props.onClick},
         div({className: 'box leftColumn-stats'},
           div({className: 'leftColumn-checked', 'aria-live': 'polite', role: 'status'}, checked, results),
-          filesize,
-          div(null, button({type: 'button', className: 'leftColumn-toggle', onClick: this.props.toggle}, toggle))
+          filesize
         ),
         div({className: 'box heading-small' + (state.optionsToggled ? ' active' : ''), onClick: this.toggleOptions}, 'Options'),
         div({className: 'leftColumn-options'},

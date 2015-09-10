@@ -6,10 +6,6 @@ var DOM = React.DOM, span = DOM.span, input = DOM.input, label = DOM.label;
 
 var Option = React.createClass({
 
-  shouldComponentUpdate: function(newProps) {
-    return this.props.selected !== newProps.selected;
-  },
-
   render: function() {
     var props = this.props;
     var data = props.data;
@@ -81,9 +77,15 @@ var Option = React.createClass({
 
   change: function() {
     var props = this.props;
-    props.select(props.data);
+    var data = props.data;
 
-    this.triggerClassPrefixCallback(this.props.data);
+    if (props.change) {
+      props.change(data);
+    } else {
+      props.select(data);
+    }
+
+    this.triggerClassPrefixCallback(data);
   }
 });
 

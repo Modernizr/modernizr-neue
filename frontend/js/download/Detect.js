@@ -6,8 +6,9 @@ var cx = require('classnames');
 var DOM = React.DOM, li = DOM.li;
 var Detect = React.createClass({
 
-  shouldComponentUpdate: function(newProps) {
-    return this.props.expanded !== newProps.expanded;
+  shouldComponentUpdate: function(newProps, newState) {
+    return this.props.expanded !== newProps.expanded ||
+      this.state.selected !== newState.selected;
   },
 
   getInitialState: function() {
@@ -36,6 +37,7 @@ var Detect = React.createClass({
           ref: 'option',
           className: 'option detect',
           select: props.select,
+          change: this.change,
           data: data,
           name: 'feature-detects',
           focusParent: this.focus,
@@ -82,10 +84,12 @@ var Detect = React.createClass({
   },
 
   mouseDown: function(e) {
+    var props = this.props;
     var metadataPane = this.refs.option.refs.metadata.getDOMNode();
     if (metadataPane.contains(e.target) && !this.state.clickFocused) {
       this.setState({clickFocused: true});
     }
+    props.focus(props.data.property);
   },
 
   blur: function(e) {
@@ -97,6 +101,11 @@ var Detect = React.createClass({
 
     var props = this.props;
     props.blur(props.data.property);
+  },
+
+  change: function(data) {
+    this.props.select(data);
+    this.setState({selected: true});
   }
 });
 
