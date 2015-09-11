@@ -54,7 +54,7 @@ npm install -g modernizr
 Now you are ready to get your start making your custom build! You can download the configuration file from the build menu (under "Command Line Config"). This will give you a [JSON](http://simple.wikipedia.org/wiki/JSON) file that you will give to the Modernizr module to make your custom build.
 
 ```
-modenrizr -c modernizr-config.json
+modernizr -c modernizr-config.json
 ```
 
 <sub>Note that you will need to give the command line config the file path to the configuraiton you downloaded from the site. In the above example, we are running the `modernizr` command from the same folder that we downloaded the `modernizr-config.json` file to.</sub>
