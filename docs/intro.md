@@ -26,7 +26,7 @@ Those users - given a substandard website for apparently no reason - can actuall
 There is, and it is called `Feature Detection`, and it looks more like this
 
 ```javascript
-  if (Modenrizr.awesomeNewFeature) {
+  if (Modernizr.awesomeNewFeature) {
     showOffAwesomeNewFeature();
   } else {
     getTheOldLameExperience();
@@ -43,9 +43,9 @@ You may notice that in addition to the `Build` output, where you have been able 
 
 #### Command Line Config
 
-Since 3.0, Modenrizr also ships its build system as a [node](https://nodejs.org/) module on [npm](https://npmjs.org). That means that you can quickly create multiple builds of Modernizr for different projects, without even having to open a new browser tab.
+Since 3.0, Modernizr also ships its build system as a [node](https://nodejs.org/) module on [npm](https://npmjs.org). That means that you can quickly create multiple builds of Modernizr for different projects, without even having to open a new browser tab.
 
-Once you have [npm installed](https://docs.npmjs.com/getting-started/installing-node), you can install the Modenrizr command line tool by running
+Once you have [npm installed](https://docs.npmjs.com/getting-started/installing-node), you can install the Modernizr command line tool by running
 
 ```
 npm install -g modernizr
@@ -134,7 +134,7 @@ Finally, if you do not want Modernizr to add any of it's classes, you can set `e
 Modernizr keeps track of the results of all of it's feature detections via the `Modernizr` object. That means that for each test, a corresponding property will be added. You just have to test for [truthiness](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) in your code to figure out what you want to do
 
 ```javascript
-  if (Modenrizr.awesomeNewFeature) {
+  if (Modernizr.awesomeNewFeature) {
     showOffAwesomeNewFeature();
   } else {
     getTheOldLameExperience();
