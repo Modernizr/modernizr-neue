@@ -1,20 +1,18 @@
 <footer role="contentinfo" class="footer">
   <div class="footer-links">
-    <div>
+    <p>
       Made with love by
       {{~#each team}} <a class="teamMember" href="{{url}}">{{name}}</a>
       {{~#unless last}}{{~#if secondToLast}}, and{{else}},{{/if~}}{{else}}.{{/unless~}}{{/each~}}
-    </div>
-    <div>
+    </p>
+    <p>
       <a target="_blank" href="/feed">Subscribe to the feed</a>,
       <a href="https://twitter.com/Modernizr">follow on twitter</a>, or
       <a href="https://paulirish.wufoo.com/forms/p1hsxsru1ohiv0u/">contact&nbsp;us</a>
-    </div>
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="donateForm">
-      <input type="hidden" name="cmd" value="_s-xclick">
-      <input type="hidden" name="hosted_button_id" value="T3SNE26ADDVX6">
-      A <button class="fakelink">donation</button> would be super cool, too.
-    </form>
+    </p>
+    <p>
+      A <a href="https://www.paypal.me/modernizr/25">donation</a> would be super cool, too.
+    </p>
   </div>
 <a class="hiddentext" title="Check out the code on github" href="https://github.com/modernizr/modernizr">Check out the code on github</a>
 </footer>

@@ -10,18 +10,19 @@
   justify-content: space-between
   align-items: flex-end
 
+  p {
+    margin: 0 0 .5em
+  }
+
   a, .fakelink {
     color: $BackgroundGrey
+    text-decoration: underline
     &:focus,
     &:hover,
     &:active {
-      text-decoration: underline
       outline: none
+      text-decoration: none
     }
-  }
-
-  .fakelink {
-    text-decoration: none
   }
 
   .hiddentext {
