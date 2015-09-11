@@ -15,8 +15,8 @@ var gruntify = function(config) {
   var gruntConfig = {
     parseFiles: true,
     customTests: [],
-    devFile: '/PATH/TO/modenrizr-dev.js',
-    outputFile: '/PATH/TO/modenrizr-output.js'
+    devFile: '/PATH/TO/modernizr-dev.js',
+    outputFile: '/PATH/TO/modernizr-output.js'
   };
   gruntConfig.tests = _.map(config['feature-detects'], function(test) {
       return test.replace(/^test\//, '');
@@ -31,4 +31,3 @@ module.exports = {
   gruntify: gruntify,
   pluralize: pluralize
 };
-
