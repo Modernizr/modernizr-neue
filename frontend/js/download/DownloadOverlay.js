@@ -66,7 +66,7 @@ var DownloadOverlay = React.createClass({
             key: 'codepen'
           },
             form({
-              action: 'http://codepen.io/pen/define',
+              action: 'https://codepen.io/pen/define',
               method: 'POST'
             },
               input({
