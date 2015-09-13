@@ -6,7 +6,8 @@ var DOM = React.DOM, div = DOM.div, input = DOM.input, label = DOM.label, button
 var fuseOptions = {
   caseSensitive: false,
   threshold: 0.3,
-  keys: ['name','property', 'caniuse', 'cssclass', 'tags', 'aliases', 'builderAliases']
+  keys: ['name','property', 'caniuse', 'cssclass', 'tags', 'aliases', 'builderAliases'],
+  maxPatternLength: 32
 };
 var fuse;
 
@@ -29,7 +30,8 @@ var SearchHeader = React.createClass({
           onChange: this.change,
           id: 'header-search-input',
           onKeyDown: this.preventSubmit,
-          value: this.props.defaultValue
+          value: this.props.defaultValue,
+          maxLength: fuseOptions.maxPatternLength
         }),
         button({type: 'submit',
           className: 'header-search-build',
