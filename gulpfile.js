@@ -352,6 +352,7 @@ gulp.task('deploy', function(cb) {
     'clean',
     'styles',
     tasks,
+    'handlebars',
     'uglify',
     'copy',
     ['news', 'rss'],
