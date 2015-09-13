@@ -338,6 +338,9 @@ gulp.task('gh-pages', ['deploy'], function(cb) {
   ], fs.writeFile('dist/CNAME','new.modernizr.com', cb));
 });
 
+// seperate out the tasks that are repeated in both deploy and develop steps.
+var tasks = ['modernizr', 'lodash', 'browserify', 'global_browserify', 'styles'];
+
 // `deploy` builds the static version of the site. Assuming a javascript supported
 // client, everything _should_ work 100% when built. Note that there are a few
 // progressive enhancements in `/server/routes/index` to allow for scriptless
@@ -348,8 +351,7 @@ gulp.task('deploy', function(cb) {
   runSequence(
     'clean',
     'styles',
-    ['lodash', 'modernizr'],
-    ['browserify', 'handlebars'],
+    tasks,
     'uglify',
     'copy',
     ['news', 'rss'],
@@ -363,8 +365,6 @@ gulp.task('deploy', function(cb) {
 // develop is your live server. Its not very pretty, and rebuilds everything on
 // every change, but it gets the job done
 gulp.task('develop', function () {
-
-  var tasks = ['modernizr', 'lodash', 'browserify', 'global_browserify', 'styles'];
 
   plugins.nodemon({
     script: 'server/index.js',
