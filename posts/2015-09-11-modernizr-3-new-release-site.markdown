@@ -38,7 +38,7 @@ Modernizr’s licensing has changed: we’ve moved from a BSD license to MIT. ([
 * `audiodata` detect has been removed, because the implementation was very poor; this spec has been deprecated in favor of the Web Audio API ([#1019](https://github.com/Modernizr/Modernizr/issues/1019))
 * `video` detect now has an `hls` subproperty representing support for the HLS video format ([#1317](https://github.com/Modernizr/Modernizr/issues/1317))
 * `todataurljpeg`, `todataurlpng` and `todataurlwebp` are no longer asynchronous ([#802](https://github.com/Modernizr/Modernizr/issues/802))
-* `fullscreen` detect has been updated to use `window.exitFullScreen` rather than `window.cancelFullScreen` as per [the latest spec](http://www.w3.org/TR/fullscreen/) ([#739](https://github.com/Modernizr/Modernizr/issues/739))
+* `fullscreen` detect has been updated to use `document.exitFullScreen` rather than the prefixed versions of `document.cancelFullScreen` as per [the latest spec](https://fullscreen.spec.whatwg.org/) ([#739](https://github.com/Modernizr/Modernizr/issues/739))
 * `indexeddb` detect now has a `deletedatabase` subproperty, representing support for the `indexedDB.deleteDatabase()` method which isn’t implemented in some browsers ([#1238](https://github.com/Modernizr/Modernizr/issues/1238))
 * `webp` detect now has `lossy`, `lossless` and `alpha` subproperties, representing support for various variants of the WebP format; the root `webp` property still represents basic lossy support ([#1229](https://github.com/Modernizr/Modernizr/issues/1229))
 * Fixed a bug in `cssvwunit`, `cssvminunit` and `cssvmaxunit` which could give incorrect results when scrollbars are present ([#1045](https://github.com/Modernizr/Modernizr/issues/1045))
