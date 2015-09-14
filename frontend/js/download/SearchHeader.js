@@ -58,8 +58,8 @@ var SearchHeader = React.createClass({
   click: function(e) {
     var props = this.props;
     // Track builds at click on Build button
-    if ( window._gaq ) {
-      _gaq.push(['_trackPageview', '/build/'+window.location.search.substr(1).split('-').join('^')]);
+    if ( window.ga ) {
+      ga('send', 'pageview', '/build/' + location.search.substr(1).replace(/-/g, '^'));
     }
     props.build(true);
     props.toggleOverlay(true);
