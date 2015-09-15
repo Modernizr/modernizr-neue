@@ -22,10 +22,10 @@
     display: block
     position: relative
     height: $DetectHeight
-    font-size: 1.4em
+    font-size: 1.2em
     line-height: $DetectHeight
     overflow: hidden
-    padding-right: $DetectHeight
+    padding-right: $DetectHeight + 10px
     padding-left: 1.2em
     width: 100%
     text-overflow: ellipsis
@@ -43,6 +43,19 @@
 
   &:first-child {
     border-top: none
+  }
+}
+
+.detectsGrid .detectRow {
+  display: inline-block
+  vertical-align: top
+  border-left: $lightBorder
+  width: 100%
+  @media (min-width: $XLargeScreen + 1px) {
+    width: 50%
+  }
+  @media (min-width: $XXLargeScreen + 1px) {
+    width: 33.33%;
   }
 }
 
@@ -66,7 +79,7 @@
   color: #444
 }
 
-@media (max-width: $XLargeScreen) {
+@media (max-width: $largeScreen) {
   .detects {
     margin-right: 0
   }
