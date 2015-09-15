@@ -376,7 +376,8 @@ gulp.task('develop', function () {
       'frontend/lib',
       'frontend/css',
       'frontend/js/*.custom.js',
-      'frontend/js/download/downloader.js'
+      'frontend/js/download/downloader.js',
+      'frontend/js/build.js'
     ]
   })
     .on('start', tasks)
