@@ -1,6 +1,6 @@
-# (the future) modernizr.com
+# The new modernizr.com
 
-for now, it lives at [new.modernizr.com](http://new.modernizr.com)
+This is now live at [modernizr.com](https://modernizr.com/)
 
 ### setup
 
