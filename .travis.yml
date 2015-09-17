@@ -3,19 +3,22 @@ language: node_js
 node_js:
   - '0.10'
 
+before_install:
+  - npm install -g npm@latest
+
 before_script:
   - npm install -g bower
   - bower install
 
 after_success:
+  - |
 
-  # Update the content from the `gh-pages` branch
-  curl -sSL "https://raw.githubusercontent.com/h5bp-bot/scripts/0.6.1/update_site_branch.sh" |
-    bash -s -- --commands "npm run travis" \
-               --commit-message "Hey server, this content is for you! [skip ci]" \
-               --directory "dist" \
-               --distribution-branch "gh-pages" \
-               --source-branch "master";
+      # Automatically update the content from the `gh-pages` branch
+      $(npm bin)/update-branch --commands "npm run travis" \
+                               --commit-message "Hey server, this content is for you! [skip ci]" \
+                               --directory "dist" \
+                               --distribution-branch "gh-pages" \
+                               --source-branch "master"
 
 env:
   global:
