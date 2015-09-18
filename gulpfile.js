@@ -90,7 +90,8 @@ gulp.task('handlebars', function() {
       batch: ['frontend/templates'],
       helpers: {
         formatDate: require('./frontend/templates/helpers/formatDate'),
-        ternary: require('./frontend/templates/helpers/ternary')
+        ternary: require('./frontend/templates/helpers/ternary'),
+        copyright: require('./frontend/templates/helpers/copyright')
       }
     }))
     .pipe(plugins.htmlmin({
@@ -136,7 +137,8 @@ gulp.task('news', function() {
           batch: ['frontend/templates'],
           helpers: {
             formatDate: require('./frontend/templates/helpers/formatDate'),
-            ternary: require('./frontend/templates/helpers/ternary')
+            ternary: require('./frontend/templates/helpers/ternary'),
+            copyright: require('./frontend/templates/helpers/copyright')
           }
         }))
         .pipe(plugins.htmlmin({
