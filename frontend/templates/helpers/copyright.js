@@ -1,14 +1,9 @@
-var copyright = function(prefix, suffix) {
-  var text = "Copyright &copy; ";
+var copyright = function(prefix) {
+  var text = "Copyright © ";
   // prefix
   if(typeof prefix == "string") text += prefix;
-  // add year
-  var today = new Date();
-  var year = today.getFullYear();
-  text += year;
-  // suffix
-  if(typeof suffix == "string") text += ", "+ suffix;
-  return text;
+
+  return text + (new Date()).getFullYear();
 }
 
 module.exports = copyright;
