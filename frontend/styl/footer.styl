@@ -5,7 +5,7 @@
   min-height: $FooterHeight
   background: $ModernizrPink
   color: $BackgroundGrey
-  font-size: 20px
+  font-size: 16px
   line-height: 1.6
   justify-content: space-between
   align-items: flex-end
@@ -41,6 +41,13 @@
   width: 100%
   &>div {
     margin: 0.5em 0
+  }
+}
+
+@media (min-width: $largeScreen + 1px) {
+  .builder .footer {
+    padding-left: 290px
+    padding-right: 30%
   }
 }
 

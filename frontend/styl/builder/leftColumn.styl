@@ -3,7 +3,7 @@
 
   position: fixed
   top: $HeaderHeight + $StandardPadding
-  bottom: $StandardPadding
+  bottom: 0
   margin-right: $StandardPadding
   width: 260px
   overflow: scroll
@@ -150,6 +150,12 @@
 .leftColumn-checked {
   display: flex
   justify-content: space-between
+}
+
+@media (min-width: $largeScreen + 1px) {
+  .builder .leftColumn {
+    z-index: 2
+  }
 }
 
 @media (max-width: $mediumScreen) {
