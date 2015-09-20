@@ -25,8 +25,11 @@
     font-size: 1.2em
     line-height: $DetectHeight
     overflow: hidden
-    padding-right: $DetectHeight + 10px
-    padding-left: 1.2em
+    padding-right: 1.2em
+    padding-left: $DetectHeight + 10px
+    @media screen and (max-width: $smallScreen) {
+      padding-left: 50px
+    }
     width: 100%
     text-overflow: ellipsis
     white-space: nowrap
@@ -47,6 +50,9 @@
   vertical-align: top
   border-left: $lightBorder
   width: 100%
+  @media (min-width: $mediumScreen + 1px) and (max-width: $largeScreen) {
+    width: 50%
+  }
   @media (min-width: $XLargeScreen + 1px) {
     width: 50%
   }
@@ -90,12 +96,6 @@
 @media (max-width: $mediumScreen) {
   .detects {
     margin: (($HeaderButtonHeight * 4) + $StatsHeight) 0 0
-  }
-}
-
-@media (max-width: 550px) {
-  .detect {
-    font-size: 20px
   }
 }
 
