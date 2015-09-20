@@ -7,6 +7,12 @@ var frontendUtils = require('../../frontend/js/download/util');
 // Note: this is where the bower download service is wired into `/download`
 module.exports = [{
     method: 'GET',
+    path: '/license',
+    handler: function (request, reply) {
+      return reply.redirect('https://opensource.org/licenses/MIT');
+    };
+  }{
+    method: 'GET',
     path: '/download',
     handler: require('./download')
   }, {
