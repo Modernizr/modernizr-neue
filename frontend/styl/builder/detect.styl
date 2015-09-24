@@ -1,5 +1,5 @@
 .detects {
-  margin: $HeaderHeight + $StandardPadding 30% $StandardPadding 290px
+  margin: ($HeaderHeight + $StandardPadding - 1px) 30% $StandardPadding 290px
 }
 
 .option {
@@ -22,11 +22,14 @@
     display: block
     position: relative
     height: $DetectHeight
-    font-size: 1.4em
+    font-size: 1.2em
     line-height: $DetectHeight
     overflow: hidden
-    padding-right: $DetectHeight
-    padding-left: 1.2em
+    padding-right: 1.2em
+    padding-left: $DetectHeight + 10px
+    @media screen and (max-width: $smallScreen) {
+      padding-left: 50px
+    }
     width: 100%
     text-overflow: ellipsis
     white-space: nowrap
@@ -40,9 +43,21 @@
 
 .detectRow {
   border-top: $lightBorder
+}
 
-  &:first-child {
-    border-top: none
+.detectsGrid .detectRow {
+  display: inline-block
+  vertical-align: top
+  border-left: $lightBorder
+  width: 100%
+  @media (min-width: $mediumScreen + 1px) and (max-width: $largeScreen) {
+    width: 50%
+  }
+  @media (min-width: $XLargeScreen + 1px) {
+    width: 50%
+  }
+  @media (min-width: $XXLargeScreen + 1px) {
+    width: 33.33%
   }
 }
 
@@ -62,11 +77,11 @@
 .option-label:hover,
 .expanded .detect,
 .detect:hover {
-  background: $White;
+  background: $White
   color: #444
 }
 
-@media (max-width: $XLargeScreen) {
+@media (max-width: $largeScreen) {
   .detects {
     margin-right: 0
   }
@@ -81,12 +96,6 @@
 @media (max-width: $mediumScreen) {
   .detects {
     margin: (($HeaderButtonHeight * 4) + $StatsHeight) 0 0
-  }
-}
-
-@media (max-width: 550px) {
-  .detect {
-    font-size: 20px
   }
 }
 
