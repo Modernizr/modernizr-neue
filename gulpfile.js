@@ -201,6 +201,7 @@ gulp.task('lodash', function(cb) {
     'extend',
     'filter',
     'find',
+    'first',
     'flatten',
     'forEach',
     'intersection',
