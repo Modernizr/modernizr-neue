@@ -101,6 +101,12 @@ module.exports = [
     }
   }, {
     method: 'GET',
+    path: '/license',
+    handler: function(request, reply) {
+      reply.view('pages/license');
+    }
+  }, {
+    method: 'GET',
     path: '/feed',
     handler: function(request, reply) {
       var feedGenerator = require.resolve('../buildSteps/rss');
