@@ -12,7 +12,9 @@ var buildFromPostedQuery = function(request, reply) {
   var ext = config.minify ? '.min.js' : '.js';
 
   Modernizr.build(config, function(build) {
-    reply(build).header('Content-disposition', 'attachment; filename=modernizr-custom' + ext);
+    reply(build)
+      .header('Content-Type', 'text/javascript')
+      .header('Content-Disposition', 'attachment; filename=modernizr-custom' + ext);
   });
 };
 
