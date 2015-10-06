@@ -1,0 +1,37 @@
+---
+layout: post
+title:  "Modernizr 3: A new release and website"
+author: <a href="https://twitter.com/patrickkettner">Patrick Kettner</a>
+---
+
+We promised faster releases - and here they are. Modernizr 3.1.0 is a pretty small release, but none the less useful.
+
+**Fixed**
+- [@mattbrundage](https://github.com/mattbrundage) fixed the casing on the Flash documentation - [#1635](https://github.com/Modernizr/Modernizr/pull/1635)
+- [@philipbordallo](https://github.com/philipbordallo) fixed an incorrect URL for the cupcakejs sessionStorage polyfill - [#1647](https://github.com/Modernizr/Modernizr/pull/1647)
+- [@valtlait](https://github.com/valtlait) nixed the crud out of the Modernizr SVG logo - [#1657](https://github.com/Modernizr/Modernizr/pull/1657)
+- [@patrickkettner](https://github.com/patrickkettner) removed an unused dependency from the fullscreen detect - [6bd55c](https://github.com/Modernizr/Modernizr/commit/6bd55c)
+- [@patrickkettner](https://github.com/patrickkettner) fixed inaccurate false negatives in the vunit detect on iOS 8+ - [#1682](https://github.com/Modernizr/Modernizr/pull/1682)
+- [@smyru](https://github.com/smyru) fixed a request loop on the form validation detect with Opera Mini servers - [#1594](https://github.com/Modernizr/Modernizr/pull/1594)
+
+
+**Updated**
+- [@alrra](https://github.com/alrra) updated the npm build script to use his updated version of `travis-scripts` - [#1662](https://github.com/Modernizr/Modernizr/pull/1662)
+- [@patrickkettner](https://github.com/patrickkettner) updated the Travis build image - [14eb32](https://github.com/Modernizr/Modernizr/commit/14eb32)
+- [@patrickkettner](https://github.com/patrickkettner) updated the metadata for jQuery-contextMenu - [#1665](https://github.com/Modernizr/Modernizr/pull/1665)
+- [@patrickkettner](https://github.com/patrickkettner) embeded website info for the contributors to the project in the package.json - [63f4b5d](https://github.com/Modernizr/Modernizr/commit/63f4b5d)
+- [@tsjost](https://github.com/tsjost) updated the README's build instructions - [#1667](https://github.com/Modernizr/Modernizr/pull/1677)
+- [@niksy](https://github.com/niksy) updated html5shiv to v3.7.2, fixed an existing issue Modernizr and Browserify - [#1680](https://github.com/Modernizr/Modernizr/pull/1680)
+
+
+**Added**
+- [@BrianCS](https://github.com/BrianCS) submitted a detect for `backdrop-filter`, with [an](https://github.com/Modernizr/Modernizr/pull/1670) [assist](https://github.com/Modernizr/Modernizr/pull/1689) from [@KuraFire](https://github.com/KuraFire) - [#1638](https://github.com/Modernizr/Modernizr/pull/1638)
+- [@peterblazejewicz](https://github.com/peterblazejewicz) added a lowercased version of the version flag (`-v`) - [#1644](https://github.com/Modernizr/Modernizr/pull/1644)
+- [@patrickkettner](https://github.com/patrickkettner) added the [`prefixedCSSValue` utility function](https://github.com/Modernizr/Modernizr/blob/feb841be8501dddffeaf37ef17bef1fbadb72d5d/src/prefixedCSSValue.js), as a way to check for prefixed versions of CSS values - [6bd55c](https://github.com/Modernizr/Modernizr/commit/6bd55c)
+- [@jdalton](https://github.com/jdalton) added Microsoft Edge to the saucelabs configuration - [#1669](https://github.com/Modernizr/Modernizr/pull/1669)
+- [@EricWVGG](https://github.com/EricWVGG) added a detect for jpeg2000 - [#1679](https://github.com/Modernizr/Modernizr/pull/1679)
+- [greenkeep.io](http://greenkeeper.io/) was added to the project, an awesome service that automatically pins your dependencies and PRs any updated in the future. Included in its updates since the last release are
+  - updating [proxyquire](https://www.npmjs.com/package/proxyquire) to v1.7.3 from v1.7.2
+  - updating [joi](https://www.npmjs.com/package/joi) to v6.9.0 from v6.7.1
+  - updating [yargs](https://www.npmjs.com/package/yargs) to v3.26.0 from 2.3.0
+  - updating [grunt-contrib-jade](https://www.npmjs.com/package/grunt-contrib-jade) to v0.15.0 from v0.14.1
