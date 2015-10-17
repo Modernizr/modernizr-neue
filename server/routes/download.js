@@ -130,7 +130,7 @@ var handler = function (request, reply) {
     // in order to do so, we create a virtual tar file, and but the build and bower.json
     // file in it
     var archive = Archiver('tar');
-    var query = request.url.search.replace(/\.tar(.gz)?$/, '');
+    var query = request.url.search.replace(/\.tar(\.gz)?|zip$/, '');
     var buildConfig = config(query);
 
     Modernizr.build(buildConfig, function(build) {
