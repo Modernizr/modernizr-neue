@@ -15,10 +15,7 @@ self.addEventListener('install', function(event) {
     '/js/prod.js',
     '/lib/r.js/dist/r.js',
     '/js/lodash.custom.js',
-    '/js/modernizr.custom.js',
-    '/js/download/downloader.js',
     '/lib/modernizr/lib/build.js',
-    '/lib/zeroclipboard/dist/ZeroClipboard.js',
     '/img/logo.svg',
     '/img/menu.svg'
   ];
