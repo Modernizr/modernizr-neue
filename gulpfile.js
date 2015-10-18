@@ -248,7 +248,7 @@ gulp.task('uglify-loose', function() {
     'frontend/lib/pako/dist/pako_deflate.js',
     'frontend/lib/pretty-bytes/pretty-bytes.js',
     'frontend/lib/r.js/dist/r.js',
-    'frontend/lib/serviceworker-cache-polyfill.js/dist/serviceworker-cache-polyfill.js',
+    'frontend/lib/serviceworker-cache-polyfill.js/index.js',
     'frontend/js/lodash.custom.js',
     'frontend/lib/requirejs-plugins/**/*.js'
   ], {base: './frontend'})
