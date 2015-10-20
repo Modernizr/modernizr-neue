@@ -18,7 +18,7 @@ In the dark ages of web development, we often had to resort to <abbr title="User
   }
 ```
 
-Now that _looks_ ok, right? We are using _Awesome-New-Feature_&trade;, and of course it isn't supported in an old crusty browser like that, right? That could very well be the case - today. 
+Now that _looks_ ok, right? We are using _Awesome-New-Feature_&trade;, and of course it isn't supported in an old crusty browser like that, right? That could very well be the case - today.
 But what if the next version of that browser adds support for _Awesome-New-Feature_&trade;? Now you have to go back and audit your code, updating every single place that you are doing this check. That is assuming that you have the time to find out about every feature update for every single browser. Worse still, until you realize that it actually works in the newest version, all of those users back at the office `getTheOldLameExperience`, for no reason whatsoever.
 
 Those users - given a substandard website for apparently no reason - can actually go into their browser and <abbr title="Operating System">OS</abbr> settings and change the name of the browser (or `user-agent` - what we compare against in code when preforming a UA sniff) to whatever they would like. At that point - your code is meaningless. You are blocking out users who may actually support all of your features, and possibly letting those in who don't. Nearly everyone gets a broken experience. There has to be a better way!
@@ -70,12 +70,12 @@ In addition to the available options and feature detects, there are a handful of
 
 `classPrefix` - _default: `""`_
 
-A string that is added before each CSS class. 
+A string that is added before each CSS class.
 
 
 `enableJSClass` - _default: `true`_
 
-Whether or not to update `.no-js` to `.js` on the root element. 
+Whether or not to update `.no-js` to `.js` on the root element.
 
 
 `enableClasses` - _default: `true`_
@@ -123,6 +123,8 @@ By default, Modernizr will rewrite `<html class="no-js">` to `<html class="js">`
 
 
 #### enableClasses
+
+If you are using a `classPrefix`, such as `supports-`, then you must include that prefix on your `html` element. ie. `supports-no-js` instead of `no-js`.
 
 Finally, if you do not want Modernizr to add any of it's classes, you can set `enableClasses` to `false`. This is _does not_ effect the `.no-js` update, so if you do not want that updated either you will need to set `enableJSClass` to `false` in your configuration.
 
