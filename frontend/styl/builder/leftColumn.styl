@@ -2,12 +2,14 @@
   @extend $hiddenScrollbar
 
   position: fixed
-  top: $HeaderHeight + $StandardPadding
+  top: $HeaderHeight + 1
   bottom: 0
   margin-right: $StandardPadding
-  width: 260px
-  overflow: scroll
+  width: $SidebarWidth - 1
   transition: top $TransitionDuration
+  display: flex
+  flex-direction: column
+  background-color: $White
 
   .toggle {
     width: 1.2em
@@ -70,7 +72,10 @@
 
 .leftColumn-options {
   padding: 0 24px 12px
+  padding-bottom: $StandardPadding
   background: $White
+  flex: 1
+  overflow-y: auto
 }
 
 .classPrefix {

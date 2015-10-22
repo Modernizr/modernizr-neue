@@ -46,7 +46,12 @@
 
 @media (min-width: $largeScreen + 1px) {
   .builder .footer {
-    padding-left: 290px
+    padding-left: calc(290px + 1.2em * 1.4)
+  }
+}
+
+@media (min-width: $XLargeScreen + 1px) {
+  .builder .footer {
     padding-right: 30%
   }
 }
