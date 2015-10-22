@@ -67,6 +67,7 @@
     "classnames": "2.1.1"
   },
   "devDependencies": {
+    "@alrra/travis-scripts": "^1.0.0",
     "aliasify": "^1.7.2",
     "del": "^1.1.1",
     "gulp": "^3.8.11",

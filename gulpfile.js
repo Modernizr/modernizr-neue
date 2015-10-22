@@ -90,7 +90,8 @@ gulp.task('handlebars', function() {
       batch: ['frontend/templates'],
       helpers: {
         formatDate: require('./frontend/templates/helpers/formatDate'),
-        ternary: require('./frontend/templates/helpers/ternary')
+        ternary: require('./frontend/templates/helpers/ternary'),
+        copyright: require('./frontend/templates/helpers/copyright')
       }
     }))
     .pipe(plugins.htmlmin({
@@ -136,7 +137,8 @@ gulp.task('news', function() {
           batch: ['frontend/templates'],
           helpers: {
             formatDate: require('./frontend/templates/helpers/formatDate'),
-            ternary: require('./frontend/templates/helpers/ternary')
+            ternary: require('./frontend/templates/helpers/ternary'),
+            copyright: require('./frontend/templates/helpers/copyright')
           }
         }))
         .pipe(plugins.htmlmin({
@@ -199,6 +201,7 @@ gulp.task('lodash', function(cb) {
     'extend',
     'filter',
     'find',
+    'first',
     'flatten',
     'forEach',
     'intersection',
@@ -245,7 +248,7 @@ gulp.task('uglify-loose', function() {
     'frontend/lib/pako/dist/pako_deflate.js',
     'frontend/lib/pretty-bytes/pretty-bytes.js',
     'frontend/lib/r.js/dist/r.js',
-    'frontend/lib/serviceworker-cache-polyfill.js/dist/serviceworker-cache-polyfill.js',
+    'frontend/lib/serviceworker-cache-polyfill.js/index.js',
     'frontend/js/lodash.custom.js',
     'frontend/lib/requirejs-plugins/**/*.js'
   ], {base: './frontend'})

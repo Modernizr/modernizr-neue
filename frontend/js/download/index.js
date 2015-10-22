@@ -32,6 +32,7 @@ if (location.hash.length || location.search.length) {
           if (query === prop.toLowerCase()
              || query === 'shiv' && prop === 'html5shiv'
              || query === 'printshiv' && prop === 'html5printshiv'
+             || obj.builderAliases && _.contains(obj.builderAliases, query)
              || query === 'do_not_use_in_production') {
             obj.checked = true;
             return true;

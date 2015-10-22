@@ -3,6 +3,8 @@ var React = require('react/addons');
 var PureRenderMixin = React.addons.PureRenderMixin;
 var Detect = React.createFactory(require('./Detect'));
 var DOM = React.DOM, ul = DOM.ul, li = DOM.li;
+var cx = require('classnames');
+
 var DetectList = React.createClass({
   mixins: [PureRenderMixin],
 
@@ -68,7 +70,10 @@ var DetectList = React.createClass({
 
     detects = detects.length ? detects : li({className: 'detect option none'}, ':[ no such luck...');
 
-    return ul({className: 'detects'}, detects);
+    return ul({className: cx({
+      'detects': true,
+      'detectsGrid': !self.props.currentSearch
+    })}, detects);
   }
 });
 

@@ -34,7 +34,7 @@ var DownloadOverlay = React.createClass({
             toggleTextarea: this.toggleTextarea,
             hasFlash: hasFlash,
             type: 'text/javascript',
-            filename: 'modernizr-custom',
+            filename: 'modernizr-custom.js',
             updateAction: props.updateAction,
             key: 'build'
           }),
@@ -45,7 +45,7 @@ var DownloadOverlay = React.createClass({
             toggleTextarea: this.toggleTextarea,
             hasFlash: hasFlash,
             type: 'application/json',
-            filename: 'modernizr-config',
+            filename: 'modernizr-config.json',
             path: '/download/config',
             updateAction: props.updateAction,
             key: 'config'
@@ -57,7 +57,7 @@ var DownloadOverlay = React.createClass({
             toggleTextarea: this.toggleTextarea,
             hasFlash: hasFlash,
             type: 'application/json',
-            filename: 'grunt config',
+            filename: 'grunt-config.json',
             path: '/download/gruntconfig',
             updateAction: props.updateAction,
             key: 'grunt'

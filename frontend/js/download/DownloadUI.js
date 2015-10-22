@@ -69,7 +69,8 @@ var DownloadUI = React.createClass({
         DetectList({
           ref: 'detectList',
           detects: detects,
-          select: this.select
+          select: this.select,
+          currentSearch: search
         })
        )
     );
