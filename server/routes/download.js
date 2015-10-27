@@ -135,7 +135,7 @@ var handler = function (request, reply) {
   var ua = request.headers['user-agent'];
   // http://bower.io/docs/config/#user-agent
   // NOTE this will obvs fail to match for custom bower user agents
-  var isBower = !!ua.match(/node\/v\d*\.\d*\.\d* (darwin|freebsd|linux|sunos|win32) (arm|ia32|x64)/);
+  var isBower = !!ua.match(/^node\/v\d*\.\d*\.\d* (darwin|freebsd|linux|sunos|win32) (arm|ia32|x64)/);
 
   if (isBower) {
     // bower complains a bunch if we don't include proper metadata with the response.
@@ -147,7 +147,7 @@ var handler = function (request, reply) {
 
     Modernizr.build(buildConfig, function(build) {
       var module = archive
-        .append(build, {name: bowerJSON.main})
+        .append(build, {name: 'bowerJSON.main})
         .append(JSON.stringify(bowerJSON, 0, 2), {name: 'bower.json'})
         .finalize();
 
@@ -161,6 +161,21 @@ var handler = function (request, reply) {
         .etag(ETag(bowerJSON.version + JSON.stringify(buildConfig)));
     });
 
+  } else if (!!ua.match(/^npm\//)) {
+
+    Modernizr.build(buildConfig, function(build) {
+    var archive = Archiver('tar');
+    var query = request.url.search.replace(/\.tar(.gz)?$/, '');
+    var buildConfig = config(query);
+      var module = archive
+        .append(build, {name: 'modernizr/' + bowerJSON.main})
+        .append(JSON.stringify(bowerJSON, 0, 2), {name: 'modernizr/package.json'})
+        .finalize();
+
+      reply(module)
+        .header('Content-disposition', 'attachment; filename=Modernizr.custom.tar')
+        .etag(ETag(bowerJSON.version + JSON.stringify(buildConfig)));
+    });
   } else if (process.env.NODE_ENV !== 'production') {
     // if it was not requested by bower, and not in prod mode, we serve the
     // homepage via the Hapi handlebars renderer
