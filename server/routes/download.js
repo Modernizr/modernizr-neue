@@ -147,7 +147,7 @@ var handler = function (request, reply) {
 
     Modernizr.build(buildConfig, function(build) {
       var module = archive
-        .append(build, {name: 'bowerJSON.main})
+        .append(build, {name: 'bowerJSON.main'})
         .append(JSON.stringify(bowerJSON, 0, 2), {name: 'bower.json'})
         .finalize();
 
