@@ -1,0 +1,35 @@
+---
+layout: post
+title:  "Modernizr 3.2.0"
+author: <a href="https://twitter.com/patrickkettner">Patrick Kettner</a>
+---
+
+Like sands through the hourglass, so are the days of our lives, so is the release of Modernizr 3.2.0.
+
+**Fixed**
+- [@TRowbotham](https://github.com/TRowbotham) fixed the unprefixed gradient detect to cover newer gradient syntaxes - [#1621](https://github.com/Modernizr/Modernizr/pull/1621)
+- [@ryanhughes](https://github.com/ryanhughes) fixed a [long standing](https://github.com/Modernizr/Modernizr/issues/1438) issue with the css hyphens detect - [#1514](https://github.com/Modernizr/Modernizr/pull/1514)
+- [@fonziemedia](https://github.com/fonziemedia) fixed the audio preload detect to be a functional check rather than simply a property check - [#1702](https://github.com/Modernizr/Modernizr/pull/1702)
+- [@JoshuaWise](https://github.com/JoshuaWise) fixed a (rather than) edge case in the transform3d detect - [#1704](https://github.com/Modernizr/Modernizr/pull/1704)
+- [@jorrit](https://github.com/jorrit) fixed a typo - [#1708](https://github.com/Modernizr/Modernizr/pull/1708)
+- [@roblarsen](https://github.com/roblarsen) added a hasOwnProperty check to the Modernizr class name creation process to avoid extraneous classes - [#1709](https://github.com/Modernizr/Modernizr/pull/1709)
+- [@aFarkas](https://github.com/aFarkas) fixed the `sizes` detect (used in responsive images) for Safari 9 - [#1728](https://github.com/Modernizr/Modernizr/pull/1728)
+
+**Added**
+- [@hypotenuse](https://github.com/hypotenuse) added a detect for XDomainRequest - [#1566](https://github.com/Modernizr/Modernizr/pull/1635)
+- [@roblarsen](https://github.com/roblarsen) added a basic detect for the new Crypto APIs - [#1661](https://github.com/Modernizr/Modernizr/pull/1661)
+- [@ChristianUlbrich](https://github.com/ChristianUlbrich) created a detect for the Base64 API - [#1696](https://github.com/Modernizr/Modernizr/pull/1696)
+- [@patrickkettner](https://github.com/patrickkettner) created a detect for the BDI element - [#1719](https://github.com/Modernizr/Modernizr/pull/1719)
+- [@deformhead](https://github.com/deformhead) added a config to force LF line endings - [#1711](https://github.com/Modernizr/Modernizr/pull/1711)
+- [@roblarsen](https://github.com/roblarsen) added a basic detect for the new Crypto APIs - [#1661](https://github.com/Modernizr/Modernizr/pull/1661)
+
+**Updated**
+- [@paulirish](https://github.com/paulirish) updated the docs to the hiddenscroll detect - [#1715](https://github.com/Modernizr/Modernizr/pull/1715)
+
+**Updated Dependencies**
+- updating [yargs](https://www.npmjs.com/package/yargs) to v3.26.0 to v3.28.0
+- updating [joi](https://www.npmjs.com/package/joi) to v6.9.0 to v6.9.1
+- updating [load-grunt-tasks](https://www.npmjs.com/package/load-grunt-tasks) to v0.2.1 to v3.3.0
+- updating [grunt-contrib-copy](https://www.npmjs.com/package/grunt-contrib-copy) to v0.8.1 to v0.8.2
+- updating [grunt-contrib-clean](https://www.npmjs.com/package/grunt-contrib-clean) to v0.4.1 to v0.6.0
+- updating [marked](https://www.npmjs.com/package/marked) to v0.2.10 to v3.5.0, which actually fixes [several](https://app.snyk.io/vuln/npm:marked:20140131) [code](https://app.snyk.io/vuln/npm:marked:20140131-1) [vulnerabilities](https://app.snyk.io/vuln/npm:marked:20140131-2)
