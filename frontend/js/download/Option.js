@@ -75,9 +75,10 @@ var Option = React.createClass({
     }
   },
 
-  change: function() {
+  change: function(e) {
     var props = this.props;
     var data = props.data;
+    data.selected = e.target.checked;
 
     if (props.change) {
       props.change(data);

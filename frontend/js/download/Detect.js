@@ -7,6 +7,9 @@ var DOM = React.DOM, li = DOM.li;
 var Detect = React.createClass({
 
   shouldComponentUpdate: function(newProps, newState) {
+    if (this.props.children === 'Application Cache') {
+      console.log('shouldComponentUpdate');
+    }
     return this.props.expanded !== newProps.expanded ||
       this.state.selected !== newState.selected;
   },
@@ -29,8 +32,7 @@ var Detect = React.createClass({
           onFocus: this.focus,
           onBlur: this.blur,
           onMouseDown: this.mouseDown,
-          onKeyDown: this.keyDown,
-          onClick: this.click
+          onKeyDown: this.keyDown
         },
         Option({
           toggle: props.toggle,
@@ -105,7 +107,7 @@ var Detect = React.createClass({
 
   change: function(data) {
     this.props.select(data);
-    this.setState({selected: true});
+    this.setState({selected: data.selected});
   }
 });
 
