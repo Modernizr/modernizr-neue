@@ -111,6 +111,22 @@ if ('serviceWorker' in navigator &&
   });
 }
 
+if (!('contains' in SVGElement.prototype)) {
+  SVGElement.prototype.contains = function contains(node) {
+    if (!(0 in arguments)) {
+      throw new TypeError('1 argument is required');
+    }
+
+    do {
+      if (this === node) {
+        return true;
+      }
+    } while (node = node && node.parentNode);
+
+    return false;
+  };
+}
+
 ZeroClipboard.config({
   swfPath: '/lib/zeroclipboard/dist/ZeroClipboard.swf',
   forceHandCursor: true,
