@@ -5,7 +5,6 @@ This is now live at [modernizr.com](https://modernizr.com/)
 ### setup
 
 ```
-npm install -g gulp
 npm install
 bower install
 ```
