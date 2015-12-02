@@ -15,7 +15,7 @@ var Modernizr = require('modernizr');
 var modernizrMetadata = Modernizr.metadata();
 var bowerJSON = require('../util/bowerJSON')();
 var modernizrOptions = require('../util/modernizrOptions');
-var _ = require(Path.join(__dirname, '..', '..', 'frontend', 'js', 'lodash.custom'));
+var _ = require('lodash.custom');
 
 // the `builderContent` step is super heavy, as a result, do not load it if we
 // are in a production enviroment

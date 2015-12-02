@@ -31,7 +31,7 @@ gulp.task('browserify', function() {
   // larger lib. So use the `.min` mode when building the production site to save those byte$
   var reactVersion = process.env.NODE_ENV === 'production' ? 'react/dist/react-with-addons.min' : 'react/addons';
 
-  return browserify('./frontend/js/download/index.js')
+  return browserify('./frontend/js/download/index.js', {paths: ['./node_modules', './frontend/js']})
     .transform(aliasify, {
       aliases: {
         'react/addons': reactVersion
@@ -70,7 +70,7 @@ gulp.task('handlebars', function() {
     options: JSON.stringify(modernizrOptions),
     builderContent: require('./server/buildSteps/download.js'),
     scripts: [
-      '/js/lodash.custom.js',
+      '../nodes_modules/lodash.custom.js',
       '/js/prod.js',
       '/lib/r.js/dist/r.js',
       '/lib/modernizr/lib/build.js',
@@ -193,7 +193,7 @@ gulp.task('modernizr', function(cb) {
 });
 
 // lodash builds our custom version of lodash. try and keep it tight.
-gulp.task('lodash', function(cb) {
+gulp.task('build-lodash', function(cb) {
   var includes = [
     'chain',
     'contains',
@@ -219,10 +219,17 @@ gulp.task('lodash', function(cb) {
     'union'
   ].join();
 
-  var output = 'frontend/js/lodash.custom.js';
+  var output = './node_modules/lodash.custom.js';
 
-  return exec('./node_modules/.bin/lodash include=' + includes + ' -d -o ' + output, cb);
+  return exec('./node_modules/.bin/lodash include=' + includes + ' -d -o ' + output);
 });
+
+gulp.task('copy-lodash', function() {
+  gulp.src('./node_modules/lodash.custom.js')
+    .pipe(plugins.copy('frontend/js', {prefix: 2}))
+});
+
+gulp.task('lodash', ['build-lodash', 'copy-lodash']);
 
 // `uglify-combined` outputs one giant glob of javascript used on `/download`
 gulp.task('uglify-combined', function() {
@@ -249,7 +256,7 @@ gulp.task('uglify-loose', function() {
     'frontend/lib/pretty-bytes/pretty-bytes.js',
     'frontend/lib/r.js/dist/r.js',
     'frontend/lib/serviceworker-cache-polyfill.js/index.js',
-    'frontend/js/lodash.custom.js',
+    'node_modules/lodash.custom.js',
     'frontend/lib/requirejs-plugins/**/*.js'
   ], {base: './frontend'})
     .pipe(plugins.sourcemaps.init())
