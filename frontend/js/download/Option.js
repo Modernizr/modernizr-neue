@@ -2,7 +2,7 @@
 var React = require('react/addons');
 var SVGToggle = React.createFactory(require('./SVGToggle'));
 var Metadata = React.createFactory(require('./Metadata'));
-var DOM = React.DOM, div = DOM.div, input = DOM.input, label = DOM.label;
+var DOM = React.DOM, span = DOM.span, input = DOM.input, label = DOM.label;
 
 var Option = React.createClass({
 
@@ -14,7 +14,7 @@ var Option = React.createClass({
     var name = data.name;
 
     return (
-      div({className: props.className},
+      span({className: props.className},
         input({
           ref: 'input',
           type: 'checkbox',

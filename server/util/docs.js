@@ -1,5 +1,5 @@
 'use strict';
-var _ = require('lodash.custom');
+var _ = require('../../frontend/js/lodash.custom.js');
 var modernizr = require('modernizr');
 var marked = require('marked');
 var path = require('path');

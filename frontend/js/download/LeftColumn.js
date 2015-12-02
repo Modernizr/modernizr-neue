@@ -4,7 +4,6 @@ var PureRenderMixin = React.addons.PureRenderMixin;
 var Option = React.createFactory(require('./Option'));
 var util = require('./util');
 var cx = require('classnames');
-var _ = require('lodash.custom');
 
 var pluralize = util.pluralize;
 var DOM = React.DOM, div = DOM.div, button = DOM.button, label = DOM.label, input = DOM.input;
