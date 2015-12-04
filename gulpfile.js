@@ -2,6 +2,7 @@
 var fs               = require('fs');
 var del              = require('del');
 var gulp             = require('gulp');
+var globby           = require('globby');
 var aliasify         = require('aliasify');
 var merge            = require('merge-stream');
 var modernizr        = require('modernizr');
@@ -273,6 +274,22 @@ gulp.task('uglify-sw', function() {
 
 gulp.task('uglify', ['uglify-combined', 'uglify-loose', 'uglify-sw']);
 
+gulp.task('appcache', function() {
+  var modernizrFiles = globby.sync([
+    './dist/lib/modernizr/lib/**/*.js',
+    './dist/lib/modernizr/src/**/*.js',
+    './dist/lib/modernizr/feature-detects/**/*.js'
+  ], {
+    cwd: ''
+  }).join('\n');
+
+  return gulp.src('frontend/offline.appcache')
+    .pipe(plugins.replace('__CACHE_VERSION__', process.env.cache_time))
+    .pipe(plugins.replace('__ASSETS__', modernizrFiles))
+    .pipe(plugins.replace('./dist', ''))
+  .pipe(gulp.dest('dist'));
+});
+
 gulp.task('clean', function(cb) {
   return del([
     'dist',
@@ -342,7 +359,7 @@ gulp.task('gh-pages', ['deploy'], function(cb) {
 });
 
 // seperate out the tasks that are repeated in both deploy and develop steps.
-var tasks = ['modernizr', 'lodash', 'browserify', 'global_browserify', 'styles'];
+var tasks = ['modernizr', 'lodash', 'browserify', 'global_browserify', 'styles', 'appcache'];
 
 // `deploy` builds the static version of the site. Assuming a javascript supported
 // client, everything _should_ work 100% when built. Note that there are a few

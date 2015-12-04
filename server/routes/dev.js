@@ -91,6 +91,18 @@ module.exports = [
     }
   }, {
     method: 'GET',
+    path: '/download-appcache',
+    handler: function(request, reply) {
+      reply.view('pages/download-appcache');
+    }
+  }, {
+    method: 'GET',
+    path: '/offline.appcache',
+    handler: function(request, reply) {
+      reply.file(Path.join(baseDir, 'dist', 'offline.appcache'));
+    }
+  }, {
+    method: 'GET',
     path: '/docs',
     handler: function(request, reply) {
       reply.view('pages/docs', {

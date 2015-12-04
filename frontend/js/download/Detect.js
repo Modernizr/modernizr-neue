@@ -7,9 +7,6 @@ var DOM = React.DOM, li = DOM.li;
 var Detect = React.createClass({
 
   shouldComponentUpdate: function(newProps, newState) {
-    if (this.props.children === 'Application Cache') {
-      console.log('shouldComponentUpdate');
-    }
     return this.props.expanded !== newProps.expanded ||
       this.state.selected !== newState.selected;
   },

@@ -109,6 +109,17 @@ if ('serviceWorker' in navigator &&
   .catch(function(error) {
     console.error(error);
   });
+} else if ('applicationCache' in window) {
+    var iframe = document.createElement('iframe');
+    iframe.src = '/download-appcache';
+    iframe.className='hidden';
+    document.body.appendChild(iframe);
+    applicationCache.addEventListener('error', function(e) {
+      try {
+        Bugsnag.notifyException(e);
+      } catch (e) {
+      }
+    });
 }
 
 if (!('contains' in SVGElement.prototype)) {
