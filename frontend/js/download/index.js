@@ -3,11 +3,39 @@ var React = require('react/addons');
 var DownloadUI = React.createFactory(require('./DownloadUI'));
 var currentSearch;
 var shouldBuild;
+var useHash;
+
+if ('serviceWorker' in navigator &&
+    (location.protocol === 'https:' || location.hostname === 'localhost')
+   ) {
+  navigator.serviceWorker.register('/serviceworker.js')
+  .catch(function(error) {
+    console.error(error);
+  });
+} else if ('applicationCache' in window) {
+    var iframe = document.createElement('iframe');
+    iframe.src = '/download-appcache';
+    iframe.className='hidden';
+    document.body.appendChild(iframe);
+
+    useHash = true;
+    localStorage.setItem('useHash', useHash);
+
+    applicationCache.addEventListener('error', function(e) {
+      try {
+        Bugsnag.notifyException(e);
+      } catch (e) {
+      }
+    });
+}
+
 
 if (location.hash.length || location.search.length) {
+  var goodSeparator = useHash ? '#' : '?';
+  var badSeparator = useHash ? '?' : '#';
   var str     = location.hash || location.search;
   var baseUrl = [location.protocol, '//', location.host, location.pathname].join('');
-  var query   = str.replace('#', '?');
+  var query   = str.replace(badSeparator, goodSeparator);
   var queries = _.chain(query.replace(/^\?/, '').split('&'))
     .map(function(query) {
       return query.split('-');
@@ -62,7 +90,14 @@ if (location.hash.length || location.search.length) {
       return query;
     });
 
-    window.history.replaceState({}, '', baseUrl + query);
+    if (useHash) {
+      if (location.search.length) {
+        window.history.replaceState({}, '', baseUrl);
+      }
+      location.hash = query;
+    } else {
+      window.history.replaceState({}, '', baseUrl + query);
+    }
   }
 }
 
@@ -100,26 +135,6 @@ if ('Worker' in window) {
   requirejs(['build'], function( _builder ) {
     window.builder = _builder;
   });
-}
-
-if ('serviceWorker' in navigator &&
-    (location.protocol === 'https:' || location.hostname === 'localhost')
-   ) {
-  navigator.serviceWorker.register('/serviceworker.js')
-  .catch(function(error) {
-    console.error(error);
-  });
-} else if ('applicationCache' in window) {
-    var iframe = document.createElement('iframe');
-    iframe.src = '/download-appcache';
-    iframe.className='hidden';
-    document.body.appendChild(iframe);
-    applicationCache.addEventListener('error', function(e) {
-      try {
-        Bugsnag.notifyException(e);
-      } catch (e) {
-      }
-    });
 }
 
 if (!('contains' in SVGElement.prototype)) {

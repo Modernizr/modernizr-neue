@@ -18,6 +18,20 @@ var server = new Hapi.Server({
   }
 });
 
+var preResponse = function(request, reply) {
+  // set the default caching to 6 hours
+  var response = request.response;
+
+  if (response.isBoom) {
+    return reply();
+  }
+
+  request.response.settings.ttl = 6 * 60 * 60 * 1000;
+
+  reply.continue();
+};
+
+
 server.views({
   engines: {
     hbs: require('handlebars')
@@ -31,8 +45,7 @@ server.connection({ port: process.env.NODE_PORT || 3000 });
 
 server.route(routes);
 
-// prime the modernizr.options cache so its returns the array right away
-modernizr.options();
+server.ext('onPreResponse', preResponse);
 
 server.start(function () {
   console.log('Server running at:', server.info.uri);

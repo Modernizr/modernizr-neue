@@ -106,6 +106,8 @@ var DownloadUI = React.createClass({
 
   updateURL: function() {
     var state = this.state;
+    var useHash = localStorage.useHash;
+    var seperator = useHash ? '#' : '?';
     var classPrefix = state.classPrefix;
     var currentSearch = state.currentSearch || '';
     var setClasses = classPrefix && classPrefix !== '';
@@ -148,13 +150,17 @@ var DownloadUI = React.createClass({
         ( (setClasses && classPrefix) ?
           '-cssclassprefix:' + escape(classPrefix) : '' );
 
-    buildQuery = buildQuery ? '?' + buildQuery : '';
+    buildQuery = buildQuery ? seperator + buildQuery : '';
 
     if (searchState) {
-      buildQuery = buildQuery ? buildQuery + '&' + searchState : '?' + searchState;
+      buildQuery = buildQuery ? buildQuery + '&' + searchState : seperator + searchState;
     }
 
-    window.history.replaceState({}, '', baseUrl + buildQuery);
+    if (useHash) {
+      location.hash = buildQuery;
+    } else {
+      window.history.replaceState({}, '', baseUrl + buildQuery);
+    }
     return buildQuery;
   },
 
