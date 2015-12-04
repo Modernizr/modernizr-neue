@@ -276,9 +276,9 @@ gulp.task('uglify', ['uglify-combined', 'uglify-loose', 'uglify-sw']);
 
 gulp.task('appcache', function() {
   var modernizrFiles = globby.sync([
-    './dist/lib/modernizr/lib/**/*.js',
-    './dist/lib/modernizr/src/**/*.js',
-    './dist/lib/modernizr/feature-detects/**/*.js'
+    './frontend/lib/modernizr/lib/**/*.js',
+    './frontend/lib/modernizr/src/**/*.js',
+    './frontend/lib/modernizr/feature-detects/**/*.js'
   ], {
     cwd: ''
   }).join('\n');
@@ -286,7 +286,7 @@ gulp.task('appcache', function() {
   return gulp.src('frontend/offline.appcache')
     .pipe(plugins.replace('__CACHE_VERSION__', process.env.cache_time))
     .pipe(plugins.replace('__ASSETS__', modernizrFiles))
-    .pipe(plugins.replace('./dist', ''))
+    .pipe(plugins.replace('./frontend', ''))
   .pipe(gulp.dest('dist'));
 });
 
