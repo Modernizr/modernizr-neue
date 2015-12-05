@@ -4,6 +4,8 @@ CACHE MANIFEST
 
 /favicon.ico
 
+/
+/download
 /index.html
 /download/index.html
 
@@ -17,6 +19,7 @@ CACHE MANIFEST
 
 /js/prod.js
 /js/build.js
+/js/lodash.custom.js
 /js/download/workers/build.js
 /js/download/workers/gzip.js
 
