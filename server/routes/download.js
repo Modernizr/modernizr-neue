@@ -136,8 +136,14 @@ var handler = function (request, reply) {
   // http://bower.io/docs/config/#user-agent
   // NOTE this will obvs fail to match for custom bower user agents
   var isBower = !!ua.match(/^node\/v\d*\.\d*\.\d* (darwin|freebsd|linux|sunos|win32) (arm|ia32|x64)/);
-  var query = request.url.search.replace(/\.tar(\.gz)?|zip$/, '');
-  var buildConfig = config(query);
+  var search = request.url.search;
+  var buildConfig;
+  var query;
+
+  if (search) {
+    query = search.replace(/\.tar(\.gz)?|zip$/, '');
+    buildConfig = config(query);
+  }
 
   if (isBower) {
     // bower complains a bunch if we don't include proper metadata with the response.
