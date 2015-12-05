@@ -19,14 +19,14 @@ var server = new Hapi.Server({
 });
 
 var preResponse = function(request, reply) {
-  // set the default caching to 6 hours
   var response = request.response;
 
   if (response.isBoom) {
     return reply();
   }
 
-  request.response.settings.ttl = 6 * 60 * 60 * 1000;
+  // cache for 6 hours
+  request.response.headers['cache-control'] = 'max-age=21600 public';
 
   reply.continue();
 };
