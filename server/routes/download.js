@@ -136,14 +136,14 @@ var handler = function (request, reply) {
   // http://bower.io/docs/config/#user-agent
   // NOTE this will obvs fail to match for custom bower user agents
   var isBower = !!ua.match(/^node\/v\d*\.\d*\.\d* (darwin|freebsd|linux|sunos|win32) (arm|ia32|x64)/);
+  var query = request.url.search.replace(/\.tar(\.gz)?|zip$/, '');
+  var buildConfig = config(query);
 
   if (isBower) {
     // bower complains a bunch if we don't include proper metadata with the response.
     // in order to do so, we create a virtual tar file, and but the build and bower.json
     // file in it
     var archive = Archiver('tar');
-    var query = request.url.search.replace(/\.tar(\.gz)?|zip$/, '');
-    var buildConfig = config(query);
 
     Modernizr.build(buildConfig, function(build) {
       var module = archive
@@ -165,8 +165,6 @@ var handler = function (request, reply) {
 
     Modernizr.build(buildConfig, function(build) {
     var archive = Archiver('tar');
-    var query = request.url.search.replace(/\.tar(.gz)?$/, '');
-    var buildConfig = config(query);
       var module = archive
         .append(build, {name: 'modernizr/' + bowerJSON.main})
         .append(JSON.stringify(bowerJSON, 0, 2), {name: 'modernizr/package.json'})
