@@ -23,13 +23,15 @@ var Metadata = React.createClass({
     var notes = data.notes;
     var polyfills = data.polyfills;
     var warnings = data.warnings;
+    var property = data.property;
 
 
     return (
       div({className: 'metadataColumn column'},
         div({className: 'name box ' + (authors.length ? 'hasAuthors' : '')},
           span({className: 'heading'}, name),
-          (!_.isEmpty(authors) && div({className: 'subheading'}, 'By: ' + listify(authors)))
+          (!_.isEmpty(authors) && div({className: 'subheading'}, 'By: ' + listify(authors))),
+          div({className: 'propertyname', dangerouslySetInnerHTML: {__html: '<code>' + property + '</code>'}})
         ),
         (async && div({className: 'box metadata-async'}, 'This is an async detect')),
         (docs && MetadataDocs({docs: docs})),
