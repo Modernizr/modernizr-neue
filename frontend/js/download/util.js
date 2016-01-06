@@ -21,7 +21,7 @@ var gruntify = function(config) {
   gruntConfig.tests = _.map(config['feature-detects'], function(test) {
       return test.replace(/^test\//, '');
     });
-  gruntConfig.extensibility = config.options;
+  gruntConfig.options = config.options;
   gruntConfig.uglify = config.minify;
   return JSON.stringify(gruntConfig, 0, 2);
 };
