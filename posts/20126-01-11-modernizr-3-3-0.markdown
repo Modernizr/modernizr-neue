@@ -1,0 +1,49 @@
+---
+layout: post
+title:  "Modernizr 3.3.0"
+author: <a href="https://twitter.com/patrickkettner">Patrick Kettner</a>
+---
+
+After a long holiday hiatus, its a brand new year, and therefore time for a brand new release from Modernizr!
+
+**Fixed**
+- [@mems](https://github.com/mems) fixed the mp3 audio detect for Firefox by adding the proper codec - [#1740](https://github.com/Modernizr/Modernizr/pull/1740)
+- [@niksy](https://github.com/niksy) fixed an issue where the flash detect could add a fake body when it didn't need too, which screwed up IE 8 (R.I.P.)- [#1740](https://github.com/Modernizr/Modernizr/pull/1557)
+- [@jnordberg](https://github.com/jnordberg) fixed the dependency ordering for requirejs on the css filters detects (whoops!) - [#1744](https://github.com/Modernizr/Modernizr/pull/1744)
+- [@mstrutt](https://github.com/mstrutt) fixed a false negative issue in nth test - [#1757](https://github.com/Modernizr/Modernizr/pull/1757)
+- [@akamike](https://github.com/akamike) fixed an issue where setClasses was not being included despite being added via config - [#1772](https://github.com/Modernizr/Modernizr/pull/1772)
+- [@patrickkettner](https://github.com/patrickkettner) fixed a handful of errors that cropped up in older browsers in [078aea](https://github.com/Modernizr/Modernizr/commit/078aea)
+- [@aFarkas](https://github.com/aFarkas) fixed a regression in the input type=number detect in [695fd5](https://github.com/Modernizr/Modernizr/commit/695fd5)
+- [@ryanseddon](https://github.com/ryanseddon) fixed base64 video used in the video autoplay detect, which was causing false negatives in some browsers - [#1795](https://github.com/Modernizr/Modernizr/pull/1795)
+- [@patrickkettner](https://github.com/patrickkettner) fixed an issue where custom tests weren't allowed to be passed into the buildQuery function - [#1801](https://github.com/Modernizr/Modernizr/pull/1801)
+- [@aakoch](https://github.com/aakoch) fixed a typo in the xdomainrequest detect - [#1803](https://github.com/Modernizr/Modernizr/pull/1803)
+- [@alexgibson](https://github.com/alexgibson) fixed false positive in Notifications test for Chrome on Android - [#1813](https://github.com/Modernizr/Modernizr/pull/1813)
+- [@rowanthorpe](https://github.com/rowanthorpe) fixed the syntax for form validation to allow it to run in XHTML mode - [#1824](https://github.com/Modernizr/Modernizr/pull/1824)
+
+**Added**
+- [@ryanseddon](https://github.com/ryanseddon) added that Modernizr follows the [Open Code of Conduct](http://todogroup.org/opencodeofconduct/) - [#1743](https://github.com/Modernizr/Modernizr/pull/1743)
+- [@KraigWalker](https://github.com/KraigWalker) added a detect for Safari's new Force Touch/3D Touch API- [#1743](https://github.com/Modernizr/Modernizr/pull/1613)
+- [@strarsis](https://github.com/strarsis) added a detect for CSS hairlines - [#1769](https://github.com/Modernizr/Modernizr/pull/1769)
+- [@jokeyrhyme](https://github.com/jokeyrhyme) added a detect for ES6 collections - [#1396](https://github.com/Modernizr/Modernizr/pull/1396)
+- [@patrickkettner](https://github.com/patrickkettner) added a detect for font ligatures - [#1774](https://github.com/Modernizr/Modernizr/pull/1774)
+- [@patrickkettner](https://github.com/patrickkettner) added a detect for crossOrigin support on the img tag - [#1775](https://github.com/Modernizr/Modernizr/pull/1775)
+- [@EricWVGG](https://github.com/EricWVGG) added a detect for jpeg 2000 - [#1679](https://github.com/Modernizr/Modernizr/pull/1679)
+- [@patrickkettner](https://github.com/patrickkettner) added a detect for css snap scroll points - [#1778](https://github.com/Modernizr/Modernizr/pull/1778)
+
+**Updated**
+- [@patrickkettner](https://github.com/patrickkettner) updated the base64 detect property to not use a hyphen by default (but still register one via an alias) - [#1761](https://github.com/Modernizr/Modernizr/pull/1761)
+- [@patrickkettner](https://github.com/patrickkettner) updated a bunch of style fixes as the result of a new jscs version - [#1737](https://github.com/Modernizr/Modernizr/pull/1737)
+- [@patrickkettner](https://github.com/patrickkettner) simplified the bdi check in [8d5169](https://github.com/Modernizr/Modernizr/commit/8d5169)
+
+**Updated Dependencies**
+- updated [joi](https://www.npmjs.com/package/joi) from v6.9.1 to v6.10.0
+- updated [grunt-contrib-clean](https://www.npmjs.com/package/grunt-contrib-clean) from v0.6.0 to v0.7.0
+- updated [doctrine](https://www.npmjs.com/package/doctrine) from v0.6.4 to v1.1.0
+- updated [yargs](https://www.npmjs.com/package/yargs) from v3.29.0 to v3.31.0
+- updated [requirejs](https://www.npmjs.com/package/requirejs) from v2.1.20 to v2.1.22
+- updated [grunt-contrib-connect](https://www.npmjs.com/package/grunt-contrib-connect) from v0.5.0 to v0.11.2
+- added [serve-static](https://www.npmjs.com/package/grunt-contrib-connect) to compensate for changes in newer versions of grunt-contrib-connect
+- updated [grunt-contrib-jscs](https://www.npmjs.com/package/grunt-contrib-jscs) from v1.8.0 to v2.6.0
+- updated [grunt-contrib-mocha](https://www.npmjs.com/package/grunt-contrib-mocha) from v0.4.13 to v0.4.15
+- updated [grunt-saucelabs](https://www.npmjs.com/package/grunt-saucelabs) from v8.6.1 to v8.6.2
+- updated [load-grunt-tasks](https://www.npmjs.com/package/load-grunt-tasks) from v3.3.0 to v3.4.0
