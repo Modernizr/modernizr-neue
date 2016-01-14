@@ -28,6 +28,12 @@ var preResponse = function(request, reply) {
   // cache for 6 hours
   request.response.headers['cache-control'] = 'max-age=21600 public';
 
+  // help prevent xss
+  request.response.headers['x-xss-protection'] = 'max-age=21600 public';
+
+  // stops browsers from trying to sniff the content type and forces it to stick with the declared content-type
+  request.response.headers['x-content-type-options'] = 'nosniff';
+
   reply.continue();
 };
 
