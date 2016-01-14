@@ -11,16 +11,20 @@ var pluralize = function(baseStr, arr) {
   return baseStr + ((length > 1 || length === 0) ? 's': '');
 };
 
-var gruntify = function(config) {
+var gruntify = function(config, metadata) {
   var gruntConfig = {
     parseFiles: true,
     customTests: [],
     devFile: '/PATH/TO/modernizr-dev.js',
     outputFile: '/PATH/TO/modernizr-output.js'
   };
-  gruntConfig.tests = _.map(config['feature-detects'], function(test) {
-      return test.replace(/^test\//, '');
+  gruntConfig.tests = _.map(config['feature-detects'], function(amdPath) {
+    var detect = _.find(metadata, function(detect) {
+      return detect.amdPath === amdPath || detect.amdPath === 'test/' + amdPath;
     });
+
+    return detect.property;
+  });
   gruntConfig.options = config.options;
   gruntConfig.uglify = config.minify;
   return JSON.stringify(gruntConfig, 0, 2);

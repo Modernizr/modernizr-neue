@@ -53,7 +53,7 @@ var DownloadOverlay = React.createClass({
           DownloadOverlayOption({
             title: 'Grunt Config',
             expanded: state.expanded,
-            content: gruntify(config),
+            content: gruntify(config, props.allDetects),
             toggleTextarea: this.toggleTextarea,
             hasFlash: hasFlash,
             type: 'application/json',
