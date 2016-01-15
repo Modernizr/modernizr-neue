@@ -1,0 +1,20 @@
+---
+layout: post
+title:  "Modernizr 3.3.1"
+author: <a href="https://twitter.com/patrickkettner">Patrick Kettner</a>
+---
+
+What a difference a day makes - we found a couple glaring bugs recently, and so we are releasing 3.3.1 right on the tail of [3.3.0](https://modernizr.com/news/modernizr-3-3-0)
+
+**Fixed**
+- [@a.shevchenko](https://github.com/a.shevchenko) fixed an issue where the indexeddb check threw an error when cookies are blocked in Firefox - [#1831](https://github.com/Modernizr/Modernizr/pull/1831)
+- [@patrickkettner](https://github.com/patrickkettner) fixed an issue where multiple build() calls in quick succession caused contaminated builds - [#1832](https://github.com/Modernizr/Modernizr/pull/1832)
+- [@JaZo](https://github.com/JaZo) fixed a typo preventing an indexedDB subtest from ever runnning - [#1834](https://github.com/Modernizr/Modernizr/pull/1834)
+- [@patrickkettner](https://github.com/patrickkettner) fixed an where the cli version of modernizr would crash when using the inline feature-detect flags - [#1839](https://github.com/Modernizr/Modernizr/pull/1839)
+
+**Updated**
+- [@alrra](https://github.com/alrra) updated a bunch of documentation links to https - [#1838](https://github.com/Modernizr/Modernizr/pull/1838)
+
+**Updated Dependencies**
+- updated [jquery](https://www.npmjs.com/package/jquery) from v1.11.3 to v1.12.0
+- updated [lodash](https://www.npmjs.com/package/lodash) from v3.10.1 to v4.0.0, including [some compat fixes](https://github.com/Modernizr/Modernizr/commit/4738f5a957e1ecd25850007293f5c8c59cf03bbe)
