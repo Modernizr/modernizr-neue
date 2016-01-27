@@ -2,9 +2,16 @@
 var React = require('react/addons');
 var SVGToggle = React.createFactory(require('./SVGToggle'));
 var Metadata = React.createFactory(require('./Metadata'));
+var CodeExampleModal = React.createFactory(require('./CodeExampleModal'));
 var DOM = React.DOM, div = DOM.div, input = DOM.input, label = DOM.label;
 
 var Option = React.createClass({
+
+  getInitialState: function() {
+    return {
+      isExamplesOpen: false
+    };
+  },
 
   render: function() {
     var props = this.props;
@@ -12,6 +19,8 @@ var Option = React.createClass({
     var value = data.amdPath || data.property;
     var prop = data.property;
     var name = data.name;
+
+
 
     return (
       div({className: props.className},
@@ -38,7 +47,25 @@ var Option = React.createClass({
             className: 'detectToggle'
           })
         ),
-        (props.metaData && Metadata({ref: 'metadata', data: data}))
+        (props.metaData && Metadata({
+          ref: 'metadata',
+          data: data,
+          onViewExamplesClick: function() {
+            this.setState({
+              isExamplesOpen: true
+            });
+          }.bind(this)
+        })),
+        (props.metaData && this.state.isExamplesOpen && (
+          CodeExampleModal({
+            data: data,
+            onRequestClose: function() {
+              this.setState({
+                isExamplesOpen: false
+              });
+            }.bind(this)
+          })
+        ))
       )
     );
   },
