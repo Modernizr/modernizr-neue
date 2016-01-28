@@ -85,3 +85,27 @@
     border-color: $DarkGrey
   }
 }
+
+.modal {
+  position: fixed
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  background-color: rgba(255, 255, 255, 0.8)
+  z-index: 2
+  overflow: auto
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: center
+}
+.modal-inner {
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2)
+  padding: 20px
+  background-color: #fff
+  width: 100%
+  max-width: 500px
+  overflow: auto
+  line-height: 1.5em
+}

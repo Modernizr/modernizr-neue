@@ -7,50 +7,32 @@ var CodeExampleModal = React.createClass({
     var data = this.props.data;
 
     return div({
+      className: 'modal',
       onClick: function() {
         this.props.onRequestClose();
-      }.bind(this),
-      style: {
-        position: 'fixed',
-        top: 0, right: 0, bottom: 0, left: 0,
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
-        zIndex: 2,
-        overflow: 'auto',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }
+      }.bind(this)
     },
       div({
+        className: 'modal-inner',
         onClick: function(e) {
           e.stopPropagation();
-        }.bind(this),
-        style: {
-          boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.2)',
-          padding: 20,
-          backgroundColor: '#fff',
-          width: '100%',
-          maxWidth: 500,
-          overflow: 'auto',
-          lineHeight: '1.5em'
-        }
+        }.bind(this)
       },
-        span({style: {opacity: 0.5}}, 'CSS'),
-        pre({style: {overflow: 'visible'}},
-          '.no-' + data.property + ' .box { color: red; }\n' +
-          '.' + data.property + ' .box { color: green; }\n'
-        ),
-        span({style: {opacity: 0.5}}, 'JS'),
-        pre({style: {overflow: 'visible'}},
-          (data.async ? 'Modernizr.on(\'' + data.property + '\', function (result) {\n' : '') +
-          'if (' + (data.async ? 'result' : ('Modernizr.' + data.property)) + ') {\n' +
-          '// supported\n' +
-          '} else {\n' +
-          '  // not-supported\n' +
-          '}\n' +
+        span({className: 'note'}, 'CSS'),
+        pre({className: 'codeblock', dangerouslySetInnerHTML: {__html:
+          '<span class="pl-e">.no-' + data.property + ' .box</span> { <span class="pl-c1">color: red;</span> }\n' +
+          '<span class="pl-e">.' + data.property + ' .box</span> { <span class="pl-c1">color: green;</span> }\n'
+        }}),
+        span({className: 'note'}, 'JS'),
+        pre({className: 'codeblock', dangerouslySetInnerHTML: {__html:
+          (data.async ? '<span class="pl-smi">Modernizr</span>.<span class="pl-en">on</span>(<span class="pl-s">\'' + data.property + '\'</span>, <span class="pl-k">function</span>(<span class="pl-smi">result</span>) {\n' : '') +
+          (data.async ? '  ' : '') + '<span class="pl-k">if</span> (' + (data.async ? 'result' : ('Modernizr.<span class="pl-c1">' + data.property + '</span>')) + ') {\n' +
+          (data.async ? '  ' : '') + '  <span class="pl-c">// supported</span>\n' +
+          (data.async ? '  ' : '') + '} <span class="pl-k">else</span> {\n' +
+          (data.async ? '  ' : '') + '  <span class="pl-c">// not-supported</span>\n' +
+          (data.async ? '  ' : '') + '}\n' +
           (data.async ? '});' : '')
-        )
+        }})
       )
     )
   }
