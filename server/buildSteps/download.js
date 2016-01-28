@@ -7,4 +7,4 @@ var downloadFactory = React.createFactory(DownloadModule);
 var options = require('../util/modernizrOptions');
 
 // render a static version of the `builder` for a faster inital render/script-less clients
-module.exports = null;//React.renderToString(downloadFactory({detects:Modernizr.metadata(), options: options}));
+module.exports = React.renderToString(downloadFactory({detects:Modernizr.metadata(), options: options}));
