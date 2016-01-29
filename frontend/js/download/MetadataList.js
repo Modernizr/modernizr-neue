@@ -1,6 +1,6 @@
 'use strict';
-var React = require('react/addons');
-var PureRenderMixin = React.addons.PureRenderMixin;
+var React = require('react');
+var PureRenderMixin = require('react-addons-pure-render-mixin');
 var util = require('./util');
 var pluralize = util.pluralize;
 var DOM = React.DOM, div = DOM.div, ul = DOM.ul, li = DOM.li;
