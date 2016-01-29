@@ -36,7 +36,8 @@ var DownloadUI = React.createClass({
                     toggle: this.toggleOverlay,
                     buildContent: state.build,
                     config: state.buildConfig,
-                    updateAction: this.updateAction
+                    updateAction: this.updateAction,
+                    allDetects: allDetects
                   }) :
                   null;
 
