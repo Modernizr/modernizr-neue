@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('lodash');
-var React = require('react/addons');
-var PureRenderMixin = React.addons.PureRenderMixin;
+var React = require('react');
+var PureRenderMixin = require('react-addons-pure-render-mixin');
 var Detect = React.createFactory(require('./Detect'));
 var DOM = React.DOM, ul = DOM.ul, li = DOM.li;
 var cx = require('classnames');
@@ -25,8 +25,8 @@ var DetectList = React.createClass({
 
       var nextRef = Math.max(0, Math.min(currentIndex + offset, this.props.detects.length));
       if (nextRef !== currentIndex) {
-        this.refs[currentIndex].refs.option.refs.input.getDOMNode().blur();
-        this.refs[nextRef].refs.option.refs.input.getDOMNode().focus();
+        this.refs[currentIndex].refs.option.refs.input.blur();
+        this.refs[nextRef].refs.option.refs.input.focus();
       }
       e.preventDefault();
     }

@@ -1,6 +1,6 @@
 'use strict';
-var React = require('react/addons');
-var PureRenderMixin = React.addons.PureRenderMixin;
+var React = require('react');
+var PureRenderMixin = require('react-addons-pure-render-mixin');
 var DOM = React.DOM, textarea = DOM.textarea, a = DOM.a, li = DOM.li, label = DOM.label, button = DOM.button, span=DOM.span;
 
 var DownloadOverlayOption = React.createClass({
@@ -18,7 +18,7 @@ var DownloadOverlayOption = React.createClass({
     var state = this.state;
     var props = this.props;
     if (state.hasFlash) {
-      var zeroClipboard = new ZeroClipboard(this.refs[props.title].getDOMNode());
+      var zeroClipboard = new ZeroClipboard(this.refs[props.title]);
       ZeroClipboard.on('error', function() {
         Modernizr.flash = false;
         self.setState({hasFlash: false});
@@ -76,7 +76,7 @@ var DownloadOverlayOption = React.createClass({
   componentDidUpdate: function() {
     this.setupClipboard();
     var textarea = this.refs.textarea;
-    textarea && textarea.getDOMNode().select();
+    textarea && textarea.select();
   },
 
   clickDownload: function() {

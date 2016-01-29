@@ -56,7 +56,9 @@
     "marked": "^0.8.2",
     "modernizr": "^3.11.8",
     "normalize.css": "^8.0.1",
-    "react": "^0.13.0",
+    "react": "^0.14.0",
+    "react-addons-pure-render-mixin": "^0.14.7",
+    "react-dom": "^0.14.0",
     "rss": "^1.2.2",
     "yaml-front-matter": "^3.4.1",
     "zeroclipboard": "^2.3.0"

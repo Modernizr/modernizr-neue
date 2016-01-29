@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('lodash');
-var React = require('react/addons');
-var PureRenderMixin = React.addons.PureRenderMixin;
+var React = require('react');
+var PureRenderMixin = require('react-addons-pure-render-mixin');
 var util = require('./util');
 var listify = util.listify;
 var DOM = React.DOM, div = DOM.div, ul = DOM.ul, li = DOM.li, a = DOM.a;

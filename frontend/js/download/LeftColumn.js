@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('lodash');
-var React = require('react/addons');
-var PureRenderMixin = React.addons.PureRenderMixin;
+var React = require('react');
+var PureRenderMixin = require('react-addons-pure-render-mixin');
 var Option = React.createFactory(require('./Option'));
 var util = require('./util');
 var cx = require('classnames');

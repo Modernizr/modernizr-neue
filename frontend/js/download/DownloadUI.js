@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react/addons');
+var React = require('react');
 var DetectList      = React.createFactory(require('./DetectList'));
 var LeftColumn      = React.createFactory(require('./LeftColumn'));
 var SearchHeader    = React.createFactory(require('./SearchHeader'));
@@ -80,7 +80,7 @@ var DownloadUI = React.createClass({
   focusFirst: function() {
     var topDetect = this.refs.detectList.refs[0];
     if (topDetect) {
-      topDetect.refs.option.refs.input.getDOMNode().focus();
+      topDetect.refs.option.refs.input.focus();
     }
   },
 
