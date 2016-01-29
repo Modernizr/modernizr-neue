@@ -1,5 +1,6 @@
 'use strict';
-var React = require('react/addons');
+var React = require('react');
+var ReactDOM = require('react-dom');
 var SVGToggle = React.createFactory(require('./SVGToggle'));
 var Metadata = React.createFactory(require('./Metadata'));
 var DOM = React.DOM, div = DOM.div, input = DOM.input, label = DOM.label;
@@ -49,7 +50,7 @@ var Option = React.createClass({
 
   keyDown: function(e) {
     if (e.which === 13) {
-      var input = this.refs.input.getDOMNode();
+      var input = this.refs.input;
       input.checked = !input.checked;
       this.change();
       e.preventDefault();
@@ -58,7 +59,7 @@ var Option = React.createClass({
 
   click: function(e) {
     var props = this.props;
-    var toggle = this.refs.SVGToggle.getDOMNode();
+    var toggle = ReactDOM.findDOMNode(this.refs.SVGToggle);
 
     if (props.ignoreLabelClick && !toggle.contains(e.target)) {
       e.preventDefault();

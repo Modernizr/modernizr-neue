@@ -1,6 +1,6 @@
 'use strict';
-var React = require('react/addons');
-var PureRenderMixin = React.addons.PureRenderMixin;
+var React = require('react');
+var PureRenderMixin = require('react-addons-pure-render-mixin');
 var Fuse = require('fuse.js');
 var DOM = React.DOM, div = DOM.div, input = DOM.input, label = DOM.label, button = DOM.button;
 var fuseOptions = {
@@ -44,7 +44,7 @@ var SearchHeader = React.createClass({
   },
 
   change: function() {
-    var val = this.refs.search.getDOMNode().value;
+    var val = this.refs.search.value;
     this.props.onChange(fuse.search(val), val);
   },
 

@@ -1,5 +1,6 @@
 'use strict';
-var React = require('react/addons');
+var React = require('react');
+var ReactDOM = require('react-dom');
 var Option = React.createFactory(require('./Option'));
 var cx = require('classnames');
 
@@ -56,7 +57,7 @@ var Detect = React.createClass({
       var windowTop = window.pageYOffset;
       var windowBottom = windowTop + windowHeight;
 
-      var node = this.getDOMNode();
+      var node = ReactDOM.findDOMNode(this);
       var nodeTop = node.offsetTop;
       var nodeBottom = nodeTop + node.offsetHeight;
       var offset;
@@ -84,7 +85,7 @@ var Detect = React.createClass({
 
   mouseDown: function(e) {
     var props = this.props;
-    var metadataPane = this.refs.option.refs.metadata.getDOMNode();
+    var metadataPane = ReactDOM.findDOMNode(this.refs.option.refs.metadata);
     if (metadataPane.contains(e.target) && !this.state.clickFocused) {
       this.setState({clickFocused: true});
     }
@@ -94,7 +95,7 @@ var Detect = React.createClass({
   blur: function(e) {
     if (this.state.clickFocused) {
       this.setState({clickFocused: false});
-      this.refs.option.refs.input.getDOMNode().focus();
+      this.refs.option.refs.input.focus();
       return e.preventDefault();
     }
 

@@ -62,7 +62,9 @@
     "he": "^0.5.0",
     "highlight.js": "^8.5.0",
     "modernizr": "^3",
-    "react": "^0.13.0",
+    "react": "^0.14.0",
+    "react-addons-pure-render-mixin": "^0.14.7",
+    "react-dom": "^0.14.0",
     "rss": "^1.1.1",
     "yaml-front-matter": "^3.2.3",
     "zeroclipboard": "^2.2.0"
