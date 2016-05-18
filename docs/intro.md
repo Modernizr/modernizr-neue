@@ -106,7 +106,7 @@ Say you include Modernizr's detection for CSS gradients. Depending on the browse
 
 #### classPrefix
 
-If you one of Modernizr's class names clashes with one of your preexisting classes, you have the option to add a `classPrefix` inside of [your config](#command-line-config). Consider the [hidden](https://github.com/Modernizr/Modernizr/blob/7b8c0f/feature-detects/dom/hidden.js) detect, which adds a `.hidden` class - something a lot of code bases already use to, well, _hide_ things. If you wanted to use that specific detection, you could use the following as your configuration
+If one of Modernizr's class names clashes with one of your preexisting classes, you have the option to add a `classPrefix` inside of [your config](#command-line-config). Consider the [hidden](https://github.com/Modernizr/Modernizr/blob/7b8c0f/feature-detects/dom/hidden.js) detect, which adds a `.hidden` class - something a lot of code bases already use to, well, _hide_ things. If you wanted to use that specific detection, you could use the following as your configuration
 
 ```json
 {
