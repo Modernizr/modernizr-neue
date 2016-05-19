@@ -43,7 +43,15 @@ var propToAMD = function(prop) {
     prop = prop.split('_');
   }
 
-  return _.where(modernizrMetadata, {'property': prop})[0].amdPath;
+  var detect = _.where(modernizrMetadata, {'property': prop});
+
+  if (_.isEmpty(detect)) {
+    // if the detect wasn't found, the property is probably inside of an array
+    // of differnet properties, which are typically used for back compat reasons
+    detect = _.where(modernizrMetadata, {'property': [prop]});
+  }
+
+  return detect && detect[0].amdPath;
 };
 
 var optProp = function(prop) {
