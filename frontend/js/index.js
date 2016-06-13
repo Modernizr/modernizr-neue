@@ -1,5 +1,5 @@
 'use strict';
-require('fontfaceobserver');
+require('fontfaceobserver/fontfaceobserver');
 
 new window.FontFaceObserver('Source Sans Pro', {})
   .check()
