@@ -1,0 +1,59 @@
+---
+layout: post
+title:  "Modernizr 3.4.0"
+author: <a href="https://twitter.com/patrickkettner">Patrick Kettner</a>
+---
+
+After a long silence, and slowed work ([I had a baby!](https://twitter.com/patrickkettner/status/700698003519082500)), the team is back at it again with Modernizr 3.4.0!!!
+
+**Fixed**
+- [@zazabe](https://github.com/zazabe) fixed the opus audio detect to be more reliable on certain mobile devices - [#1784](https://github.com/Modernizr/Modernizr/pull/1784)
+- [@rowanthorpe](https://github.com/rowanthorpe) fixed the unicode test to not throw an err in XHTML pages - [#1823](https://github.com/Modernizr/Modernizr/pull/1823)
+- [@patrickkettner](https://github.com/patrickkettner) fixed the vml detect to not throw an err in XHTML5 pages - [#1823](https://github.com/Modernizr/Modernizr/pull/1823)
+- [@patrickkettner](https://github.com/patrickkettner) fixed himself from commiting build files yet again - [#1845](https://github.com/Modernizr/Modernizr/pull/1845)
+- [@jshen212](https://github.com/jshen212) fixed a glaring typo in the docs - [#1849](https://github.com/Modernizr/Modernizr/pull/1849)
+- [@patrickkettner](https://github.com/patrickkettner) fixed the prefixing helper - [#1840](https://github.com/Modernizr/Modernizr/pull/1840)
+- [@denyskoch](https://github.com/denyskoch) fixed the preserve-3d detect for IE 11 and Windows 10 - [#1868](https://github.com/Modernizr/Modernizr/pull/1868)
+- [@patrickkettner](https://github.com/patrickkettner) fixed the history detect for file:// pages - [#2029](https://github.com/Modernizr/Modernizr/pull/2029)
+- [@ryanseddon](https://github.com/ryanseddon) fixed the generatedcontent detect for zoomed pages - [#2005](https://github.com/Modernizr/Modernizr/pull/2005)
+- [@jdelStrother](https://github.com/jdelStrother) fixed the video autoplay detect from crashing in certain situations - [#2063](https://github.com/Modernizr/Modernizr/pull/2063)
+- [@Isthu](https://github.com/Isthu) fixed the css regions detect - [#2091](https://github.com/Modernizr/Modernizr/pull/2091)
+- [@piperchester](https://github.com/piperchester) fixed a whole mess of doc typos - [#2128](https://github.com/Modernizr/Modernizr/pull/2128)
+- [@patrickkettner](https://github.com/patrickkettner) fixed the datachannel detect to work correctly in Edge 15 - [#ff821e42](https://github.com/Modernizr/Modernizr/pull/)
+
+**Updated**
+- [@Rowno](https://github.com/Rowno) updated the build URL to use https instead of http for links - [#1865](https://github.com/Modernizr/Modernizr/pull/1865)
+- [@patrickkettner](https://github.com/patrickkettner) updated the IndexedDB detect to be more fine grained with feature detection - [#2030](https://github.com/Modernizr/Modernizr/pull/2030)
+- [@patrickkettner](https://github.com/patrickkettner) added the alias svgincss for svgasimg - [#2031](https://github.com/Modernizr/Modernizr/pull/2031)
+- [@paulirish](https://github.com/paulirish) inverted the internal logic of the transformstylepreserve3d detect to make it more readable - [#1920](https://github.com/Modernizr/Modernizr/pull/1920)
+- [@patrickkettner](https://github.com/patrickkettner) updated a few tests to not use the Boolean constructor - [#2049](https://github.com/Modernizr/Modernizr/pull/2049)
+- [@camjc](https://github.com/camjc) removed some duplicat entries from the config-all file - [#2066](https://github.com/Modernizr/Modernizr/pull/2066)
+- [@LaurentBarbareau](https://github.com/LaurentBarbareau) updated support detect metadata to have a valid url - [#2097](https://github.com/Modernizr/Modernizr/pull/2097)
+- [@whawker](https://github.com/whawker) updated the localizednumber test - [#2093](https://github.com/Modernizr/Modernizr/pull/2093)
+- [@PikadudeNo1](https://github.com/PikadudeNo1) updated the fontface detect to remove old android due to very low usage - [#2095](https://github.com/Modernizr/Modernizr/pull/2095)
+- [@JaZo](https://github.com/JaZo) updated the indexeddbblob detect to ensure the puts are successful - [#2102](https://github.com/Modernizr/Modernizr/pull/2102)
+- [@philippevk](https://github.com/philippevk) updated the es6 string detect to check for includes instead of contains - [#2136](https://github.com/Modernizr/Modernizr/pull/2136)
+
+**Added**
+- [@vincentriemer](https://github.com/vincentriemer) created a detect for es6 arrow functions - [#1794](https://github.com/Modernizr/Modernizr/pull/1794)
+- [@patrickkettner](https://github.com/patrickkettner) created a detect for RTC Message Channels - [#2026](https://github.com/Modernizr/Modernizr/pull/2026)
+- [@patrickkettner](https://github.com/patrickkettner) created a detect for hover and pointer media queries - [#2028](https://github.com/Modernizr/Modernizr/pull/2028)
+- [@patrickkettner](https://github.com/patrickkettner) added the ability to use setClasses via a flag on the cli - [#2043](https://github.com/Modernizr/Modernizr/pull/2043)
+- [@rupl](https://github.com/rupl) added a detect for CSS Transforms Level 2 - [#2100](https://github.com/Modernizr/Modernizr/pull/2100)
+- [@lukasoppermann](https://github.com/lukasoppermann) added a detect for custom elements - [#2155](https://github.com/Modernizr/Modernizr/pull/2155)
+
+**Updated Dependencies**
+- updated [yargs](https://www.npmjs.com/package/yargs) from v3.30.0 to v6.6.0
+- updated [lodash](https://www.npmjs.com/package/lodash) from v3.10.1 to v4.17.4
+- removed [grunt-jscs](https://www.npmjs.com/package/grunt-jscs) - [#2044](https://github.com/Modernizr/Modernizr/pull/2044)
+- removed [grunt-contrib-jshint](https://www.npmjs.com/package/grunt-contrib-jshint) - [#2044](https://github.com/Modernizr/Modernizr/pull/2044)
+- updated [grunt-istanbul](https://www.npmjs.com/package/grunt-istanbul) from v0.4.2 to v0.7.1
+- updated [grunt-saucelabs](https://www.npmjs.com/package/grunt-saucelabs) from v8.6.1 to v9.0.0
+- removed [marked](https://www.npmjs.com/package/marked) - [#2027](https://github.com/Modernizr/Modernizr/pull/2027)
+- added [remarkable](https://www.npmjs.com/package/remarkable) - [#2027](https://github.com/Modernizr/Modernizr/pull/2027)
+- added [eslint](https://www.npmjs.com/package/eslint) - [#2044](https://github.com/Modernizr/Modernizr/pull/2044)
+- removed support for Node 0.10 (only affects the cli tool) - [#2115](https://github.com/Modernizr/Modernizr/pull/2115)
+- updated [proxyquire](https://www.npmjs.com/package/proxyquite) from v1.7.3 to v1.7.11
+
+
+And finally, a big big thank you to Ryan Seddon for pushing this release through!
