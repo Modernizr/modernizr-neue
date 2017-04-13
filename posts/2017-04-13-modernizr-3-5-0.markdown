@@ -1,0 +1,23 @@
+---
+layout: post
+title:  "Modernizr 3.5.0"
+author: <a href="https://twitter.com/KuraFire">Faruk Ateş</a>
+---
+
+Instead of quietly updating the library like we did for our 3.4.0 release (yes, that happened — [see the full changelog here](https://modernizr.com/news/modernizr-3-4-0)), we have an exciting new feature detect as part of 3.5.0: CSS Grids!
+
+With browsers [adding support for CSS Grids in their latest releases](http://caniuse.com/#feat=css-grid), the time to [start using CSS Grids](https://alistapart.com/article/practical-grid) is truly here. Just one caveat: IE11 and current shipping versions of Edge do not support the new syntax, but _do_ support the old legacy CSS Grids proposal—and only one of them supports, uh, `@supports`.
+
+So in **3.5.0** we’re adding two tests in one: the now-standard official CSS Grid syntax as `Modernizr.cssgrid`, and the old proposal’s syntax as `Modernizr.cssgridlegacy`. There is also an additional polyfill available for the Pointer Events test, named PEP. Lastly, dependencies were updated.
+
+Happy developing!
+
+**New Feature Detect(s)**
+- [@kurafire](https://github.com/kurafire) added CSS Grid test for old & new syntaxes [#2189](https://github.com/Modernizr/Modernizr/pull/2189)
+
+**Updated**
+- [roblarsen](https://github.com/roblarsen) + [patrickkettner](https://github.com/patrickkettner) added PEP to pointer events as a polyfill [#2179](https://github.com/Modernizr/Modernizr/pull/2179)
+
+**Updated Dependencies**
+- Update grunt-contrib-clean to version 1.1.0 🚀 [#2188](https://github.com/Modernizr/Modernizr/pull/2188)
+- Update yargs to version 7.0.2 🚀 [#2175](https://github.com/Modernizr/Modernizr/pull/2175)
