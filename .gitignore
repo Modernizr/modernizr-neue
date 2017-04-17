@@ -7,4 +7,5 @@ frontend/css
 frontend/js/build.js
 frontend/js/prod.js*
 frontend/js/*.custom.js
+frontend/js/build.js
 modernizr-metadata.json
