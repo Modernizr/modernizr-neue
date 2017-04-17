@@ -137,7 +137,7 @@ var DownloadUI = React.createClass({
         if (prop.indexOf('html5') === 0) {
           prop = prop.replace('html5','');
         }
-        return prop.toLowerCase();
+        return prop;
       });
 
     if (!minify) {
