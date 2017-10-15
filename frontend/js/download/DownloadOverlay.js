@@ -100,7 +100,7 @@ var DownloadOverlay = React.createClass({
 
     // multiclasses features are joined with a _, so we do this splitting and joining
     // to flatten the array into a list of individual classes
-    var features = location.search.slice(1).split('&')[0].split('_').join('-').split('-')
+    var features = location.search.slice(1).split('&')[0].split('_').join('-').split('-');
     var _ul = document.createElement('ul');
 
     features = _.forEach(features, function(feature) {

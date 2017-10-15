@@ -7,13 +7,15 @@ var util = require('./util');
 var cx = require('classnames');
 
 var pluralize = util.pluralize;
-var DOM = React.DOM, div = DOM.div, button = DOM.button, label = DOM.label, input = DOM.input;
+var DOM = React.DOM, div = DOM.div, label = DOM.label, input = DOM.input;
 
 var LeftColumn = React.createClass({
   mixins: [PureRenderMixin],
 
   getInitialState: function() {
-    return {};
+    return {
+      classPrefix: this.props.classPrefix || ''
+    };
   },
 
   render: function() {
@@ -35,7 +37,7 @@ var LeftColumn = React.createClass({
     });
     var inputClass = cx({
       'classPrefix': true,
-      'classNameAdded': state.classNameAdded
+      'classNameAdded': state.classPrefix.length > 0
     });
 
     var results = detects.length === allDetects.length ? ' ' :
@@ -78,7 +80,7 @@ var LeftColumn = React.createClass({
         checked: option.checked,
         toggleClassPrefix: this.toggleClassPrefix
       });
-    }, this);
+    }.bind(this));
 
     return (
       div({className: className, onClick: this.props.onClick},
@@ -95,7 +97,7 @@ var LeftColumn = React.createClass({
             hidden: !this.state.showClassPrefixInput
           })},
             label({htmlFor: 'classPrefix'}, '… with prefix'),
-            input({className: inputClass, name: 'classPrefix', id: 'classPrefix', placeholder:'e.g. mod_', onKeyUp: this.classNameAdded})
+            input({className: inputClass, value: this.state.classPrefix, name: 'classPrefix', id: 'classPrefix', placeholder:'e.g. mod_', onChange: this.classNameAdded})
           )
         )
       )
@@ -119,7 +121,7 @@ var LeftColumn = React.createClass({
 
   classNameAdded: function(e) {
     var prefix = e.target.value;
-    this.setState({classNameAdded: prefix.length});
+    this.setState({classPrefix: prefix});
     this.props.updatePrefix(prefix);
   }
 
