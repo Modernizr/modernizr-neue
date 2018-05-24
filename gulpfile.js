@@ -18,7 +18,7 @@ var modernizrOptions = require('./server/util/modernizrOptions');
 
 var plugins = require('gulp-load-plugins')({
   rename: {
-    'gulp-minify-css': 'minifyCSS',
+    'gulp-clean-css': 'cleanCSS',
     'gulp-compile-handlebars': 'handlebars'
   }
 });
@@ -174,7 +174,7 @@ gulp.task('styles', function() {
     .pipe(plugins.sourcemaps.init())
       .pipe(plugins.stylus())
       .pipe(plugins.autoprefixer())
-      .pipe(plugins.minifyCSS())
+      .pipe(plugins.cleanCSS())
     .pipe(plugins.sourcemaps.write('.', {sourceMappingURLPrefix: '/css/'}))
   .pipe(gulp.dest('frontend/css'));
 });
