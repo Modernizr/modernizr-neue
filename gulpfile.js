@@ -15,6 +15,7 @@ var authors          = require('./server/util/footer');
 var feed             = require('./server/buildSteps/rss');
 var blogPost         = require('./server/util/blogPost');
 var modernizrOptions = require('./server/util/modernizrOptions');
+var zopfli           = require('imagemin-zopfli');
 
 var plugins = require('gulp-load-plugins')({
   rename: {
