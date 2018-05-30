@@ -199,7 +199,6 @@ gulp.task('modernizr', function(cb) {
 gulp.task('lodash', function(cb) {
   var includes = [
     'chain',
-    'contains',
     'defer',
     'extend',
     'filter',
@@ -207,16 +206,15 @@ gulp.task('lodash', function(cb) {
     'first',
     'flatten',
     'forEach',
+    'includes',
     'intersection',
     'isArray',
     'isEmpty',
     'isEqual',
     'map',
     'merge',
-    'pluck',
     'reduce',
     'some',
-    'where',
     'without',
     'zipObject',
     'union'

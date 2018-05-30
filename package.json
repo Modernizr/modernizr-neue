@@ -87,7 +87,7 @@
     "gulp-stylus": "^2.7.0",
     "gulp-uglify": "^3.0.0",
     "imagemin-zopfli": "^5.1.0",
-    "lodash-cli": "^3.5.0",
+    "lodash-cli": "^4.17.5",
     "marked": "^0.4.0",
     "merge-stream": "^1.0.1",
     "run-sequence": "^2.2.1",
