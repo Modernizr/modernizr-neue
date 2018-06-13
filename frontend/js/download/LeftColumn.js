@@ -7,7 +7,7 @@ var util = require('./util');
 var cx = require('classnames');
 
 var pluralize = util.pluralize;
-var DOM = React.DOM, div = DOM.div, button = DOM.button, label = DOM.label, input = DOM.input;
+var DOM = React.DOM, div = DOM.div, label = DOM.label, input = DOM.input;
 
 var LeftColumn = React.createClass({
   mixins: [PureRenderMixin],

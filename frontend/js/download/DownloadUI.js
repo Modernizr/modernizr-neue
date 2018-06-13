@@ -51,7 +51,7 @@ var DownloadUI = React.createClass({
           onHover: this.build,
           build: this.build,
           defaultValue: state.currentSearch,
-          focusFirst: this.focusFirst,
+          focusFirst: this.focusFirst
         }),
 
         overlay,
