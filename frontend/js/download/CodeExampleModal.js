@@ -34,7 +34,7 @@ var CodeExampleModal = React.createClass({
           (data.async ? '});' : '')
         }})
       )
-    )
+    );
   }
 });
 
