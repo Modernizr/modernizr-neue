@@ -10,13 +10,14 @@ var DOM = React.DOM, form = DOM.form;
 var DownloadUI = React.createClass({
   getInitialState: function() {
     return {
-      currentSearch: this.props.currentSearch
+      currentSearch: this.props.initialState.currentSearch,
+      classPrefix: this.props.initialState.classPrefix
     };
   },
 
   componentDidMount: function() {
     var props = this.props;
-    if (props.currentSearch) {
+    if (this.state.currentSearch) {
       this.refs.searchHeader.change();
     }
 
@@ -64,7 +65,8 @@ var DownloadUI = React.createClass({
           updatePrefix: this.updatePrefix,
           filesize: state.filesize,
           build: this.build,
-          select: this.select
+          select: this.select,
+          classPrefix: this.state.classPrefix
         }),
 
         DetectList({

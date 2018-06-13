@@ -1,9 +1,12 @@
 'use strict';
 var React = require('react/addons');
 var DownloadUI = React.createFactory(require('./DownloadUI'));
-var currentSearch;
 var shouldBuild;
 var useHash;
+var initialState = {
+  currentSearch: undefined,
+  classPrefix: undefined
+};
 
 if ('serviceWorker' in navigator &&
     (location.protocol === 'https:' || location.hostname === 'localhost')
@@ -46,48 +49,54 @@ if (location.hash.length || location.search.length) {
   if (queries.length) {
     shouldBuild = true;
 
-    queries.map(function(query) {
+    queries.forEach(function(query) {
       var searchResult = query.match(/q=(.*)/);
       if (searchResult) {
-        currentSearch = unescape(searchResult[1]);
+        initialState.currentSearch = unescape(searchResult[1]);
       } else {
+        var clearQuery = query.replace('#', '');
         var matches = function(obj) {
           var prop = obj.property;
           if (_.isArray(prop)) {
             prop = prop.join('_');
           }
 
-          if (query === prop.toLowerCase()
-             || query === 'shiv' && prop === 'html5shiv'
-             || query === 'printshiv' && prop === 'html5printshiv'
-             || obj.builderAliases && _.contains(obj.builderAliases, query)
-             || query === 'do_not_use_in_production') {
+          if (_.contains(clearQuery, 'cssclassprefix')) {
+            var splittedQuery = clearQuery.split(':');
+            if (splittedQuery.length === 2 && splittedQuery[1].length > 0) {
+              initialState.classPrefix = splittedQuery[1];
+            }
+          }
+
+          if (clearQuery === prop.toLowerCase()
+             || clearQuery === 'shiv' && prop === 'html5shiv'
+             || clearQuery === 'printshiv' && prop === 'html5printshiv'
+             || obj.builderAliases && _.contains(obj.builderAliases, clearQuery)
+             || clearQuery === 'do_not_use_in_production') {
             obj.checked = true;
             return true;
           }
 
-          if (query === 'dontmin' && prop === 'minify') {
+          if (clearQuery === 'dontmin' && prop === 'minify') {
             obj.checked = false;
             return true;
           }
         };
 
-        if(queries.length === 1 && query === 'do_not_use_in_production') {
+        if(queries.length === 1 && clearQuery === 'do_not_use_in_production') {
           _.chain(_.union(window._options, window._modernizrMetadata))
             .filter(function(option) {
               if(_.isArray(option.property)) {
                 return true;
               }
-              return option.property.toLowerCase() !== 'html5printshiv'
+              return option.property.toLowerCase() !== 'html5printshiv';
             })
             .forEach(matches)
             .value();
         } else {
-          return _.some(window._options, matches) || _.some(window._modernizrMetadata, matches);
+          _.some(window._options, matches) || _.some(window._modernizrMetadata, matches);
         }
       }
-
-      return query;
     });
 
     if (useHash) {
@@ -162,6 +171,6 @@ ZeroClipboard.config({
 React.render(DownloadUI({
   detects: window._modernizrMetadata,
   options: window._options,
-  currentSearch: currentSearch,
+  initialState: initialState,
   shouldBuild: shouldBuild
 }), document.getElementById('main'));
