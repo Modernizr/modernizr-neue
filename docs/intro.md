@@ -126,6 +126,7 @@ By default, Modernizr will rewrite `<html class="no-js">` to `<html class="js">`
 
 If you are using a `classPrefix`, such as `supports-`, then you must include that prefix on your `html` element. ie. `supports-no-js` instead of `no-js`.
 
+
 Finally, if you do not want Modernizr to add any of its classes, you can set `enableClasses` to `false`. This is _does not_ affect the `.no-js` update, so if you do not want that updated either you will need to set `enableJSClass` to `false` in your configuration.
 
 
