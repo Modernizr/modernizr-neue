@@ -3,6 +3,7 @@ var _ = require('lodash');
 var React = require('react/addons');
 var PureRenderMixin = React.addons.PureRenderMixin;
 var util = require('./util');
+var capitalize = util.capitalize;
 var pluralize = util.pluralize;
 var DOM = React.DOM, div = DOM.div, ul = DOM.ul, li = DOM.li;
 
@@ -22,7 +23,7 @@ var MetadataList = React.createClass({
 
     return (
       div({className: 'box'},
-        div(null, pluralize(str, items.length)),
+        div({className: 'heading-small'}, capitalize(pluralize(str, items.length))),
         ul(null, items)
       )
     );
