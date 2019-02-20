@@ -11,7 +11,7 @@ Happy developing in 2018!
 
 **New Feature Detect(s)**
 - [@oliverjash](https://github.com/oliverjash) added test for CSS `:focus-within` pseudo-selector [#2287](https://github.com/Modernizr/Modernizr/pull/2287)
-- [@patrickkettner](https://github.com/oliverjash) added test for variable fonts [#2202](https://github.com/Modernizr/Modernizr/pull/2202)
+- [@patrickkettner](https://github.com/patrickkettner) added test for variable fonts [#2202](https://github.com/Modernizr/Modernizr/pull/2202)
 
 **Fixes**
 - Contributions by @cliener, @jayeb, @bholley, @rejas, @simongareste, @timkraut, @philippsimon, @patrickhlauke, @luftywiranda13, @milesthedisch, @strarsis
