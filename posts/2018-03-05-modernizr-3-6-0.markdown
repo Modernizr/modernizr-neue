@@ -1,0 +1,18 @@
+---
+layout: post
+title:  "Modernizr 3.6.0"
+author: <a href="https://github.com/rejas/">Rejas</a>
+---
+
+Sorry, we promised we would not be quietly updating the library again but here we are again. But the good news: we are not
+dead yet. And two new feature detects are in this release, one for the focus-within pseudo-selector and one for variable fonts.
+
+Happy developing in 2018!
+
+**New Feature Detect(s)**
+- [@oliverjash](https://github.com/oliverjash) added test for CSS `:focus-within` pseudo-selector [#2287](https://github.com/Modernizr/Modernizr/pull/2287)
+- [@patrickkettner](https://github.com/oliverjash) added test for variable fonts [#2202](https://github.com/Modernizr/Modernizr/pull/2202)
+
+**Fixes**
+- Contributions by @cliener, @jayeb, @bholley, @rejas, @simongareste, @timkraut, @philippsimon, @patrickhlauke, @luftywiranda13, @milesthedisch, @strarsis
+which all provided [fixes](https://github.com/Modernizr/Modernizr/compare/v3.5.0...v3.6.0) for this release
