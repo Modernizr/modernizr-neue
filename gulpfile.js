@@ -15,7 +15,6 @@ var authors          = require('./server/util/footer');
 var feed             = require('./server/buildSteps/rss');
 var blogPost         = require('./server/util/blogPost');
 var modernizrOptions = require('./server/util/modernizrOptions');
-var zopfli           = require('imagemin-zopfli');
 
 var plugins = require('gulp-load-plugins')({
   rename: {
@@ -52,9 +51,9 @@ gulp.task('global_browserify', function() {
   .pipe(gulp.dest('./frontend/js/'));
 });
 
-// `handlebars` is used for pretty much everything except for `/downlaod`, however
+// `handlebars` is used for pretty much everything except for `/download`, however
 // this task is only for building the static, production version. When running in
-// `develop`, all of the handlebars compilation is handeled by Hapi, most of those
+// `develop`, all of the handlebars compilation is handled by Hapi, most of those
 // configurations are found in `server/routes/dev`. Functionally, it should result
 // in the same output.
 gulp.task('handlebars', function() {
@@ -119,7 +118,7 @@ gulp.task('handlebars', function() {
 gulp.task('news', function() {
   var tasks = fs
     .readdirSync('./posts')
-    // reverse, so its orderes from newest to oldest
+    // reverse, so its orders from newest to oldest
     .reverse()
     .map(blogPost)
     .map(function(post, index, posts) {
@@ -261,7 +260,7 @@ gulp.task('uglify-loose', function() {
 
 
 gulp.task('uglify-sw', function() {
-  // uglify service worker seperatly, becuase it has to be served by itself
+  // uglify service worker separately, because it has to be served by itself
   // from the root of the domain, so its `base` is different from all the
   // scripts in `uglify-loose`
   return gulp.src('frontend/js/download/workers/serviceworker.js', {base: 'frontend/js/download/workers/'})
@@ -335,7 +334,7 @@ gulp.task('copy-scripts', function() {
 
 gulp.task('copy', ['copy-styles', 'copy-img', 'copy-scripts']);
 
-// smoosh everything down with zopfli (http://en.wikipedia.org/wiki/Zopfli)
+// smooch everything down with zopfli (http://en.wikipedia.org/wiki/Zopfli)
 // Hapi has built in support for serving precompressed files (when configured),
 // so we get a ~8% filesize reduction
 gulp.task('compress', function() {
@@ -360,7 +359,7 @@ gulp.task('gh-pages', ['deploy'], function(cb) {
   ], fs.writeFile('dist/CNAME','new.modernizr.com', cb));
 });
 
-// seperate out the tasks that are repeated in both deploy and develop steps.
+// separate out the tasks that are repeated in both deploy and develop steps.
 var tasks = ['modernizr', 'lodash', 'browserify', 'global_browserify', 'styles', 'appcache'];
 
 // `deploy` builds the static version of the site. Assuming a javascript supported
