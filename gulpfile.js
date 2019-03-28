@@ -10,6 +10,7 @@ var browserify       = require('browserify');
 var exec             = require('child_process').exec;
 var runSequence      = require('run-sequence');
 var source           = require('vinyl-source-stream');
+var zopfli           = require('imagemin-zopfli');
 var authors          = require('./server/util/footer');
 var feed             = require('./server/buildSteps/rss');
 var blogPost         = require('./server/util/blogPost');
@@ -74,7 +75,7 @@ gulp.task('handlebars', function() {
       '/js/lodash.custom.js',
       '/js/prod.js',
       '/lib/r.js/dist/r.js',
-      '/lib/modernizr/lib/build.js',
+      '/lib/modernizr/lib/build.js'
     ],
     latestPosts: latestPosts,
     team: authors,
@@ -340,7 +341,9 @@ gulp.task('copy', ['copy-styles', 'copy-img', 'copy-scripts']);
 // so we get a ~8% filesize reduction
 gulp.task('compress', function() {
   return gulp.src('dist/**/*')
-    .pipe(plugins.zopfli())
+    .pipe(plugins.imagemin({
+        use: [zopfli()]
+    }))
   .pipe(gulp.dest('dist'));
 });
 

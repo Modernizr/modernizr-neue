@@ -8,7 +8,7 @@ With this knowledge that Modernizr gives you, you can take advantage of these ne
 
 <a name="what-is-feature-detection"></a>
 ## What is feature detection?
-In the dark ages of web development, we often had to resort to <abbr title="User Agent">UA</abbr> sniffing in order to determine if their user's would be able to make use of _Awesome-New-Feature_&trade;. In practice, that means doing something like the following
+In the dark ages of web development, we often had to resort to <abbr title="User Agent">UA</abbr> sniffing in order to determine if their users would be able to make use of _Awesome-New-Feature_&trade;. In practice, that means doing something like the following
 
 ```javascript
   if (browser === "the-one-they-make-you-use-at-work") {
@@ -126,14 +126,15 @@ By default, Modernizr will rewrite `<html class="no-js">` to `<html class="js">`
 
 If you are using a `classPrefix`, such as `supports-`, then you must include that prefix on your `html` element. ie. `supports-no-js` instead of `no-js`.
 
-Finally, if you do not want Modernizr to add any of it's classes, you can set `enableClasses` to `false`. This _does not_ effect the `.no-js` update, so if you do not want that updated either you will need to set `enableJSClass` to `false` in your configuration.
+
+Finally, if you do not want Modernizr to add any of its classes, you can set `enableClasses` to `false`. This _does not_ affect the `.no-js` update, so if you do not want that updated either you will need to set `enableJSClass` to `false` in your configuration.
 
 
 ## Using Modernizr with JavaScript
 
 #### The Modernizr object
 
-Modernizr keeps track of the results of all of it's feature detections via the `Modernizr` object. That means that for each test, a corresponding property will be added. You just have to test for [truthiness](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) in your code to figure out what you want to do
+Modernizr keeps track of the results of all of its feature detections via the `Modernizr` object. That means that for each test, a corresponding property will be added. You just have to test for [truthiness](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) in your code to figure out what you want to do
 
 ```javascript
   if (Modernizr.awesomeNewFeature) {
