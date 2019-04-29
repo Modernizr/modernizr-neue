@@ -1,6 +1,10 @@
 'use strict';
 var _ = require('lodash');
 
+var capitalize = function(baseStr) {
+  return baseStr.charAt(0).toUpperCase() + baseStr.slice(1);
+};
+
 var listify = function(string) {
   return _.reduce(string, function(str, next, i, arr) {
     var joiner = i + 1 < arr.length ? ', ' : ' and ';
@@ -32,6 +36,7 @@ var gruntify = function(config, metadata) {
 };
 
 module.exports = {
+  capitalize: capitalize,
   listify: listify,
   gruntify: gruntify,
   pluralize: pluralize
