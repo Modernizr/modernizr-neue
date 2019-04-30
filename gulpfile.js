@@ -2,6 +2,7 @@
 var fs               = require('fs');
 var del              = require('del');
 var gulp             = require('gulp');
+var path             = require('path');
 var globby           = require('globby');
 var aliasify         = require('aliasify');
 var merge            = require('merge-stream');
@@ -189,7 +190,7 @@ gulp.task('modernizr', function(cb) {
 
   var output = 'frontend/js/modernizr.custom.js';
 
-  return exec('./node_modules/.bin/modernizr -f ' + detects + ' -d ' + output,
+  return exec(`${path.resolve('./node_modules/.bin/modernizr')} -f ${detects} -d ${output}`,
     cb
   );
 });
@@ -221,7 +222,7 @@ gulp.task('lodash', function(cb) {
 
   var output = 'frontend/js/lodash.custom.js';
 
-  return exec('./node_modules/.bin/lodash include=' + includes + ' -d -o ' + output, cb);
+  return exec(`${path.resolve('./node_modules/.bin/lodash')} include=${includes} -d -o ${output}`, cb);
 });
 
 // `uglify-combined` outputs one giant glob of javascript used on `/download`
