@@ -1,0 +1,26 @@
+---
+layout: post
+title:  "Modernizr 3.7.0"
+author: <a href="https://github.com/rejas/">Rejas</a>
+---
+
+Not a full year in the making but close. Lots of new feature detectes and more bugfixes then we can write down
+
+**New Feature Detect(s)**
+- [@abrad1212](https://github.com/abrad1212) added detect for the GetBattery API [#2312](https://github.com/Modernizr/Modernizr/pull/2312)
+- [@mAiNiNfEcTiOn](https://github.com/mAiNiNfEcTiOn) [@Kruithne](https://github.com/Kruithne) [@rejas](https://github.com/rejas) added css custom properties feature detection [#2310](https://github.com/Modernizr/Modernizr/pull/2310)
+- [@rejas](https://github.com/rejas) added detect for font display [#2323](https://github.com/Modernizr/Modernizr/pull/2323)
+- [@rejas](https://github.com/rejas) added test for text-decoration-skip-ink [#2324](https://github.com/Modernizr/Modernizr/pull/2324)
+- [@andreacc](https://github.com/andreacc) added detection for formNoValidate attribute on inputs [#2164](https://github.com/Modernizr/Modernizr/pull/2164)
+- [@rejas](https://github.com/rejas) added detect for box-decoration-break [#2330](https://github.com/Modernizr/Modernizr/pull/2330)
+- [@haraldreingruber](https://github.com/haraldreingruber) added Media Source Extension API feature dectection [#2233](https://github.com/Modernizr/Modernizr/pull/2233)
+- [@JordyvanDortmont](https://github.com/JordyvanDortmont) added audio autoplay feature detect [#2185](https://github.com/Modernizr/Modernizr/pull/2185)
+- [@rejas](https://github.com/rejas) added more tests around text decoration styling [#2327](https://github.com/Modernizr/Modernizr/pull/2327)
+- [@dutchenkoOleg](https://github.com/dutchenkoOleg) added Intersection Observer API [#2360](https://github.com/Modernizr/Modernizr/pull/2360)
+- [@escodel](https://github.com/escodel) added feature detection for navigator.connection.effectiveType [#2381](https://github.com/Modernizr/Modernizr/pull/2381)
+- [@escodel](https://github.com/escodel) added PublicKeyCredential feature detect for webauthn [#2393](https://github.com/Modernizr/Modernizr/pull/2393)
+
+
+**Fixes**
+- Contributions by @emilio, @rejas, @jsoref, @mhadam, @annevk, @andreacc, @steffenweber, @gregersrygg, @anenviousguest, 
+@niksy, @mreinstein, @snout-o, @Nicholas-Eng, @nali, @chris13524 and @odysseuscm which all provided [fixes](https://github.com/Modernizr/Modernizr/compare/v3.6.0...v3.7.0) for this release

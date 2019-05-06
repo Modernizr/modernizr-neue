@@ -16,7 +16,7 @@ Happy developing!
 - [@kurafire](https://github.com/kurafire) added CSS Grid test for old & new syntaxes [#2189](https://github.com/Modernizr/Modernizr/pull/2189)
 
 **Updated**
-- [roblarsen](https://github.com/roblarsen) + [patrickkettner](https://github.com/patrickkettner) added PEP to pointer events as a polyfill [#2179](https://github.com/Modernizr/Modernizr/pull/2179)
+- [@roblarsen](https://github.com/roblarsen) + [@patrickkettner](https://github.com/patrickkettner) added PEP to pointer events as a polyfill [#2179](https://github.com/Modernizr/Modernizr/pull/2179)
 
 **Updated Dependencies**
 - Update grunt-contrib-clean to version 1.1.0 🚀 [#2188](https://github.com/Modernizr/Modernizr/pull/2188)
