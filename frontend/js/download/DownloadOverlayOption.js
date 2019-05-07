@@ -1,7 +1,8 @@
 /*globals ZeroClipboard, Modernizr*/
 'use strict';
-var React = require('react/addons');
-var PureRenderMixin = React.addons.PureRenderMixin;
+var React = require('react');
+var addons = require('react-addons');
+var PureRenderMixin = addons.PureRenderMixin;
 var DOM = React.DOM, textarea = DOM.textarea, a = DOM.a, li = DOM.li, label = DOM.label, button = DOM.button, span=DOM.span;
 
 var DownloadOverlayOption = React.createClass({

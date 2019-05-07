@@ -1,7 +1,8 @@
 /*globals Modernizr*/
 'use strict';
-var React = require('react/addons');
-var PureRenderMixin = React.addons.PureRenderMixin;
+var React = require('react');
+var addons = require('react-addons');
+var PureRenderMixin = addons.PureRenderMixin;
 var DownloadOverlayOption = React.createFactory(require('./DownloadOverlayOption'));
 var gruntify = require('./util').gruntify;
 var DOM = React.DOM, div = DOM.div, form = DOM.form, button = DOM.button, input = DOM.input, ul = DOM.ul, li = DOM.li;

@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react/addons');
+var React = require('react');
 var DOM = React.DOM, div = DOM.div, span = DOM.span, pre = DOM.pre;
 
 var CodeExampleModal = React.createClass({
