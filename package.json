@@ -63,9 +63,7 @@
     "marked": "^0.6.2",
     "modernizr": "^3",
     "normalize.css": "^8.0.1",
-    "react": "^0.14.8",
-    "react-addons": "^0.9.1-deprecated",
-    "react-dom": "^0.14.8",
+    "react": "^0.13.0",
     "rss": "^1.2.2",
     "yaml-front-matter": "3.4.1",
     "zeroclipboard": "^2.3.0"

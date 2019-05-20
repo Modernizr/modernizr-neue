@@ -1,8 +1,7 @@
 'use strict';
 var _ = require('lodash');
-var React = require('react');
-var addons = require('react-addons');
-var PureRenderMixin = addons.PureRenderMixin;
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var DOM = React.DOM, div = DOM.div, a = DOM.a;
 var MetadataNotes = React.createClass({
   mixins: [PureRenderMixin],

@@ -1,7 +1,6 @@
 'use strict';
-var React = require('react');
-var addons = require('react-addons');
-var PureRenderMixin = addons.PureRenderMixin;
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var DOM = React.DOM, svg = DOM.svg, circle = DOM.circle, path = DOM.path;
 
 var SVGToggle = React.createClass({

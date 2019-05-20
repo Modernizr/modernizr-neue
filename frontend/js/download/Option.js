@@ -1,5 +1,5 @@
 'use strict';
-var React = require('react');
+var React = require('react/addons');
 var SVGToggle = React.createFactory(require('./SVGToggle'));
 var Metadata = React.createFactory(require('./Metadata'));
 var CodeExampleModal = React.createFactory(require('./CodeExampleModal'));

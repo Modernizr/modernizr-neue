@@ -1,6 +1,5 @@
 'use strict';
-var React = require('react');
-var ReactDOM = require('react-dom');
+var React = require('react/addons');
 var DownloadUI = React.createFactory(require('./DownloadUI'));
 var currentSearch;
 var shouldBuild;
@@ -160,7 +159,7 @@ ZeroClipboard.config({
   flashLoadTimeout: 5000
 });
 
-ReactDOM.render(DownloadUI({
+React.render(DownloadUI({
   detects: window._modernizrMetadata,
   options: window._options,
   currentSearch: currentSearch,

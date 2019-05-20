@@ -1,8 +1,7 @@
 'use strict';
 var _ = require('lodash');
-var React = require('react');
-var addons = require('react-addons');
-var PureRenderMixin = addons.PureRenderMixin;
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 var MetadataDocs = React.createFactory(require('./MetadataDocs'));
 var MetadataList = React.createFactory(require('./MetadataList'));
 var MetadataNotes = React.createFactory(require('./MetadataNotes'));
