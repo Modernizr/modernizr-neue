@@ -215,9 +215,9 @@ gulp.task('lodash', function(cb) {
     'merge',
     'reduce',
     'some',
+    'union',
     'without',
-    'zipObject',
-    'union'
+    'zipObject'
   ].join();
 
   var output = 'frontend/js/lodash.custom.js';

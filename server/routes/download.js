@@ -39,16 +39,16 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 var propToAMD = function(prop) {
-  if (_.contains(prop, '_')) {
+  if (_.includes(prop, '_')) {
     prop = prop.split('_');
   }
 
-  var detect = _.where(modernizrMetadata, {'property': prop});
+  var detect = _.filter(modernizrMetadata, {'property': prop});
 
   if (_.isEmpty(detect)) {
     // if the detect wasn't found, the property is probably inside of an array
     // of differnet properties, which are typically used for back compat reasons
-    detect = _.where(modernizrMetadata, {'property': [prop]});
+    detect = _.filter(modernizrMetadata, {'property': [prop]});
   }
 
   return detect && detect[0].amdPath;
