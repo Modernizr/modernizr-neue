@@ -8,7 +8,8 @@
     "deploy": "gulp deploy",
     "develop": "gulp develop",
     "test": "echo 0",
-    "travis": "gulp gh-pages"
+    "create-gh-pages": "gulp gh-pages",
+    "update-gh-pages": "scripts/generate-gh-pages.sh"
   },
   "repository": {
     "type": "git",

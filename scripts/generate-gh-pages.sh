@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+# Manually create and update the content from the `gh-pages` branch
+
 # abort on errors
 set -e
 
