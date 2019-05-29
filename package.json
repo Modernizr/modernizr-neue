@@ -60,7 +60,7 @@
     "handlebars": "^4.1.2",
     "hapi": "^8.4.0",
     "he": "^1.2.0",
-    "highlight.js": "^9.15.6",
+    "highlight.js": "^9.15.8",
     "marked": "^0.6.2",
     "modernizr": "^3",
     "normalize.css": "^8.0.1",
@@ -91,7 +91,7 @@
     "gulp-uglify": "^3.0.2",
     "imagemin-zopfli": "^6.0.0",
     "lodash-cli": "^4.17.5",
-    "merge-stream": "^1.0.1",
+    "merge-stream": "^2.0.0",
     "vinyl-source-stream": "^2.0.0"
   },
   "private": true
