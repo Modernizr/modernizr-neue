@@ -1,4 +1,5 @@
 # The new modernizr.com
+[![Build Status](https://api.travis-ci.org/Modernizr/modernizr-neue.svg?branch=master)](https://travis-ci.org/Modernizr/modernizr-neue) 
 
 This is now live at [modernizr.com](https://modernizr.com/)
 
