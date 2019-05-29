@@ -25,7 +25,6 @@
   "dependencies": {
     "requirejs-plugins": "~1.0.3",
     "r.js": "~2.1.16",
-    "normalize.css": "~3.0.2",
     "zeroclipboard": "~2.2.0",
     "pako": "~0.2.6",
     "pretty-bytes": "~1.0.4",

@@ -37,7 +37,7 @@ var parsedDocs = _.chain(options)
       if ('function' in doc) {
         block += '<code class="functionRef">' + doc.name + '(';
 
-        var params = _.where(doc.tags, {'title': 'param'})
+        var params = _.filter(doc.tags, {'title': 'param'})
           .map(function(tag) {
             if (tag.type && tag.type.type === 'OptionalType') {
               tag.optional = true;

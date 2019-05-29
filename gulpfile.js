@@ -2,13 +2,13 @@
 var fs               = require('fs');
 var del              = require('del');
 var gulp             = require('gulp');
+var path             = require('path');
 var globby           = require('globby');
 var aliasify         = require('aliasify');
 var merge            = require('merge-stream');
 var modernizr        = require('modernizr');
 var browserify       = require('browserify');
 var exec             = require('child_process').exec;
-var runSequence      = require('run-sequence');
 var source           = require('vinyl-source-stream');
 var zopfli           = require('imagemin-zopfli');
 var authors          = require('./server/util/footer');
@@ -18,7 +18,7 @@ var modernizrOptions = require('./server/util/modernizrOptions');
 
 var plugins = require('gulp-load-plugins')({
   rename: {
-    'gulp-minify-css': 'minifyCSS',
+    'gulp-clean-css': 'cleanCSS',
     'gulp-compile-handlebars': 'handlebars'
   }
 });
@@ -51,9 +51,9 @@ gulp.task('global_browserify', function() {
   .pipe(gulp.dest('./frontend/js/'));
 });
 
-// `handlebars` is used for pretty much everything except for `/downlaod`, however
+// `handlebars` is used for pretty much everything except for `/download`, however
 // this task is only for building the static, production version. When running in
-// `develop`, all of the handlebars compilation is handeled by Hapi, most of those
+// `develop`, all of the handlebars compilation is handled by Hapi, most of those
 // configurations are found in `server/routes/dev`. Functionally, it should result
 // in the same output.
 gulp.task('handlebars', function() {
@@ -118,7 +118,7 @@ gulp.task('handlebars', function() {
 gulp.task('news', function() {
   var tasks = fs
     .readdirSync('./posts')
-    // reverse, so its orderes from newest to oldest
+    // reverse, so its orders from newest to oldest
     .reverse()
     .map(blogPost)
     .map(function(post, index, posts) {
@@ -174,7 +174,7 @@ gulp.task('styles', function() {
     .pipe(plugins.sourcemaps.init())
       .pipe(plugins.stylus())
       .pipe(plugins.autoprefixer())
-      .pipe(plugins.minifyCSS())
+      .pipe(plugins.cleanCSS())
     .pipe(plugins.sourcemaps.write('.', {sourceMappingURLPrefix: '/css/'}))
   .pipe(gulp.dest('frontend/css'));
 });
@@ -189,7 +189,7 @@ gulp.task('modernizr', function(cb) {
 
   var output = 'frontend/js/modernizr.custom.js';
 
-  return exec('./node_modules/.bin/modernizr -f ' + detects + ' -d ' + output,
+  return exec(`${path.resolve('./node_modules/.bin/modernizr')} -f ${detects} -d ${output}`,
     cb
   );
 });
@@ -198,7 +198,6 @@ gulp.task('modernizr', function(cb) {
 gulp.task('lodash', function(cb) {
   var includes = [
     'chain',
-    'contains',
     'defer',
     'extend',
     'filter',
@@ -206,24 +205,23 @@ gulp.task('lodash', function(cb) {
     'first',
     'flatten',
     'forEach',
+    'includes',
     'intersection',
     'isArray',
     'isEmpty',
     'isEqual',
     'map',
     'merge',
-    'pluck',
     'reduce',
     'some',
-    'where',
+    'union',
     'without',
-    'zipObject',
-    'union'
+    'zipObject'
   ].join();
 
   var output = 'frontend/js/lodash.custom.js';
 
-  return exec('./node_modules/.bin/lodash include=' + includes + ' -d -o ' + output, cb);
+  return exec(`${path.resolve('./node_modules/.bin/lodash')} include=${includes} -d -o ${output}`, cb);
 });
 
 // `uglify-combined` outputs one giant glob of javascript used on `/download`
@@ -262,7 +260,7 @@ gulp.task('uglify-loose', function() {
 
 
 gulp.task('uglify-sw', function() {
-  // uglify service worker seperatly, becuase it has to be served by itself
+  // uglify service worker separately, because it has to be served by itself
   // from the root of the domain, so its `base` is different from all the
   // scripts in `uglify-loose`
   return gulp.src('frontend/js/download/workers/serviceworker.js', {base: 'frontend/js/download/workers/'})
@@ -273,7 +271,7 @@ gulp.task('uglify-sw', function() {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('uglify', ['uglify-combined', 'uglify-loose', 'uglify-sw']);
+gulp.task('uglify', gulp.series('uglify-combined', 'uglify-loose', 'uglify-sw'));
 
 gulp.task('appcache', function() {
   var modernizrFiles = globby.sync([
@@ -334,9 +332,9 @@ gulp.task('copy-scripts', function() {
   .pipe(plugins.copy('dist', {prefix: 1}));
 });
 
-gulp.task('copy', ['copy-styles', 'copy-img', 'copy-scripts']);
+gulp.task('copy', gulp.series('copy-styles', 'copy-img', 'copy-scripts'));
 
-// smoosh everything down with zopfli (http://en.wikipedia.org/wiki/Zopfli)
+// smooch everything down with zopfli (http://en.wikipedia.org/wiki/Zopfli)
 // Hapi has built in support for serving precompressed files (when configured),
 // so we get a ~8% filesize reduction
 gulp.task('compress', function() {
@@ -347,31 +345,22 @@ gulp.task('compress', function() {
   .pipe(gulp.dest('dist'));
 });
 
-// in case the hapi server falls over, or if we just want to test what changes
-// look like, the gh-pages task is used by travis.ci to automatically upload
-// a compiled version of the `master` branch to the `gh-pages` branch. In order
-// to prevent a whole lotta bloat in the git repo, we remove all of the sourcemaps
-// and zopfli compressed files. The CNAME file is used by github to allow for a
-// custom domain (http://git.io/vvvgp)
-gulp.task('gh-pages', ['deploy'], function(cb) {
-  return del([
-    'dist/**/*.gz',
-    'dist/**/*.map',
-    '!dist'
-  ], fs.writeFile('dist/CNAME','new.modernizr.com', cb));
-});
-
-// seperate out the tasks that are repeated in both deploy and develop steps.
+// separate out the tasks that are repeated in both deploy and develop steps.
 var tasks = ['modernizr', 'lodash', 'browserify', 'global_browserify', 'styles', 'appcache'];
+
+var env;
+
+gulp.task('set:production', function(cb) {
+  env = process.env.NODE_ENV;
+  process.env.NODE_ENV = 'production';
+  cb();
+});
 
 // `deploy` builds the static version of the site. Assuming a javascript supported
 // client, everything _should_ work 100% when built. Note that there are a few
 // progressive enhancements in `/server/routes/index` to allow for scriptless
 // clients, and the bower download support
-gulp.task('deploy', function(cb) {
-  var env = process.env.NODE_ENV;
-  process.env.NODE_ENV = 'production';
-  runSequence(
+gulp.task('deploy', gulp.series('set:production',
     'clean',
     'styles',
     tasks,
@@ -380,11 +369,10 @@ gulp.task('deploy', function(cb) {
     'copy',
     ['news', 'rss'],
     'compress',
-  function() {
+  function(cb) {
     process.env.NODE_ENV = env;
     cb();
-  });
-});
+  }));
 
 // develop is your live server. Its not very pretty, and rebuilds everything on
 // every change, but it gets the job done
@@ -411,3 +399,20 @@ gulp.task('develop', function () {
       console.log('restarted!');
     });
 });
+
+
+// in case the hapi server falls over, or if we just want to test what changes
+// look like, the gh-pages task is used by travis.ci to automatically upload
+// a compiled version of the `master` branch to the `gh-pages` branch. In order
+// to prevent a whole lotta bloat in the git repo, we remove all of the sourcemaps
+// and zopfli compressed files. The CNAME file is used by github to allow for a
+// custom domain (http://git.io/vvvgp)
+gulp.task('gh-pages', gulp.series('deploy', function(cb) {
+  return del([
+    'dist/**/*.gz',
+    'dist/**/*.map',
+    '!dist'
+  ], fs.writeFile('dist/CNAME','new.modernizr.com', cb));
+}));
+
+gulp.task('default', gulp.series('deploy'));

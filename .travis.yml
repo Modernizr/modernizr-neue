@@ -14,9 +14,8 @@ before_script:
 
 after_success:
   - |
-
       # Automatically update the content from the `gh-pages` branch
-      $(npm bin)/update-branch --commands "npm run travis" \
+      $(npm bin)/update-branch --commands "npm run create-gh-pages" \
                                --commit-message "Hey server, this content is for you! [skip ci]" \
                                --directory "dist" \
                                --distribution-branch "gh-pages" \
