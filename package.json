@@ -73,7 +73,7 @@
     "aliasify": "^2.1.0",
     "del": "^4.1.1",
     "globby": "^9.2.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^6.1.0",
     "gulp-clean-css": "^4.2.0",
     "gulp-compile-handlebars": "^0.6.1",
@@ -91,7 +91,6 @@
     "imagemin-zopfli": "^6.0.0",
     "lodash-cli": "^4.17.5",
     "merge-stream": "^1.0.1",
-    "run-sequence": "^2.2.1",
     "vinyl-source-stream": "^2.0.0"
   },
   "private": true
