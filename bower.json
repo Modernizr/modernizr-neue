@@ -24,12 +24,12 @@
   ],
   "dependencies": {
     "requirejs-plugins": "~1.0.3",
-    "r.js": "~2.1.16",
-    "zeroclipboard": "~2.2.0",
-    "pako": "~0.2.6",
+    "r.js": "~2.3.6",
+    "zeroclipboard": "~2.3.0",
+    "pako": "~1.0.10",
     "pretty-bytes": "~1.0.4",
     "serviceworker-cache-polyfill.js": "coonsta/cache-polyfill",
-    "modernizr": "modernizr/modernizr#master"
+    "modernizr": "~3"
   },
   "private": true
 }
