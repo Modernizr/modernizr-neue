@@ -122,7 +122,6 @@ var LeftColumn = React.createClass({
     this.setState({classNameAdded: prefix.length});
     this.props.updatePrefix(prefix);
   }
-
 });
 
 module.exports = LeftColumn;

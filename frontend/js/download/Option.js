@@ -20,8 +20,6 @@ var Option = React.createClass({
     var prop = data.property;
     var name = data.name;
 
-
-
     return (
       div({className: props.className},
         input({

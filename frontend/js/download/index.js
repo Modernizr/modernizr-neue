@@ -29,7 +29,6 @@ if ('serviceWorker' in navigator &&
     });
 }
 
-
 if (location.hash.length || location.search.length) {
   var goodSeparator = useHash ? '#' : '?';
   var badSeparator = useHash ? '?' : '#';

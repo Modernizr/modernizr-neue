@@ -98,5 +98,4 @@ var DownloadOverlayOption = React.createClass({
   }
 });
 
-
 module.exports = DownloadOverlayOption;

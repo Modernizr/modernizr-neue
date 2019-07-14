@@ -37,7 +37,6 @@ var preResponse = function(request, reply) {
   reply.continue();
 };
 
-
 server.views({
   engines: {
     hbs: require('handlebars')

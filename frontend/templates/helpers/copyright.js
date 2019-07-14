@@ -1,3 +1,4 @@
+'use strict';
 var copyright = function(prefix) {
   var text = "Copyright © ";
   // prefix

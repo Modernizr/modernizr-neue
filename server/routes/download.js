@@ -2,7 +2,7 @@
 
 // We have three possible outcomes when someone requests `/download`,
 
-// 1. serve the compilled, static html file if in production
+// 1. serve the compiled, static html file if in production
 // 2. serve a compiled handlebars template on each request, in development
 // 3. reply with a tar ball of a compiled version of Modernizr, if requested via bower
 
@@ -18,7 +18,7 @@ var modernizrOptions = require('../util/modernizrOptions');
 var _ = require(Path.join(__dirname, '..', '..', 'frontend', 'js', 'lodash.custom'));
 
 // the `builderContent` step is super heavy, as a result, do not load it if we
-// are in a production enviroment
+// are in a production environment
 if (process.env.NODE_ENV !== 'production') {
   var builderContent = require('../buildSteps/download');
 
@@ -47,7 +47,7 @@ var propToAMD = function(prop) {
 
   if (_.isEmpty(detect)) {
     // if the detect wasn't found, the property is probably inside of an array
-    // of differnet properties, which are typically used for back compat reasons
+    // of different properties, which are typically used for back compat reasons
     detect = _.filter(modernizrMetadata, {'property': [prop]});
   }
 
@@ -86,7 +86,7 @@ var config = function(query) {
 
   queries.forEach(function(query) {
     // `/download` has a search box that we track state with via the `q` param
-    // since it defently won't match anything, we exit early when found
+    // since it definitely won't match anything, we exit early when found
     var searchResult = query.match(/q=(.*)/);
     var cssclassprefix = query.match('cssclassprefix:(.*)');
 
@@ -111,7 +111,7 @@ var config = function(query) {
       var prop = obj.property;
 
       if (_.isArray(prop)) {
-        // some detects have an array of properties, which would strinigfy weirdly
+        // some detects have an array of properties, which would stringify weirdly
         // without us doing it manually here
         prop = prop.join('_');
       }

@@ -12,7 +12,6 @@ var intro = fs.readFileSync(path.join(base, 'docs', 'intro.md'));
 
 var options = modernizr.options(undefined, true);
 
-
 options = _.merge(options, _.map(options, function(option) {
   return _.chain(option.tags)
     .map(function(tag) {
@@ -70,7 +69,6 @@ var parsedDocs = _.chain(options)
   .filter()
   .value()
   .join('');
-
 
 marked.setOptions({
   highlight: function (code) {
