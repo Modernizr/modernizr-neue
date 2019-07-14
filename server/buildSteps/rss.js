@@ -1,4 +1,3 @@
-/*jshint camelcase: false */
 'use strict';
 
 var posts;
