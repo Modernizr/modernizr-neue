@@ -75,7 +75,7 @@
     "@alrra/travis-scripts": "^3.0.1",
     "aliasify": "^2.1.0",
     "del": "^5.1.0",
-    "eslint": "^6.0.1",
+    "eslint": "^6.2.1",
     "globby": "^11.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",

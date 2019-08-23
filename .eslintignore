@@ -1,1 +1,6 @@
 /frontend/lib/**/*.js
+/frontend/js/download/downloader.js
+/frontend/js/build.js
+/frontend/js/lodash.custom.js
+/frontend/js/modernizr.custom.js
+/frontend/js/prod.js
