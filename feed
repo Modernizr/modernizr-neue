@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Offical Modernizr.com Blog]]></title><description><![CDATA[Front-End Development Done Right]]></description><link>https://modernizr.com</link><image><url>https://modernizr.com/img/logo.png</url><title>Offical Modernizr.com Blog</title><link>https://modernizr.com</link></image><generator>RSS for Node</generator><lastBuildDate>Thu, 24 Oct 2019 15:58:09 GMT</lastBuildDate><atom:link href="https://modernizr.com/feed" rel="self" type="application/rss+xml"/><language><![CDATA[en-US]]></language><ttl>1440</ttl><item><title><![CDATA[Modernizr 3.8.0]]></title><description><![CDATA[<p>The nights are getting longer, time to publish a new version of Modernizr to keep the community warm. Besides the usual 
+new feature detects and fixes to existing ones some stuff happened under the hood too:</p>
+<ul>
+<li>First, the build process was converted over to gulp since grunt and especially the test plugins are more or less abandoned.
+This allows to run the tests under the latest version of node and with all the latest libraries like jquery v3.</li>
+<li>Secondly, for the first time we deprecated two tests: <code>Unicode</code> and <code>Touchevents</code>. The former didnt provide a real
+value and was more like an educated guess. The touchevents-test is often misinterpreted to test if the device is capable of touch events.
+But Modernizr tests for browser capability and although it clearly states that even in the test, people opened bugreports
+once we fixed a test in v3.7.1 that corrected the behaviour in chrome (see <a href="https://github.com/Modernizr/Modernizr/issues/2408">#2408</a>)
+So we decided to deprecate those tests. That means that they are not included in the default build config anymore and 
+their source code will be removed once we have a v4 of Modernizr (whenever that is, no ETA yet)</li>
+</ul>
+<p><strong>New Feature Detect(s)</strong></p>
+<ul>
+<li><a href="https://github.com/pascalim">@pascalim</a> added support for ShadowRoot DOM api feature detect through <code>shadowroot</code> and <code>shadowroot-legacy</code> <a href="https://github.com/Modernizr/Modernizr/pull/2475"><code>#2475</code></a></li>
+<li><a href="https://github.com/BrockBeaudry">@BrockBeaudry</a> added proxy detection <a href="https://github.com/Modernizr/Modernizr/pull/2459"><code>#2459</code></a></li>
+<li><a href="https://github.com/horprogs">@horprogs</a> added feature detect native lazy loading img <a href="https://github.com/Modernizr/Modernizr/pull/2453"><code>#2453</code></a></li>
+</ul>
+<p><strong>Fixes</strong></p>
+<ul>
+<li><a href="https://github.com/Minilfat">@Minilfat</a> fixed vh unit issue on ios safari / android chrome  <a href="https://github.com/Modernizr/Modernizr/issues/1805"><code>#1805</code></a></li>
+<li><a href="https://github.com/theLine">@theLine</a> fixed viewport jumping when using CSS Hyphens <a href="https://github.com/Modernizr/Modernizr/issues/1781"><code>#1781</code></a></li>
+<li><a href="https://github.com/listton">@listton</a> fixed check if userAgent is empty <a href="https://github.com/Modernizr/Modernizr/pull/2471"><code>#2471</code></a></li>
+<li><a href="https://github.com/mrcoles">@mrcoles</a> fixed emoji devicePixelRatio vs backingStorePixelRatio <a href="https://github.com/Modernizr/Modernizr/issues/2419"><code>#2419</code></a></li>
+<li><a href="https://github.com/foolip">@foolip</a> fixed testProps.js documentation to avoid misreading <a href="https://github.com/Modernizr/Modernizr/pull/2426"><code>#2426</code></a></li>
+<li><a href="https://github.com/DominikTrenz">@DominikTrenz</a> fixed the datachannel test on ios #2307 <a href="https://github.com/Modernizr/Modernizr/issues/2307"><code>#2307</code></a></li>
+</ul>
+<p><strong>Miscellaneous</strong></p>
+<ul>
+<li>Deprecate some tests <a href="https://github.com/Modernizr/Modernizr/pull/2472"><code>#2472</code></a></li>
+<li>Add new CodeOfConduct <a href="https://github.com/Modernizr/Modernizr/pull/2427"><code>#2427</code></a></li>
+<li>Use addTest for some tests like inputtypes <a href="https://github.com/Modernizr/Modernizr/pull/2469"><code>#2469</code></a></li>
+<li>Catch exception when running in headless chrome <a href="https://github.com/Modernizr/Modernizr/pull/2436"><code>#2436</code></a></li>
+<li>Issue 2343: Fix github.io page <a href="https://github.com/Modernizr/Modernizr/pull/2443"><code>#2443</code></a></li>
+<li>Issue 2406: Update jquery  <a href="https://github.com/Modernizr/Modernizr/pull/2448"><code>#2448</code></a></li>
+<li>Use gulp for the dev pipeline <a href="https://github.com/Modernizr/Modernizr/pull/2429"><code>#2429</code></a></li>
+<li>Add domPrefixesAll helper method <a href="https://github.com/Modernizr/Modernizr/pull/2442"><code>#2442</code></a></li>
+<li>Use gulp for the dev pipeline (#2429) <a href="https://github.com/Modernizr/Modernizr/issues/2332"><code>#2332</code></a></li>
+<li>Add script for serving the gh-pages (and therefore the browser tests) locally <a href="https://github.com/Modernizr/Modernizr/commit/6daed0f623890706d3814c46226573d2cc2b39e8"><code>6daed0f</code></a></li>
+<li>Update main entry in package.json <a href="https://github.com/Modernizr/Modernizr/commit/377a6303b3b6d400979eeae351e1dcf43972eef4"><code>377a630</code></a></li>
+<li>Cleanups after switch to gulp, move some legacy files into own directory for reference, store some test files in tmp directory <a href="https://github.com/Modernizr/Modernizr/commit/c47441be1f346f6f60a3d4edf11a8849307ec2b7"><code>c47441b</code></a></li>
+<li>Fix typo in README, Update dependencies and gitignore <a href="https://github.com/Modernizr/Modernizr/commit/a335662549432100b5bd70833ccd45375532b77f"><code>a335662</code></a></li>
+<li>Cleanup TODO tags, update dependencies <a href="https://github.com/Modernizr/Modernizr/commit/8c5b557c8b903ab73a5a66645e7775670b14a0e0"><code>8c5b557</code></a></li>
+<li>Add npm shortcuts to some gulp tasks <a href="https://github.com/Modernizr/Modernizr/commit/332a68b8270c29479225d32bb1e9520f47ccdcfe"><code>332a68b</code></a></li>
+<li>Check for multi-spaces with eslint, fix those and cleanup some DOCs and notes <a href="https://github.com/Modernizr/Modernizr/commit/6a2f4256d86876edf23f9123c9db8fbc55d00517"><code>6a2f425</code></a></li>
+<li>Add npm badge to README <a href="https://github.com/Modernizr/Modernizr/commit/1b9549035dbed6ebbd07443513aa03abfeb9c2dd"><code>1b95490</code></a></li>
+<li>Fix double DOC entry <a href="https://github.com/Modernizr/Modernizr/commit/7599d26b7fd49cacad297cd3cf824b9133d76d69"><code>7599d26</code></a></li>
+<li>Exit with non-zero status if there were failures <a href="https://github.com/Modernizr/Modernizr/commit/1818d61a02e02feca59119ddddb730e11e160e9f"><code>1818d61</code></a></li>
+<li>Add coveralls badge <a href="https://github.com/Modernizr/Modernizr/commit/4ee23c7f6d3a8ff3dcbc48fa87e4b3d2d3e27833"><code>4ee23c7</code></a></li>
+</ul>
+]]></description><link>https://modernizr.com/news//news/modernizr-3-8</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-3-8</guid><dc:creator><![CDATA[<a href="https://github.com/rejas/">Rejas</a>]]></dc:creator><pubDate>Wed, 23 Oct 2019 22:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 3.7.1]]></title><description><![CDATA[<p>Small but controversial this bugfix release cleaned up some build configs and fixed one test that was reporting
+incorrectly.</p>
+<p><strong>Fixes</strong></p>
+<ul>
+<li><a href="https://github.com/rejas">@rejas</a> Fix touch event detection for Chrome &gt;= 70 <a href="https://github.com/Modernizr/Modernizr/issues/2408">#2408</a></li>
+</ul>
+]]></description><link>https://modernizr.com/news//news/modernizr-3-7-1</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-3-7-1</guid><dc:creator><![CDATA[<a href="https://github.com/rejas/">Rejas</a>]]></dc:creator><pubDate>Wed, 13 Mar 2019 23:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 3.7.0]]></title><description><![CDATA[<p>Not a full year in the making but close. Lots of new feature detectes and more bugfixes then we can write down</p>
+<p><strong>New Feature Detect(s)</strong></p>
+<ul>
+<li><a href="https://github.com/abrad1212">@abrad1212</a> added detect for the GetBattery API <a href="https://github.com/Modernizr/Modernizr/pull/2312">#2312</a></li>
+<li><a href="https://github.com/mAiNiNfEcTiOn">@mAiNiNfEcTiOn</a> <a href="https://github.com/Kruithne">@Kruithne</a> <a href="https://github.com/rejas">@rejas</a> added css custom properties feature detection <a href="https://github.com/Modernizr/Modernizr/pull/2310">#2310</a></li>
+<li><a href="https://github.com/rejas">@rejas</a> added detect for font display <a href="https://github.com/Modernizr/Modernizr/pull/2323">#2323</a></li>
+<li><a href="https://github.com/rejas">@rejas</a> added test for text-decoration-skip-ink <a href="https://github.com/Modernizr/Modernizr/pull/2324">#2324</a></li>
+<li><a href="https://github.com/andreacc">@andreacc</a> added detection for formNoValidate attribute on inputs <a href="https://github.com/Modernizr/Modernizr/pull/2164">#2164</a></li>
+<li><a href="https://github.com/rejas">@rejas</a> added detect for box-decoration-break <a href="https://github.com/Modernizr/Modernizr/pull/2330">#2330</a></li>
+<li><a href="https://github.com/haraldreingruber">@haraldreingruber</a> added Media Source Extension API feature dectection <a href="https://github.com/Modernizr/Modernizr/pull/2233">#2233</a></li>
+<li><a href="https://github.com/JordyvanDortmont">@JordyvanDortmont</a> added audio autoplay feature detect <a href="https://github.com/Modernizr/Modernizr/pull/2185">#2185</a></li>
+<li><a href="https://github.com/rejas">@rejas</a> added more tests around text decoration styling <a href="https://github.com/Modernizr/Modernizr/pull/2327">#2327</a></li>
+<li><a href="https://github.com/dutchenkoOleg">@dutchenkoOleg</a> added Intersection Observer API <a href="https://github.com/Modernizr/Modernizr/pull/2360">#2360</a></li>
+<li><a href="https://github.com/escodel">@escodel</a> added feature detection for navigator.connection.effectiveType <a href="https://github.com/Modernizr/Modernizr/pull/2381">#2381</a></li>
+<li><a href="https://github.com/escodel">@escodel</a> added PublicKeyCredential feature detect for webauthn <a href="https://github.com/Modernizr/Modernizr/pull/2393">#2393</a></li>
+</ul>
+<p><strong>Fixes</strong></p>
+<ul>
+<li>Contributions by @emilio, @rejas, @jsoref, @mhadam, @annevk, @andreacc, @steffenweber, @gregersrygg, @anenviousguest, 
+@niksy, @mreinstein, @snout-o, @Nicholas-Eng, @nali, @chris13524 and @odysseuscm which all provided <a href="https://github.com/Modernizr/Modernizr/compare/v3.6.0...v3.7.0">fixes</a> for this release</li>
+</ul>
+]]></description><link>https://modernizr.com/news//news/modernizr-3-7-0</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-3-7-0</guid><dc:creator><![CDATA[<a href="https://github.com/rejas/">Rejas</a>]]></dc:creator><pubDate>Mon, 25 Feb 2019 23:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 3.6.0]]></title><description><![CDATA[<p>Sorry, we promised we would not be quietly updating the library again but here we are again. But the good news: we are not
+dead yet. And two new feature detects are in this release, one for the focus-within pseudo-selector and one for variable fonts.</p>
+<p>Happy developing in 2018!</p>
+<p><strong>New Feature Detect(s)</strong></p>
+<ul>
+<li><a href="https://github.com/oliverjash">@oliverjash</a> added test for CSS <code>:focus-within</code> pseudo-selector <a href="https://github.com/Modernizr/Modernizr/pull/2287">#2287</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> added test for variable fonts <a href="https://github.com/Modernizr/Modernizr/pull/2202">#2202</a></li>
+</ul>
+<p><strong>Fixes</strong></p>
+<ul>
+<li>Contributions by @cliener, @jayeb, @bholley, @rejas, @simongareste, @timkraut, @philippsimon, @patrickhlauke, @luftywiranda13, @milesthedisch, @strarsis
+which all provided <a href="https://github.com/Modernizr/Modernizr/compare/v3.5.0...v3.6.0">fixes</a> for this release</li>
+</ul>
+]]></description><link>https://modernizr.com/news//news/modernizr-3-6-0</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-3-6-0</guid><dc:creator><![CDATA[<a href="https://github.com/rejas/">Rejas</a>]]></dc:creator><pubDate>Sun, 04 Mar 2018 23:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 3.5.0]]></title><description><![CDATA[<p>Instead of quietly updating the library like we did for our 3.4.0 release (yes, that happened — <a href="https://modernizr.com/news/modernizr-3-4-0">see the full changelog here</a>), we have an exciting new feature detect as part of 3.5.0: CSS Grids!</p>
+<p>With browsers <a href="http://caniuse.com/#feat=css-grid">adding support for CSS Grids in their latest releases</a>, the time to <a href="https://alistapart.com/article/practical-grid">start using CSS Grids</a> is truly here. Just one caveat: IE11 and current shipping versions of Edge do not support the new syntax, but <em>do</em> support the old legacy CSS Grids proposal—and only one of them supports, uh, <code>@supports</code>.</p>
+<p>So in <strong>3.5.0</strong> we’re adding two tests in one: the now-standard official CSS Grid syntax as <code>Modernizr.cssgrid</code>, and the old proposal’s syntax as <code>Modernizr.cssgridlegacy</code>. There is also an additional polyfill available for the Pointer Events test, named PEP. Lastly, dependencies were updated.</p>
+<p>Happy developing!</p>
+<p><strong>New Feature Detect(s)</strong></p>
+<ul>
+<li><a href="https://github.com/kurafire">@kurafire</a> added CSS Grid test for old &amp; new syntaxes <a href="https://github.com/Modernizr/Modernizr/pull/2189">#2189</a></li>
+</ul>
+<p><strong>Updated</strong></p>
+<ul>
+<li><a href="https://github.com/roblarsen">@roblarsen</a> + <a href="https://github.com/patrickkettner">@patrickkettner</a> added PEP to pointer events as a polyfill <a href="https://github.com/Modernizr/Modernizr/pull/2179">#2179</a></li>
+</ul>
+<p><strong>Updated Dependencies</strong></p>
+<ul>
+<li>Update grunt-contrib-clean to version 1.1.0 🚀 <a href="https://github.com/Modernizr/Modernizr/pull/2188">#2188</a></li>
+<li>Update yargs to version 7.0.2 🚀 <a href="https://github.com/Modernizr/Modernizr/pull/2175">#2175</a></li>
+</ul>
+]]></description><link>https://modernizr.com/news//news/modernizr-3-5-0</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-3-5-0</guid><dc:creator><![CDATA[<a href="https://twitter.com/KuraFire">Faruk Ateş</a>]]></dc:creator><pubDate>Wed, 12 Apr 2017 22:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 3.4.0]]></title><description><![CDATA[<p>After a long silence, and slowed work (<a href="https://twitter.com/patrickkettner/status/700698003519082500">I had a baby!</a>), the team is back at it again with Modernizr 3.4.0!!!</p>
+<p><strong>Fixed</strong></p>
+<ul>
+<li><a href="https://github.com/zazabe">@zazabe</a> fixed the opus audio detect to be more reliable on certain mobile devices - <a href="https://github.com/Modernizr/Modernizr/pull/1784">#1784</a></li>
+<li><a href="https://github.com/rowanthorpe">@rowanthorpe</a> fixed the unicode test to not throw an err in XHTML pages - <a href="https://github.com/Modernizr/Modernizr/pull/1823">#1823</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> fixed the vml detect to not throw an err in XHTML5 pages - <a href="https://github.com/Modernizr/Modernizr/pull/1823">#1823</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> fixed himself from commiting build files yet again - <a href="https://github.com/Modernizr/Modernizr/pull/1845">#1845</a></li>
+<li><a href="https://github.com/jshen212">@jshen212</a> fixed a glaring typo in the docs - <a href="https://github.com/Modernizr/Modernizr/pull/1849">#1849</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> fixed the prefixing helper - <a href="https://github.com/Modernizr/Modernizr/pull/1840">#1840</a></li>
+<li><a href="https://github.com/denyskoch">@denyskoch</a> fixed the preserve-3d detect for IE 11 and Windows 10 - <a href="https://github.com/Modernizr/Modernizr/pull/1868">#1868</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> fixed the history detect for file:// pages - <a href="https://github.com/Modernizr/Modernizr/pull/2029">#2029</a></li>
+<li><a href="https://github.com/ryanseddon">@ryanseddon</a> fixed the generatedcontent detect for zoomed pages - <a href="https://github.com/Modernizr/Modernizr/pull/2005">#2005</a></li>
+<li><a href="https://github.com/jdelStrother">@jdelStrother</a> fixed the video autoplay detect from crashing in certain situations - <a href="https://github.com/Modernizr/Modernizr/pull/2063">#2063</a></li>
+<li><a href="https://github.com/Isthu">@Isthu</a> fixed the css regions detect - <a href="https://github.com/Modernizr/Modernizr/pull/2091">#2091</a></li>
+<li><a href="https://github.com/piperchester">@piperchester</a> fixed a whole mess of doc typos - <a href="https://github.com/Modernizr/Modernizr/pull/2128">#2128</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> fixed the datachannel detect to work correctly in Edge 15 - <a href="https://github.com/Modernizr/Modernizr/pull/">#ff821e42</a></li>
+</ul>
+<p><strong>Updated</strong></p>
+<ul>
+<li><a href="https://github.com/Rowno">@Rowno</a> updated the build URL to use https instead of http for links - <a href="https://github.com/Modernizr/Modernizr/pull/1865">#1865</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> updated the IndexedDB detect to be more fine grained with feature detection - <a href="https://github.com/Modernizr/Modernizr/pull/2030">#2030</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> added the alias svgincss for svgasimg - <a href="https://github.com/Modernizr/Modernizr/pull/2031">#2031</a></li>
+<li><a href="https://github.com/paulirish">@paulirish</a> inverted the internal logic of the transformstylepreserve3d detect to make it more readable - <a href="https://github.com/Modernizr/Modernizr/pull/1920">#1920</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> updated a few tests to not use the Boolean constructor - <a href="https://github.com/Modernizr/Modernizr/pull/2049">#2049</a></li>
+<li><a href="https://github.com/camjc">@camjc</a> removed some duplicat entries from the config-all file - <a href="https://github.com/Modernizr/Modernizr/pull/2066">#2066</a></li>
+<li><a href="https://github.com/LaurentBarbareau">@LaurentBarbareau</a> updated support detect metadata to have a valid url - <a href="https://github.com/Modernizr/Modernizr/pull/2097">#2097</a></li>
+<li><a href="https://github.com/whawker">@whawker</a> updated the localizednumber test - <a href="https://github.com/Modernizr/Modernizr/pull/2093">#2093</a></li>
+<li><a href="https://github.com/PikadudeNo1">@PikadudeNo1</a> updated the fontface detect to remove old android due to very low usage - <a href="https://github.com/Modernizr/Modernizr/pull/2095">#2095</a></li>
+<li><a href="https://github.com/JaZo">@JaZo</a> updated the indexeddbblob detect to ensure the puts are successful - <a href="https://github.com/Modernizr/Modernizr/pull/2102">#2102</a></li>
+<li><a href="https://github.com/philippevk">@philippevk</a> updated the es6 string detect to check for includes instead of contains - <a href="https://github.com/Modernizr/Modernizr/pull/2136">#2136</a></li>
+</ul>
+<p><strong>Added</strong></p>
+<ul>
+<li><a href="https://github.com/vincentriemer">@vincentriemer</a> created a detect for es6 arrow functions - <a href="https://github.com/Modernizr/Modernizr/pull/1794">#1794</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> created a detect for RTC Message Channels - <a href="https://github.com/Modernizr/Modernizr/pull/2026">#2026</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> created a detect for hover and pointer media queries - <a href="https://github.com/Modernizr/Modernizr/pull/2028">#2028</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> added the ability to use setClasses via a flag on the cli - <a href="https://github.com/Modernizr/Modernizr/pull/2043">#2043</a></li>
+<li><a href="https://github.com/rupl">@rupl</a> added a detect for CSS Transforms Level 2 - <a href="https://github.com/Modernizr/Modernizr/pull/2100">#2100</a></li>
+<li><a href="https://github.com/lukasoppermann">@lukasoppermann</a> added a detect for custom elements - <a href="https://github.com/Modernizr/Modernizr/pull/2155">#2155</a></li>
+</ul>
+<p><strong>Updated Dependencies</strong></p>
+<ul>
+<li>updated <a href="https://www.npmjs.com/package/yargs">yargs</a> from v3.30.0 to v6.6.0</li>
+<li>updated <a href="https://www.npmjs.com/package/lodash">lodash</a> from v3.10.1 to v4.17.4</li>
+<li>removed <a href="https://www.npmjs.com/package/grunt-jscs">grunt-jscs</a> - <a href="https://github.com/Modernizr/Modernizr/pull/2044">#2044</a></li>
+<li>removed <a href="https://www.npmjs.com/package/grunt-contrib-jshint">grunt-contrib-jshint</a> - <a href="https://github.com/Modernizr/Modernizr/pull/2044">#2044</a></li>
+<li>updated <a href="https://www.npmjs.com/package/grunt-istanbul">grunt-istanbul</a> from v0.4.2 to v0.7.1</li>
+<li>updated <a href="https://www.npmjs.com/package/grunt-saucelabs">grunt-saucelabs</a> from v8.6.1 to v9.0.0</li>
+<li>removed <a href="https://www.npmjs.com/package/marked">marked</a> - <a href="https://github.com/Modernizr/Modernizr/pull/2027">#2027</a></li>
+<li>added <a href="https://www.npmjs.com/package/remarkable">remarkable</a> - <a href="https://github.com/Modernizr/Modernizr/pull/2027">#2027</a></li>
+<li>added <a href="https://www.npmjs.com/package/eslint">eslint</a> - <a href="https://github.com/Modernizr/Modernizr/pull/2044">#2044</a></li>
+<li>removed support for Node 0.10 (only affects the cli tool) - <a href="https://github.com/Modernizr/Modernizr/pull/2115">#2115</a></li>
+<li>updated <a href="https://www.npmjs.com/package/proxyquite">proxyquire</a> from v1.7.3 to v1.7.11</li>
+</ul>
+<p>And finally, a big big thank you to Ryan Seddon for pushing this release through!</p>
+]]></description><link>https://modernizr.com/news//news/modernizr-3-4-0</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-3-4-0</guid><dc:creator><![CDATA[<a href="https://twitter.com/patrickkettner">Patrick Kettner</a>]]></dc:creator><pubDate>Tue, 14 Mar 2017 23:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 3.3.1]]></title><description><![CDATA[<p>What a difference a day makes - we found a couple glaring bugs recently, and so we are releasing 3.3.1 right on the tail of <a href="https://modernizr.com/news/modernizr-3-3-0">3.3.0</a></p>
+<p><strong>Fixed</strong></p>
+<ul>
+<li><a href="https://github.com/a.shevchenko">@a.shevchenko</a> fixed an issue where the indexeddb check threw an error when cookies are blocked in Firefox - <a href="https://github.com/Modernizr/Modernizr/pull/1831">#1831</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> fixed an issue where multiple build() calls in quick succession caused contaminated builds - <a href="https://github.com/Modernizr/Modernizr/pull/1832">#1832</a></li>
+<li><a href="https://github.com/JaZo">@JaZo</a> fixed a typo preventing an indexedDB subtest from ever runnning - <a href="https://github.com/Modernizr/Modernizr/pull/1834">#1834</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> fixed an where the cli version of modernizr would crash when using the inline feature-detect flags - <a href="https://github.com/Modernizr/Modernizr/pull/1839">#1839</a></li>
+</ul>
+<p><strong>Updated</strong></p>
+<ul>
+<li><a href="https://github.com/alrra">@alrra</a> updated a bunch of documentation links to https - <a href="https://github.com/Modernizr/Modernizr/pull/1838">#1838</a></li>
+</ul>
+<p><strong>Updated Dependencies</strong></p>
+<ul>
+<li>updated <a href="https://www.npmjs.com/package/jquery">jquery</a> from v1.11.3 to v1.12.0</li>
+<li>updated <a href="https://www.npmjs.com/package/lodash">lodash</a> from v3.10.1 to v4.0.0, including <a href="https://github.com/Modernizr/Modernizr/commit/4738f5a957e1ecd25850007293f5c8c59cf03bbe">some compat fixes</a></li>
+</ul>
+]]></description><link>https://modernizr.com/news//news/modernizr-3-3-1</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-3-3-1</guid><dc:creator><![CDATA[<a href="https://twitter.com/patrickkettner">Patrick Kettner</a>]]></dc:creator><pubDate>Wed, 13 Jan 2016 23:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 3.3.0]]></title><description><![CDATA[<p>After a long holiday hiatus, its a brand new year, and therefore time for a brand new release from Modernizr!</p>
+<p><strong>Fixed</strong></p>
+<ul>
+<li><a href="https://github.com/mems">@mems</a> fixed the mp3 audio detect for Firefox by adding the proper codec - <a href="https://github.com/Modernizr/Modernizr/pull/1740">#1740</a></li>
+<li><a href="https://github.com/niksy">@niksy</a> fixed an issue where the flash detect could add a fake body when it didn&#39;t need too, which screwed up IE 8 (R.I.P.)- <a href="https://github.com/Modernizr/Modernizr/pull/1557">#1740</a></li>
+<li><a href="https://github.com/jnordberg">@jnordberg</a> fixed the dependency ordering for requirejs on the css filters detects (whoops!) - <a href="https://github.com/Modernizr/Modernizr/pull/1744">#1744</a></li>
+<li><a href="https://github.com/mstrutt">@mstrutt</a> fixed a false negative issue in nth test - <a href="https://github.com/Modernizr/Modernizr/pull/1757">#1757</a></li>
+<li><a href="https://github.com/akamike">@akamike</a> fixed an issue where setClasses was not being included despite being added via config - <a href="https://github.com/Modernizr/Modernizr/pull/1772">#1772</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> fixed a handful of errors that cropped up in older browsers in <a href="https://github.com/Modernizr/Modernizr/commit/078aea">078aea</a></li>
+<li><a href="https://github.com/aFarkas">@aFarkas</a> fixed a regression in the input type=number detect in <a href="https://github.com/Modernizr/Modernizr/commit/695fd5">695fd5</a></li>
+<li><a href="https://github.com/ryanseddon">@ryanseddon</a> fixed base64 video used in the video autoplay detect, which was causing false negatives in some browsers - <a href="https://github.com/Modernizr/Modernizr/pull/1795">#1795</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> fixed an issue where custom tests weren&#39;t allowed to be passed into the buildQuery function - <a href="https://github.com/Modernizr/Modernizr/pull/1801">#1801</a></li>
+<li><a href="https://github.com/aakoch">@aakoch</a> fixed a typo in the xdomainrequest detect - <a href="https://github.com/Modernizr/Modernizr/pull/1803">#1803</a></li>
+<li><a href="https://github.com/alexgibson">@alexgibson</a> fixed false positive in Notifications test for Chrome on Android - <a href="https://github.com/Modernizr/Modernizr/pull/1813">#1813</a></li>
+<li><a href="https://github.com/rowanthorpe">@rowanthorpe</a> fixed the syntax for form validation to allow it to run in XHTML mode - <a href="https://github.com/Modernizr/Modernizr/pull/1824">#1824</a></li>
+</ul>
+<p><strong>Added</strong></p>
+<ul>
+<li><a href="https://github.com/ryanseddon">@ryanseddon</a> added that Modernizr follows the <a href="http://todogroup.org/opencodeofconduct/">Open Code of Conduct</a> - <a href="https://github.com/Modernizr/Modernizr/pull/1743">#1743</a></li>
+<li><a href="https://github.com/KraigWalker">@KraigWalker</a> added a detect for Safari&#39;s new Force Touch/3D Touch API- <a href="https://github.com/Modernizr/Modernizr/pull/1613">#1743</a></li>
+<li><a href="https://github.com/strarsis">@strarsis</a> added a detect for CSS hairlines - <a href="https://github.com/Modernizr/Modernizr/pull/1769">#1769</a></li>
+<li><a href="https://github.com/jokeyrhyme">@jokeyrhyme</a> added a detect for ES6 collections - <a href="https://github.com/Modernizr/Modernizr/pull/1396">#1396</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> added a detect for font ligatures - <a href="https://github.com/Modernizr/Modernizr/pull/1774">#1774</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> added a detect for crossOrigin support on the img tag - <a href="https://github.com/Modernizr/Modernizr/pull/1775">#1775</a></li>
+<li><a href="https://github.com/EricWVGG">@EricWVGG</a> added a detect for jpeg 2000 - <a href="https://github.com/Modernizr/Modernizr/pull/1679">#1679</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> added a detect for css snap scroll points - <a href="https://github.com/Modernizr/Modernizr/pull/1778">#1778</a></li>
+</ul>
+<p><strong>Updated</strong></p>
+<ul>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> updated the base64 detect property to not use a hyphen by default (but still register one via an alias) - <a href="https://github.com/Modernizr/Modernizr/pull/1761">#1761</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> updated a bunch of style fixes as the result of a new jscs version - <a href="https://github.com/Modernizr/Modernizr/pull/1737">#1737</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> simplified the bdi check in <a href="https://github.com/Modernizr/Modernizr/commit/8d5169">8d5169</a></li>
+</ul>
+<p><strong>Updated Dependencies</strong></p>
+<ul>
+<li>updated <a href="https://www.npmjs.com/package/joi">joi</a> from v6.9.1 to v6.10.0</li>
+<li>updated <a href="https://www.npmjs.com/package/grunt-contrib-clean">grunt-contrib-clean</a> from v0.6.0 to v0.7.0</li>
+<li>updated <a href="https://www.npmjs.com/package/doctrine">doctrine</a> from v0.6.4 to v1.1.0</li>
+<li>updated <a href="https://www.npmjs.com/package/yargs">yargs</a> from v3.29.0 to v3.31.0</li>
+<li>updated <a href="https://www.npmjs.com/package/requirejs">requirejs</a> from v2.1.20 to v2.1.22</li>
+<li>updated <a href="https://www.npmjs.com/package/grunt-contrib-connect">grunt-contrib-connect</a> from v0.5.0 to v0.11.2</li>
+<li>added <a href="https://www.npmjs.com/package/grunt-contrib-connect">serve-static</a> to compensate for changes in newer versions of grunt-contrib-connect</li>
+<li>updated <a href="https://www.npmjs.com/package/grunt-contrib-jscs">grunt-contrib-jscs</a> from v1.8.0 to v2.6.0</li>
+<li>updated <a href="https://www.npmjs.com/package/grunt-contrib-mocha">grunt-contrib-mocha</a> from v0.4.13 to v0.4.15</li>
+<li>updated <a href="https://www.npmjs.com/package/grunt-saucelabs">grunt-saucelabs</a> from v8.6.1 to v8.6.2</li>
+<li>updated <a href="https://www.npmjs.com/package/load-grunt-tasks">load-grunt-tasks</a> from v3.3.0 to v3.4.0</li>
+</ul>
+]]></description><link>https://modernizr.com/news//news/modernizr-3-3-0</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-3-3-0</guid><dc:creator><![CDATA[<a href="https://twitter.com/patrickkettner">Patrick Kettner</a>]]></dc:creator><pubDate>Sun, 10 Jan 2016 23:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 3.2.0]]></title><description><![CDATA[<p>Like sands through the hourglass, so are the days of our lives, so is the release of Modernizr 3.2.0.</p>
+<p><strong>Fixed</strong></p>
+<ul>
+<li><a href="https://github.com/TRowbotham">@TRowbotham</a> fixed the unprefixed gradient detect to cover newer gradient syntaxes - <a href="https://github.com/Modernizr/Modernizr/pull/1621">#1621</a></li>
+<li><a href="https://github.com/ryanhughes">@ryanhughes</a> fixed a <a href="https://github.com/Modernizr/Modernizr/issues/1438">long standing</a> issue with the css hyphens detect - <a href="https://github.com/Modernizr/Modernizr/pull/1514">#1514</a></li>
+<li><a href="https://github.com/fonziemedia">@fonziemedia</a> fixed the audio preload detect to be a functional check rather than simply a property check - <a href="https://github.com/Modernizr/Modernizr/pull/1702">#1702</a></li>
+<li><a href="https://github.com/JoshuaWise">@JoshuaWise</a> fixed a (rather than) edge case in the transform3d detect - <a href="https://github.com/Modernizr/Modernizr/pull/1704">#1704</a></li>
+<li><a href="https://github.com/jorrit">@jorrit</a> fixed a typo - <a href="https://github.com/Modernizr/Modernizr/pull/1708">#1708</a></li>
+<li><a href="https://github.com/roblarsen">@roblarsen</a> added a hasOwnProperty check to the Modernizr class name creation process to avoid extraneous classes - <a href="https://github.com/Modernizr/Modernizr/pull/1709">#1709</a></li>
+<li><a href="https://github.com/aFarkas">@aFarkas</a> fixed the <code>sizes</code> detect (used in responsive images) for Safari 9 - <a href="https://github.com/Modernizr/Modernizr/pull/1728">#1728</a></li>
+</ul>
+<p><strong>Added</strong></p>
+<ul>
+<li><a href="https://github.com/hypotenuse">@hypotenuse</a> added a detect for XDomainRequest - <a href="https://github.com/Modernizr/Modernizr/pull/1635">#1566</a></li>
+<li><a href="https://github.com/roblarsen">@roblarsen</a> added a basic detect for the new Crypto APIs - <a href="https://github.com/Modernizr/Modernizr/pull/1661">#1661</a></li>
+<li><a href="https://github.com/ChristianUlbrich">@ChristianUlbrich</a> created a detect for the Base64 API - <a href="https://github.com/Modernizr/Modernizr/pull/1696">#1696</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> created a detect for the BDI element - <a href="https://github.com/Modernizr/Modernizr/pull/1719">#1719</a></li>
+<li><a href="https://github.com/deformhead">@deformhead</a> added a config to force LF line endings - <a href="https://github.com/Modernizr/Modernizr/pull/1711">#1711</a></li>
+<li><a href="https://github.com/roblarsen">@roblarsen</a> added a basic detect for the new Crypto APIs - <a href="https://github.com/Modernizr/Modernizr/pull/1661">#1661</a></li>
+</ul>
+<p><strong>Updated</strong></p>
+<ul>
+<li><a href="https://github.com/paulirish">@paulirish</a> updated the docs to the hiddenscroll detect - <a href="https://github.com/Modernizr/Modernizr/pull/1715">#1715</a></li>
+</ul>
+<p><strong>Updated Dependencies</strong></p>
+<ul>
+<li>updating <a href="https://www.npmjs.com/package/yargs">yargs</a> to v3.26.0 to v3.28.0</li>
+<li>updating <a href="https://www.npmjs.com/package/joi">joi</a> to v6.9.0 to v6.9.1</li>
+<li>updating <a href="https://www.npmjs.com/package/load-grunt-tasks">load-grunt-tasks</a> to v0.2.1 to v3.3.0</li>
+<li>updating <a href="https://www.npmjs.com/package/grunt-contrib-copy">grunt-contrib-copy</a> to v0.8.1 to v0.8.2</li>
+<li>updating <a href="https://www.npmjs.com/package/grunt-contrib-clean">grunt-contrib-clean</a> to v0.4.1 to v0.6.0</li>
+<li>updating <a href="https://www.npmjs.com/package/marked">marked</a> to v0.2.10 to v3.5.0, which actually fixes <a href="https://app.snyk.io/vuln/npm:marked:20140131">several</a> <a href="https://app.snyk.io/vuln/npm:marked:20140131-1">code</a> <a href="https://app.snyk.io/vuln/npm:marked:20140131-2">vulnerabilities</a></li>
+</ul>
+]]></description><link>https://modernizr.com/news//news/modernizr-3-2-0</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-3-2-0</guid><dc:creator><![CDATA[<a href="https://twitter.com/patrickkettner">Patrick Kettner</a>]]></dc:creator><pubDate>Wed, 28 Oct 2015 23:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 3.1.0]]></title><description><![CDATA[<p>We promised faster releases - and here they are. Modernizr 3.1.0 is a pretty small release, but none the less useful.</p>
+<p><strong>Fixed</strong></p>
+<ul>
+<li><a href="https://github.com/mattbrundage">@mattbrundage</a> fixed the casing on the Flash documentation - <a href="https://github.com/Modernizr/Modernizr/pull/1635">#1635</a></li>
+<li><a href="https://github.com/philipbordallo">@philipbordallo</a> fixed an incorrect URL for the cupcakejs sessionStorage polyfill - <a href="https://github.com/Modernizr/Modernizr/pull/1647">#1647</a></li>
+<li><a href="https://github.com/valtlait">@valtlait</a> nixed the crud out of the Modernizr SVG logo - <a href="https://github.com/Modernizr/Modernizr/pull/1657">#1657</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> removed an unused dependency from the fullscreen detect - <a href="https://github.com/Modernizr/Modernizr/commit/6bd55c">6bd55c</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> fixed inaccurate false negatives in the vunit detect on iOS 8+ - <a href="https://github.com/Modernizr/Modernizr/pull/1682">#1682</a></li>
+<li><a href="https://github.com/smyru">@smyru</a> fixed a request loop on the form validation detect with Opera Mini servers - <a href="https://github.com/Modernizr/Modernizr/pull/1594">#1594</a></li>
+</ul>
+<p><strong>Updated</strong></p>
+<ul>
+<li><a href="https://github.com/alrra">@alrra</a> updated the npm build script to use his updated version of <code>travis-scripts</code> - <a href="https://github.com/Modernizr/Modernizr/pull/1662">#1662</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> updated the Travis build image - <a href="https://github.com/Modernizr/Modernizr/commit/14eb32">14eb32</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> updated the metadata for jQuery-contextMenu - <a href="https://github.com/Modernizr/Modernizr/pull/1665">#1665</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> embeded website info for the contributors to the project in the package.json - <a href="https://github.com/Modernizr/Modernizr/commit/63f4b5d">63f4b5d</a></li>
+<li><a href="https://github.com/tsjost">@tsjost</a> updated the README&#39;s build instructions - <a href="https://github.com/Modernizr/Modernizr/pull/1677">#1667</a></li>
+<li><a href="https://github.com/niksy">@niksy</a> updated html5shiv to v3.7.2, fixed an existing issue Modernizr and Browserify - <a href="https://github.com/Modernizr/Modernizr/pull/1680">#1680</a></li>
+</ul>
+<p><strong>Added</strong></p>
+<ul>
+<li><a href="https://github.com/BrianCS">@BrianCS</a> submitted a detect for <code>backdrop-filter</code>, with <a href="https://github.com/Modernizr/Modernizr/pull/1670">an</a> <a href="https://github.com/Modernizr/Modernizr/pull/1689">assist</a> from <a href="https://github.com/KuraFire">@KuraFire</a> - <a href="https://github.com/Modernizr/Modernizr/pull/1638">#1638</a></li>
+<li><a href="https://github.com/peterblazejewicz">@peterblazejewicz</a> added a lowercased version of the version flag (<code>-v</code>) - <a href="https://github.com/Modernizr/Modernizr/pull/1644">#1644</a></li>
+<li><a href="https://github.com/patrickkettner">@patrickkettner</a> added the <a href="https://github.com/Modernizr/Modernizr/blob/feb841be8501dddffeaf37ef17bef1fbadb72d5d/src/prefixedCSSValue.js"><code>prefixedCSSValue</code> utility function</a>, as a way to check for prefixed versions of CSS values - <a href="https://github.com/Modernizr/Modernizr/commit/6bd55c">6bd55c</a></li>
+<li><a href="https://github.com/jdalton">@jdalton</a> added Microsoft Edge to the saucelabs configuration - <a href="https://github.com/Modernizr/Modernizr/pull/1669">#1669</a></li>
+<li><a href="https://github.com/EricWVGG">@EricWVGG</a> added a detect for jpeg2000 - <a href="https://github.com/Modernizr/Modernizr/pull/1679">#1679</a></li>
+<li><a href="http://greenkeeper.io/">greenkeep.io</a> was added to the project, an awesome service that automatically pins your dependencies and PRs any updated in the future. Included in its updates since the last release are<ul>
+<li>updating <a href="https://www.npmjs.com/package/proxyquire">proxyquire</a> to v1.7.3 from v1.7.2</li>
+<li>updating <a href="https://www.npmjs.com/package/joi">joi</a> to v6.9.0 from v6.7.1</li>
+<li>updating <a href="https://www.npmjs.com/package/yargs">yargs</a> to v3.26.0 from 2.3.0</li>
+<li>updating <a href="https://www.npmjs.com/package/grunt-contrib-jade">grunt-contrib-jade</a> to v0.15.0 from v0.14.1</li>
+</ul>
+</li>
+</ul>
+]]></description><link>https://modernizr.com/news//news/modernizr-3-1-0</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-3-1-0</guid><dc:creator><![CDATA[<a href="https://twitter.com/patrickkettner">Patrick Kettner</a>]]></dc:creator><pubDate>Sun, 04 Oct 2015 22:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 3: A new release and website]]></title><description><![CDATA[<p>After what appears an eternity to us and the wider development community we are ecstatic to announce the release of Modernizr 3.0! This is a massive release and from our last release almost 2.5 years have passed - an unacceptable timeline. We plan to fix this and have faster releases where it makes sense.</p>
+<h3 id="whats-new-and-exciting">What&#39;s new and exciting?</h3>
+<p>A lot! We restructured how we write our detects. we no longer have the concept of core tests, and we redesigned and built the site from the ground up to give the website a refresh as well as make the builder a whole lot more powerful for beginners and advanced users. From just creating a simple build to grabbing a config, to implementing in your build process, through to a really cool solution of dynamically creating a custom package that can be installed via bower.</p>
+<p>Along with this internal restructure, we’ve added over 100 new detects by the community!</p>
+<h3 id="modernizr-changes">Modernizr changes:</h3>
+<p>The internal structure of Modernizr has been completely revamped, making it easier to contribute to and easier to customize/extend
+Modernizr’s licensing has changed: we’ve moved from a BSD license to MIT. (<a href="https://github.com/Modernizr/Modernizr/issues/679">#679</a>)</p>
+<h4 id="detects">Detects</h4>
+<ul>
+<li>99 new detects and counting (see <a href="https://github.com/Modernizr/Modernizr/issues/1230">#1230</a> for the full list)</li>
+<li>No detect names are hyphenated anymore; e.g. <code>battery-api</code> → <code>batteryapi</code>, <code>flexbox-legacy</code> → <code>flexboxlegacy</code>, etc (<a href="https://github.com/Modernizr/Modernizr/issues/719">#719</a>, <a href="https://github.com/Modernizr/Modernizr/issues/782">#782</a>)</li>
+<li><code>Modernizr.contentsecuritypolicy</code> has been removed, as the JS API it was testing is deprecated (<a href="https://github.com/Modernizr/Modernizr/issues/1461">#1461</a>)</li>
+<li><code>Modernizr.touch</code> has been removed in favor of <code>touchevents</code> and <code>pointerevents</code> (<a href="https://github.com/Modernizr/Modernizr/issues/548">#548</a>)</li>
+<li><code>Modernizr.pointerevents</code> now detects DOM PointerEvent support, rather than CSS pointer-events (<a href="https://github.com/Modernizr/Modernizr/issues/800">#800</a>)</li>
+<li>Detect for CSS pointer-events is now called <code>csspointerevents</code> (<a href="https://github.com/Modernizr/Modernizr/issues/800">#800</a>)</li>
+<li>Fixed false-positives in <code>fontface</code> detect (<a href="https://github.com/Modernizr/Modernizr/issues/1147">#1147</a>)</li>
+<li>Our tests for Flexbox have been revised to better match developers’ expectations:<ul>
+<li><code>Modernizr.flexbox</code> returns true if flex-basis is supported – which represents a “reasonable” modern spec implementation (Chrome, FF, Safari and IE11 all pass this)</li>
+<li><code>Modernizr.flexwrap</code> has been added to detect features missing from Firefox’s implementation</li>
+<li><code>Modernizr.flexboxtweener</code> has been added to detect the implementation used by IE10</li>
+<li><code>Modernizr.flexboxlegacy</code> remains unchanged</li>
+</ul>
+</li>
+<li>WebGL detect is now more reliable, using <a href="http://www.w3.org/TR/2013/WD-html51-20130528/embedded-content-0.html#dom-canvas-supportscontext">HTMLCanvasElement.supportsContext()</a> where available (<a href="https://github.com/Modernizr/Modernizr/issues/689">#689</a>)</li>
+<li>WebGL extension enumerations are now attached to <code>Modernizr.webglextensions</code> rather than <code>Modernizr.webgl</code></li>
+<li>The <code>datauri</code> detect now has a <code>over32kb</code> subproperty which will be true if the browser supports data URIs longer than 32 kB (<a href="https://github.com/Modernizr/Modernizr/issues/321">#321</a>)</li>
+<li><code>audio</code> detect now also checks support for the Ogg Opus codec, exposed as <code>Modernizr.audio.opus</code> (<a href="https://github.com/Modernizr/Modernizr/issues/699">#699</a>)</li>
+<li><code>audiodata</code> detect has been removed, because the implementation was very poor; this spec has been deprecated in favor of the Web Audio API (<a href="https://github.com/Modernizr/Modernizr/issues/1019">#1019</a>)</li>
+<li><code>video</code> detect now has an <code>hls</code> subproperty representing support for the HLS video format (<a href="https://github.com/Modernizr/Modernizr/issues/1317">#1317</a>)</li>
+<li><code>todataurljpeg</code>, <code>todataurlpng</code> and <code>todataurlwebp</code> are no longer asynchronous (<a href="https://github.com/Modernizr/Modernizr/issues/802">#802</a>)</li>
+<li><code>fullscreen</code> detect has been updated to use <code>document.exitFullScreen</code> rather than the prefixed versions of <code>document.cancelFullScreen</code> as per <a href="https://fullscreen.spec.whatwg.org/">the latest spec</a> (<a href="https://github.com/Modernizr/Modernizr/issues/739">#739</a>)</li>
+<li><code>indexeddb</code> detect now has a <code>deletedatabase</code> subproperty, representing support for the <code>indexedDB.deleteDatabase()</code> method which isn’t implemented in some browsers (<a href="https://github.com/Modernizr/Modernizr/issues/1238">#1238</a>)</li>
+<li><code>webp</code> detect now has <code>lossy</code>, <code>lossless</code> and <code>alpha</code> subproperties, representing support for various variants of the WebP format; the root <code>webp</code> property still represents basic lossy support (<a href="https://github.com/Modernizr/Modernizr/issues/1229">#1229</a>)</li>
+<li>Fixed a bug in <code>cssvwunit</code>, <code>cssvminunit</code> and <code>cssvmaxunit</code> which could give incorrect results when scrollbars are present (<a href="https://github.com/Modernizr/Modernizr/issues/1045">#1045</a>)</li>
+<li>Fixed a bug in <code>emoji</code> detect where the test could stop working once minified (<a href="https://github.com/Modernizr/Modernizr/issues/899">#899</a>)</li>
+<li>Fixed a bug in <code>regions</code> detect where wrong result could be given when page is zoomed (<a href="https://github.com/Modernizr/Modernizr/issues/940">#940</a>)</li>
+<li>Fixed a bug in <code>csstransforms3d</code> detect where wrong result could be given when page is zoomed (<a href="https://github.com/Modernizr/Modernizr/issues/760">#760</a>)</li>
+<li>Fixed a false-positive for the <code>cssscrollbar</code> detect in IE9 (<a href="https://github.com/Modernizr/Modernizr/issues/698">#698</a>)</li>
+<li>Fixed a bug where <code>indexeddb</code> would throw an error if indexedDB was disabled via a browser flag (<a href="https://github.com/Modernizr/Modernizr/issues/798">#798</a>)</li>
+<li>Fixed various false-positives in <code>fileinput</code> detect (<a href="https://github.com/Modernizr/Modernizr/issues/772">#772</a>)</li>
+<li>Fixed various incorrect results in <code>history</code> detect (<a href="https://github.com/Modernizr/Modernizr/issues/733">#733</a>, <a href="https://github.com/Modernizr/Modernizr/issues/1471">#1471</a>)</li>
+<li>Fixed a false-positive for <code>cookies</code> detect in IE9 (<a href="https://github.com/Modernizr/Modernizr/issues/666">#666</a>)</li>
+<li>Fixed a false-negative for <code>csstransforms3d</code> in WebKit browsers when certain styles are present on the page (<a href="https://github.com/Modernizr/Modernizr/issues/740">#740</a>)</li>
+<li>Fixed a bug where a page reload could crash Safari 5.1 (<a href="https://github.com/Modernizr/Modernizr/issues/524">#524</a>)</li>
+<li>Fixed <code>cssmask</code> detect (a typo meant it was ineffective) (<a href="https://github.com/Modernizr/Modernizr/issues/671">#671</a>)</li>
+<li>Fixed <code>userselect</code> detect (a typo meant it was ineffective) (<a href="https://github.com/Modernizr/Modernizr/issues/671">#671</a>)</li>
+<li>Fixed a bug in <code>displaytable</code> detect when page is in RTL (<a href="https://github.com/Modernizr/Modernizr/issues/716">#716</a>)</li>
+<li>Improved accuracy of <code>xhr2</code> detect in Firefox 3.6 (<a href="https://github.com/Modernizr/Modernizr/issues/1178">#1178</a>)</li>
+<li>Improved accuracy of <code>customprotocolhandler</code> detect in Android 2.x (<a href="https://github.com/Modernizr/Modernizr/issues/992">#992</a>)</li>
+<li>Blacklisted Android 1.x &amp; 2.x from passing the <code>csstransforms</code> detect, because it’s excessively buggy (<a href="https://github.com/Modernizr/Modernizr/issues/903">#903</a>)</li>
+<li>Fixed <code>backgroundblendmode</code> detect (<a href="https://github.com/Modernizr/Modernizr/issues/1420">#1420</a>)</li>
+</ul>
+<h4 id="apis">APIs</h4>
+<ul>
+<li>Modernizr used to include a <code>Function.prototype.bind</code> polyfill (this was documented, but was somewhat hidden); this has been removed (<a href="https://github.com/Modernizr/Modernizr/issues/1278">#1278</a>)</li>
+<li><code>testProp()</code>, <code>testAllProps()</code> and <code>prefixed()</code> now use <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSS.supports"><code>CSS.supports()</code></a> under the hood for most CSS feature detects where available, improving performance and accuracy (<a href="https://github.com/Modernizr/Modernizr/issues/818">#818</a>)</li>
+<li><code>Modernizr.load</code> has been deprecated in favor of using <a href="http://yepnopejs.com/">yepnope.js</a> directly; from v3.0, yepnope.js must be included in the page in order for <code>Modernizr.load</code> to work: calling <code>.load()</code> will simply pass the arguments on to <code>yepnope()</code>; this will be removed fully in a future release (<a href="https://github.com/Modernizr/Modernizr/issues/1241">#1241</a>)</li>
+<li>New <code>Modernizr.on()</code> API, for handling asynchronous detects (<a href="https://github.com/Modernizr/Modernizr/issues/622">#622</a>)</li>
+<li>New <code>prefixedCSS()</code> API, which functions like <code>prefixed()</code> but returns the prefixed property name in kebab-case (hyphenated, as used in CSS) instead of camelCase (<a href="https://github.com/Modernizr/Modernizr/issues/848">#848</a>)</li>
+<li><code>testProp()</code>, <code>testAllProps()</code>, <code>prefixed()</code> and <code>prefixedCSS()</code> now accept property names in either camelCase or kebab-case; for prefixed*() the format of the response depends on which function you call: <code>prefixed()</code> always returns camelCase, <code>prefixedCSS()</code> always returns kebab-case) (<a href="https://github.com/Modernizr/Modernizr/issues/848">#848</a>)</li>
+<li>New <code>noPrefixes</code> build option, which forces feature detects to only return true if the feature is supported without a vendor prefix (<a href="https://github.com/Modernizr/Modernizr/issues/1082">#1082</a>)</li>
+<li>New <code>enableJSClass</code> build option, which determines whether or not to add js/no-js classes to the <code>&lt;html&gt;</code> element when Modernizr runs; true by default (<a href="https://github.com/Modernizr/Modernizr/issues/1385">#1385</a>)</li>
+<li><code>hasEvent()</code> previously used “appropriate” elements for certain tests: submit would be tested against a <code>&lt;form&gt;</code> element, error would be tested against an <code>&lt;img&gt;</code> element, etc; this is no longer the case – for consistency, all will be tested against a <code>&lt;div&gt;</code>, unless otherwise specified by the optional elem argument (<a href="https://github.com/Modernizr/Modernizr/issues/636">#636</a>)</li>
+<li><code>hasEvent()</code>&#39;s optional elem argument can now be an element or simply a tag name, e.g. <code>Modernizr.hasEvent(&#39;click&#39;, &#39;a&#39;)</code> (<a href="https://github.com/Modernizr/Modernizr/issues/636">#636</a>)</li>
+<li>If a classPrefix is specified as a build option, it will be applied to no-js/js classes as well (previously this only applied to feature classes) (<a href="https://github.com/Modernizr/Modernizr/issues/1031">#1031</a>)</li>
+<li>Fixed a bug where classPrefix wasn’t applied to the class set for the first-executed feature detect (<a href="https://github.com/Modernizr/Modernizr/issues/1053">#1053</a>)</li>
+<li><code>testProp()</code> and <code>testAllProps()</code> now accept up to 3 arguments: <code>testProp(prop, [value, [skipValueTest]])</code>; if a value is provided, Modernizr will ensure that value is supported for the named CSS property, delegating to CSS.supports() where available; if skipValueTest is true (default is false), the value test won’t be conducted when CSS.supports() isn’t available</li>
+<li><code>addTest()</code> will now set subproperties if given a property name containing a period (.), which can be used for defining custom structured detects, or for extending existing detects (e.g. adding custom codec detects to <code>Modernizr.audio</code>) (<a href="https://github.com/Modernizr/Modernizr/issues/1089">#1089</a>) <strong><em>(buggy: <a href="https://github.com/Modernizr/Modernizr/issues/1355">#1355</a>)</em></strong></li>
+<li>Fixed a bug where calling <code>Modernizr.prefixed()</code> with an obj argument which doesn’t support binding would throw an exception (<a href="https://github.com/Modernizr/Modernizr/issues/1014">#1014</a>)</li>
+<li>Fixed a bug where calling <code>Modernizr.mq()</code> inside a hidden iframe would throw an error in Firefox (<a href="https://github.com/Modernizr/Modernizr/issues/886">#886</a>)</li>
+</ul>
+<h3 id="the-website">The website</h3>
+<p>We started out revamping the builder to make it easier to find the detects you needed and evolved into a complete revamp of the website.</p>
+<h3 id="some-things-to-point-out">Some things to point out:</h3>
+<ul>
+<li>The website uses service workers so after you’ve created your build in theory you can do the same offline</li>
+<li>You can search for a detect in real time on the download page.</li>
+<li>Each detect now has a special comment that we parse and display on the download page, with handy information about the detect including polyfills and links.</li>
+<li>Best of all it’s open source so if you find issues please report or fix them!</li>
+</ul>
+<h3 id="thanks">Thanks</h3>
+<p>Of course we can&#39;t thank the community enough for their massive contributions to Modernizr 3.0 all 86 of them!</p>
+<p><a href="https://github.com/AlbertoElias">AlbertoElias</a>, <a href="https://github.com/BYK">BYK</a>, <a href="https://github.com/DannyJoris">DannyJoris</a>, <a href="https://github.com/MoOx">MoOx</a>, <a href="https://github.com/NikV">NikV</a>, <a href="https://github.com/RReverser">RReverser</a>, <a href="https://github.com/Rowno">Rowno</a>, <a href="https://github.com/SimenB">SimenB</a>, <a href="https://github.com/SlexAxton">SlexAxton</a>, <a href="https://github.com/TalAter">TalAter</a>, <a href="https://github.com/Wilto">Wilto</a>, <a href="https://github.com/Yomguithereal">Yomguithereal</a>, <a href="https://github.com/alrra">alrra</a>, <a href="https://github.com/anenviousguest">anenviousguest</a>, <a href="https://github.com/aroben">aroben</a>, <a href="https://github.com/atdt">atdt</a>, <a href="https://github.com/ausi">ausi</a>, <a href="https://github.com/bportnoy">bportnoy</a>, <a href="https://github.com/brendankenny">brendankenny</a>, <a href="https://github.com/burnersk">burnersk</a>, <a href="https://github.com/cagerton">cagerton</a>, <a href="https://github.com/calweb">calweb</a>, <a href="https://github.com/candrews">candrews</a>, <a href="https://github.com/chrisjlee">chrisjlee</a>, <a href="https://github.com/danbeam">danbeam</a>, <a href="https://github.com/darcyclarke">darcyclarke</a>, <a href="https://github.com/dbow">dbow</a>, <a href="https://github.com/ddprrt">ddprrt</a>, <a href="https://github.com/devongovett">devongovett</a>, <a href="https://github.com/devote">devote</a>, <a href="https://github.com/dmethvin">dmethvin</a>, <a href="https://github.com/doctyper">doctyper</a>, <a href="https://github.com/drublic">drublic</a>, <a href="https://github.com/edmellum">edmellum</a>, <a href="https://github.com/emilchristensen">emilchristensen</a>, <a href="https://github.com/fgnass">fgnass</a>, <a href="https://github.com/filaraujo">filaraujo</a>, <a href="https://github.com/frederfred">frederfred</a>, <a href="https://github.com/frob">frob</a>, <a href="https://github.com/gaearon">gaearon</a>, <a href="https://github.com/garrypolley">garrypolley</a>, <a href="https://github.com/genintho">genintho</a>, <a href="https://github.com/grayghostvisuals">grayghostvisuals</a>, <a href="https://github.com/hzoo">hzoo</a>, <a href="https://github.com/jacobrossi">jacobrossi</a>, <a href="https://github.com/janroures">janroures</a>, <a href="https://github.com/javiercejudo">javiercejudo</a>, <a href="https://github.com/jmartin84">jmartin84</a>, <a href="https://github.com/jokeyrhyme">jokeyrhyme</a>, <a href="https://github.com/jon301">jon301</a>, <a href="https://github.com/jonathanong">jonathanong</a>, <a href="https://github.com/jongrover">jongrover</a>, <a href="https://github.com/jtangelder">jtangelder</a>, <a href="https://github.com/kkirsche">kkirsche</a>, <a href="https://github.com/komachi">komachi</a>, <a href="https://github.com/kristerkari">kristerkari</a>, <a href="https://github.com/lbesson">lbesson</a>, <a href="https://github.com/mathiasbynens">mathiasbynens</a>, <a href="https://github.com/mikach">mikach</a>, <a href="https://github.com/mrkiffie">mrkiffie</a>, <a href="https://github.com/nok">nok</a>, <a href="https://github.com/patrickkettner">patrickkettner</a>, <a href="https://github.com/paulirish">paulirish</a>, <a href="https://github.com/robocoder">robocoder</a>, <a href="https://github.com/robwierzbowski">robwierzbowski</a>, <a href="https://github.com/rose">rose</a>, <a href="https://github.com/rrrene">rrrene</a>, <a href="https://github.com/rxaviers">rxaviers</a>, <a href="https://github.com/ryanseddon">ryanseddon</a>, <a href="https://github.com/silverwind">silverwind</a>, <a href="https://github.com/slavanga">slavanga</a>, <a href="https://github.com/ssidorchick">ssidorchick</a>, <a href="https://github.com/steveyken">steveyken</a>, <a href="https://github.com/stucox">stucox</a>, <a href="https://github.com/svinkle">svinkle</a>, <a href="https://github.com/swaydeng">swaydeng</a>, <a href="https://github.com/teebot">teebot</a>, <a href="https://github.com/thanpolas">thanpolas</a>, <a href="https://github.com/tnajdek">tnajdek</a>, <a href="https://github.com/tomgco">tomgco</a>, <a href="https://github.com/triblondon">triblondon</a>, <a href="https://github.com/vlajos">vlajos</a>, <a href="https://github.com/wilddeer">wilddeer</a>, <a href="https://github.com/zachleat">zachleat</a>, <a href="https://github.com/zeno">zeno</a>, <a href="https://github.com/zhorvath">zhorvath</a></p>
+<p>A few worthy call outs, Patrick Kettner who came in and contributed an enormous amount of effort and work to get 3.0 to the state it is, without him we wouldn&#39;t of got to this release. Stu Cox who also came onto the scene and contributed a huge amount of work and Joe Critchley who took on updating the look and feel of the our new shiny website.</p>
+]]></description><link>https://modernizr.com/news//news/modernizr-3-new-release-site</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-3-new-release-site</guid><dc:creator><![CDATA[Modernizr]]></dc:creator><pubDate>Thu, 10 Sep 2015 22:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 3, Stickers & Diversity]]></title><description><![CDATA[<p>While Modernizr was meant from day one to eventually become unnecessary, that day is far from here, and so development on the library goes on. Some of the things we’ve been busy with:</p>
+<h3 id="version-3">Version 3</h3>
+<p>Modernizr v.3 is not a mere version bump with some new additions; it is <a href="https://alexsexton.com/talks/modernizr-3-workflow/">a complete architectural rewrite</a> of the entire library <em>and</em> all of the 150+ community feature tests. The team and some of our great contributors have worked tirelessly to convert all of the tests to <a href="https://alexsexton.com/talks/modernizr-3-workflow/#/23/1">facilitate a new loading structure based on AMD</a>, and are currently embedding the tests with important meta-data such as known issues, sample usage and more. </p>
+<p>There is a new site in the making as well, with a new documentation page <a href="http://www.surveymonkey.com/s/BYKMMS7">taking your feedback into account</a> (feel free to fill out that survey if you haven’t yet), and a new download page that makes it much easier and faster to create the custom build that you need.</p>
+<p>You can help make v.3 become a reality by <a href="https://github.com/Modernizr/Modernizr/issues?q=is%3Aopen">closing issues</a>, or by updating <a href="https://github.com/Modernizr/Modernizr/pulls">open Pull Requests</a> to the new v.3-compatible format for tests (<a href="https://github.com/Modernizr/Modernizr/blob/master/feature-detects/a/download.js">see this example for what that looks like</a>).</p>
+<h3 id="stickers">Stickers!</h3>
+<p><a href="http://devswag.com/products/modernizr-stickers-4"><img alt="an example of the modernizr logo on a sticker" src="http://modernizr.com/i/posts/modernizr-sticker.jpg" height="240"><img alt="the top of a macbook pro, with the modernizr sticker in the upper left" src="http://modernizr.com/i/posts/modernizr-sticker-laptop.jpg" height="240"></a></p>
+<p>While we work on version 3, you can show your support with some <a href="http://devswag.com/products/modernizr-stickers-4">fancy new Modernizr stickers</a>, courtesy of the fine folks at DevSwag. Put these stickers on your laptop, fixie bike, and anything else you’d like to “modernize” (ahem).</p>
+<p>The stickers are just $6 for a pack of four, and all of the proceeds that go to Modernizr will be donated to the <a href="https://adainitiative.org/">Ada Initiative</a>. All of us here at Modernizr care deeply about having a healthy and diverse community of developers, and the Ada Initiative does great work that we support.</p>
+<h3 id="diversity-in-tech--open-source">Diversity in tech &amp; open source</h3>
+<p>The tech community, and in particular open source, is currently quite male-dominated. By itself that’s not so much of a problem, but it becomes more of one when it leads to increasingly male-specific behavior and cultures, which can be hostile and alienating to various groups—other men included.</p>
+<p>Currently in tech, typically male behavior such as aggressiveness is rewarded with more visibility and, consequently, more opportunities. Discussions online, whether they’re about community diversity, ruby vs. python, or tabs vs. spaces, often devolve into a lot of verbal aggression, breeding an angry and hostile culture from which no one really benefits. Similarly, a harmless joke here or there isn’t a big deal, but the same kind of jokes over and over again breed a certain culture, and that culture is often exclusionary to people who don’t care for those jokes.</p>
+<p>When this happens within a small group of people, it’s one thing. When it happens <em>industry-wide,</em> we’re excluding people from our field altogether, and that is a terrible thing that fundamentally undermines the meaning and value of our work. “Merit” is a total fallacy if you only allow a certain kind of people to be measured for it.</p>
+<p>Our industry is vast and encompasses many different types of people. It is time to stop having this belief that tech, web development, or open source, is a community composed entirely of “other people who are just like us,” and that it gives us carte blanche for behaving however <em>we</em> want, or for saying whatever <em>we</em> want. Sexist, misogynist, racist, homophobic and otherwise exclusionary language, jokes and slurs—whether we put them in commits, source code, or comments to blog posts—are absolutely unacceptable.</p>
+<p>It’s time for us to stop trying to get the industry or community to behave according to the rules set forth by the most vocal majority. Each and every one of us deserves to be respected and listened to, to not be shouted down by an angry mob.</p>
+<p>We should not judge our peers solely by the quality of their code or pixels: that’s dehumanizing and wrong, and encourages individualism. It’s time for us all to embrace the diversity that we represent: different people from different backgrounds with different skills, ideas and opinions.</p>
+<p>Since Faruk first started Modernizr in 2009, it has evolved through a collective, social effort. This wouldn&#39;t have been possible without the vast range of different contributors, each bringing their own unique slant. It’s ultimately this diversity that has allowed Modernizr to be the broad-reaching tool it has become — and it will only be able to continue to grow and improve if it sticks to and supports these ideals across the entire community.</p>
+]]></description><link>https://modernizr.com/news//news/modernizr-v3-stickers-diversity</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-v3-stickers-diversity</guid><dc:creator><![CDATA[Modernizr]]></dc:creator><pubDate>Mon, 01 Apr 2013 22:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr Policy on Browser Bugs and Feature Detects]]></title><description><![CDATA[<p>Modernizr detects features in browsers based on the APIs they expose to enable that feature. However, sometimes a browser vendor will implement a feature, but its implementation is buggy; for instance, its API exists but the output is not rendered, or the feature doesn’t work right—or even at all. This sometimes results in what we call “False Positives”: a feature that tests positively, but is not reliable or usable. (For example, Opera Mini provides a false positive for CSS Gradients.)  Other times we might calls these plain “browser bugs,” issues in the implementation that doesn’t affect the common use but is an edge case issue. (For example, <code>box-sizing</code> doesn&#39;t work with <code>min-height</code> in Firefox.)</p>
+<p>False positives are a developer’s nightmare: they can be hard to discover, even harder to fix, and are almost always frustrating. So what can we do?</p>
+<p>Modernizr aims for accuracy in tests based on their associated ECMAScript, HTML and CSS specifications. Yet sometimes something slips past and it reports a false positive. We are in the process of documenting these cases and putting them in one single page for easy consumption.</p>
+<h3 id="found-a-false-positive">Found a false positive?</h3>
+<p>When you encounter a false positive, <a href="https://github.com/Modernizr/Modernizr/issues">add it to the Modernizr Issues tracker</a>. We will give it <a href="https://github.com/Modernizr/Modernizr/labels/false%20result">the “False result” label</a>. Also please clearly describe which browser(s) it is a false positive in, and whether the implementation is buggy, broken or incomplete.</p>
+<p>Wherever possible, we will attempt to work around the issue (for example: forcing a reflow, adding the element to the DOM, etc), though as a last result we will add a UA sniff. We&#39;d appreciate your help with a pull request, as well!</p>
+<p>Above all: <a href="http://coding.smashingmagazine.com/2011/09/07/help-the-community-report-browser-bugs/">report false positives to their respective vendors’ bug trackers</a>. (Many times it&#39;s a mobile port of WebKit that has the problem; while it may not exist in other WebKit ports, you can file these at the WebKit tracker regardless.) That is the best way to get these issues resolved, and helps Modernizr to be a great feature detection library.</p>
+<h3 id="browser-bug">Browser bug?</h3>
+<p>We agree that browser bugs should be detected instead of assumed for given UA strings. This is how <code>jQuery.support</code> works. However, Modernizr detects features and will not be collecting bugs. We do recommend you <a href="http://coding.smashingmagazine.com/2011/09/07/help-the-community-report-browser-bugs/">file the issue with the appropriate vendor</a> and blog about it or post on Stack Overflow to get the word out there with your proposed fix.</p>
+<h3 id="thanks">Thanks</h3>
+<p>Modernizr will strive to report accurately, even if the browser is returning a false positive for the correct detect.</p>
+]]></description><link>https://modernizr.com/news//news/modernizr-policy-feature-detects</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-policy-feature-detects</guid><dc:creator><![CDATA[Modernizr]]></dc:creator><pubDate>Sun, 06 Jan 2013 23:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 2.6.2 released]]></title><description><![CDATA[<p>Summer is over, back to work! We’ve released Modernizr 2.6.2 with a number of new detects, bug fixes, and test improvements for your modern development needs.</p>
+<p>Some notable fixes include:</p>
+<ul>
+<li>Fix for a <a href="https://github.com/Modernizr/Modernizr/issues/524">hilarious edge case</a> in Safari where if you set your body or html element to <code>overflow-y: scroll</code> and apply styles to the webkit-scrollbars (<a href="http://jsbin.com/ecetor/4/edit#html">see demo</a>), the browser spontaneously refreshes</li>
+<li>HTML5 Shiv got a fix for better compatibility with jPlayer</li>
+<li>Generated Content false-positive fix for IE7</li>
+<li>Fix for our download builder and turning off css classes</li>
+<li>Better Travis CI output for unit tests using grunt</li>
+<li>All incoming pull requests are tested against our test suite with Travis CI</li>
+</ul>
+<h3 id="detects">Detects</h3>
+<p>We’ve also added some new detects:</p>
+<ul>
+<li>Content Security Policy</li>
+<li>CSS&#39;s <code>object-fit</code></li>
+<li><code>position: sticky;</code></li>
+<li><code>@supports</code> : CSS&#39;s new native feature detection</li>
+<li>viewport unit tests: vhunit, vmaxunit, vminunit, vwunit</li>
+<li><code>input[form]</code> attribute</li>
+<li>new iframe attributes: sandbox, seamless, srcdoc</li>
+<li>PointerLock API</li>
+</ul>
+<h3 id="test-improvements">Test improvements</h3>
+<p>And lastly, there have been updates to these tests:</p>
+<ul>
+<li><code>background-size: cover</code></li>
+<li>css filters</li>
+<li>css subpixelfont</li>
+<li>elem-track - reflecting partial support by IE10</li>
+<li>gamepad api</li>
+</ul>
+<p>For more details on the exact code changes of this release, see <a href="https://github.com/Modernizr/Modernizr/compare/v2.6.1...v2.6.2">the full changelog on GitHub</a>.</p>
+<p>We thank our great dev community who have contributed much of the work for this update. Thanks to their moms and dads, too.</p>
+]]></description><link>https://modernizr.com/news//news/modernizr-262</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-262</guid><dc:creator><![CDATA[Modernizr]]></dc:creator><pubDate>Mon, 03 Sep 2012 22:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 2.6 released]]></title><description><![CDATA[<p>Modernizr 2.6 is now available. Below is a summary of the major changes. The <a href="https://github.com/Modernizr/Modernizr/compare/v2.5.3...v2.6.1">full diff</a> is also available.</p>
+<p>You can download the <a href="http://modernizr.com/download/">latest at the builder</a>. You must upgrade if you&#39;re using geolocation or flexbox; otherwise you only <em>should</em> upgrade.</p>
+<h3 id="detects">Detects</h3>
+<p>We’ve added a lot of new tests, many of which by the community, and updated existing ones:</p>
+<ul>
+<li><strong>Geolocation</strong> used to be a trivial detect but two issues have come up recently that make it trickier. If you&#39;re using your own detect, <a href="https://github.com/Modernizr/Modernizr/blob/eeb5ca/modernizr.js#L457-469">read the details</a>.</li>
+<li>The ESR release of Firefox exposes MozWebsocket whereas every other supporting browser uses the standard <strong><code>WebSocket</code></strong>. We&#39;ve quickened and simplified our detect accordingly.</li>
+<li>We got a last minute pull request from David Baron, the czar of Gecko, who recommended we don&#39;t allow <code>Modernizr.testProp(&#39;pointer-events&#39;)</code> to pass, and instead require the camelcased equivalent: <code>pointerEvents</code></li>
+<li>Opera fixed a bug affecting the <strong><code>&lt;input type=color&gt;</code></strong> detect, so we&#39;ve sped up and simplified our detect.</li>
+<li>Our detect for <strong>flexbox</strong> has been updated as the new spec had naming changes. The detect for the flexbox implementation that you see in older mobile WebKit is now available as <code>flexboxlegacy</code> (without a hyphen).</li>
+<li>Our <strong>WebGL</strong> test got much faster, though it is less reliable. We made this decision because many Modernizr users include all tests they don&#39;t use and the earlier WebGL test could last for 500ms sometimes. If your site or app relies on the WebGL test, make sure you also have a fallback in case the context creation fails. It can fail due to inadequate GPU or lack of graphics memory, see also <a href="http://www.khronos.org/webgl/wiki/HandlingContextLost">recovering from a lost context</a>.</li>
+<li>Plenty more inline documentation added about detection weirdness. The <a href="https://github.com/Modernizr/Modernizr/blob/f9210de0ee4b1e0db142143/modernizr.js">source comments</a> are a fun read.</li>
+<li>As well as tightening up support for existing tests, we&#39;ve also added a number of new detects, many submitted by the community:<ul>
+<li>blob-constructor</li>
+<li>css-backgroundposition-shorthand</li>
+<li>css-backgroundposition-xy</li>
+<li>css-calc</li>
+<li>css-filters<ul>
+<li>Detecting the <a href="http://www.html5rocks.com/en/tutorials/filters/understanding-css/">new CSS filters</a>, but not catching the legacy IE filter property.</li>
+</ul>
+</li>
+<li>css-lastchild</li>
+<li>css-mask<ul>
+<li>This correctly finds the WebKit mask property without a false positive on Firefox&#39;s SVG mask support.</li>
+</ul>
+</li>
+<li>css-regions<ul>
+<li>Contributed by Adobe.</li>
+</ul>
+</li>
+<li>css-subpixelfont</li>
+<li>exif-orientation<ul>
+<li>Did you know iOS Safari is the only browser to use the orientation bit in EXIF and rotate the asset accordingly? Well, Modernizr does.</li>
+</ul>
+</li>
+<li>forms-fileinput<ul>
+<li>Detecting <code>&lt;input type=file&gt;</code> not working on iOS &lt;6</li>
+</ul>
+</li>
+<li>dart</li>
+<li>network-xhr2<ul>
+<li>Which has an <a href="https://github.com/Modernizr/Modernizr/issues/385">interesting testing story</a></li>
+</ul>
+</li>
+<li>style-scoped</li>
+<li>svg-filters<ul>
+<li>Only detects SVG filters appling to SVG content. SVG filters on HTML is <a href="https://github.com/Modernizr/Modernizr/issues/606">awaiting</a>.</li>
+</ul>
+</li>
+<li>vibration</li>
+<li>You can <a href="https://github.com/Modernizr/Modernizr/tree/master/feature-detects">view all of these detects on GitHub</a> and add them in the <a href="http://modernizr.com/download">download builder</a> today.</li>
+</ul>
+</li>
+</ul>
+<h3 id="dependencies">Dependencies</h3>
+<ul>
+<li><strong>html5shiv</strong> is now up to 3.6, fixing <a href="https://github.com/aFarkas/html5shiv/compare/3.4...master">some edgecases</a> users ran into</li>
+<li><strong>yepnope</strong> was updated to 1.5.4</li>
+</ul>
+<h3 id="development-workflow">Development Workflow:</h3>
+<ul>
+<li>We&#39;re using <strong><a href="http://editorconfig.org/">EditorConfig</a></strong> to keep our whitespace policy consistent</li>
+<li><strong><a href="http://gruntjs.com">GruntJS</a></strong> powers our automatic linting and minification now.</li>
+<li>We are integrated with <strong>Travis</strong>, so after all commits, <a href="http://travis-ci.org/#!/Modernizr/Modernizr/builds">Travis runs our test suite</a> in a headless WebKit via PhantomJS.</li>
+</ul>
+<p>Up next, we&#39;re going to clarify our touch detect: Is it detecting touch devices or touch events; and which touch event model?  We&#39;re also going to redesign the download page and update the documentation with some more <a href="https://hacks.mozilla.org/2012/07/the-web-developer-toolbox-modernizr/">approachable documentation</a>.</p>
+<p>As always,  if you&#39;d like to get involved, hop into the <a href="https://github.com/Modernizr/Modernizr/issues">GitHub issue tracker</a>.</p>
+]]></description><link>https://modernizr.com/news//news/modernizr-260</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-260</guid><dc:creator><![CDATA[Modernizr]]></dc:creator><pubDate>Wed, 18 Jul 2012 22:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 2.5: Supercharged for 2012]]></title><description><![CDATA[<p>Modernizr 2.0 came out more than eight months ago; we’ve not sat still in the period since, and today we’re proud to announce the release of Modernizr 2.5, our biggest update yet!</p>
+<h3 id="newin2.5">New in 2.5</h3>
+
+<p>The <a href="https://github.com/Modernizr/Modernizr/compare/v2.0.6...v2.5.1">list of new things in 2.5</a> is too big for GitHub to handle, but here are the highlights:</p>
+<ul>
+<li><p>More than 60 new feature detects for emerging browser features; check out <a href="https://gist.github.com/783522a92b79a0868532">the full list</a> or peruse <strong>all</strong> of the community-driven tests in our <a href="https://github.com/Modernizr/Modernizr/tree/master/feature-detects">feature-detects folder</a>.</p>
+</li>
+<li><p>We now have a super robust and integrated <a href="http://modernizr.github.com/Modernizr/test/index.html">test suite</a>. Paul did a great video <a href="http://www.youtube.com/watch?feature=player_embedded&amp;v=Mbt6h1BFW8g">detailing how it works</a>.</p>
+</li>
+<li><p>Brand new embedded and included micro-libraries: html5shiv 3.2 and yepnope .js 1.5.</p>
+</li>
+<li><p><code>Modernizr.prefixed()</code> can now <a href="/docs/#prefixeddom">detect prefixed DOM features</a> and give you a hook. E.g.: <code>Modernizr.prefixed(&#39;requestAnimationFrame&#39;, window) // rAF function</code></p>
+</li>
+<li><p>Bugfix for possible false negative when browser support for prefixed CSS Transforms is sunsetted.</p>
+</li>
+<li><p>We now ship with a <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function/bind">Function.prototype.bind polyfill</a> included by default. You&#8217;re welcome!</p>
+<p>Modernizr 2.5 introduces some minor backwards-compatibility breaks due to changes in features and behavior.</p>
+</li>
+<li><p>We no longer include Respond.js in the builder. If you still require Respond.js in your project, just include it manually.</p>
+</li>
+<li><p><code>Modernizr._domPrefixes</code> has been renamed to <code>Modernizr._cssomPrefixes</code>, and a new, lower-case <code>Modernizr._domPrefixes</code> has been introduced.</p>
+</li>
+<li><p>We’ve removed KHTML prefix testing, due to lack of usage.</p>
+<p>We encourage all users to upgrade to Modernizr 2.5, as there should be no regressions. If you do happen to encounter issues, please <a href="https://github.com/Modernizr/Modernizr/wiki/Filing-a-bug">file them on GitHub</a>.</p>
+<h3 id="thanks">Thanks</h3>
+
+<p>This great release would not have been possible were it not for the many contributions from people who volunteered bug reports, bug fixes and all new tests. We’ve made <a href="/contributors/">a dedicated page to thank everyone</a> who contributed to Modernizr 2.5; this release has been the most collaborative effort yet for Modernizr, and we couldn’t be more excited about that.</p>
+</li>
+</ul>
+<p>We’re similarly excited to announce the expansion of the team. Ryan Seddon has been made an official member at last, and we also welcome Alexander Farkas to the team. And speaking of Ryan, he’s done a great <a href="https://learnable.com/courses/modernizr-front-end-development-done-right-2561">Learnable course on Modernizr</a>, so if you’re relatively new to the library you should check it out!</p>
+<h3 id="elsewhere">Elsewhere</h3>
+
+<p>While not a Modernizr effort, we do want to bring some attention to a very useful new reasource, ideal for people who use Modernizr: <a href="http://html5please.us/">HTML5 Please</a>. Together with <a href="http://caniuse.com/">Can I Use…</a>, these two sites should cover all your questions over which features are <em>reliable and safe</em> to use based on what audiences you need to support.</p>
+<p>We’d also like to note that our <a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-Browser-Polyfills">HTML5 Cross Browser Polyfills wiki</a> is still growing, with many more polyfills having been added.</p>
+<p>Modernizr 2.5 is the best starting library for anyone taking advantage of the latest in HTML5 and related technologies, and we hope you’ll enjoy it.</p>
+<hr>
+<p id="update252"><strong>Update Feb 8:</strong> we’ve included another couple of small—but significant—updates, and have released Modernizr 2.5.2.</p>
+
+<p>Notably, this latest update includes <strong>html5shiv 3.3</strong>, which features an up to 16x performance increase over the shiv that was bundled in Modernizr 2.0. The html5shiv team (Jonathan Neal, John-David Dalton, and Modernizr team member Alexander Farkas) has been hard at work (<a href="https://github.com/aFarkas/html5shiv/wiki">view changelog</a>) making this <a href="http://paulirish.com/2011/the-history-of-the-html5-shiv/">foundational</a> piece of the HTML5 infrastructure fast and robust. <small>(To be clear, this is the exact same shiv available in Remy Sharp&#39;s googlecode repos.)</small> Plus, using Modernizr 2.5 (with the included html5shiv 3.x), you no longer need <a href="http://jdbartlett.com/innershiv/">innerShiv</a>; the fix is automatic.</p>
+<p>Additionally, our <a href="/download/">download builder</a> now ships with <strong><a href="http://yepnopejs.com/#whatsnew">Yepnope 1.5.2</a></strong>.</p>
+<p>We also want to highlight a few more changes from 2.5:</p>
+<ul>
+<li>We’ve toughened up <code>canPlayType</code> checks for Firefox 3.5.0, 3.5.1 and 4.0.0 - 4.0.4</li>
+<li>In iOS5 Private Browsing mode you can use <code>localStorage.getItem</code> but it throws an exception for <code>setItem</code>. We test it out and set <code>Modernizr.localStorage</code> to false if we cannot store.</li>
+<li>We now have a <a href="http://html5please.us/#datalist"><code>&lt;datalist&gt;</code></a> detect with no false positives! It’s accessible through <code>Modernizr.input.list</code> [<a href="https://github.com/Modernizr/Modernizr/issues/146">#146</a>]</li>
+<li>If you use the <code>transitionEnd</code> event, we’ve <a href="http://www.modernizr.com/docs/#s25">documented</a> the correct IE10 and spec’d behavior.</li>
+<li>If you, by chance, have a class of <code>oh-no-js-oh-my</code> on the <code>&lt;html&gt;</code> element we wont remove it anymore as part of our <code>no-js</code> to <code>js</code> switch.</li>
+<li>The <a href="https://github.com/Modernizr/Modernizr/wiki">Modernizr wiki</a> has been reorganized. Much cleaner!</li>
+</ul>
+]]></description><link>https://modernizr.com/news//news/modernizr-25</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-25</guid><dc:creator><![CDATA[Modernizr]]></dc:creator><pubDate>Sun, 05 Feb 2012 23:00:00 GMT</pubDate></item><item><title><![CDATA[How Does Modernizr’s Test Suite Work?]]></title><description><![CDATA[<p>Sometimes, members of the team get asked how we ascertain and verify that the features we detect are accurately detected. It’s not always a simple process, but over time we’ve put together a test suite that helps us out a lot.</p>
+<p>Paul has recorded a screencast discussing how this test suite for Modernizr was built. The brief summary: initially built with QUnit, the test suite has coverage over the full API surface area of Modernizr, even using kangax’s <a href="https://github.com/kangax/detect-global">detect-global</a> script to assure no globals are introduced beyond <code>Modernizr</code> and <code>yepnope</code>. After that it gets interesting—as verifying the results from Modernizr’s detection of the current browser’s features isn’t straightforward. We end up using APIs from both Caniuse.com and GitHub, using projects like Lloyd Hilaiel’s <a href="http://jsonselect.org/">JSONSelect</a>, Lindsey Simon&#39;s <a href="https://github.com/tobie/ua-parser">ua-parser</a> (ported to Node by <a href="http://twitter.com/tobie">@tobie</a>), some ES5 polyfills, and some real sexy jQuery Deferred action to elegantly handle a bunch of <code>$.getScript</code> calls.</p>
+<p>20 minutes of javascript and feature detection action below.</p>
+<iframe title="Modernizr's test suite: Behind the Scenes" width="640" height="480" src="https://www.youtube.com/embed/Mbt6h1BFW8g?feature=player_embedded" frameborder="0" allowfullscreen></iframe>
+]]></description><link>https://modernizr.com/news//news/modernizr-test-suite</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-test-suite</guid><dc:creator><![CDATA[Modernizr]]></dc:creator><pubDate>Sun, 06 Nov 2011 23:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr and Content Delivery Networks (CDNs)]]></title><description><![CDATA[<p>One of the most common requests around Modernizr is for it to be made available on a Content Delivery Network. Back in the 1.x days this made a fair bit of sense: there was only one version of the library, and so the compressed version would be useful to have on a CDN for performance reasons.</p>
+<p>With the advent of Modernizr 2, however we&rsquo;ve (re)introduced modular builds of the library, which make the value of CDNs less self-evident. We now make you create a customized build of Modernizr&mdash;using only the tests you actually need&mdash;when you want a production-ready, minified &amp; compressed version of the library. But with over 40 embedded tests, supporting all possible combinations of tests is impossible, aside of being downright undesirable.</p>
+<p>This has caused some confusion, so we&rsquo;d like to explain the right way to use Modernizr under the various different scenarios that occur.</p>
+<h3 id="development">Development, local: General development and/or learning</h3>
+
+<p>When you start building a new project, or if you simply want to learn, you should download <a href="http://www.modernizr.com/downloads/modernizr-latest.js">the latest development version of Modernizr</a>. This is typically a stage where you don&rsquo;t know yet which feature detection tests you&rsquo;ll eventually need by the time you go to production, and don&rsquo;t need to worry about minification. If you&rsquo;re building your site or app locally, this is the version to use.</p>
+<h3 id="special">Development + CDN: Test cases, one-offs, partial control-situations</h3>
+
+<p>If you&rsquo;re creating a quick test case using something like <a href="http://jsfiddle.net/">jsfiddle</a>, or are writing an entry for a contest like <a href="http://10k.aneventapart.com/">10K Apart</a>, using a CDN can be not just useful, but downright necessary. If your situation relies on externally-hosted code, use one of the CDN releases.</p>
+<p>But be warned: <em>these versions contain all 40+ tests!</em> That means they are full-fledged libraries with almost certainly a lot of things you don&rsquo;t need in a final product.</p>
+<p>That&rsquo;s why the <a href="http://www.asp.net/ajaxlibrary/cdn.ashx#Modernizr_Releases_on_the_CDN_5">Microsoft CDN</a> and <a href="http://www.cdnjs.com/#/search/modernizr">CDNJS</a> releases of Modernizr are essentially just Development versions, but hosted somewhere for you to use.</p>
+<h3 id="production">Custom build: All production uses</h3>
+
+<p>Are you priming your website or app for production? Then it&rsquo;s time to head over to <a href="http://www.modernizr.com/download/">the custom download builder</a>, tick all the tests your project makes use of, and hit that Generate button to make your own special build.</p>
+<p><strong>All production uses of Modernizr should be using a latest custom build from the site.</strong> This ensures that you won&rsquo;t run into any (old) bugs, and will have the absolute minimum amount of code and execution time needed for the best possible performance.</p>
+<p>As an added bonus, these custom builds now include a directly-usable Build link that allow you to make small tweaks&mdash;change a setting here or there&mdash;without having to figure out your requirements all over again. It&rsquo;s also helpful whenever a new stable build is released: just revisit that Build link from your custom build&rsquo;s source, hit Generate again and you have a new, updated stable build. Always be sure to test!</p>
+<p>We hope this simple guide helps you figure out when to use what version of Modernizr.</p>
+]]></description><link>https://modernizr.com/news//news/modernizr-and-cdns</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-and-cdns</guid><dc:creator><![CDATA[Team Modernizr]]></dc:creator><pubDate>Wed, 31 Aug 2011 22:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 2]]></title><description><![CDATA[<p>The long wait is over—Modernizr 2 is here! Modernizr 2 takes feature detection to the next level, enabling a powerful new approach to building great websites and applications that elegantly respond and adapt to the user’s environment.</p>
+<p>What’s new:</p>
+<ul>
+<li><p>Media Query testing:<br/>
+<code>Modernizr.mq(&#39;only all and (max-width: 600px)&#39;) // true</code></p>
+</li>
+<li><p>Conditional resource loading via <code>Modernizr.load()</code> — powered by <a href="http://yepnopejs.com/">yepnope.js</a>;</p>
+</li>
+<li><p>Vendor prefix detection<br/>
+<code>Modernizr.prefixed(&#39;transform&#39;) // &#39;WebkitTransform&#39;</code></p>
+</li>
+<li><p>A whole new set of <a href="/docs/#s3">extensibility methods</a>, so its easy to augment the Modernizr tests with your own.</p>
+</li>
+<li><p>A brand new site!</p>
+</li>
+<li><p>…with the <a href="/download/">custom build tool</a> baked right in;</p>
+</li>
+<li><p>…and a completely revamped, much more detailed <a href="/docs/">Documentation</a> page.</p>
+<p>Modernizr 2 now contains <strong>40</strong> feature detection tests, but only the development version will come bundled with all of them. When you are ready to get a compressed and minified production build, simply go to the <a href="/download/">Download</a> page and pick and choose only the tests and features that you need. This way, we ensure that your production build will have the absolute smallest footprint and fastest execution time possible.</p>
+<p>A little tip: when you make a custom build, your URL will be adjusted to reflect your choices exactly. Bookmark it after building in case you ever need to go back and adjust your settings!</p>
+<p>We know you might need to detect more than what’s available in the Modernizr core. Keep an eye on <a href="https://github.com/Modernizr/Modernizr/tree/master/feature-detects">our feature-detects</a> folder for the best-of-breed detections for everything.</p>
+</li>
+</ul>
+<p>Want to learn how to do conditional resource loading with <code>Modernizr.load()</code>? Our new documentation comes with a great <a href="/docs/#load">Modernizr.load tutorial</a> that takes you through the basics and gets you started. Alternatively, you could check out our site’s own <a href="/i/js/modernizr.com-custom.js">modernizr.com-custom.js</a> for some inspiration.</p>
+<p>We’d love to get your feedback on the new Modernizr, the new site and our new documentation and resources pages. <a href="https://twitter.com/?status=@Modernizr%20">Let us know via Twitter</a>, especially if you come across a bug somewhere—things are still a little rough around the edges here and there, but we figured you’d prefer to have Modernizr 2 sooner rather than later.</p>
+<p>A huge thanks goes out to all of our contributors who provided code for additional tests, helped us with debugging and getting our detection algorithms right, and so much more. Additionally, special thanks go out to Simon a.k.a. Simurai, for crafting some fancy CSS3 buttons for us, Ryan Seddon for integration work, and Aaron Gustafson for making sure our ARIA roles were top notch.</p>
+<p>— Team Modernizr (Faruk Ateş, Paul Irish and Alex Sexton)</p>
+]]></description><link>https://modernizr.com/news//news/modernizr-2</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-2</guid><dc:creator><![CDATA[Team Modernizr]]></dc:creator><pubDate>Tue, 31 May 2011 22:00:00 GMT</pubDate></item><item><title><![CDATA[Modernizr 1.7 changelog]]></title><description><![CDATA[<p>We put 1.7 live some time ago but never got around to publishing a changelog. Since people have been asking, below are the core changes. For an exact changelog, see the <a href="https://github.com/Modernizr/Modernizr/compare/v1.6...v1.7">commit log on GitHub between 1.6 and 1.7</a>.</p>
+<p>At the heart of 1.7 are the following major changes:</p>
+<ul>
+<li>A weaker, less crash-prone test for WebGL</li>
+<li>A fix for @font-face in certain browsers</li>
+<li>Faster Drag &amp; Drop test</li>
+<li>Updated IE Print Protector for better speed and reliability</li>
+<li>One less content reflow&nbsp;due to better className setting</li>
+</ul>
+<p>Beyond these main changes, 1.7 fixes lots of small bugs like tiny memory leaks and the occasional false returns in certain browsers.&nbsp;</p>
+<p>A small update on the Modernizr 2 front: we&rsquo;re getting very close to releasing it, so if you encounter any major bugs using either 1.7 or the <a href="http://modernizr.github.com/Modernizr/2.0-beta/">2.0 beta builder</a>, please <a href="https://github.com/Modernizr/Modernizr/issues">report them on GitHub</a>&nbsp;as soon as possible. We already have a lot of issues and features pushed to our planned 2.1 release, but would love to make sure that the 2.0 release is the absolute best version of Modernizr yet.</p>
+]]></description><link>https://modernizr.com/news//news/modernizr-17-changelog</link><guid isPermaLink="true">https://modernizr.com/news//news/modernizr-17-changelog</guid><dc:creator><![CDATA[Team Modernizr]]></dc:creator><pubDate>Wed, 11 May 2011 22:00:00 GMT</pubDate></item></channel></rss>
