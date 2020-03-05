@@ -1,4 +1,3 @@
-/*globals Modernizr*/
 'use strict';
 var React = require('react/addons');
 var PureRenderMixin = React.addons.PureRenderMixin;
@@ -103,7 +102,7 @@ var DownloadOverlay = React.createClass({
     var features = location.search.slice(1).split('&')[0].split('_').join('-').split('-');
     var _ul = document.createElement('ul');
 
-    features = _.forEach(features, function(feature) {
+    _.forEach(features, function(feature) {
       data.css += '.no-' + feature + ' li.'+ feature + '{ color: red; }';
 
       var _li = document.createElement('li');
