@@ -1,0 +1,24 @@
+---
+layout: post
+title:  "Modernizr 3.9.0"
+author: <a href="https://github.com/rejas/">Rejas</a>
+---
+
+New year, new release with 2 new feature detects and 2 fixes for existing ones. Should have released it 2 days earlier :-)
+
+**New Feature Detect(s)**
+- [@chris13524](https://github.com/chris13524) added detection for `gap` CSS property for flexbox [`#2485`](https://github.com/Modernizr/Modernizr/pull/2485)
+- [@buhichan](https://github.com/buhichan) added feature detect for ES6 Symbol [`#2487`](https://github.com/Modernizr/Modernizr/pull/2487)
+
+**Fixes**
+- [@GuiMaron](https://github.com/GuiMaron) fixed inputnumber-l10n test causing unintended scrolls [`#2492`](https://github.com/Modernizr/Modernizr/issues/2492)
+- [@rejas](https://github.com/rejas) fixed possible unintended scrolling in onInput test
+
+**Miscellaneous**
+- Replace expect.js with chai [`#2449`](https://github.com/Modernizr/Modernizr/pull/2449)
+- Fix command line fails for nested properties [`#2480`](https://github.com/Modernizr/Modernizr/pull/2480)
+- Fix travis not signaling an error when node tests fail
+- Fix missing chai lib on integration test page
+- Cleanup feature-detects meta tags whitespace
+- Update dependencies like sinon [`#2491`](https://github.com/Modernizr/Modernizr/pull/2491)
+- Remove node8 from testing matrix [`#2494`](https://github.com/Modernizr/Modernizr/pull/2494)

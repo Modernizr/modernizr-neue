@@ -1,0 +1,9 @@
+---
+layout: post
+title:  "Modernizr 3.9.1"
+author: <a href="https://github.com/rejas/">Rejas</a>
+---
+Small bugfix release which reverts a dependency update which broke webpack builds
+
+**Fixes**
+- [@rejas](https://github.com/rejas) Fix new version is not backwards compatible with older versions of node [#2499](https://github.com/Modernizr/Modernizr/issues/2499)
