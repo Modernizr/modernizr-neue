@@ -7,9 +7,10 @@
     "start": "gulp develop",
     "test": "echo 0",
     "---": "--------------------",
+    "clean": "gulp clean",
     "build": "gulp deploy",
     "develop": "gulp develop",
-    "eslint": "eslint --fix frontend/**/*.js server/**/*.js",
+    "lint": "eslint --fix frontend/**/*.js server/**/*.js",
     "create-gh-pages": "gulp gh-pages",
     "update-gh-pages": "scripts/generate-gh-pages.sh"
   },
