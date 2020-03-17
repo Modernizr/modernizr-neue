@@ -1,3 +1,4 @@
+/*globals ga */
 'use strict';
 var React = require('react/addons');
 var PureRenderMixin = React.addons.PureRenderMixin;

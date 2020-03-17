@@ -2,7 +2,6 @@
 
 var Hapi = require('hapi');
 var Path = require('path');
-var modernizr = require('modernizr');
 var basePath = Path.join(__dirname, '..');
 var envRoutes = process.env.NODE_ENV === 'production' ? 'prod' : 'dev';
 

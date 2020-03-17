@@ -1,0 +1,15 @@
+{
+  "extends": ["eslint:recommended"],
+  "env": {
+    "amd": true,
+    "browser": true,
+    "node": true,
+    "worker": true
+  },
+  "globals": {
+    "Modernizr": true,
+    "requirejs": true,
+    "ZeroClipboard": true,
+    "_": true
+  }
+}

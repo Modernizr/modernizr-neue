@@ -1,3 +1,4 @@
+/*globals Bugsnag*/
 'use strict';
 var React = require('react/addons');
 var DownloadUI = React.createFactory(require('./DownloadUI'));
@@ -25,6 +26,7 @@ if ('serviceWorker' in navigator &&
       try {
         Bugsnag.notifyException(e);
       } catch (e) {
+        // eslint-disable-line
       }
     });
 }
@@ -146,7 +148,7 @@ if (!('contains' in SVGElement.prototype)) {
       if (this === node) {
         return true;
       }
-    } while (node = node && node.parentNode);
+    } while (node = node && node.parentNode); // eslint-disable-line
 
     return false;
   };

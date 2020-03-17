@@ -1,3 +1,4 @@
+/*globals pako, prettyBytes*/
 'use strict';
 importScripts('/lib/pako/dist/pako_deflate.js', '/lib/pretty-bytes/pretty-bytes.js');
 
@@ -17,7 +18,7 @@ var hashCode = function(str) {
 
 var hash = {};
 
-onmessage = function(msg, cb) {
+onmessage = function(msg) {
   var hashedConfig = hashCode(msg.data);
   var data = JSON.parse(msg.data);
   var build = data.build;

@@ -175,7 +175,7 @@ var handler = function (request, reply) {
         .etag(ETag(bowerJSON.version + JSON.stringify(buildConfig)));
     });
 
-  } else if (!!ua.match(/^npm\//)) {
+  } else if (ua.match(/^npm\//)) {
 
     Modernizr.build(buildConfig, function(build) {
     var archive = Archiver('tar');
