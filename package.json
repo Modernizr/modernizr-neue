@@ -3,23 +3,16 @@
   "version": "1.0.0",
   "description": "the new version of modernizr.com",
   "main": "index.js",
-  "scripts": {
-    "start": "gulp develop",
-    "test": "echo 0",
-    "---": "--------------------",
-    "server": "cross-env NODE_ENV=production node ./server",
-    "clean": "gulp clean",
-    "build": "gulp deploy",
-    "develop": "gulp develop",
-    "lint": "eslint --fix frontend/**/*.js server/**/*.js",
-    "create-gh-pages": "gulp gh-pages",
-    "update-gh-pages": "scripts/generate-gh-pages.sh"
+  "private": true,
+  "bugs": "https://github.com/Modernizr/modernizr-neue/issues",
+  "homepage": "https://github.com/Modernizr/modernizr-neue",
+  "repository": "https://github.com/Modernizr/modernizr-neue.git",
+  "license": "MIT",
+  "author": {
+    "name": "Modernizr",
+    "url": "https://modernizr.com/"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/modernizr/modernizr-neue"
-  },
-  "authors": [
+  "contributors": [
     {
       "name": "Faruk Ates",
       "url": "https://twitter.com/KuraFire"
@@ -49,11 +42,6 @@
       "url": "https://twitter.com/doctyper"
     }
   ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/modernizr/modernizr-neue/issues"
-  },
-  "homepage": "https://github.com/modernizr/modernizr-neue",
   "dependencies": {
     "archiver": "^0.14.3",
     "browserify": "^16.5.0",
@@ -100,5 +88,16 @@
     "merge-stream": "^2.0.0",
     "vinyl-source-stream": "^2.0.0"
   },
-  "private": true
+  "scripts": {
+    "start": "gulp develop",
+    "test": "echo 0",
+    "---": "--------------------",
+    "server": "cross-env NODE_ENV=production node ./server",
+    "clean": "gulp clean",
+    "build": "gulp deploy",
+    "develop": "gulp develop",
+    "lint": "eslint --fix frontend/**/*.js server/**/*.js",
+    "create-gh-pages": "gulp gh-pages",
+    "update-gh-pages": "scripts/generate-gh-pages.sh"
+  }
 }
