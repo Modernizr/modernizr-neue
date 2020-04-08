@@ -7,6 +7,7 @@
     "start": "gulp develop",
     "test": "echo 0",
     "---": "--------------------",
+    "server": "cross-env NODE_ENV=production node ./server",
     "clean": "gulp clean",
     "build": "gulp deploy",
     "develop": "gulp develop",
@@ -75,6 +76,7 @@
   "devDependencies": {
     "@alrra/travis-scripts": "^3.0.1",
     "aliasify": "^2.1.0",
+    "cross-env": "^7.0.2",
     "del": "^5.1.0",
     "eslint": "^6.2.1",
     "globby": "^11.0.0",
