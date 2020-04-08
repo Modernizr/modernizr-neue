@@ -4,7 +4,7 @@ var pkg = require(Path.join(__dirname, '..', '..', 'package.json'));
 
 // creates an array of authors names from the package.json with a few
 // additional attributes for easier handlebars formatting in the footer
-var authors = pkg.authors.map(
+var authors = pkg.contributors.map(
   function(author, index, authors) {
 
     author.name = author.name.split(' ').shift();
