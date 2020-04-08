@@ -27,6 +27,9 @@ var Metadata = React.createClass({
     var warnings = data.warnings;
     var property = data.property;
 
+    if (property instanceof Array)
+        property = property.join(', ');
+
     return (
       div({className: 'metadataColumn column'},
         div({className: 'name box ' + (authors.length ? 'hasAuthors' : '')},
