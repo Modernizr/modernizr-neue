@@ -1,0 +1,29 @@
+---
+layout: post
+title:  "Modernizr 3.10.0"
+author: <a href="https://github.com/rejas/">Rejas</a>
+---
+
+Spring starts with a lot of new es6/es7 feature detetcs thanks to @dabretin.
+Otherwise nothing drastic, just a few fixes and updates to the infrastructure.
+
+**New Feature Detect(s)**
+
+[@dabretin](https://github.com/dabretin) added all of these:
+- ES6 rest parameters test [`#2516`](https://github.com/Modernizr/Modernizr/pull/2516)
+- ES7 - rest destructuring [`#2517`](https://github.com/Modernizr/Modernizr/pull/2517)
+- ES6 - Spread syntax check [`#2522`](https://github.com/Modernizr/Modernizr/pull/2522)
+- ES7 - spread object [`#2523`](https://github.com/Modernizr/Modernizr/pull/2523)
+- ES6 - String template [`#2518`](https://github.com/Modernizr/Modernizr/pull/2518)
+- ES7 array test (includes method) [`#2515`](https://github.com/Modernizr/Modernizr/pull/2515)
+
+**Fixes**
+- [@dabretin](https://github.com/dabretin) fixed a reference to testProp [`#2530`](https://github.com/Modernizr/Modernizr/pull/2530)
+- [@HadadTomer](https://github.com/HadadTomer) fixed setting scriptGlobalName causing an exception [`#2521`](https://github.com/Modernizr/Modernizr/pull/2521)
+- [@rejas](https://github.com/rejas) fixed nth selector test in zoomed chrome browser fails [`#2414`](https://github.com/Modernizr/Modernizr/pull/2414)
+
+**Miscellaneous**
+- Use eslint:recommended, cleanup warnings [`#2527`](https://github.com/Modernizr/Modernizr/pull/2527)
+- Update jsdocs [`#2526`](https://github.com/Modernizr/Modernizr/pull/2526)
+- Update dependencies [`d9acf39`](https://github.com/Modernizr/Modernizr/commit/d9acf39e1e7b38f52720f1f69dd48e79863e3034)
+- Update metadata [`0cb85f2`](https://github.com/Modernizr/Modernizr/commit/0cb85f21327b4fbc2cccf4cc720bfcf612103eff)
