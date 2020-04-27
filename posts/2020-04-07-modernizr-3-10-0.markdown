@@ -4,18 +4,18 @@ title:  "Modernizr 3.10.0"
 author: <a href="https://github.com/rejas/">Rejas</a>
 ---
 
-Spring starts with a lot of new es6/es7 feature detetcs thanks to @dabretin.
+Spring starts with a lot of new es6/es7 feature detects thanks to @dabretin.
 Otherwise nothing drastic, just a few fixes and updates to the infrastructure.
 
 **New Feature Detect(s)**
 
 [@dabretin](https://github.com/dabretin) added all of these:
-- ES6 rest parameters test [`#2516`](https://github.com/Modernizr/Modernizr/pull/2516)
+- ES6 - rest parameters test [`#2516`](https://github.com/Modernizr/Modernizr/pull/2516)
 - ES7 - rest destructuring [`#2517`](https://github.com/Modernizr/Modernizr/pull/2517)
-- ES6 - Spread syntax check [`#2522`](https://github.com/Modernizr/Modernizr/pull/2522)
+- ES6 - spread syntax check [`#2522`](https://github.com/Modernizr/Modernizr/pull/2522)
 - ES7 - spread object [`#2523`](https://github.com/Modernizr/Modernizr/pull/2523)
-- ES6 - String template [`#2518`](https://github.com/Modernizr/Modernizr/pull/2518)
-- ES7 array test (includes method) [`#2515`](https://github.com/Modernizr/Modernizr/pull/2515)
+- ES6 - string template [`#2518`](https://github.com/Modernizr/Modernizr/pull/2518)
+- ES7 - array test (includes method) [`#2515`](https://github.com/Modernizr/Modernizr/pull/2515)
 
 **Fixes**
 - [@dabretin](https://github.com/dabretin) fixed a reference to testProp [`#2530`](https://github.com/Modernizr/Modernizr/pull/2530)

@@ -1,0 +1,28 @@
+---
+layout: post
+title:  "Modernizr 3.11.0"
+author: <a href="https://github.com/rejas/">Rejas</a>
+---
+
+We might be living in interesting times, two releases in one month :-) Getting a small release out the door
+before work on v4 starts. Stay tuned for that...
+
+**New Feature Detect(s)**
+
+[@dabretin](https://github.com/dabretin) continued his addition of es6 and beyond:
+- ES6 - class [`#2532`](https://github.com/Modernizr/Modernizr/pull/2532)
+- ES8 - object [`#2533`](https://github.com/Modernizr/Modernizr/pull/2533)
+- TextEncoder and TextDecoder [`#2531`](https://github.com/Modernizr/Modernizr/pull/2531)
+
+[@MarkelFe](https://github.com/MarkelFe) added:
+- av1 and h265 codec detection [`#2534`](https://github.com/Modernizr/Modernizr/pull/2534)
+
+**Fixes**
+- [@Sembiance](https://github.com/Sembiance) fixed an issue with AVG Secure browser throwing exceptions when using toDataURL when Anti-Fingerprinting is turned on [`#2538`](https://github.com/Modernizr/Modernizr/pull/2538)
+- [@MarkelFe](https://github.com/MarkelFe) added some missing caniuse mappings [`#2535`](https://github.com/Modernizr/Modernizr/pull/2535)
+
+**Miscellaneous**
+
+- Update computedStyle usage [`#2528`](https://github.com/Modernizr/Modernizr/pull/2528)
+- Cleanup property tags [`#2542`](https://github.com/Modernizr/Modernizr/pull/2542)
+- Change property name for es6 class test [`1baf805`](https://github.com/Modernizr/Modernizr/commit/1baf805e9eb54710f6ad122a4f6557f6e369c530)

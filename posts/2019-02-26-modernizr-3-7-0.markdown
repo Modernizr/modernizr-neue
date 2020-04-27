@@ -4,7 +4,7 @@ title:  "Modernizr 3.7.0"
 author: <a href="https://github.com/rejas/">Rejas</a>
 ---
 
-Not a full year in the making but close. Lots of new feature detectes and more bugfixes then we can write down
+Not a full year in the making but close. Lots of new feature detects and more bugfixes then we can write down
 
 **New Feature Detect(s)**
 - [@abrad1212](https://github.com/abrad1212) added detect for the GetBattery API [#2312](https://github.com/Modernizr/Modernizr/pull/2312)

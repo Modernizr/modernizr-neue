@@ -3,6 +3,7 @@ layout: post
 title:  "Modernizr 3.7.1"
 author: <a href="https://github.com/rejas/">Rejas</a>
 ---
+
 Small but controversial this bugfix release cleaned up some build configs and fixed one test that was reporting
 incorrectly.
 

@@ -4,7 +4,7 @@ title:  "Modernizr 3.3.0"
 author: <a href="https://twitter.com/patrickkettner">Patrick Kettner</a>
 ---
 
-After a long holiday hiatus, its a brand new year, and therefore time for a brand new release from Modernizr!
+After a long holiday hiatus, it's a brand new year, and therefore time for a brand new release from Modernizr!
 
 **Fixed**
 - [@mems](https://github.com/mems) fixed the mp3 audio detect for Firefox by adding the proper codec - [#1740](https://github.com/Modernizr/Modernizr/pull/1740)
