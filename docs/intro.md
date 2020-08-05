@@ -51,7 +51,7 @@ Once you have [npm installed](https://docs.npmjs.com/getting-started/installing-
 npm install -g modernizr
 ```
 
-Now you are ready to get your start making your custom build! You can download the configuration file from the build menu (under "Command Line Config"). This will give you a [JSON](http://simple.wikipedia.org/wiki/JSON) file that you will give to the Modernizr module to make your custom build.
+Now you are ready to start making your custom build! You can download the configuration file from the build menu (under "Command Line Config"). This will give you a [JSON](http://simple.wikipedia.org/wiki/JSON) file that you will give to the Modernizr module to make your custom build.
 
 ```
 modernizr -c modernizr-config.json
