@@ -53,7 +53,7 @@
     "hapi": "^8.4.0",
     "he": "^1.2.0",
     "highlight.js": "^9.18.1",
-    "marked": "^0.8.2",
+    "marked": "^4.0.10",
     "modernizr": "^3.11.8",
     "normalize.css": "^8.0.1",
     "react": "^0.13.0",
