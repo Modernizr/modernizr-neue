@@ -43,7 +43,7 @@
     }
   ],
   "dependencies": {
-    "archiver": "^0.14.3",
+    "archiver": "^5.3.1",
     "browserify": "^16.5.1",
     "classnames": "^2.3.1",
     "etag": "^1.8.1",
